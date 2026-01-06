@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Spinazzola | New Media Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --brand-blue: #0066cc; 
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--brand-blue);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1.6fr auto 1fr;
+            gap: 70px;
+            max-width: 1400px;
+            width: 100%;
+            align-items: center;
+        }
+
+        /* Area Sinistra */
+        .hero-text {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            font-weight: 800;
+            line-height: 0.85;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .role-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 45px;
+            color: var(--white);
+        }
+
+        .mission {
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.4;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            max-width: 700px;
+            margin-left: auto;
+        }
+
+        .credentials {
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            opacity: 0.8;
+            display: inline-block;
+            align-self: flex-end;
+        }
+
+        /* Divisore Centrale */
+        .divider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 650px;
+        }
+
+        /* NUOVO STILE PER L'ICONA SVG */
+        .sparkle-icon {
+            width: 55px; /* Dimensione leggermente aumentata per compensare la morbidezza */
+            height: 55px;
+            color: var(--white); /* Usa il colore bianco per il riempimento SVG */
+            margin-bottom: 25px;
+            flex-shrink: 0;
+        }
+
+        .vertical-line {
+            width: 1px;
+            background-color: rgba(255, 255, 255, 0.4);
+            flex-grow: 1;
+        }
+
+        /* Area Destra */
+        .info-panel {
+            text-align: left;
+        }
+
+        .contact-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .contact-list li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-list a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .contact-list i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Stile Dati Societari e Logo */
+        .company-data {
+            font-size: 0.9rem;
+            opacity: 0.75;
+            line-height: 1.7;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 50px;
+        }
+
+        .company-logo {
+            max-width: 150px; 
+            height: auto;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 1024px) {
+            body { 
+                padding: 30px 20px; 
+                justify-content: flex-start;
+            }
+
+            .main-layout { grid-template-columns: 1fr; gap: 40px; }
+            .hero-text { text-align: center; }
+            .hero-text h1 { letter-spacing: -2px; }
+            .mission, .credentials { margin: 0 auto 20px auto; align-self: center; }
+            
+            /* Stella centrale */
+            .divider-container { 
+                height: auto; 
+                min-height: auto; 
+                width: 100%; 
+                justify-content: center; 
+                margin: 10px 0 30px 0;
+            }
+            .sparkle-icon { margin-bottom: 0; } /* Aggiornato il selettore per mobile */
+            .vertical-line { display: none; }
+
+            /* Centratura contatti mobile */
+            .info-panel { text-align: center; }
+            .contact-list li { justify-content: center; }
+            
+            .company-data { 
+                border-top: none; 
+                padding-top: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="main-layout">
+        <section class="hero-text">
+            <h1>Andrea<br>Spinazzola</h1>
+            <div class="role-title">Generative AI Strategist & Workflow Architect</div>
+            <p class="mission">
+                Integrazione delle tecnologie e dei modelli AI emergenti<br>
+                per la Comunicazione Visiva e l’Editoria.
+            </p>
+            <div class="credentials">
+                Adobe Certified Instructor & ex Adobe Guru
+            </div>
+        </section>
+
+        <div class="divider-container">
+            <svg class="sparkle-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C13.4373 6.8335 17.1665 10.5627 22 12C17.1665 13.4373 13.4373 17.1665 12 22C10.5627 17.1665 6.8335 13.4373 2 12C6.8335 10.5627 10.5627 6.8335 12 2Z"/>
+            </svg>
+            <div class="vertical-line"></div>
+        </div>
+
+        <aside class="info-panel">
+            <ul class="contact-list">
+                <li><i class="fa-solid fa-envelope"></i> <a href="mailto:a.spinazzola@new-media-design.it">a.spinazzola@new-media-design.it</a></li>
+                <li><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/aspinazzola" target="_blank">linkedin.com/in/aspinazzola</a></li>
+                <li><i class="fa-solid fa-globe"></i> <a href="https://www.new-media-design.it" target="_blank">www.new-media-design.it</a></li>
+                <li><i class="fa-solid fa-mobile-screen-button"></i> <a href="tel:+393478461063">+39 347 8461063</a></li>
+            </ul>
+
+            <div class="company-data">
+                <img src="logo-nmd-white.png" alt="New Media Design Logo" class="company-logo">
+                
+                <strong>New Media Design di Andrea Spinazzola</strong><br>
+                Viale Valganna, 34/D - 21100 VARESE<br>
+                P.I.: 03820670127
+            </div>
+        </aside>
+    </main>
+
+</body>
+</html>
