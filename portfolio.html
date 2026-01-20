@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centrostyle - Generative AI Carousel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #1a1a1a; /* Sfondo scuro per far risaltare il PDF */
+            --nav-color: rgba(255, 255, 255, 0.3);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: white;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+
+        /* Contenitore Carosello */
+        #carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            width: 100vw;
+            height: 100vh;
+            scrollbar-width: none;
+        }
+        #carousel::-webkit-scrollbar { display: none; }
+
+        .slide {
+            min-width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        canvas {
+            max-width: 95vw;
+            max-height: 90vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            background-color: white;
+        }
+
+        /* Frecce Navigazione */
+        .nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--nav-color);
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: color 0.3s;
+            padding: 20px;
+        }
+        .nav-btn:hover { color: white; }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        /* Indicatore Pagina */
+        #page-info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--nav-color);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="nav-btn prev" onclick="move(-1)">&#10229;</button>
+    <button class="nav-btn next" onclick="move(1)">&#10230;</button>
+    
+    <div id="carousel">
+        </div>
+
+    <div id="page-info">CARICAMENTO DOCUMENTO...</div>
+
+    <script>
+        // Configurazione PDF.js
+        const url = 'NMD_CENTROSTYLE_Presentazione_2025-2.pdf'; 
+        const pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        const carousel = document.getElementById('carousel');
+        const pageInfo = document.getElementById('page-info');
+
+        // Caricamento del PDF
+        pdfjsLib.getDocument(url).promise.then(pdf => {
+            console.log('PDF caricato, pagine:', pdf.numPages);
+            
+            for (let i = 1; i <= pdf.numPages; i++) {
+                createSlide(pdf, i);
+            }
+            pageInfo.innerText = `1 / ${pdf.numPages}`;
+        }).catch(err => {
+            pageInfo.innerText = "ERRORE: Assicurati di usare un server locale.";
+            console.error(err);
+        });
+
+        async function createSlide(pdf, pageNum) {
+            // Crea elementi HTML
+            const section = document.createElement('section');
+            section.className = 'slide';
+            const canvas = document.createElement('canvas');
+            section.appendChild(canvas);
+            carousel.appendChild(section);
+
+            // Renderizza pagina su canvas
+            const page = await pdf.getPage(pageNum);
+            const viewport = page.getViewport({ scale: 2 }); // Alta qualità
+            const context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport
+            };
+            await page.render(renderContext).promise;
+        }
+
+        // Funzioni di movimento
+        function move(direction) {
+            carousel.scrollBy({
+                left: direction * window.innerWidth,
+                behavior: 'smooth'
+            });
+        }
+
+        // Aggiorna contatore pagina durante lo scroll
+        carousel.addEventListener('scroll', () => {
+            const pageNum = Math.round(carousel.scrollLeft / window.innerWidth) + 1;
+            const total = carousel.children.length;
+            if(total > 0) pageInfo.innerText = `${pageNum} / ${total}`;
+        });
+
+        // Tasti freccia tastiera
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') move(1);
+            if (e.key === 'ArrowLeft') move(-1);
+        });
+    </script>
+</body>
+</html>
