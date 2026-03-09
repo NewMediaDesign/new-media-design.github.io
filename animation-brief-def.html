@@ -209,10 +209,13 @@
   }
   input:focus, textarea:focus, select:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(232,184,109,.1);
+    box-shadow: 0 0 0 3px rgba(24,119,197,.1);
   }
   textarea { min-height: 100px; }
   select option { background: var(--bg2); }
+  ::placeholder { color: #C5CAD4; opacity: 1; }
+  ::-webkit-input-placeholder { color: #C5CAD4; }
+  ::-moz-placeholder { color: #C5CAD4; opacity: 1; }
 
   /* ─── TWO COL ───────────────────────────────────────────────── */
   .two-col {
@@ -807,8 +810,16 @@
        STEP 0 — COVER
   ══════════════════════════════════════════════════════ -->
   <div class="step active" id="step-0">
-    <div class="hero-tag"><span class="hero-dot"></span> AI Generative Video</div>
-    <h1>Animation<br><span>Brief.</span></h1>
+
+    <!-- ── NMD COVER HEADER ── -->
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:28px; margin-bottom:40px; border-bottom:2px solid #111;">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGl2ZWxsb18xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDM0MC4xNiA4NS4wNCI+CiAgPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDMwLjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDIuMS4xIEJ1aWxkIDEyMykgIC0tPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuc3QwIHsKICAgICAgICBmaWxsOiAjOTM5NDk2OwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8Zz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xOTYuMDMsMTAuNTVoLTMxLjA2bDExLjgyLDIxLjI2aDE5LjI0YzUuODcsMCwxMC42NCw0Ljc3LDEwLjY0LDEwLjYzcy00Ljc3LDEwLjYzLTEwLjY0LDEwLjYzaC0xOS41M2MtNS44NywwLTEwLjYzLDQuNzYtMTAuNjMsMTAuNjNzNC43NiwxMC42MywxMC42MywxMC42M2gxOS41M2MxNy41OSwwLDMxLjktMTQuMywzMS45LTMxLjg5cy0xNC4zMS0zMS44OS0zMS45LTMxLjg5WiIvPgogICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE4NS42OSw1OC41OGwtMjMuMzgtNDIuNTJjLTEuODctMy4zOS01LjQyLTUuNS05LjI5LTUuNTEtMy44NywwLTcuNDMsMi4wOS05LjMxLDUuNDYsMCwwLTcuNTIsMTMuNS0xNC4zNywyNS44MS02Ljg0LTEyLjMxLTE0LjMyLTI1Ljc5LTE0LjMyLTI1Ljc5LTEuODgtMy4zOC01LjQzLTUuNDctOS4yOS01LjQ4LTMuODYuMDEtNy40MSwyLjEtOS4yOCw1LjQ4LDAsMC03LjQ5LDEzLjQ4LTE0LjMyLDI1Ljc5LTYuODYtMTIuMzEtMTQuMzctMjUuODEtMTQuMzctMjUuODEtMS44OS0zLjM3LTUuNDUtNS40Ny05LjMyLTUuNDYtMy44Ny4wMS03LjQyLDIuMTItOS4yOSw1LjUxbC0yMy4zOCw0Mi41MmMtMi44Myw1LjE1LS45NiwxMS42MSw0LjE5LDE0LjQ0LDUuMTQsMi44MywxMS42MS45NSwxNC40My00LjE5LDAsMCw3LjM4LTEzLjQxLDE0LjEzLTI1LjY5LDYuODUsMTIuMywxNC4zMywyNS43MywxNC4zMywyNS43MywxLjg4LDMuMzgsNS40NCw1LjQ3LDkuMyw1LjQ2LDMuODYsMCw3LjQxLTIuMDksOS4yOC01LjQ3LDAsMCw3LjQ3LTEzLjQ2LDE0LjMtMjUuNzUsNi44MywxMi4yOSwxNC4zLDI1Ljc1LDE0LjMsMjUuNzUsMS44NywzLjM4LDUuNDMsNS40Nyw5LjI4LDUuNDcsMy44Ni4wMSw3LjQyLTIuMDgsOS4zLTUuNDYsMCwwLDcuNDgtMTMuNDMsMTQuMzMtMjUuNzMsNi43NiwxMi4yOCwxNC4xMywyNS42OSwxNC4xMywyNS42OSwyLjgzLDUuMTQsOS4yOSw3LjAyLDE0LjQzLDQuMTksNS4xNS0yLjgzLDcuMDItOS4yOSw0LjE5LTE0LjQ0WiIvPgogIDwvZz4KICA8Zz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNTIuMjMsMTEuOTR2MTQuMjRjMCwuMDYuMDEuMTMuMDEuMTlsLTEwLjA1LTEzLjZ2LjlzMTAuMDgsMTMuNjEsMTAuMDgsMTMuNjFjLjA2LjA4LjE0LjEzLjI0LjEzaC4yNXYtMTUuNDdoLS41M1pNMjQxLjY3LDEyLjA4Yy0uMDQtLjA2LS4wNy0uMDktLjExLS4xMS0uMDMtLjAyLS4wOC0uMDMtLjE0LS4wM2gtLjI3djE1LjQ3aC41MnYtMTUuMzNaIi8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjc4LjU1LDEyLjgxbC00LjU0LDEzLjA2Yy0uMDMuMTItLjA3LjI0LS4xLjM3LS4wMy4xMy0uMDcuMjctLjEuNDEtLjA1LS4yOC0uMTItLjU0LS4xOC0uNzhsLTQuMjctMTMuNzRjLS4wNC0uMTMtLjEyLS4xOS0uMjQtLjE5aC0uNWw0LjksMTUuNDdoLjUzbDQuNzYtMTMuODItLjI2LS43OFoiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNTUuNjMsMzUuNGMtLjA2LDAtLjExLjAxLS4xNS4wMi0uMDQuMDItLjA3LjA2LS4xMS4xMmwtNi41MSwxMS4zOGMtLjA0LjA4LS4wNy4xNS0uMS4yMi0uMDMuMDctLjA2LjE0LS4wOS4ybC0uMTktLjQxLTYuMjgtMTAuNjZ2MS4wMmw2LjE0LDEwLjQ2Yy4wNy4xMi4xNi4xOS4yNy4xOWguMTFjLjExLDAsLjItLjA3LjI3LS4xOWw2LjQ5LTExLjM3cy0uMDEuMTEtLjAxLjE3djE0LjMxaC41M3YtMTUuNDZoLS4zN1pNMjQxLjUxLDM1LjRoLS4zNnYxNS40NmguNTJ2LTE1LjQzcy0uMDEsMC0uMDEsMGMtLjA0LS4wMS0uMDktLjAyLS4xNS0uMDJaIi8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjg2LjUsNDMuMTNjMCwxLjIxLS4xOCwyLjI5LS41MywzLjI1LS4zNS45Ni0uODUsMS43Ny0xLjQ5LDIuNDMtLjY0LjY2LTEuNCwxLjE3LTIuMjksMS41Mi0uODkuMzUtMS44Ny41My0yLjk0LjUzaC01LjU4di0xNS40N2g1LjU4YzEuMDcsMCwyLjA1LjE4LDIuOTQuNTMuODkuMzUsMS42NS44NiwyLjI5LDEuNTJzMS4xMywxLjQ3LDEuNDksMi40M2MuMzUuOTYuNTMsMi4wNC41MywzLjI1Wk0yODUuODcsNDMuMTNjMC0xLjE1LS4xNi0yLjE4LS40OC0zLjA4LS4zMi0uOS0uNzctMS42Ni0xLjM1LTIuMjctLjU4LS42Mi0xLjI4LTEuMDgtMi4wOS0xLjQxLS44MS0uMzItMS43LS40OC0yLjY4LS40OGgtNC45N3YxNC40OGg0Ljk3Yy45NywwLDEuODctLjE2LDIuNjgtLjQ4LjgxLS4zMiwxLjUxLS43OSwyLjA5LTEuNDFzMS4wMy0xLjM3LDEuMzUtMi4yNy40OC0xLjkyLjQ4LTMuMDdaIi8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzA3LjI0LDUwLjg3aC0uNDdjLS4xMSwwLS4xOS0uMDYtLjI0LS4xOWwtMi4wMS00LjloLTcuOTRsLTIuMDEsNC45Yy0uMDQuMTItLjEyLjE5LS4yNS4xOWgtLjQ1bDYuNC0xNS40N2guNThsNi40LDE1LjQ3Wk0yOTYuNzcsNDUuMzJoNy41NWwtMy41NC04LjYxYy0uMDQtLjEtLjA4LS4yMS0uMTItLjMxcy0uMDgtLjIyLS4xMi0uMzRjLS4wNC4xMi0uMDguMjQtLjEyLjM0LS4wNC4xLS4wOC4yMS0uMTIuMzFsLTMuNTQsOC42MVoiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNTMuOTYsNjYuNTljMCwxLjIxLS4xOCwyLjI5LS41MywzLjI1LS4zNS45Ni0uODUsMS43Ny0xLjQ5LDIuNDMtLjY0LjY2LTEuNCwxLjE3LTIuMjksMS41Mi0uODkuMzUtMS44Ny41My0yLjk0LjUzaC01LjU4di0xNS40N2g1LjU4YzEuMDcsMCwyLjA1LjE4LDIuOTQuNTMuODkuMzUsMS42NS44NiwyLjI5LDEuNTJzMS4xMywxLjQ3LDEuNDksMi40M2MuMzUuOTYuNTMsMi4wNC41MywzLjI1Wk0yNTMuMzIsNjYuNTljMC0xLjE1LS4xNi0yLjE4LS40OC0zLjA4LS4zMi0uOS0uNzctMS42Ni0xLjM1LTIuMjctLjU4LS42Mi0xLjI4LTEuMDgtMi4wOS0xLjQxLS44MS0uMzItMS43LS40OC0yLjY4LS40OGgtNC45N3YxNC40OGg0Ljk3Yy45NywwLDEuODctLjE2LDIuNjgtLjQ4LjgxLS4zMiwxLjUxLS43OSwyLjA5LTEuNDFzMS4wMy0xLjM3LDEuMzUtMi4yNy40OC0xLjkyLjQ4LTMuMDdaIi8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjc3Ljk1LDYwLjQ2Yy0uMDQuMDctLjExLjExLS4xOS4xMXMtLjE5LS4wNy0uMzQtLjIxYy0uMTQtLjE0LS4zNC0uMy0uNi0uNDgtLjI2LS4xOC0uNTktLjM0LS45OS0uNDgtLjQtLjE0LS45LS4yMS0xLjUtLjIxcy0xLjE0LjA5LTEuNi4yN2MtLjQ3LjE4LS44Ni40Mi0xLjE3Ljczcy0uNTUuNjYtLjcxLDEuMDYtLjI0LjgyLS4yNCwxLjI2YzAsLjU2LjExLDEuMDQuMzQsMS40MXMuNTMuNy45Ljk1Yy4zNy4yNi44LjQ3LDEuMjcuNjVzLjk2LjM1LDEuNDYuNTFjLjUuMTcuOTkuMzQsMS40Ni41My40Ny4xOS45LjQyLDEuMjcuNzFzLjY3LjY0LjksMS4wNmMuMjMuNDIuMzQuOTQuMzQsMS41N3MtLjExLDEuMjQtLjMzLDEuOGMtLjIyLjU2LS41MywxLjA1LS45NSwxLjQ2LS40Mi40MS0uOTIuNzQtMS41Mi45OHMtMS4yOC4zNi0yLjA0LjM2Yy0uNTIsMC0uOTktLjA1LTEuNDEtLjE0LS40Mi0uMDktLjgxLS4yMi0xLjE3LS40LS4zNi0uMTctLjY4LS4zOC0uOTgtLjYzLS4zLS4yNS0uNTgtLjUzLS44NS0uODVsLjE0LS4yMnMuMDctLjA2LjA5LS4wOGMuMDMtLjAyLjA2LS4wMy4xMi0uMDNzLjEyLjA1LjIxLjE0LjIxLjIxLjM2LjM0LjMyLjI4LjUzLjQ0Yy4yMS4xNi40NS4zLjczLjQ0cy42MS4yNS45OC4zNC43OS4xNCwxLjI2LjE0Yy42NywwLDEuMjYtLjEsMS43OS0uMzFzLjk3LS41LDEuMzQtLjg2Yy4zNi0uMzYuNjQtLjc5LjgzLTEuMjcuMTktLjQ4LjI5LTEsLjI5LTEuNTUsMC0uNTktLjExLTEuMDctLjM0LTEuNDUtLjIzLS4zOC0uNTMtLjctLjktLjk2LS4zNy0uMjYtLjc5LS40Ny0xLjI3LS42NC0uNDgtLjE3LS45Ni0uMzQtMS40Ni0uNS0uNS0uMTYtLjk4LS4zMy0xLjQ2LS41Mi0uNDgtLjE5LS45LS40Mi0xLjI3LS43MS0uMzctLjI5LS42Ny0uNjUtLjktMS4wOC0uMjMtLjQzLS4zNC0uOTctLjM0LTEuNjEsMC0uNTEuMDktLjk5LjI5LTEuNDUuMTktLjQ2LjQ3LS44Ny44My0xLjIzLjM2LS4zNi44MS0uNjQsMS4zNC0uODUuNTMtLjIxLDEuMTQtLjMyLDEuODMtLjMyLjc4LDAsMS40Ni4xMiwyLjA2LjM3LjYuMjUsMS4xNi42NCwxLjY4LDEuMTdsLS4xMy4yNFoiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yOTcuNjMsNzQuMDRjLS44OC4zLTEuODcuNDYtMi45OC40Ni0xLjIxLDAtMi4zLS4xOC0zLjI3LS41NS0uOTctLjM3LTEuNzktLjktMi40Ny0xLjU4LS42OC0uNjktMS4yLTEuNTItMS41Ni0yLjQ5LS4zNi0uOTctLjU0LTIuMDctLjU0LTMuMjhzLjE4LTIuMy41My0zLjI3Yy4zNi0uOTcuODctMS44LDEuNTQtMi40OS42Ny0uNjksMS40Ny0xLjIyLDIuNDItMS41OS45NS0uMzcsMi4wMS0uNTYsMy4xOS0uNTYuNTgsMCwxLjExLjA0LDEuNi4xMS40OS4wNy45NC4xOSwxLjM2LjM0cy44MS4zNCwxLjE4LjU3LjczLjQ5LDEuMDcuNzlsLS4xNS4yM2MtLjA2LjA5LS4xNC4xMi0uMjUuMDktLjA3LS4wMi0uMjEtLjEyLS40LS4yOS0uMTktLjE3LS40OC0uMzUtLjg1LS41NHMtLjg1LS4zNy0xLjQ0LS41My0xLjI5LS4yNC0yLjEzLS4yNGMtMS4wOCwwLTIuMDUuMTctMi45Mi41MS0uODcuMzQtMS42MS44My0yLjIyLDEuNDYtLjYxLjY0LTEuMDgsMS40MS0xLjQxLDIuMzNzLS41LDEuOTUtLjUsMy4xLjE3LDIuMTcuNSwzLjA5LjgsMS43LDEuNDIsMi4zNGMuNjIuNjQsMS4zOCwxLjEzLDIuMjcsMS40Ny44OS4zNCwxLjkuNTEsMy4wMi41MS41MSwwLC45OC0uMDMsMS40MS0uMS40NC0uMDcuODUtLjE2LDEuMjQtLjI5LjM5LS4xMi43Ny0uMjcsMS4xMy0uNDUuMzctLjE4Ljc0LS4zOCwxLjExLS42MXYtNC41NWgtMy4yN2MtLjA1LDAtLjEtLjAyLS4xMy0uMDYtLjA0LS4wNC0uMDYtLjA4LS4wNi0uMTJ2LS4zMWg0LjAydjUuMjhjLS43Ni41Mi0xLjU4LjkzLTIuNDYsMS4yNFoiLz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjU4LjI3LDE5LjgydjcuMDdoOC41NWwtLjAyLjUyaC05LjEzdi0xNS40N2g5LjEzdi41MmgtOC41M3Y2Ljg1Ii8+CiAgICAgIDxyZWN0IGNsYXNzPSJzdDAiIHg9IjI2MC42NiIgeT0iMTkuMzIiIHdpZHRoPSI0Ljc5IiBoZWlnaHQ9Ii41MSIvPgogICAgPC9nPgogICAgPGc+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNjEuNSw0My4yOHY3LjA3aDguNTVsLS4wMi41MmgtOS4xM3YtMTUuNDdoOS4xM3YuNTJoLTguNTN2Ni44NSIvPgogICAgICA8cmVjdCBjbGFzcz0ic3QwIiB4PSIyNjMuODkiIHk9IjQyLjc3IiB3aWR0aD0iNC43OSIgaGVpZ2h0PSIuNTEiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjU4LjQ1LDY2LjczdjcuMDdoOC41NWwtLjAyLjUyaC05LjEzdi0xNS40N2g5LjEzdi41MmgtOC41M3Y2Ljg1Ii8+CiAgICAgIDxyZWN0IGNsYXNzPSJzdDAiIHg9IjI2MC44NSIgeT0iNjYuMjIiIHdpZHRoPSI0Ljc5IiBoZWlnaHQ9Ii41MSIvPgogICAgPC9nPgogICAgPHJlY3QgY2xhc3M9InN0MCIgeD0iMjkwLjQiIHk9IjM1LjQiIHdpZHRoPSIuNjEiIGhlaWdodD0iMTUuNDYiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNzguODMsMTIuMDNjLjA1LS4wNi4xMi0uMDkuMjEtLjA5aC4xNGMuMTMsMCwuMjEuMDYuMjUuMTlsNC43NiwxMy43NGMuMDcuMjMuMTQuNDkuMi43OC4wMy0uMTUuMDUtLjI4LjA4LS40MS4wMy0uMTMuMDctLjI1LjEtLjM3bDQuMjctMTMuNzRjLjA0LS4xMy4xMy0uMTkuMjYtLjE5aC40NmwtNC45LDE1LjQ3aC0uNTRsLS45Mi0yLjY3LTMuNzgtMTEuMDItLjU5LTEuNjlaIi8+CiAgICA8cmVjdCBjbGFzcz0ic3QwIiB4PSIyODIuMzMiIHk9IjU5IiB3aWR0aD0iLjYxIiBoZWlnaHQ9IjE1LjQ2Ii8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzE1LjE3LDU4Ljg1djE0LjI0YzAsLjA2LjAxLjEzLjAxLjE5bC0xMC4wNS0xMy42di45czEwLjA4LDEzLjYxLDEwLjA4LDEzLjYxYy4wNi4wOC4xNC4xMy4yNC4xM2guMjV2LTE1LjQ3aC0uNTNaTTMwNC42MSw1OC45OWMtLjA0LS4wNi0uMDctLjA5LS4xMS0uMTEtLjAzLS4wMi0uMDgtLjAzLS4xNC0uMDNoLS4yN3YxNS40N2guNTJ2LTE1LjMzWiIvPgogIDwvZz4KPC9zdmc+" alt="New Media Design" style="height:48px; opacity:.85;">
+      <div style="text-align:right;">
+        <div style="font-size:42px; font-weight:900; text-transform:uppercase; letter-spacing:-.03em; line-height:1; color:#111; font-family:'Inter',sans-serif;">Animation<br><span style="color:#1877C5;">Brief.</span></div>
+      </div>
+    </div>
+
+        <div class="hero-tag"><span class="hero-dot"></span> AI Generative Video</div>
     <p class="subtitle">
       Compila questo documento descrivendo il video che hai in mente.<br>
       Più dettagli fornisci, più il risultato sarà fedele alla tua visione.
@@ -1332,8 +1343,8 @@
 
     <div id="summary-content"></div>
 
-    <!-- Stima costi -->
-    <div id="cost-estimate" style="margin-top:24px; display:none">
+    <!-- Stima costi — visibile solo nel PDF, non al cliente -->
+    <div id="cost-estimate" style="margin-top:24px; display:none !important; visibility:hidden; position:absolute; left:-9999px;">
       <div style="background: linear-gradient(135deg, #f0f6ff, #e8f0fe); border:1px solid #c5d8f8; border-radius:12px; padding:24px 28px;">
         <div style="font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#1877C5; margin-bottom:8px">💡 Stima Indicativa del Progetto</div>
         <div id="cost-range" style="font-size:36px; font-weight:900; color:#111; letter-spacing:-.02em; line-height:1; margin-bottom:6px">—</div>
@@ -1752,9 +1763,10 @@ function buildCostEstimate() {
   if (audioTotal > 0) parts.push('audio');
   parts.push(`${postHours}h post-produzione`);
 
+  // Salva i valori in campi nascosti — mai visibili al cliente, usati solo da Formspree
   rangeEl.textContent = `€${minVal.toLocaleString('it-IT')} – €${maxVal.toLocaleString('it-IT')}`;
   detailEl.textContent = `Include: ${parts.join(', ')}.`;
-  el.style.display = 'block';
+  // NON mostrare mai al cliente — el.style.display resta 'none'
 }
 
 function block(title, rows) {
@@ -1769,6 +1781,7 @@ function openModal() {
   renderBriefText();
   document.getElementById('brief-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
+  sendToFormspree(); // invio silenzioso a Andrea
 }
 
 function closeModal() {
@@ -1917,65 +1930,199 @@ function copyBrief() {
   });
 }
 
-function sendMail() {
-  const project = document.getElementById('c-project')?.value.trim() || 'Brief';
-  const client  = document.getElementById('c-client')?.value.trim() || '';
-  const subject = encodeURIComponent(`Animation Brief — ${project}${client ? ' · ' + client : ''}`);
-  const body    = encodeURIComponent(
-    `Ciao Andrea,\n\nti invio il brief compilato per il progetto "${project}".\n\n` +
-    getBriefPlainText().substring(0, 1800)
-  );
-  window.open(`mailto:a.spinazzola@new-media-design.it?subject=${subject}&body=${body}`);
-}
-
-function downloadPdf() {
-  const btn     = document.getElementById('btn-pdf');
-  const project = document.getElementById('c-project')?.value.trim() || 'Brief';
-  const client  = document.getElementById('c-client')?.value.trim() || '';
-  const filename = `Animation_Brief_${project.replace(/\s+/g,'_')}.pdf`;
-
-  btn.textContent = '⏳ Generazione…';
+function sendViaFormspree() {
+  const btn = document.getElementById('btn-send-form');
+  btn.textContent = '⏳ Invio in corso…';
   btn.disabled = true;
 
-  const iframe = document.createElement('iframe');
-  iframe.style.cssText = 'position:fixed;left:-9999px;top:0;width:794px;height:1123px;border:none;visibility:hidden;';
-  document.body.appendChild(iframe);
-  iframe.contentDocument.open();
-  iframe.contentDocument.write(buildPdfHtml(project, client));
-  iframe.contentDocument.close();
+  const val = (id) => { const el = document.getElementById(id); return el ? (el.value.trim() || '') : ''; };
+  const project = val('c-project') || 'Senza titolo';
+  const client  = val('c-client')  || 'N/D';
+  const costRange  = document.getElementById('cost-range')?.textContent?.trim() || 'N/D';
+  const costDetail = document.getElementById('cost-detail')?.textContent?.trim() || '';
 
-  setTimeout(() => {
-    const opt = {
-      margin: 0, filename,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: false, windowWidth: 794 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: 'avoid-all' }
-    };
-    html2pdf().set(opt).from(iframe.contentDocument.body).save().then(() => {
-      document.body.removeChild(iframe);
-      btn.textContent = '✓ PDF Scaricato!';
-      setTimeout(() => { btn.textContent = '⬇ Scarica PDF'; btn.disabled = false; }, 2500);
-    }).catch(() => {
-      document.body.removeChild(iframe);
-      btn.textContent = '⬇ Scarica PDF';
+  const payload = {
+    _subject: `📋 Nuovo Brief — ${project} · ${client}`,
+    'Nome progetto': project,
+    'Cliente': client,
+    'Referente': val('c-contact') || '—',
+    'Data': val('c-date') || '—',
+    '💰 Stima (solo tua)': `${costRange} — ${costDetail}`,
+    'Brief completo': getBriefPlainText()
+  };
+
+  fetch('https://formspree.io/f/mkoqoqza', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.ok) {
+      btn.textContent = '✓ Brief Inviato!';
+      btn.style.background = '#16a34a';
+    } else {
+      throw new Error();
+    }
+  })
+  .catch(() => {
+    btn.textContent = '✕ Errore — riprova';
+    btn.style.background = '#dc2626';
+    btn.disabled = false;
+    setTimeout(() => {
+      btn.textContent = '✉ Invia Brief';
+      btn.style.background = '';
       btn.disabled = false;
-      alert('Errore nella generazione del PDF. Riprova.');
-    });
-  }, 1200);
+    }, 3000);
+  });
 }
 
-function buildPdfHtml(project, client) {
+// ── FORMSPREE — invio silenzioso a Andrea con brief + stima ──────────────
+function sendToFormspree() {
+  const val = (id) => { const el = document.getElementById(id); return el ? (el.value.trim() || '') : ''; };
+  const project = val('c-project') || 'Senza titolo';
+  const client  = val('c-client')  || 'N/D';
+
+  // Stima costi (visibile solo a Andrea, non al cliente)
+  const costRange  = document.getElementById('cost-range')?.textContent?.trim() || 'N/D';
+  const costDetail = document.getElementById('cost-detail')?.textContent?.trim() || '';
+
+  const payload = {
+    _subject: `📋 Nuovo Brief — ${project} · ${client}`,
+    _replyto: val('c-contact') || 'cliente',
+
+    '── PROGETTO': '──────────────────────────',
+    'Nome progetto': project,
+    'Cliente':       client,
+    'Referente':     val('c-contact') || '—',
+    'Data':          val('c-date')    || '—',
+
+    '── 💰 STIMA COSTI (solo tua)': '──────────────────────────',
+    'Range stimato': costRange,
+    'Dettaglio':     costDetail,
+
+    '── BRIEF COMPLETO': '──────────────────────────',
+    'Testo': getBriefPlainText()
+  };
+
+  fetch('https://formspree.io/f/mkoqoqza', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {}); // silenzioso — non mostrare errori al cliente
+}
+
+// ── LOCALSTORAGE — salvataggio e ripristino automatico ───────────────────
+const LS_KEY = 'nmd_brief_v1';
+
+function lsSave() {
+  const ids = [
+    'c-project','c-client','c-contact','c-date',
+    'p-objective','p-target','p-duration',
+    'i-refs','i-vidrefs',
+    's-desc','s-colors-yes','s-colors-no',
+    'a-vo-lang','a-vo-script',
+    'd-deadline','d-flex','d-notes'
+  ];
+  // Add scene text fields
+  for (let i = 0; i < 10; i++) {
+    ids.push(`sc${i}-subj`,`sc${i}-subj2`,`sc${i}-env`,`sc${i}-light`,`sc${i}-action`,`sc${i}-style`,`sc${i}-neg`);
+  }
+
+  const data = { fields: {}, checked: {}, ts: Date.now() };
+
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data.fields[id] = el.value;
+  });
+
+  // Save selected chips and check-items
+  document.querySelectorAll('.check-item.selected, .scene-chip.selected').forEach(el => {
+    const parent = el.closest('[id]');
+    if (parent) {
+      if (!data.checked[parent.id]) data.checked[parent.id] = [];
+      data.checked[parent.id].push(el.textContent.trim());
+    }
+  });
+
+  // Save scene duration sliders
+  for (let i = 0; i < 10; i++) {
+    const el = document.getElementById(`sc${i}-dur`);
+    if (el) data.fields[`sc${i}-dur`] = el.value;
+  }
+
+  try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function lsRestore() {
+  let data;
+  try { data = JSON.parse(localStorage.getItem(LS_KEY)); } catch(e) { return; }
+  if (!data) return;
+
+  // Restore text fields
+  Object.entries(data.fields || {}).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.value = val;
+      el.dispatchEvent(new Event('input'));
+    }
+  });
+
+  // Restore checked items
+  Object.entries(data.checked || {}).forEach(([parentId, texts]) => {
+    const parent = document.getElementById(parentId);
+    if (!parent) return;
+    parent.querySelectorAll('.check-item, .scene-chip').forEach(el => {
+      if (texts.includes(el.textContent.trim())) el.classList.add('selected');
+    });
+  });
+
+  // Show restore banner if data is less than 7 days old
+  if (data.ts && (Date.now() - data.ts) < 7 * 24 * 60 * 60 * 1000) {
+    const project = data.fields?.['c-project'] || '';
+    const banner = document.createElement('div');
+    banner.id = 'ls-banner';
+    banner.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1877C5;color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-family:Inter,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:9999;display:flex;align-items:center;gap:16px;';
+    banner.innerHTML = `<span>✓ Progresso ripristinato${project ? ': <strong>' + project + '</strong>' : ''}</span>
+      <button onclick="lsClear()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;">Cancella</button>
+      <button onclick="document.getElementById('ls-banner').remove()" style="background:none;border:none;color:#fff;cursor:pointer;font-size:16px;line-height:1;">✕</button>`;
+    document.body.appendChild(banner);
+    setTimeout(() => banner?.remove(), 6000);
+  }
+}
+
+function lsClear() {
+  try { localStorage.removeItem(LS_KEY); } catch(e) {}
+  document.getElementById('ls-banner')?.remove();
+}
+
+// Auto-save on any input/change
+document.addEventListener('input',  () => lsSave());
+document.addEventListener('change', () => lsSave());
+document.addEventListener('click',  e => {
+  if (e.target.classList.contains('check-item') ||
+      e.target.classList.contains('scene-chip') ||
+      e.target.closest('.check-item') ||
+      e.target.closest('.scene-chip')) {
+    setTimeout(lsSave, 50);
+  }
+});
+
+// Restore on load
+document.addEventListener('DOMContentLoaded', lsRestore);
+
+
+function buildPdfContent(project, client) {
   const getChecked = (id) => [...document.querySelectorAll(`#${id} .check-item.selected`)].map(el => el.textContent.trim()).join(', ') || '—';
   const val = (id) => { const el = document.getElementById(id); return el ? (el.value.trim() || '—') : '—'; };
 
   const row = (label, value) => value && value !== '—'
-    ? `<tr><td class="lbl">${label}</td><td class="val">${value}</td></tr>`
+    ? `<tr><td class="pdf-lbl">${label}</td><td class="pdf-val">${value}</td></tr>`
     : '';
 
-  const section = (title, rows, color = '#1877C5') => `
-    <div class="section">
-      <div class="section-title" style="border-left:4px solid ${color}">${title}</div>
+  const section = (title, rows) => `
+    <div class="pdf-section">
+      <div class="pdf-section-title">${title}</div>
       <table>${rows}</table>
     </div>`;
 
@@ -1984,13 +2131,13 @@ function buildPdfHtml(project, client) {
   for (let i = 0; i < 10; i++) {
     const subj = document.getElementById(`sc${i}-subj`)?.value.trim();
     if (!subj) continue;
-    const dur   = document.getElementById(`sc${i}-dur`)?.value || '5';
-    const shot  = [...document.querySelectorAll(`#sc${i}-shot .scene-chip.selected`)].map(c => c.textContent).join(', ') || '—';
-    const cam   = [...document.querySelectorAll(`#sc${i}-cam .scene-chip.selected`)].map(c => c.textContent).join(', ') || '—';
-    const inp   = [...document.querySelectorAll(`#sc${i}-input .scene-chip.selected`)].map(c => c.textContent).join(', ') || '—';
+    const dur  = document.getElementById(`sc${i}-dur`)?.value || '5';
+    const shot = [...document.querySelectorAll(`#sc${i}-shot .scene-chip.selected`)].map(c => c.textContent).join(', ') || '—';
+    const cam  = [...document.querySelectorAll(`#sc${i}-cam .scene-chip.selected`)].map(c => c.textContent).join(', ') || '—';
+    const inp  = [...document.querySelectorAll(`#sc${i}-input .scene-chip.selected`)].map(c => c.textContent).join(', ') || '—';
     scenesHtml += `
-      <div class="scene-block">
-        <div class="scene-num">SCENA ${String(i+1).padStart(2,'0')} <span class="scene-dur">${dur} sec</span></div>
+      <div class="pdf-scene">
+        <div class="pdf-scene-num">SCENA ${String(i+1).padStart(2,'0')} <span class="pdf-scene-dur">${dur} sec</span></div>
         <table>
           ${row('Soggetto principale', subj)}
           ${row('Soggetti secondari', document.getElementById(`sc${i}-subj2`)?.value)}
@@ -2008,110 +2155,160 @@ function buildPdfHtml(project, client) {
 
   const date = new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' });
 
-  return `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  const css = `
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    #pdf-target { font-family: 'Inter', Arial, sans-serif; color: #111; background: #fff; font-size: 11px; line-height: 1.6; padding: 28px 32px; width: 750px; }
+    #pdf-target .pdf-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #111; }
+    #pdf-target .pdf-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; color: #111; }
+    #pdf-target .pdf-title span { color: #1877C5; }
+    #pdf-target .pdf-meta { text-align: right; font-size: 10px; color: #666; line-height: 1.7; }
+    #pdf-target .pdf-meta strong { color: #111; font-weight: 700; font-size: 12px; display: block; }
+    #pdf-target .pdf-cols { display: flex; gap: 16px; margin-bottom: 14px; }
+    #pdf-target .pdf-cols .pdf-section { flex: 1; margin-bottom: 0; }
+    #pdf-target .pdf-section { margin-bottom: 18px; }
+    #pdf-target .pdf-section-title { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #1877C5; border-left: 3px solid #1877C5; padding-left: 6px; margin-bottom: 6px; }
+    #pdf-target table { width: 100%; border-collapse: collapse; }
+    #pdf-target tr { border-bottom: 1px solid #f0f0f0; }
+    #pdf-target tr:last-child { border-bottom: none; }
+    #pdf-target td { padding: 4px 6px; vertical-align: top; }
+    #pdf-target .pdf-lbl { width: 140px; font-weight: 500; color: #888; font-size: 10px; text-transform: uppercase; letter-spacing: .04em; }
+    #pdf-target .pdf-val { color: #1a1a1a; font-size: 11px; font-weight: 400; }
+    #pdf-target .pdf-scenes-title { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #1877C5; border-left: 3px solid #1877C5; padding-left: 6px; margin-bottom: 10px; margin-top: 4px; }
+    #pdf-target .pdf-scene { background: #f8f9fb; border: 1px solid #e5e7eb; border-radius: 4px; padding: 10px; margin-bottom: 8px; }
+    #pdf-target .pdf-scene-num { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #1877C5; margin-bottom: 4px; }
+    #pdf-target .pdf-scene-dur { background: #1877C5; color: #fff; border-radius: 10px; padding: 1px 6px; font-size: 8px; margin-left: 5px; }
+    #pdf-target .pdf-footer { margin-top: 16px; padding-top: 8px; border-top: 1px solid #e5e7eb; display: flex; justify-content: space-between; font-size: 9px; color: #999; }
+  `;
+
+  const html = `
+    <div class="pdf-header">
+      <div>
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGl2ZWxsb18xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDM0MC4xNiA4NS4wNCI+CiAgPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDMwLjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDIuMS4xIEJ1aWxkIDEyMykgIC0tPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuc3QwIHsKICAgICAgICBmaWxsOiAjOTM5NDk2OwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8Zz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xOTYuMDMsMTAuNTVoLTMxLjA2bDExLjgyLDIxLjI2aDE5LjI0YzUuODcsMCwxMC42NCw0Ljc3LDEwLjY0LDEwLjYzcy00Ljc3LDEwLjYzLTEwLjY0LDEwLjYzaC0xOS41M2MtNS44NywwLTEwLjYzLDQuNzYtMTAuNjMsMTAuNjNzNC43NiwxMC42MywxMC42MywxMC42M2gxOS41M2MxNy41OSwwLDMxLjktMTQuMywzMS45LTMxLjg5cy0xNC4zMS0zMS44OS0zMS45LTMxLjg5WiIvPgogICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE4NS42OSw1OC41OGwtMjMuMzgtNDIuNTJjLTEuODctMy4zOS01LjQyLTUuNS05LjI5LTUuNTEtMy44NywwLTcuNDMsMi4wOS05LjMxLDUuNDYsMCwwLTcuNTIsMTMuNS0xNC4zNywyNS44MS02Ljg0LTEyLjMxLTE0LjMyLTI1Ljc5LTE0LjMyLTI1Ljc5LTEuODgtMy4zOC01LjQzLTUuNDctOS4yOS01LjQ4LTMuODYuMDEtNy40MSwyLjEtOS4yOCw1LjQ4LDAsMC03LjQ5LDEzLjQ4LTE0LjMyLDI1Ljc5LTYuODYtMTIuMzEtMTQuMzctMjUuODEtMTQuMzctMjUuODEtMS44OS0zLjM3LTUuNDUtNS40Ny05LjMyLTUuNDYtMy44Ny4wMS03LjQyLDIuMTItOS4yOSw1LjUxbC0yMy4zOCw0Mi41MmMtMi44Myw1LjE1LS45NiwxMS42MSw0LjE5LDE0LjQ0LDUuMTQsMi44MywxMS42MS45NSwxNC40My00LjE5LDAsMCw3LjM4LTEzLjQxLDE0LjEzLTI1LjY5LDYuODUsMTIuMywxNC4zMywyNS43MywxNC4zMywyNS43MywxLjg4LDMuMzgsNS40NCw1LjQ3LDkuMyw1LjQ2LDMuODYsMCw3LjQxLTIuMDksOS4yOC01LjQ3LDAsMCw3LjQ3LTEzLjQ2LDE0LjMtMjUuNzUsNi44MywxMi4yOSwxNC4zLDI1Ljc1LDE0LjMsMjUuNzUsMS44NywzLjM4LDUuNDMsNS40Nyw5LjI4LDUuNDcsMy44Ni4wMSw3LjQyLTIuMDgsOS4zLTUuNDYsMCwwLDcuNDgtMTMuNDMsMTQuMzMtMjUuNzMsNi43NiwxMi4yOCwxNC4xMywyNS42OSwxNC4xMywyNS42OSwyLjgzLDUuMTQsOS4yOSw3LjAyLDE0LjQzLDQuMTksNS4xNS0yLjgzLDcuMDItOS4yOSw0LjE5LTE0LjQ0WiIvPgogIDwvZz4KICA8Zz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNTIuMjMsMTEuOTR2MTQuMjRjMCwuMDYuMDEuMTMuMDEuMTlsLTEwLjA1LTEzLjZ2LjlzMTAuMDgsMTMuNjEsMTAuMDgsMTMuNjFjLjA2LjA4LjE0LjEzLjI0LjEzaC4yNXYtMTUuNDdoLS41M1pNMjQxLjY3LDEyLjA4Yy0uMDQtLjA2LS4wNy0uMDktLjExLS4xMS0uMDMtLjAyLS4wOC0uMDMtLjE0LS4wM2gtLjI3djE1LjQ3aC41MnYtMTUuMzNaIi8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjc4LjU1LDEyLjgxbC00LjU0LDEzLjA2Yy0uMDMuMTItLjA3LjI0LS4xLjM3LS4wMy4xMy0uMDcuMjctLjEuNDEtLjA1LS4yOC0uMTItLjU0LS4xOC0uNzhsLTQuMjctMTMuNzRjLS4wNC0uMTMtLjEyLS4xOS0uMjQtLjE5aC0uNWw0LjksMTUuNDdoLjUzbDQuNzYtMTMuODItLjI2LS43OFoiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNTUuNjMsMzUuNGMtLjA2LDAtLjExLjAxLS4xNS4wMi0uMDQuMDItLjA3LjA2LS4xMS4xMmwtNi41MSwxMS4zOGMtLjA0LjA4LS4wNy4xNS0uMS4yMi0uMDMuMDctLjA2LjE0LS4wOS4ybC0uMTktLjQxLTYuMjgtMTAuNjZ2MS4wMmw2LjE0LDEwLjQ2Yy4wNy4xMi4xNi4xOS4yNy4xOWguMTFjLjExLDAsLjItLjA3LjI3LS4xOWw2LjQ5LTExLjM3cy0uMDEuMTEtLjAxLjE3djE0LjMxaC41M3YtMTUuNDZoLS4zN1pNMjQxLjUxLDM1LjRoLS4zNnYxNS40NmguNTJ2LTE1LjQzcy0uMDEsMC0uMDEsMGMtLjA0LS4wMS0uMDktLjAyLS4xNS0uMDJaIi8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjg2LjUsNDMuMTNjMCwxLjIxLS4xOCwyLjI5LS41MywzLjI1LS4zNS45Ni0uODUsMS43Ny0xLjQ5LDIuNDMtLjY0LjY2LTEuNCwxLjE3LTIuMjksMS41Mi0uODkuMzUtMS44Ny41My0yLjk0LjUzaC01LjU4di0xNS40N2g1LjU4YzEuMDcsMCwyLjA1LjE4LDIuOTQuNTMuODkuMzUsMS42NS44NiwyLjI5LDEuNTJzMS4xMywxLjQ3LDEuNDksMi40M2MuMzUuOTYuNTMsMi4wNC41MywzLjI1Wk0yODUuODcsNDMuMTNjMC0xLjE1LS4xNi0yLjE4LS40OC0zLjA4LS4zMi0uOS0uNzctMS42Ni0xLjM1LTIuMjctLjU4LS42Mi0xLjI4LTEuMDgtMi4wOS0xLjQxLS44MS0uMzItMS43LS40OC0yLjY4LS40OGgtNC45N3YxNC40OGg0Ljk3Yy45NywwLDEuODctLjE2LDIuNjgtLjQ4LjgxLS4zMiwxLjUxLS43OSwyLjA5LTEuNDFzMS4wMy0xLjM3LDEuMzUtMi4yNy40OC0xLjkyLjQ4LTMuMDdaIi8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzA3LjI0LDUwLjg3aC0uNDdjLS4xMSwwLS4xOS0uMDYtLjI0LS4xOWwtMi4wMS00LjloLTcuOTRsLTIuMDEsNC45Yy0uMDQuMTItLjEyLjE5LS4yNS4xOWgtLjQ1bDYuNC0xNS40N2guNThsNi40LDE1LjQ3Wk0yOTYuNzcsNDUuMzJoNy41NWwtMy41NC04LjYxYy0uMDQtLjEtLjA4LS4yMS0uMTItLjMxcy0uMDgtLjIyLS4xMi0uMzRjLS4wNC4xMi0uMDguMjQtLjEyLjM0LS4wNC4xLS4wOC4yMS0uMTIuMzFsLTMuNTQsOC42MVoiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNTMuOTYsNjYuNTljMCwxLjIxLS4xOCwyLjI5LS41MywzLjI1LS4zNS45Ni0uODUsMS43Ny0xLjQ5LDIuNDMtLjY0LjY2LTEuNCwxLjE3LTIuMjksMS41Mi0uODkuMzUtMS44Ny41My0yLjk0LjUzaC01LjU4di0xNS40N2g1LjU4YzEuMDcsMCwyLjA1LjE4LDIuOTQuNTMuODkuMzUsMS42NS44NiwyLjI5LDEuNTJzMS4xMywxLjQ3LDEuNDksMi40M2MuMzUuOTYuNTMsMi4wNC41MywzLjI1Wk0yNTMuMzIsNjYuNTljMC0xLjE1LS4xNi0yLjE4LS40OC0zLjA4LS4zMi0uOS0uNzctMS42Ni0xLjM1LTIuMjctLjU4LS42Mi0xLjI4LTEuMDgtMi4wOS0xLjQxLS44MS0uMzItMS43LS40OC0yLjY4LS40OGgtNC45N3YxNC40OGg0Ljk3Yy45NywwLDEuODctLjE2LDIuNjgtLjQ4LjgxLS4zMiwxLjUxLS43OSwyLjA5LTEuNDFzMS4wMy0xLjM3LDEuMzUtMi4yNy40OC0xLjkyLjQ4LTMuMDdaIi8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjc3Ljk1LDYwLjQ2Yy0uMDQuMDctLjExLjExLS4xOS4xMXMtLjE5LS4wNy0uMzQtLjIxYy0uMTQtLjE0LS4zNC0uMy0uNi0uNDgtLjI2LS4xOC0uNTktLjM0LS45OS0uNDgtLjQtLjE0LS45LS4yMS0xLjUtLjIxcy0xLjE0LjA5LTEuNi4yN2MtLjQ3LjE4LS44Ni40Mi0xLjE3Ljczcy0uNTUuNjYtLjcxLDEuMDYtLjI0LjgyLS4yNCwxLjI2YzAsLjU2LjExLDEuMDQuMzQsMS40MXMuNTMuNy45Ljk1Yy4zNy4yNi44LjQ3LDEuMjcuNjVzLjk2LjM1LDEuNDYuNTFjLjUuMTcuOTkuMzQsMS40Ni41My40Ny4xOS45LjQyLDEuMjcuNzFzLjY3LjY0LjksMS4wNmMuMjMuNDIuMzQuOTQuMzQsMS41N3MtLjExLDEuMjQtLjMzLDEuOGMtLjIyLjU2LS41MywxLjA1LS45NSwxLjQ2LS40Mi40MS0uOTIuNzQtMS41Mi45OHMtMS4yOC4zNi0yLjA0LjM2Yy0uNTIsMC0uOTktLjA1LTEuNDEtLjE0LS40Mi0uMDktLjgxLS4yMi0xLjE3LS40LS4zNi0uMTctLjY4LS4zOC0uOTgtLjYzLS4zLS4yNS0uNTgtLjUzLS44NS0uODVsLjE0LS4yMnMuMDctLjA2LjA5LS4wOGMuMDMtLjAyLjA2LS4wMy4xMi0uMDNzLjEyLjA1LjIxLjE0LjIxLjIxLjM2LjM0LjMyLjI4LjUzLjQ0Yy4yMS4xNi40NS4zLjczLjQ0cy42MS4yNS45OC4zNC43OS4xNCwxLjI2LjE0Yy42NywwLDEuMjYtLjEsMS43OS0uMzFzLjk3LS41LDEuMzQtLjg2Yy4zNi0uMzYuNjQtLjc5LjgzLTEuMjcuMTktLjQ4LjI5LTEsLjI5LTEuNTUsMC0uNTktLjExLTEuMDctLjM0LTEuNDUtLjIzLS4zOC0uNTMtLjctLjktLjk2LS4zNy0uMjYtLjc5LS40Ny0xLjI3LS42NC0uNDgtLjE3LS45Ni0uMzQtMS40Ni0uNS0uNS0uMTYtLjk4LS4zMy0xLjQ2LS41Mi0uNDgtLjE5LS45LS40Mi0xLjI3LS43MS0uMzctLjI5LS42Ny0uNjUtLjktMS4wOC0uMjMtLjQzLS4zNC0uOTctLjM0LTEuNjEsMC0uNTEuMDktLjk5LjI5LTEuNDUuMTktLjQ2LjQ3LS44Ny44My0xLjIzLjM2LS4zNi44MS0uNjQsMS4zNC0uODUuNTMtLjIxLDEuMTQtLjMyLDEuODMtLjMyLjc4LDAsMS40Ni4xMiwyLjA2LjM3LjYuMjUsMS4xNi42NCwxLjY4LDEuMTdsLS4xMy4yNFoiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yOTcuNjMsNzQuMDRjLS44OC4zLTEuODcuNDYtMi45OC40Ni0xLjIxLDAtMi4zLS4xOC0zLjI3LS41NS0uOTctLjM3LTEuNzktLjktMi40Ny0xLjU4LS42OC0uNjktMS4yLTEuNTItMS41Ni0yLjQ5LS4zNi0uOTctLjU0LTIuMDctLjU0LTMuMjhzLjE4LTIuMy41My0zLjI3Yy4zNi0uOTcuODctMS44LDEuNTQtMi40OS42Ny0uNjksMS40Ny0xLjIyLDIuNDItMS41OS45NS0uMzcsMi4wMS0uNTYsMy4xOS0uNTYuNTgsMCwxLjExLjA0LDEuNi4xMS40OS4wNy45NC4xOSwxLjM2LjM0cy44MS4zNCwxLjE4LjU3LjczLjQ5LDEuMDcuNzlsLS4xNS4yM2MtLjA2LjA5LS4xNC4xMi0uMjUuMDktLjA3LS4wMi0uMjEtLjEyLS40LS4yOS0uMTktLjE3LS40OC0uMzUtLjg1LS41NHMtLjg1LS4zNy0xLjQ0LS41My0xLjI5LS4yNC0yLjEzLS4yNGMtMS4wOCwwLTIuMDUuMTctMi45Mi41MS0uODcuMzQtMS42MS44My0yLjIyLDEuNDYtLjYxLjY0LTEuMDgsMS40MS0xLjQxLDIuMzNzLS41LDEuOTUtLjUsMy4xLjE3LDIuMTcuNSwzLjA5LjgsMS43LDEuNDIsMi4zNGMuNjIuNjQsMS4zOCwxLjEzLDIuMjcsMS40Ny44OS4zNCwxLjkuNTEsMy4wMi41MS41MSwwLC45OC0uMDMsMS40MS0uMS40NC0uMDcuODUtLjE2LDEuMjQtLjI5LjM5LS4xMi43Ny0uMjcsMS4xMy0uNDUuMzctLjE4Ljc0LS4zOCwxLjExLS42MXYtNC41NWgtMy4yN2MtLjA1LDAtLjEtLjAyLS4xMy0uMDYtLjA0LS4wNC0uMDYtLjA4LS4wNi0uMTJ2LS4zMWg0LjAydjUuMjhjLS43Ni41Mi0xLjU4LjkzLTIuNDYsMS4yNFoiLz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjU4LjI3LDE5LjgydjcuMDdoOC41NWwtLjAyLjUyaC05LjEzdi0xNS40N2g5LjEzdi41MmgtOC41M3Y2Ljg1Ii8+CiAgICAgIDxyZWN0IGNsYXNzPSJzdDAiIHg9IjI2MC42NiIgeT0iMTkuMzIiIHdpZHRoPSI0Ljc5IiBoZWlnaHQ9Ii41MSIvPgogICAgPC9nPgogICAgPGc+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNjEuNSw0My4yOHY3LjA3aDguNTVsLS4wMi41MmgtOS4xM3YtMTUuNDdoOS4xM3YuNTJoLTguNTN2Ni44NSIvPgogICAgICA8cmVjdCBjbGFzcz0ic3QwIiB4PSIyNjMuODkiIHk9IjQyLjc3IiB3aWR0aD0iNC43OSIgaGVpZ2h0PSIuNTEiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjU4LjQ1LDY2LjczdjcuMDdoOC41NWwtLjAyLjUyaC05LjEzdi0xNS40N2g5LjEzdi41MmgtOC41M3Y2Ljg1Ii8+CiAgICAgIDxyZWN0IGNsYXNzPSJzdDAiIHg9IjI2MC44NSIgeT0iNjYuMjIiIHdpZHRoPSI0Ljc5IiBoZWlnaHQ9Ii41MSIvPgogICAgPC9nPgogICAgPHJlY3QgY2xhc3M9InN0MCIgeD0iMjkwLjQiIHk9IjM1LjQiIHdpZHRoPSIuNjEiIGhlaWdodD0iMTUuNDYiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNzguODMsMTIuMDNjLjA1LS4wNi4xMi0uMDkuMjEtLjA5aC4xNGMuMTMsMCwuMjEuMDYuMjUuMTlsNC43NiwxMy43NGMuMDcuMjMuMTQuNDkuMi43OC4wMy0uMTUuMDUtLjI4LjA4LS40MS4wMy0uMTMuMDctLjI1LjEtLjM3bDQuMjctMTMuNzRjLjA0LS4xMy4xMy0uMTkuMjYtLjE5aC40NmwtNC45LDE1LjQ3aC0uNTRsLS45Mi0yLjY3LTMuNzgtMTEuMDItLjU5LTEuNjlaIi8+CiAgICA8cmVjdCBjbGFzcz0ic3QwIiB4PSIyODIuMzMiIHk9IjU5IiB3aWR0aD0iLjYxIiBoZWlnaHQ9IjE1LjQ2Ii8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzE1LjE3LDU4Ljg1djE0LjI0YzAsLjA2LjAxLjEzLjAxLjE5bC0xMC4wNS0xMy42di45czEwLjA4LDEzLjYxLDEwLjA4LDEzLjYxYy4wNi4wOC4xNC4xMy4yNC4xM2guMjV2LTE1LjQ3aC0uNTNaTTMwNC42MSw1OC45OWMtLjA0LS4wNi0uMDctLjA5LS4xMS0uMTEtLjAzLS4wMi0uMDgtLjAzLS4xNC0uMDNoLS4yN3YxNS40N2guNTJ2LTE1LjMzWiIvPgogIDwvZz4KPC9zdmc+" alt="New Media Design" style="height:22px; margin-bottom:8px; display:block; opacity:.8;">
+        <div class="pdf-title">Animation<br><span>Brief.</span></div>
+      </div>
+      <div class="pdf-meta">
+        <strong>${project || 'Progetto'}</strong>
+        ${client ? client + '<br>' : ''}
+        ${val('c-contact') !== '—' ? val('c-contact') + '<br>' : ''}
+        ${date}
+        <div style="margin-top:6px; font-size:8px; color:#aaa; line-height:1.6;">
+          New Media Design di Andrea Spinazzola<br>
+          Viale Valganna, 34/D – 21100 Varese · P.I. 03820670127<br>
+          a.spinazzola@new-media-design.it · +39 347 846 1063
+        </div>
+      </div>
+    </div>
+
+    <div class="pdf-cols">
+      ${section('Obiettivo & Target', `
+        ${row('Obiettivo', val('p-objective'))}
+        ${row('Target', val('p-target'))}
+        ${row('Durata totale', val('p-duration'))}
+        ${row('Destinazione', getChecked('p-dest'))}
+      `)}
+      ${section('Specifiche Tecniche', `
+        ${row('Formato', getChecked('t-format'))}
+        ${row('Risoluzione', getChecked('t-res'))}
+        ${row('Output', getChecked('t-output'))}
+      `)}
+    </div>
+
+    <div class="pdf-cols">
+      ${section('Punto di Partenza', `
+        ${row('Visual', getChecked('i-hasvisual'))}
+        ${row('Materiale', getChecked('i-inputtype'))}
+        ${row('Rif. visivi', val('i-refs'))}
+        ${row('Rif. video', val('i-vidrefs'))}
+      `)}
+      ${section('Audio', `
+        ${row('Musica', getChecked('a-music'))}
+        ${row('Effetti', getChecked('a-sfx'))}
+        ${row('Voiceover', getChecked('a-vo'))}
+        ${row('Lingua', val('a-vo-lang'))}
+        ${row('Speaker', getChecked('a-speaker'))}
+      `)}
+    </div>
+
+    ${section('Stile Visivo', `
+      ${row('Stile', getChecked('s-style'))}
+      ${row('Descrizione', val('s-desc'))}
+      ${row('Colori da usare', val('s-colors-yes'))}
+      ${row('Colori da evitare', val('s-colors-no'))}
+      ${row('Mood', getChecked('s-mood'))}
+      ${row('Lighting', getChecked('s-light'))}
+    `)}
+
+    ${scenesHtml ? `<div class="pdf-scenes-title">Schede Scena</div>${scenesHtml}` : ''}
+
+    ${val('d-deadline') !== '—' || val('d-notes') !== '—' ? section('Consegna', `
+      ${row('Deadline', val('d-deadline'))}
+      ${row('Flessibilità', val('d-flex'))}
+      ${row('Note', val('d-notes'))}
+    `) : ''}
+
+
+    <div class="pdf-footer">
+      <div>
+        <span style="font-weight:600; color:#555;">New Media Design</span> di Andrea Spinazzola &nbsp;·&nbsp;
+        Viale Valganna, 34/D – 21100 Varese &nbsp;·&nbsp; P.I. 03820670127<br>
+        <span style="color:#1877C5;">a.spinazzola@new-media-design.it</span> &nbsp;·&nbsp; +39 347 846 1063
+      </div>
+      <div style="text-align:right;">
+        ${project ? project + '<br>' : ''}
+        ${client ? client + '<br>' : ''}
+        ${date}
+      </div>
+    </div>
+  `;
+
+  return { css, html };
+}
+
+function downloadPdf() {
+  const project = document.getElementById('c-project')?.value.trim() || 'Brief';
+  const client  = document.getElementById('c-client')?.value.trim() || '';
+
+  const { css, html } = buildPdfContent(project, client);
+
+  const fullHtml = `<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Animation Brief — ${project}</title>
   <style>
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:'Inter',sans-serif; color:#111; background:#fff; font-size:11px; line-height:1.5; }
-    .page { width:210mm; padding:14mm 14mm 14mm 14mm; }
-
-    /* Header */
-    .header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10mm; padding-bottom:5mm; border-bottom:2px solid #111; }
-    .header-title { font-size:26px; font-weight:900; text-transform:uppercase; letter-spacing:-.02em; line-height:1; }
-    .header-title span { color:#1877C5; }
-    .header-meta { text-align:right; font-size:10px; color:#666; line-height:1.7; }
-    .header-meta strong { color:#111; font-weight:600; display:block; font-size:12px; margin-bottom:2px; }
-
-    /* Sections */
-    .section { margin-bottom:6mm; page-break-inside:avoid; }
-    .section-title { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:#1877C5; padding-left:8px; margin-bottom:4px; padding-top:2px; padding-bottom:2px; }
-    table { width:100%; border-collapse:collapse; }
-    tr { border-bottom:1px solid #f0f0f0; }
-    tr:last-child { border-bottom:none; }
-    td { padding:3px 6px; vertical-align:top; }
-    td.lbl { width:140px; font-weight:500; color:#555; font-size:10px; white-space:nowrap; }
-    td.val { color:#111; font-size:11px; }
-
-    /* Scenes */
-    .scenes-title { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:#1877C5; padding-left:8px; margin-bottom:4mm; border-left:4px solid #1877C5; padding-top:2px; padding-bottom:2px; }
-    .scene-block { background:#f8f9fb; border:1px solid #e5e7eb; border-radius:4px; padding:4mm; margin-bottom:3mm; page-break-inside:avoid; }
-    .scene-num { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:#1877C5; margin-bottom:3px; }
-    .scene-dur { background:#1877C5; color:#fff; border-radius:10px; padding:1px 7px; font-size:8px; margin-left:6px; font-weight:600; }
-
-    /* Two column layout */
-    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:5mm; margin-bottom:6mm; }
-    .two-col .section { margin-bottom:0; }
-
-    /* Footer */
-    .footer { margin-top:8mm; padding-top:4mm; border-top:1px solid #e5e7eb; display:flex; justify-content:space-between; font-size:9px; color:#999; }
+    ${css.replace(/#pdf-target /g, '')}
+    @media print {
+      body { margin: 0; }
+      @page { margin: 10mm; size: A4; }
+    }
   </style>
-  </head><body><div class="page">
+</head>
+<body style="font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;font-size:11px;line-height:1.5;padding:20px;">
+  ${html}
+  <script>
+    window.onload = function() { setTimeout(function() { window.print(); }, 500); };
+  <\/script>
+</body>
+</html>`;
 
-  <div class="header">
-    <div>
-      <div class="header-title">Animation<br><span>Brief.</span></div>
-    </div>
-    <div class="header-meta">
-      <strong>${project || 'Progetto'}</strong>
-      ${client ? client + '<br>' : ''}
-      ${val('c-contact') !== '—' ? val('c-contact') + '<br>' : ''}
-      ${date}
-    </div>
-  </div>
+  // Primary: open new window
+  const printWindow = window.open('', '_blank', 'width=920,height=720');
 
-  <div class="two-col">
-    ${section('Obiettivo & Target', `
-      ${row('Obiettivo', val('p-objective'))}
-      ${row('Target', val('p-target'))}
-      ${row('Durata totale', val('p-duration'))}
-      ${row('Destinazione', getChecked('p-dest'))}
-    `)}
-    ${section('Specifiche Tecniche', `
-      ${row('Formato', getChecked('t-format'))}
-      ${row('Risoluzione', getChecked('t-res'))}
-      ${row('Output', getChecked('t-output'))}
-    `)}
-  </div>
-
-  <div class="two-col">
-    ${section('Punto di Partenza', `
-      ${row('Visual esistente', getChecked('i-hasvisual'))}
-      ${row('Tipo materiale', getChecked('i-inputtype'))}
-      ${row('Rif. visivi', val('i-refs'))}
-      ${row('Rif. video', val('i-vidrefs'))}
-    `)}
-    ${section('Audio', `
-      ${row('Musica', getChecked('a-music'))}
-      ${row('Effetti', getChecked('a-sfx'))}
-      ${row('Voiceover', getChecked('a-vo'))}
-      ${row('Lingua', val('a-vo-lang'))}
-      ${row('Speaker', getChecked('a-speaker'))}
-    `)}
-  </div>
-
-  ${section('Stile Visivo', `
-    ${row('Stile', getChecked('s-style'))}
-    ${row('Descrizione', val('s-desc'))}
-    ${row('Colori da usare', val('s-colors-yes'))}
-    ${row('Colori da evitare', val('s-colors-no'))}
-    ${row('Mood', getChecked('s-mood'))}
-    ${row('Lighting', getChecked('s-light'))}
-  `)}
-
-  ${scenesHtml ? `<div class="scenes-title">Schede Scena</div>${scenesHtml}` : ''}
-
-  ${val('d-deadline') !== '—' || val('d-notes') !== '—' ? section('Consegna', `
-    ${row('Deadline', val('d-deadline'))}
-    ${row('Flessibilità', val('d-flex'))}
-    ${row('Note', val('d-notes'))}
-  `) : ''}
-
-  <div class="footer">
-    <span>Animation Brief — ${project || ''}${client ? ' · ' + client : ''}</span>
-    <span>${date}</span>
-  </div>
-
-  </div></body></html>`;
+  if (printWindow && !printWindow.closed) {
+    printWindow.document.open();
+    printWindow.document.write(fullHtml);
+    printWindow.document.close();
+  } else {
+    // Fallback: download as .html file (user opens and prints)
+    const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `Animation_Brief_${project.replace(/\s+/g,'_')}.html`;
+    a.click();
+    URL.revokeObjectURL(url);
+    alert('Il tuo browser ha bloccato la finestra di stampa.\nIl file HTML è stato scaricato: aprilo nel browser e usa Stampa → Salva come PDF.');
+  }
 }
 
 
@@ -2128,7 +2325,7 @@ function buildPdfHtml(project, client) {
     </div>
     <div class="modal-footer">
       <button class="modal-btn modal-btn-copy" id="btn-copy" onclick="copyBrief()">⎘ Copia Testo</button>
-      <button class="modal-btn modal-btn-mail" onclick="sendMail()">✉ Invia Email</button>
+      <button class="modal-btn modal-btn-mail" id="btn-send-form" onclick="sendViaFormspree()">✉ Invia Brief</button>
       <button class="modal-btn modal-btn-pdf" id="btn-pdf" onclick="downloadPdf()">⬇ Scarica PDF</button>
     </div>
   </div>
