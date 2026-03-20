@@ -310,8 +310,7 @@ function cursorEnter(x,y){cursor.style.left=x+'px';cursor.style.top=y+'px';curso
 function cursorMove(x,y){cursor.style.left=x+'px';cursor.style.top=y+'px'}
 function cursorLeave(){cursor.classList.remove('visible')}
 updateCursorColor();
-document.getElementById('siteName').textContent=MANIFEST.site.name;
-fetch('manifest.json').then(function(r){if(!r.ok)throw new Error('Failed to load manifest.json');return r.json()}).then(function(data){MANIFEST=data;buildNav();buildHero();flushReadyCallbacks()}).catch(function(err){console.error('Manifest load error:',err);showError('Unable to load gallery configuration. Please ensure manifest.json exists and is valid.')});
+fetch('manifest.json').then(function(r){if(!r.ok)throw new Error('Failed to load manifest.json');return r.json()}).then(function(data){MANIFEST=data;document.getElementById('siteName').textContent=MANIFEST.site.name;buildNav();buildHero();flushReadyCallbacks()}).catch(function(err){console.error('Manifest load error:',err);showError('Unable to load gallery configuration. Please ensure manifest.json exists and is valid.')});
 })();
 </script>
 </body>
