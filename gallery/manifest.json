@@ -1,0 +1,24 @@
+{
+  "site": {
+    "name": "Andrea Spinazzola",
+    "hero": {
+      "seriesId": "series-1",
+      "interval": 5000
+    }
+  },
+  "series": [
+    {
+      "id": "series-1",
+      "title": "Human Frequency",
+      "subtitle": "Series I — Faces · AI Generative · 2024",
+      "images": [
+        {
+          "filename": "images/series-1/01.jpg",
+          "title": "Opera 01",
+          "description": "Opera 01 della serie Human Frequency",
+          "meta": "2024 · AI Generative"
+        }
+      ]
+    }
+  ]
+}
