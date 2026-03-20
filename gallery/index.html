@@ -68,7 +68,10 @@ header.solid .theme-btn{color:var(--fg2)}
 .series-bar-meta{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;color:var(--fg2);text-transform:uppercase}
 @media(max-width:480px){.series-bar-meta{display:none}}
 .contact-overlay{-webkit-user-select:text;user-select:text}
-.contact-body{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;overflow-y:auto}
+.contact-body{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;overflow-y:auto;position:relative}
+.contact-close-btn{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--fg2);cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;transition:color .2s;touch-action:manipulation;z-index:10}
+.contact-close-btn:hover{color:var(--fg)}
+.contact-close-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .contact-inner{width:100%;max-width:480px}
 .contact-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--fg2);margin-bottom:32px}
 .contact-form{display:flex;flex-direction:column;gap:0}
@@ -163,11 +166,10 @@ header.solid .theme-btn{color:var(--fg2)}
 </div>
 <div class="contact-overlay" id="contactOverlay">
   <div class="contact-header">
-    <button class="g-back" id="contactBack"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
     <div class="g-header-name">Andrea Spinazzola</div>
-    <button class="m-btn" id="contactClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="contact-body">
+    <button class="contact-close-btn" id="contactClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <div class="contact-inner">
       <div class="contact-label">Get in touch</div>
       <form class="contact-form" id="contactForm" novalidate>
@@ -273,7 +275,6 @@ function resetToFit(){isZoomed=false;panX=0;panY=0;renderMuseum()}
 document.getElementById('heroEnter').addEventListener('click',function(){var heroSeries=getHeroSeries();if(heroSeries)openGallery(heroSeries.id)});
 document.getElementById('galleryBack').addEventListener('click',closeGallery);
 document.getElementById('themeBtn').addEventListener('click',function(){var html=document.documentElement;var dark=html.dataset.theme==='dark';html.dataset.theme=dark?'light':'dark';document.getElementById('themeIcon').innerHTML=dark?'<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>':'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';updateCursorColor()});
-document.getElementById('contactBack').addEventListener('click',toggleContact);
 document.getElementById('contactClose').addEventListener('click',toggleContact);
 mClose.addEventListener('click',closeMuseum);
 mReset.addEventListener('click',resetToFit);
