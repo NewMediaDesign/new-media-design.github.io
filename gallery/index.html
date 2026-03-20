@@ -53,7 +53,7 @@ header.solid .theme-btn{color:var(--fg2)}
 .g-back:hover{color:var(--fg)}
 .g-back svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .g-header-name{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--fg);margin:0 auto}
-.gallery-wall{flex:1;overflow:hidden;transition:background .4s}
+.gallery-wall{flex:1;overflow:hidden;transition:background .4s;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:100px;gap:1px;background:var(--border);padding:1px}
 .g-item{position:relative;overflow:hidden;background:var(--bg);transition:background .4s}
 .g-item canvas{width:100%;height:100%;display:block;pointer-events:none;will-change:transform;transform-origin:center;transition:transform 1.1s var(--ease)}
 .g-item .g-hit{position:absolute;inset:0;z-index:2;cursor:none}
@@ -67,13 +67,15 @@ header.solid .theme-btn{color:var(--fg2)}
 .series-bar-title{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--fg)}
 .series-bar-meta{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;color:var(--fg2);text-transform:uppercase}
 @media(max-width:480px){.series-bar-meta{display:none}}
-.contact-overlay{-webkit-user-select:text;user-select:text;position:relative}
-.contact-close-btn{position:absolute;top:10px;right:10px;background:none;border:none;color:var(--fg);cursor:pointer;width:48px;height:48px;display:flex;align-items:center;justify-content:center;transition:opacity .2s;touch-action:manipulation;z-index:10;opacity:.6}
-.contact-close-btn:hover{opacity:1}
-.contact-close-btn svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.contact-body{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;overflow-y:auto;position:relative}
+.contact-overlay{-webkit-user-select:text;user-select:text}
+.contact-body{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;overflow-y:auto}
 .contact-inner{width:100%;max-width:480px}
-.contact-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--fg2);margin-bottom:32px}
+.overlay-close{position:absolute;bottom:20px;left:20px;z-index:10;background:none;border:none;color:var(--fg2);cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;padding:0;transition:color .15s;touch-action:manipulation}
+.overlay-wrapper{position:absolute;inset:0;pointer-events:none}
+.overlay-wrapper *{pointer-events:auto}
+.overlay-close:hover{color:var(--fg)}
+.overlay-close svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.contact-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--fg2)}
 .contact-form{display:flex;flex-direction:column;gap:0}
 .form-field{display:flex;flex-direction:column;gap:6px;border-bottom:1px solid var(--border);padding:18px 0;transition:border-color .2s}
 .form-field:focus-within{border-bottom-color:var(--fg)}
@@ -96,14 +98,13 @@ header.solid .theme-btn{color:var(--fg2)}
 .custom-cursor{position:fixed;top:0;left:0;width:40px;height:40px;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);opacity:0;transition:opacity .18s}
 .custom-cursor.visible{opacity:1}
 .custom-cursor.pressed{transform:translate(-50%,-50%) scale(.72)}
-.museum{position:fixed;inset:0;z-index:800;background:var(--bg);display:flex;flex-direction:column;opacity:0;transform:translateY(24px);pointer-events:none;visibility:hidden;transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear .38s}
+.museum{position:relative;inset:0;z-index:960;background:var(--bg);display:flex;flex-direction:column;opacity:0;transform:translateY(24px);pointer-events:none;visibility:hidden;transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear .38s}
 .museum.open{opacity:1;transform:translateY(0);pointer-events:auto;visibility:visible;transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear 0s}
-.museum-top{height:var(--h);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--border);transition:border-color .4s}
-.museum-counter{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;color:var(--fg2);text-transform:uppercase}
-.m-btn{background:none;border:none;color:var(--fg2);cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;transition:color .15s;touch-action:manipulation}
+.museum-counter{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;color:var(--fg2);text-transform:uppercase;flex-shrink:0}
+.m-btn{background:none;border:none;color:var(--fg2);cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;transition:color .15s;touch-action:manipulation;flex-shrink:0}
 .m-btn:hover{color:var(--fg)}
 .m-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.museum-stage{flex:1;position:relative;overflow:hidden}
+.museum-stage{flex:1;position:relative;overflow:hidden;padding-top:20px}
 #museum-canvas{position:absolute;display:block;cursor:zoom-in}
 #museum-canvas.zoomed{cursor:grab}
 #museum-canvas.grabbing{cursor:grabbing}
@@ -165,13 +166,12 @@ header.solid .theme-btn{color:var(--fg2)}
   </div>
 </div>
 <div class="contact-overlay" id="contactOverlay">
-  <button class="contact-close-btn" id="contactClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-  <div class="contact-header">
-    <div class="g-header-name">Andrea Spinazzola</div>
+  <div class="overlay-wrapper">
+    <button class="overlay-close" id="contactClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="contact-body">
     <div class="contact-inner">
-      <div class="contact-label">Get in touch</div>
+      <div class="contact-label" style="margin-bottom:32px">Get in touch</div>
       <form class="contact-form" id="contactForm" novalidate>
         <div class="form-field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" placeholder="Your name" autocomplete="name" required></div>
         <div class="form-field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required></div>
@@ -185,10 +185,8 @@ header.solid .theme-btn{color:var(--fg2)}
   </div>
 </div>
 <div class="museum" id="museum">
-  <div class="museum-top">
-    <div style="width:36px"></div>
-    <div class="museum-counter" id="museumCounter">01 / 01</div>
-    <button class="m-btn" id="mClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="overlay-wrapper">
+    <button class="overlay-close" id="mClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="museum-stage" id="museumStage">
     <canvas id="museum-canvas"></canvas>
@@ -198,6 +196,7 @@ header.solid .theme-btn{color:var(--fg2)}
     <button class="m-arrow m-arrow-right" id="mNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
   <div class="museum-caption">
+    <div class="museum-counter" id="museumCounter">01 / 01</div>
     <div class="caption-title" id="captionTitle">&mdash;</div>
     <div class="caption-body">
       <div class="caption-desc" id="captionDesc">&mdash;</div>
@@ -280,7 +279,7 @@ mClose.addEventListener('click',closeMuseum);
 mReset.addEventListener('click',resetToFit);
 mPrev.addEventListener('click',function(){if(slideAnim)return;resetToFit();slideToImage((mIdx-1+currentSeriesImages.length)%currentSeriesImages.length,-1)});
 mNext.addEventListener('click',function(){if(slideAnim)return;resetToFit();slideToImage((mIdx+1)%currentSeriesImages.length,1)});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(museum.classList.contains('open')){closeMuseum()}else if(contactOverlay.classList.contains('open')){toggleContact()}}if(!museum.classList.contains('open'))return;if(e.key==='ArrowRight'&&!slideAnim){resetToFit();slideToImage((mIdx+1)%currentSeriesImages.length,1)}if(e.key==='ArrowLeft'&&!slideAnim){resetToFit();slideToImage((mIdx-1+currentSeriesImages.length)%currentSeriesImages.length,-1)}});
+document.addEventListener('keydown',function(e){if(!museum.classList.contains('open'))return;if(e.key==='Escape')closeMuseum();if(e.key==='ArrowRight'&&!slideAnim){resetToFit();slideToImage((mIdx+1)%currentSeriesImages.length,1)}if(e.key==='ArrowLeft'&&!slideAnim){resetToFit();slideToImage((mIdx-1+currentSeriesImages.length)%currentSeriesImages.length,-1)}});
 mStage.addEventListener('mousemove',function(e){var r=mStage.getBoundingClientRect(),x=e.clientX-r.left,w=mStage.clientWidth;mPrev.classList.toggle('visible',x<w*0.22);mNext.classList.toggle('visible',x>w*0.78);clearTimeout(arrowTimer);arrowTimer=setTimeout(function(){mPrev.classList.remove('visible');mNext.classList.remove('visible')},2000)});
 mStage.addEventListener('mouseleave',function(){mPrev.classList.remove('visible');mNext.classList.remove('visible')});
 mCanvas.addEventListener('mouseenter',function(e){if(!isZoomed)cursorEnter(e.clientX,e.clientY)});
@@ -312,7 +311,8 @@ function cursorEnter(x,y){cursor.style.left=x+'px';cursor.style.top=y+'px';curso
 function cursorMove(x,y){cursor.style.left=x+'px';cursor.style.top=y+'px'}
 function cursorLeave(){cursor.classList.remove('visible')}
 updateCursorColor();
-fetch('manifest.json').then(function(r){if(!r.ok)throw new Error('Failed to load manifest.json');return r.json()}).then(function(data){MANIFEST=data;document.getElementById('siteName').textContent=MANIFEST.site.name;buildNav();buildHero();flushReadyCallbacks()}).catch(function(err){console.error('Manifest load error:',err);showError('Unable to load gallery configuration. Please ensure manifest.json exists and is valid.')});
+document.getElementById('siteName').textContent=MANIFEST.site.name;
+fetch('manifest.json').then(function(r){if(!r.ok)throw new Error('Failed to load manifest.json');return r.json()}).then(function(data){MANIFEST=data;buildNav();buildHero();flushReadyCallbacks()}).catch(function(err){console.error('Manifest load error:',err);showError('Unable to load gallery configuration. Please ensure manifest.json exists and is valid.')});
 })();
 </script>
 </body>
