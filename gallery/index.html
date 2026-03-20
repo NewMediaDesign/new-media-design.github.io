@@ -165,7 +165,7 @@ header.solid .theme-btn{color:var(--fg2)}
   <div class="contact-header">
     <button class="g-back" id="contactBack"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
     <div class="g-header-name">Andrea Spinazzola</div>
-    <div style="width:60px"></div>
+    <button class="m-btn" id="contactClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="contact-body">
     <div class="contact-inner">
@@ -274,11 +274,12 @@ document.getElementById('heroEnter').addEventListener('click',function(){var her
 document.getElementById('galleryBack').addEventListener('click',closeGallery);
 document.getElementById('themeBtn').addEventListener('click',function(){var html=document.documentElement;var dark=html.dataset.theme==='dark';html.dataset.theme=dark?'light':'dark';document.getElementById('themeIcon').innerHTML=dark?'<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>':'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';updateCursorColor()});
 document.getElementById('contactBack').addEventListener('click',toggleContact);
+document.getElementById('contactClose').addEventListener('click',toggleContact);
 mClose.addEventListener('click',closeMuseum);
 mReset.addEventListener('click',resetToFit);
 mPrev.addEventListener('click',function(){if(slideAnim)return;resetToFit();slideToImage((mIdx-1+currentSeriesImages.length)%currentSeriesImages.length,-1)});
 mNext.addEventListener('click',function(){if(slideAnim)return;resetToFit();slideToImage((mIdx+1)%currentSeriesImages.length,1)});
-document.addEventListener('keydown',function(e){if(!museum.classList.contains('open'))return;if(e.key==='Escape')closeMuseum();if(e.key==='ArrowRight'&&!slideAnim){resetToFit();slideToImage((mIdx+1)%currentSeriesImages.length,1)}if(e.key==='ArrowLeft'&&!slideAnim){resetToFit();slideToImage((mIdx-1+currentSeriesImages.length)%currentSeriesImages.length,-1)}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(museum.classList.contains('open')){closeMuseum()}else if(contactOverlay.classList.contains('open')){toggleContact()}}if(!museum.classList.contains('open'))return;if(e.key==='ArrowRight'&&!slideAnim){resetToFit();slideToImage((mIdx+1)%currentSeriesImages.length,1)}if(e.key==='ArrowLeft'&&!slideAnim){resetToFit();slideToImage((mIdx-1+currentSeriesImages.length)%currentSeriesImages.length,-1)}});
 mStage.addEventListener('mousemove',function(e){var r=mStage.getBoundingClientRect(),x=e.clientX-r.left,w=mStage.clientWidth;mPrev.classList.toggle('visible',x<w*0.22);mNext.classList.toggle('visible',x>w*0.78);clearTimeout(arrowTimer);arrowTimer=setTimeout(function(){mPrev.classList.remove('visible');mNext.classList.remove('visible')},2000)});
 mStage.addEventListener('mouseleave',function(){mPrev.classList.remove('visible');mNext.classList.remove('visible')});
 mCanvas.addEventListener('mouseenter',function(e){if(!isZoomed)cursorEnter(e.clientX,e.clientY)});
