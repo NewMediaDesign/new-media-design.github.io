@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;})()</script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -237,12 +238,12 @@ header.solid .theme-btn{ color:var(--fg2); }
   <div class="h-name">Andrea Spinazzola</div>
   <nav>
     <a href="#" class="active" id="navWork">Work</a>
-    <a href="#">Series</a>
-    <a href="#">About</a>
+    <a href="#" id="navSeries" onclick="return false;">Series</a>
+    <a href="#" id="navAbout" onclick="return false;">About</a>
     <a href="#" id="navContact">Contact</a>
   </nav>
   <div class="h-right">
-    <button class="theme-btn" id="themeBtn">
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
       <svg id="themeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
     </button>
   </div>
@@ -265,7 +266,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 
 <div class="gallery-overlay" id="galleryOverlay">
   <div class="gallery-header">
-    <button class="g-back" id="galleryBack"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="g-back" id="galleryBack" aria-label="Back to home"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
     <div class="g-header-name">Andrea Spinazzola</div>
     <div style="width:60px"></div>
   </div>
@@ -278,7 +279,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 
 <div class="contact-overlay" id="contactOverlay">
   <div class="contact-header">
-    <button class="g-back" id="contactBack"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <button class="g-back" id="contactBack" aria-label="Back to home"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
     <div class="g-header-name">Andrea Spinazzola</div>
     <div style="width:60px"></div>
   </div>
@@ -302,14 +303,14 @@ header.solid .theme-btn{ color:var(--fg2); }
   <div class="museum-top">
     <div style="width:36px"></div>
     <div class="museum-counter" id="museumCounter">01 / 02</div>
-    <button class="m-btn" id="mClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button class="m-btn" id="mClose" aria-label="Close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="museum-stage" id="museumStage">
     <canvas id="museum-canvas"></canvas>
     <div class="museum-wm">&copy; Andrea Spinazzola</div>
-    <button class="museum-reset" id="museumReset"><svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
-    <button class="m-arrow m-arrow-left"  id="mPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-    <button class="m-arrow m-arrow-right" id="mNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button class="museum-reset" id="museumReset" aria-label="Reset zoom"><svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+    <button class="m-arrow m-arrow-left"  id="mPrev" aria-label="Previous image"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button class="m-arrow m-arrow-right" id="mNext" aria-label="Next image"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
   <div class="museum-caption">
     <div class="caption-title" id="captionTitle">&mdash;</div>
@@ -345,9 +346,12 @@ const themeBtn  = document.getElementById('themeBtn');
 const themeIcon = document.getElementById('themeIcon');
 const SUN  = '<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>';
 const MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+// Sync icon with saved theme on init
+themeIcon.innerHTML = html.dataset.theme === 'dark' ? MOON : SUN;
 themeBtn.addEventListener('click', () => {
   const dark = html.dataset.theme === 'dark';
   html.dataset.theme = dark ? 'light' : 'dark';
+  localStorage.setItem('theme', dark ? 'light' : 'dark');
   themeIcon.innerHTML = dark ? SUN : MOON;
   updateCursorColor();
 });
@@ -417,13 +421,23 @@ function goToSlide(idx) {
   };
   if (next.complete) go(); else next.onload = go;
 }
-function startTimer() { clearInterval(heroTimer); heroTimer = setInterval(() => goToSlide((heroIdx+1)%IMAGES.length), 5000); }
+function startTimer() { clearInterval(heroTimer); if (IMAGES.length <= 1) return; heroTimer = setInterval(() => goToSlide((heroIdx+1)%IMAGES.length), 5000); }
 (function initHero() {
   const img = loadedImgs[0];
   if (img.complete) drawHero(heroCanvasA, img); else img.onload = () => drawHero(heroCanvasA, img);
   updateDots(); startTimer();
 })();
-window.addEventListener('resize', () => drawHero(heroCanvasA, loadedImgs[heroIdx]));
+let _heroResizeTimer;
+window.addEventListener('resize', () => { clearTimeout(_heroResizeTimer); _heroResizeTimer = setTimeout(() => drawHero(heroCanvasA, loadedImgs[heroIdx]), 150); });
+
+// Hero touch swipe
+let _heroTouchX = 0;
+document.getElementById('heroSection').addEventListener('touchstart', e => { _heroTouchX = e.touches[0].clientX; }, {passive:true});
+document.getElementById('heroSection').addEventListener('touchend', e => {
+  if (IMAGES.length <= 1) return;
+  const dx = e.changedTouches[0].clientX - _heroTouchX;
+  if (Math.abs(dx) > 50) dx < 0 ? goToSlide((heroIdx+1)%IMAGES.length) : goToSlide((heroIdx-1+IMAGES.length)%IMAGES.length);
+}, {passive:true});
 
 // GALLERY
 const galleryOverlay = document.getElementById('galleryOverlay');
@@ -441,12 +455,13 @@ document.getElementById('heroEnter').addEventListener('click', openGallery);
 document.getElementById('galleryBack').addEventListener('click', closeGallery);
 document.getElementById('navWork').addEventListener('click', e => { e.preventDefault(); galleryOverlay.classList.contains('open') ? closeGallery() : openGallery(); });
 
-const GRID = [IMAGES[0],IMAGES[1],IMAGES[1],IMAGES[0]];
-GRID.forEach((data,i) => {
+IMAGES.forEach((data,i) => {
   const item = document.createElement('div'); item.className = 'g-item';
   const cv   = document.createElement('canvas');
   const cap  = document.createElement('div'); cap.className = 'g-caption';
-  cap.innerHTML = '<span class="g-caption-title">'+data.title+'</span><span class="g-caption-index">No.'+String((i%IMAGES.length)+1).padStart(2,'0')+'</span>';
+  const capTitle = document.createElement('span'); capTitle.className = 'g-caption-title'; capTitle.textContent = data.title;
+  const capIdx   = document.createElement('span'); capIdx.className   = 'g-caption-index'; capIdx.textContent   = 'No.'+String(i+1).padStart(2,'0');
+  cap.appendChild(capTitle); cap.appendChild(capIdx);
   const hit = document.createElement('div'); hit.className = 'g-hit';
   item.appendChild(cv); item.appendChild(cap); item.appendChild(hit);
   galleryWall.appendChild(item);
@@ -455,10 +470,11 @@ GRID.forEach((data,i) => {
   hit.addEventListener('mouseleave', cursorLeave);
   hit.addEventListener('mousedown',  () => cursor.classList.add('pressed'));
   hit.addEventListener('mouseup',    () => cursor.classList.remove('pressed'));
-  hit.addEventListener('click',      () => openMuseum(i%IMAGES.length));
-  const img = loadedImgs[i%IMAGES.length];
+  hit.addEventListener('click',      () => openMuseum(i));
+  const img = loadedImgs[i];
   const paint = () => {
-    cv.width = item.clientWidth||800; cv.height = item.clientHeight||500;
+    if (!item.clientWidth || !item.clientHeight) return;
+    cv.width = item.clientWidth; cv.height = item.clientHeight;
     const ctx = cv.getContext('2d');
     const s = Math.max(cv.width/img.naturalWidth, cv.height/img.naturalHeight);
     const sw = img.naturalWidth*s, sh = img.naturalHeight*s;
@@ -587,12 +603,6 @@ function slideToImage(idx, dir) {
     offCanvas.width = cw; offCanvas.height = ch;
     offCtx.clearRect(0, 0, cw, ch);
     offCtx.drawImage(mCanvas, 0, 0);
-    // Update caption
-    mIdx = idx;
-    mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
-    document.getElementById('captionTitle').textContent = IMAGES[idx].title;
-    document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
-    document.getElementById('captionMeta').textContent  = IMAGES[idx].meta;
     // Compute next image's fit geometry using SAME canvas size
     const iw2 = nextImg.naturalWidth, ih2 = nextImg.naturalHeight;
     const s2  = Math.min(cw/iw2, ch/ih2);
@@ -611,7 +621,14 @@ function slideToImage(idx, dir) {
       mCtx.drawImage(nextImg, Math.round((cw-dw2)/2+dir*SHIFT*(1-e)), Math.round((ch-dh2)/2), dw2, dh2);
       mCtx.restore();
       if (t<1) { slideAnim = requestAnimationFrame(frame); }
-      else { mImg = nextImg; slideAnim = null; renderMuseum(); }
+      else {
+        mIdx = idx; mImg = nextImg; slideAnim = null;
+        mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
+        document.getElementById('captionTitle').textContent = IMAGES[idx].title;
+        document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
+        document.getElementById('captionMeta').textContent  = IMAGES[idx].meta;
+        renderMuseum();
+      }
     }
     slideAnim = requestAnimationFrame(frame);
   };
@@ -663,8 +680,13 @@ mPrev.addEventListener('click', () => { if(slideAnim) return; resetToFit(); slid
 mNext.addEventListener('click', () => { if(slideAnim) return; resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); });
 
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (museum.classList.contains('open'))         { closeMuseum();  return; }
+    if (galleryOverlay.classList.contains('open')) { closeGallery(); return; }
+    if (contactOverlay.classList.contains('open')) { closeContact(); return; }
+    return;
+  }
   if (!museum.classList.contains('open')) return;
-  if (e.key==='Escape') closeMuseum();
   if (e.key==='ArrowRight'&&!slideAnim){ resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); }
   if (e.key==='ArrowLeft' &&!slideAnim){ resetToFit(); slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1); }
 });
@@ -747,6 +769,7 @@ contactForm.addEventListener('submit', async e => {
   const email   = document.getElementById('cf-email').value.trim();
   const message = document.getElementById('cf-message').value.trim();
   if (!name||!email||!message){ setStatus('Please fill in all fields.','err'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setStatus('Please enter a valid email address.','err'); return; }
   formSubmitBtn.classList.add('loading'); formSubmitBtn.disabled=true; setStatus('','');
   try {
     const res = await fetch('https://formspree.io/f/xgonqrbv',{
