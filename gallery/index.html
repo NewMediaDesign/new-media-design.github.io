@@ -182,6 +182,18 @@ header.solid .theme-btn{ color:var(--fg2); }
   .about-content{ padding:32px 20px; }
 }
 
+/* LOAD BAR */
+.load-bar{
+  position:fixed; top:0; left:0; right:0; height:2px; z-index:9998;
+  background:transparent; pointer-events:none; overflow:hidden;
+}
+.load-bar.active::after{
+  content:''; position:absolute; top:0; height:100%;
+  width:45%; background:var(--fg); opacity:.55;
+  animation:loadSlide 1.4s ease-in-out infinite;
+}
+@keyframes loadSlide{ 0%{left:-45%} 100%{left:110%} }
+
 /* CURSOR */
 .custom-cursor{ position:fixed; top:0; left:0; width:40px; height:40px; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); opacity:0; transition:opacity .18s; }
 .custom-cursor.visible{ opacity:1; }
@@ -259,6 +271,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 </style>
 </head>
 <body>
+<div class="load-bar" id="loadBar"></div>
 <div class="custom-cursor" id="customCursor"></div>
 
 <header id="mainHeader">
@@ -466,6 +479,9 @@ function goToSlide(idx) {
   if (idx===heroIdx) return;
   heroIdx = idx;
   const next = loadedImgs[idx];
+  ensureImg(idx);
+  // Silently preload the one after
+  ensureImg((idx+1) % IMAGES.length);
   const go = () => {
     drawHero(heroCanvasB, next);
     heroCanvasB.style.transition = 'none'; heroCanvasB.style.opacity = '0';
@@ -478,12 +494,12 @@ function goToSlide(idx) {
       }, 1250);
     });
   };
-  if (next.complete) go(); else next.onload = go;
+  if (next.naturalWidth) go(); else next.addEventListener('load', go, {once:true});
 }
 function startTimer() { clearInterval(heroTimer); if (IMAGES.length <= 1) return; heroTimer = setInterval(() => goToSlide((heroIdx+1)%IMAGES.length), 5000); }
 function initHero() {
   const img = loadedImgs[0];
-  if (img.complete) drawHero(heroCanvasA, img); else img.onload = () => drawHero(heroCanvasA, img);
+  if (img.naturalWidth) drawHero(heroCanvasA, img); else img.addEventListener('load', () => drawHero(heroCanvasA, img), {once:true});
   updateDots(); startTimer();
 }
 let _heroResizeTimer;
@@ -575,9 +591,10 @@ function buildGalleryGrid() {
     hit.addEventListener('mouseup',    () => cursor.classList.remove('pressed'));
     hit.addEventListener('click',      () => openMuseum(data.origIdx));
 
-    const img = loadedImgs[data.origIdx];
+    const ii = data.origIdx;
     const paint = () => {
-      if (!item.clientWidth || !item.clientHeight) return;
+      const img = loadedImgs[ii];
+      if (!item.clientWidth || !item.clientHeight || !img.naturalWidth) return;
       cv.width = item.clientWidth; cv.height = item.clientHeight;
       const ctx = cv.getContext('2d');
       const s = Math.max(cv.width/img.naturalWidth, cv.height/img.naturalHeight);
@@ -585,8 +602,13 @@ function buildGalleryGrid() {
       ctx.clearRect(0,0,cv.width,cv.height);
       ctx.drawImage(img, (cv.width-sw)/2, (cv.height-sh)/2, sw, sh);
     };
-    if (img.complete) paint(); else img.onload = paint;
     new ResizeObserver(paint).observe(item);
+    // Lazy load: trigger only when item is near the viewport
+    new IntersectionObserver((entries, obs) => {
+      if (!entries[0].isIntersecting) return;
+      obs.unobserve(item);
+      ensureImg(ii, paint);
+    }, { rootMargin: '400px 0px' }).observe(item);
   });
 }
 
@@ -775,7 +797,10 @@ function loadMuseumImage(idx) {
 function openMuseum(idx) {
   isZoomed=false; panX=0; panY=0;
   museum.classList.add('open');
-  requestAnimationFrame(() => loadMuseumImage(idx));
+  // Preload current + adjacent images
+  ensureImg(idx, () => requestAnimationFrame(() => loadMuseumImage(idx)));
+  ensureImg((idx-1+IMAGES.length)%IMAGES.length);
+  ensureImg((idx+1)%IMAGES.length);
 }
 function closeMuseum() { museum.classList.remove('open'); cursorLeave(); }
 
@@ -880,6 +905,21 @@ function setStatus(msg,type){
   formStatus.className='form-status'+(msg?' visible':'')+(type?' '+type:'');
 }
 
+// LOAD BAR
+const loadBar = document.getElementById('loadBar');
+let _pending = 0;
+function loaderStart() { _pending++; loadBar.classList.add('active'); }
+function loaderDone()  { if (--_pending <= 0) { _pending=0; loadBar.classList.remove('active'); } }
+
+// Ensure image at index i is loading; call cb when ready
+function ensureImg(i, cb) {
+  const img = loadedImgs[i];
+  if (!img) return;
+  if (img.naturalWidth) { if (cb) cb(); return; }
+  if (!img.src) { loaderStart(); img.src = IMAGES[i].src; img.addEventListener('load',  loaderDone, {once:true}); img.addEventListener('error', loaderDone, {once:true}); }
+  if (cb) img.addEventListener('load', cb, {once:true});
+}
+
 // MANIFEST
 function initFromManifest(manifest) {
   const sid = manifest.site.hero && manifest.site.hero.seriesId;
@@ -891,14 +931,16 @@ function initFromManifest(manifest) {
     desc:  img.description || '',
     meta:  img.meta || ''
   }));
-  loadedImgs = IMAGES.map(d => { const i = new Image(); i.src = d.src; return i; });
+  // Create Image objects without src — load on demand
+  loadedImgs = IMAGES.map(() => new Image());
   document.getElementById('heroSeries').textContent = series.subtitle || '';
   document.getElementById('heroTitle').textContent  = series.title    || '';
   document.getElementById('seriesBarTitle').textContent = series.title    || '';
   document.getElementById('seriesBarMeta').textContent  = series.subtitle || '';
   buildHeroDots();
-  initHero();
-  buildGalleryGrid();
+  // Load only first image immediately for hero
+  ensureImg(0, initHero);
+  if (IMAGES[1]) ensureImg(1); // preload second silently
 }
 fetch('manifest.json')
   .then(r => { if (!r.ok) throw new Error('manifest.json not found'); return r.json(); })
