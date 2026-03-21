@@ -132,17 +132,17 @@ header.solid .theme-btn{ color:var(--fg2); }
 
 /* CONTACT */
 .contact-overlay{ -webkit-user-select:text; user-select:text; }
-.contact-back{
-  width:56px; height:56px; border-radius:50%;
-  background:#e00; color:#fff !important;
-  display:flex; align-items:center; justify-content:center;
-  margin-bottom:32px; padding:0;
-  font-size:0; letter-spacing:0;
-}
-.contact-back svg{ width:20px; height:20px; stroke:#fff; stroke-width:2; }
-.contact-back:hover{ background:#c00; color:#fff !important; }
 .contact-body{ flex:1; display:flex; align-items:center; justify-content:center; padding:40px 20px; overflow-y:auto; }
-.contact-inner{ width:100%; max-width:480px; }
+.contact-inner{ position:relative; width:100%; max-width:480px; }
+.contact-close{
+  position:absolute; top:-8px; right:-8px;
+  width:36px; height:36px;
+  background:none; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--fg2); transition:color .2s; touch-action:manipulation;
+}
+.contact-close:hover{ color:var(--fg); }
+.contact-close svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
 .contact-label{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.28em; text-transform:uppercase; color:var(--fg2); margin-bottom:32px; }
 .contact-form{ display:flex; flex-direction:column; gap:0; }
 .form-field{ display:flex; flex-direction:column; gap:6px; border-bottom:1px solid var(--border); padding:18px 0; transition:border-color .2s; }
@@ -294,7 +294,7 @@ header.solid .theme-btn{ color:var(--fg2); }
   </div>
   <div class="contact-body">
     <div class="contact-inner">
-      <button class="g-back contact-back" id="contactBack" aria-label="Back to home"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+      <button class="contact-close" id="contactBack" aria-label="Close contact"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       <div class="contact-label">Get in touch</div>
       <form class="contact-form" id="contactForm" novalidate>
         <div class="form-field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" placeholder="Your name" autocomplete="name" required></div>
