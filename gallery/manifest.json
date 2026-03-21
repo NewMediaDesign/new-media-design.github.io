@@ -12,30 +12,25 @@
       "title": "Human Frequency",
       "subtitle": "Series I — Faces · AI Generative · 2024",
       "images": [
-        {
-          "filename": "images/series-1/01.jpg",
-          "title": "Opera 01",
-          "description": "Opera 01 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
-        },
-        {
-          "filename": "images/series-1/02.jpg",
-          "title": "Opera 02",
-          "description": "Opera 02 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
-        },
-        {
-          "filename": "images/series-1/03.jpg",
-          "title": "Opera 03",
-          "description": "Opera 03 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
-        },
-        {
-          "filename": "images/series-1/04.jpg",
-          "title": "Opera 04",
-          "description": "Opera 04 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
-        }
+        { "filename": "images/series-1/01.jpg",  "title": "Opera 01",  "description": "Opera 01 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/02.jpg",  "title": "Opera 02",  "description": "Opera 02 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/03.jpg",  "title": "Opera 03",  "description": "Opera 03 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/04.jpg",  "title": "Opera 04",  "description": "Opera 04 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/05.jpg",  "title": "Opera 05",  "description": "Opera 05 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/06.jpg",  "title": "Opera 06",  "description": "Opera 06 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/07.jpg",  "title": "Opera 07",  "description": "Opera 07 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/08.jpg",  "title": "Opera 08",  "description": "Opera 08 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/09.jpg",  "title": "Opera 09",  "description": "Opera 09 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/10.jpg",  "title": "Opera 10",  "description": "Opera 10 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/11.jpg",  "title": "Opera 11",  "description": "Opera 11 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/12.jpg",  "title": "Opera 12",  "description": "Opera 12 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/13.jpg",  "title": "Opera 13",  "description": "Opera 13 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/15.jpg",  "title": "Opera 15",  "description": "Opera 15 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/16.jpg",  "title": "Opera 16",  "description": "Opera 16 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/17.jpg",  "title": "Opera 17",  "description": "Opera 17 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/18.jpg",  "title": "Opera 18",  "description": "Opera 18 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/19.jpg",  "title": "Opera 19",  "description": "Opera 19 della serie Human Frequency",  "meta": "2024 · AI Generative" },
+        { "filename": "images/series-1/20.jpg",  "title": "Opera 20",  "description": "Opera 20 della serie Human Frequency",  "meta": "2024 · AI Generative" }
       ]
     }
   ]
