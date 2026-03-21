@@ -84,6 +84,97 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+## Sessione 3 — 2026-03-21
+
+**Obiettivo:** Masonry gallery, navigazione menu, performance mobile, sistema documentazione
+
+---
+
+**1 — Sistema documentazione sessioni**
+- Creata cartella `docx/` con tre file: `PROJECT.md`, `SESSION.md`, `CONTENT.md`
+- Pushata anche nel repo GitHub per persistenza
+- Creata memoria persistente Claude Code in `C:\Users\spina\.claude\projects\...`
+
+---
+
+**2 — Gallery: da grid fisso a masonry con shuffle**
+- Rimosso grid CSS hardcoded per 4 immagini
+- Nuovo sistema: 3 colonne su desktop, 2 su mobile (flex columns)
+- 3 altezze casuali (220/320/440px desktop, 180/260/360px mobile)
+- Distribuzione bilanciata per colonne (algoritmo shortest-column-first)
+- Immagini rimescolate casualmente ad ogni apertura gallery
+- Aggiunto bottone shuffle (icona frecce incrociate) nella series bar con animazione spin
+
+---
+
+**3 — Nuove immagini series-1**
+- Da 4 a 19 immagini (01–20, manca 14)
+- `manifest.json` aggiornato con tutte le entry
+- Immagini pushate su GitHub: `images/series-1/05-20.jpg`
+
+---
+
+**4 — UX: link home + Back nel museo**
+- "Andrea Spinazzola" in header → ora è un button che chiude tutto e torna alla hero
+- Museum: aggiunto bottone "Back" in alto a sinistra (sostituisce spacer), chiude il museum e torna alla gallery
+- La X rimane a destra come alternativa
+
+---
+
+**5 — Fix navigazione menu (refactor completo)**
+- **Problema**: overlay multipli a z-index:200 si sovrapponevano; passare da una sezione all'altra non funzionava
+- **Soluzione**: migrazione da logica JS `.open` a **CSS `:target`** nativo
+  - I nav link ora usano `href="#galleryOverlay"`, `href="#aboutOverlay"`, `href="#contactOverlay"`
+  - Il browser gestisce show/hide degli overlay nativamente tramite `:target`
+  - JS gestisce solo side-effects: header solid, hero timer start/stop, nav active state
+  - `goHome()` usa `history.pushState` per pulire l'hash senza aggiungere history entry
+  - `hashchange` event listener unico per tutti gli aggiornamenti di stato
+- Eliminati: `openGallery`, `closeGallery`, `openAbout`, `closeAbout`, `openContact`, `closeContact` (6 funzioni → 1)
+
+---
+
+**6 — Performance: lazy loading + load bar**
+- **Problema**: tutte le 19 immagini caricate al primo load → mobile bloccato
+- `initFromManifest`: crea Image objects senza `src` (nessun download al boot)
+- Al boot si caricano SOLO le prime 2 immagini (hero)
+- `buildGalleryGrid`: `IntersectionObserver` con `rootMargin: 400px` — ogni immagine si carica solo quando sta per entrare nel viewport
+- `goToSlide`: carica l'immagine target + precarica silenziosamente la successiva
+- `openMuseum`: precarica i-1, i, i+1 prima di renderizzare
+- `ensureImg(i, cb)`: funzione utility centralizzata per il lazy loading
+- **Load bar**: barra animata 2px in cima (indeterminata, stile GitHub), appare mentre immagini scaricano, scompare da sola
+
+---
+
+**Commit chiave sessione 3:**
+- `f95fc4e` — feat: add 15 new images to series-1 (05-20, skip 14)
+- `f0f4e0f` — docs: add session/project/content documentation system
+- `2903dc5` — feat: masonry layout with random shuffle
+- `73e2a62` — feat: home link on name + Back button in museum
+- `b3583b3` — fix: rewrite nav logic with goHome()
+- `371a120` — refactor: replace JS overlay toggling with CSS :target navigation
+- `bda00d6` — perf: lazy loading + load bar indicator
+
+**Ultimo commit:** `bda00d6` — branch `main`
+
+---
+
+**Stato al termine della sessione:**
+- ✅ Gallery masonry con shuffle casuale e bottone re-shuffle
+- ✅ 19 immagini in serie (manifest aggiornato)
+- ✅ Navigazione menu funzionante via CSS :target
+- ✅ Lazy loading attivo — mobile nettamente più veloce
+- ✅ Load bar discreta durante caricamento immagini
+- ✅ Museum con Back button
+- ✅ "Andrea Spinazzola" = link home
+
+**Pending / prossima sessione:**
+- Aggiornare testi About (bio, email reale, Instagram handle)
+- Implementare sezione Series (attualmente placeholder)
+- Valutare ottimizzazione immagini lato server (WebP, thumbnails)
+- Meta description, favicon, og:image per SEO
+
+---
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD
