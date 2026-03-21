@@ -80,7 +80,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 .gallery-overlay{ z-index:200; }
 .contact-overlay{ z-index:200; }
 .about-overlay{ z-index:200; }
-.gallery-overlay.open,.contact-overlay.open,.about-overlay.open{
+#galleryOverlay:target,#contactOverlay:target,#aboutOverlay:target{
   opacity:1; transform:translateY(0); pointer-events:auto; visibility:visible;
   transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear 0s;
 }
@@ -264,10 +264,10 @@ header.solid .theme-btn{ color:var(--fg2); }
 <header id="mainHeader">
   <button class="h-name" id="hName">Andrea Spinazzola</button>
   <nav>
-    <a href="#" class="active" id="navWork">Work</a>
-    <a href="#" id="navSeries" onclick="return false;">Series</a>
-    <a href="#" id="navAbout" onclick="return false;">About</a>
-    <a href="#" id="navContact">Contact</a>
+    <a href="#galleryOverlay" id="navWork">Work</a>
+    <a href="#" id="navSeries">Series</a>
+    <a href="#aboutOverlay" id="navAbout">About</a>
+    <a href="#contactOverlay" id="navContact">Contact</a>
   </nav>
   <div class="h-right">
     <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
@@ -503,31 +503,29 @@ const galleryOverlay = document.getElementById('galleryOverlay');
 const mainHeader     = document.getElementById('mainHeader');
 const galleryWall    = document.getElementById('galleryWall');
 
-function setNav(active) {
-  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  if (active) active.classList.add('active');
-}
-// ── Core navigation ─────────────────────────────────
-function goHome() {
-  museum.classList.remove('open'); cursorLeave();
-  galleryOverlay.classList.remove('open');
-  contactOverlay.classList.remove('open');
-  aboutOverlay.classList.remove('open');
-  mainHeader.classList.remove('solid');
-  startTimer();
-  setNav(document.getElementById('navWork'));
-}
-function openGallery() {
-  goHome();
-  galleryOverlay.classList.add('open');
-  mainHeader.classList.add('solid');
-  clearInterval(heroTimer);
-  setNav(document.getElementById('navWork'));
-}
-function closeGallery() { goHome(); }
+// ── Navigation: CSS :target handles show/hide, JS handles side-effects ──
+const galleryOverlay = document.getElementById('galleryOverlay');
+const contactOverlay = document.getElementById('contactOverlay');
 
-document.getElementById('heroEnter').addEventListener('click', openGallery);
-document.getElementById('galleryBack').addEventListener('click', goHome);
+function goHome() {
+  history.pushState(null, '', location.pathname);
+  updateNav();
+}
+function updateNav() {
+  const h = location.hash;
+  const inSection = h === '#galleryOverlay' || h === '#aboutOverlay' || h === '#contactOverlay';
+  mainHeader.classList.toggle('solid', inSection);
+  if (inSection) { clearInterval(heroTimer); } else { startTimer(); }
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  if      (h === '#galleryOverlay') document.getElementById('navWork').classList.add('active');
+  else if (h === '#aboutOverlay')   document.getElementById('navAbout').classList.add('active');
+  else if (h === '#contactOverlay') document.getElementById('navContact').classList.add('active');
+  if (h === '#galleryOverlay') buildGalleryGrid();
+}
+window.addEventListener('hashchange', updateNav);
+
+document.getElementById('heroEnter').addEventListener('click', () => { location.hash = '#galleryOverlay'; });
+document.getElementById('galleryBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
 document.getElementById('hName').addEventListener('click', goHome);
 
 document.getElementById('shuffleBtn').addEventListener('click', () => {
@@ -536,7 +534,6 @@ document.getElementById('shuffleBtn').addEventListener('click', () => {
   setTimeout(() => btn.classList.remove('spinning'), 400);
   buildGalleryGrid();
 });
-document.getElementById('navWork').addEventListener('click', e => { e.preventDefault(); openGallery(); });
 
 function buildGalleryGrid() {
   galleryWall.innerHTML = '';
@@ -783,15 +780,15 @@ function openMuseum(idx) {
 function closeMuseum() { museum.classList.remove('open'); cursorLeave(); }
 
 mClose.addEventListener('click', closeMuseum);
-document.getElementById('mBack').addEventListener('click', closeMuseum);
+document.getElementById('mBack').addEventListener('click', () => { closeMuseum(); });
 mReset.addEventListener('click', resetToFit);
 mPrev.addEventListener('click', () => { if(slideAnim) return; resetToFit(); slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1); });
 mNext.addEventListener('click', () => { if(slideAnim) return; resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); });
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (museum.classList.contains('open'))         { closeMuseum(); return; }
-    if (galleryOverlay.classList.contains('open') || contactOverlay.classList.contains('open') || aboutOverlay.classList.contains('open')) { goHome(); return; }
+    if (museum.classList.contains('open')) { closeMuseum(); return; }
+    if (location.hash) { goHome(); return; }
     return;
   }
   if (!museum.classList.contains('open')) return;
@@ -852,34 +849,13 @@ window.addEventListener('resize', () => { if(museum.classList.contains('open')) 
 
 // ABOUT
 const aboutOverlay = document.getElementById('aboutOverlay');
-function openAbout() {
-  goHome();
-  aboutOverlay.classList.add('open');
-  mainHeader.classList.add('solid');
-  clearInterval(heroTimer);
-  setNav(document.getElementById('navAbout'));
-}
-function closeAbout() { goHome(); }
-document.getElementById('navAbout').removeAttribute('onclick');
-document.getElementById('navAbout').addEventListener('click', e => { e.preventDefault(); openAbout(); });
-document.getElementById('aboutBack').addEventListener('click', goHome);
+document.getElementById('aboutBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
 
 // CONTACT
-const contactOverlay = document.getElementById('contactOverlay');
-const contactForm    = document.getElementById('contactForm');
-const formSubmitBtn  = document.getElementById('formSubmitBtn');
-const formStatus     = document.getElementById('formStatus');
-
-function openContact() {
-  goHome();
-  contactOverlay.classList.add('open');
-  mainHeader.classList.add('solid');
-  clearInterval(heroTimer);
-  setNav(document.getElementById('navContact'));
-}
-function closeContact() { goHome(); }
-document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); openContact(); });
-document.getElementById('contactBack').addEventListener('click', goHome);
+const contactForm   = document.getElementById('contactForm');
+const formSubmitBtn = document.getElementById('formSubmitBtn');
+const formStatus    = document.getElementById('formStatus');
+document.getElementById('contactBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
 
 contactForm.addEventListener('submit', async e => {
   e.preventDefault();
