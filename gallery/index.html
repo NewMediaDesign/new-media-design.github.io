@@ -507,17 +507,28 @@ function setNav(active) {
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
   if (active) active.classList.add('active');
 }
-function openGallery()  { if (museum.classList.contains('open')) closeMuseum(); galleryOverlay.classList.add('open'); mainHeader.classList.add('solid'); clearInterval(heroTimer); setNav(document.getElementById('navWork')); }
-function closeGallery() { galleryOverlay.classList.remove('open'); if (!contactOverlay.classList.contains('open') && !aboutOverlay.classList.contains('open')) mainHeader.classList.remove('solid'); startTimer(); setNav(document.getElementById('navWork')); }
+// ── Core navigation ─────────────────────────────────
+function goHome() {
+  museum.classList.remove('open'); cursorLeave();
+  galleryOverlay.classList.remove('open');
+  contactOverlay.classList.remove('open');
+  aboutOverlay.classList.remove('open');
+  mainHeader.classList.remove('solid');
+  startTimer();
+  setNav(document.getElementById('navWork'));
+}
+function openGallery() {
+  goHome();
+  galleryOverlay.classList.add('open');
+  mainHeader.classList.add('solid');
+  clearInterval(heroTimer);
+  setNav(document.getElementById('navWork'));
+}
+function closeGallery() { goHome(); }
 
 document.getElementById('heroEnter').addEventListener('click', openGallery);
-document.getElementById('galleryBack').addEventListener('click', closeGallery);
-document.getElementById('hName').addEventListener('click', () => {
-  if (museum.classList.contains('open'))         closeMuseum();
-  if (galleryOverlay.classList.contains('open')) closeGallery();
-  if (contactOverlay.classList.contains('open')) closeContact();
-  if (aboutOverlay.classList.contains('open'))   closeAbout();
-});
+document.getElementById('galleryBack').addEventListener('click', goHome);
+document.getElementById('hName').addEventListener('click', goHome);
 
 document.getElementById('shuffleBtn').addEventListener('click', () => {
   const btn = document.getElementById('shuffleBtn');
@@ -525,7 +536,7 @@ document.getElementById('shuffleBtn').addEventListener('click', () => {
   setTimeout(() => btn.classList.remove('spinning'), 400);
   buildGalleryGrid();
 });
-document.getElementById('navWork').addEventListener('click', e => { e.preventDefault(); galleryOverlay.classList.contains('open') ? closeGallery() : openGallery(); });
+document.getElementById('navWork').addEventListener('click', e => { e.preventDefault(); openGallery(); });
 
 function buildGalleryGrid() {
   galleryWall.innerHTML = '';
@@ -779,10 +790,8 @@ mNext.addEventListener('click', () => { if(slideAnim) return; resetToFit(); slid
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (museum.classList.contains('open'))         { closeMuseum();  return; }
-    if (galleryOverlay.classList.contains('open')) { closeGallery(); return; }
-    if (contactOverlay.classList.contains('open')) { closeContact(); return; }
-    if (aboutOverlay.classList.contains('open'))   { closeAbout();   return; }
+    if (museum.classList.contains('open'))         { closeMuseum(); return; }
+    if (galleryOverlay.classList.contains('open') || contactOverlay.classList.contains('open') || aboutOverlay.classList.contains('open')) { goHome(); return; }
     return;
   }
   if (!museum.classList.contains('open')) return;
@@ -844,21 +853,16 @@ window.addEventListener('resize', () => { if(museum.classList.contains('open')) 
 // ABOUT
 const aboutOverlay = document.getElementById('aboutOverlay');
 function openAbout() {
-  if (museum.classList.contains('open')) closeMuseum();
+  goHome();
   aboutOverlay.classList.add('open');
   mainHeader.classList.add('solid');
   clearInterval(heroTimer);
   setNav(document.getElementById('navAbout'));
 }
-function closeAbout() {
-  aboutOverlay.classList.remove('open');
-  if (!galleryOverlay.classList.contains('open') && !contactOverlay.classList.contains('open')) mainHeader.classList.remove('solid');
-  startTimer();
-  setNav(document.getElementById('navWork'));
-}
+function closeAbout() { goHome(); }
 document.getElementById('navAbout').removeAttribute('onclick');
-document.getElementById('navAbout').addEventListener('click', e => { e.preventDefault(); aboutOverlay.classList.contains('open') ? closeAbout() : openAbout(); });
-document.getElementById('aboutBack').addEventListener('click', closeAbout);
+document.getElementById('navAbout').addEventListener('click', e => { e.preventDefault(); openAbout(); });
+document.getElementById('aboutBack').addEventListener('click', goHome);
 
 // CONTACT
 const contactOverlay = document.getElementById('contactOverlay');
@@ -867,20 +871,15 @@ const formSubmitBtn  = document.getElementById('formSubmitBtn');
 const formStatus     = document.getElementById('formStatus');
 
 function openContact() {
-  if (museum.classList.contains('open')) closeMuseum();
+  goHome();
   contactOverlay.classList.add('open');
   mainHeader.classList.add('solid');
   clearInterval(heroTimer);
   setNav(document.getElementById('navContact'));
 }
-function closeContact() {
-  contactOverlay.classList.remove('open');
-  if (!galleryOverlay.classList.contains('open') && !aboutOverlay.classList.contains('open')) mainHeader.classList.remove('solid');
-  startTimer();
-  setNav(document.getElementById('navWork'));
-}
-document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); contactOverlay.classList.contains('open') ? closeContact() : openContact(); });
-document.getElementById('contactBack').addEventListener('click', closeContact);
+function closeContact() { goHome(); }
+document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); openContact(); });
+document.getElementById('contactBack').addEventListener('click', goHome);
 
 contactForm.addEventListener('submit', async e => {
   e.preventDefault();
