@@ -33,7 +33,7 @@ header{
   transition:background .45s,border-color .45s;
 }
 header.solid{ background:var(--bg); border-bottom-color:var(--border); }
-.h-name{ font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#fff; margin-right:auto; transition:color .4s; white-space:nowrap; }
+.h-name{ font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#fff; margin-right:auto; transition:color .4s; white-space:nowrap; background:none; border:none; cursor:pointer; padding:0; font-family:inherit; }
 header.solid .h-name{ color:var(--fg); }
 nav{ display:flex; align-items:stretch; height:var(--h); }
 nav a{
@@ -262,7 +262,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 <div class="custom-cursor" id="customCursor"></div>
 
 <header id="mainHeader">
-  <div class="h-name">Andrea Spinazzola</div>
+  <button class="h-name" id="hName">Andrea Spinazzola</button>
   <nav>
     <a href="#" class="active" id="navWork">Work</a>
     <a href="#" id="navSeries" onclick="return false;">Series</a>
@@ -360,7 +360,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 
 <div class="museum" id="museum">
   <div class="museum-top">
-    <div style="width:36px"></div>
+    <button class="g-back m-back" id="mBack" aria-label="Back to gallery"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
     <div class="museum-counter" id="museumCounter">01 / 02</div>
     <button class="m-btn" id="mClose" aria-label="Close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
@@ -512,6 +512,13 @@ function closeGallery() { galleryOverlay.classList.remove('open'); if (!contactO
 
 document.getElementById('heroEnter').addEventListener('click', openGallery);
 document.getElementById('galleryBack').addEventListener('click', closeGallery);
+document.getElementById('hName').addEventListener('click', () => {
+  if (museum.classList.contains('open'))         closeMuseum();
+  if (galleryOverlay.classList.contains('open')) closeGallery();
+  if (contactOverlay.classList.contains('open')) closeContact();
+  if (aboutOverlay.classList.contains('open'))   closeAbout();
+});
+
 document.getElementById('shuffleBtn').addEventListener('click', () => {
   const btn = document.getElementById('shuffleBtn');
   btn.classList.add('spinning');
@@ -765,6 +772,7 @@ function openMuseum(idx) {
 function closeMuseum() { museum.classList.remove('open'); cursorLeave(); }
 
 mClose.addEventListener('click', closeMuseum);
+document.getElementById('mBack').addEventListener('click', closeMuseum);
 mReset.addEventListener('click', resetToFit);
 mPrev.addEventListener('click', () => { if(slideAnim) return; resetToFit(); slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1); });
 mNext.addEventListener('click', () => { if(slideAnim) return; resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); });
