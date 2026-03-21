@@ -132,7 +132,15 @@ header.solid .theme-btn{ color:var(--fg2); }
 
 /* CONTACT */
 .contact-overlay{ -webkit-user-select:text; user-select:text; }
-.contact-back{ margin-bottom:32px; }
+.contact-back{
+  width:56px; height:56px; border-radius:50%;
+  background:#e00; color:#fff !important;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:32px; padding:0;
+  font-size:0; letter-spacing:0;
+}
+.contact-back svg{ width:20px; height:20px; stroke:#fff; stroke-width:2; }
+.contact-back:hover{ background:#c00; color:#fff !important; }
 .contact-body{ flex:1; display:flex; align-items:center; justify-content:center; padding:40px 20px; overflow-y:auto; }
 .contact-inner{ width:100%; max-width:480px; }
 .contact-label{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.28em; text-transform:uppercase; color:var(--fg2); margin-bottom:32px; }
@@ -450,7 +458,7 @@ function setNav(active) {
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
   if (active) active.classList.add('active');
 }
-function openGallery()  { galleryOverlay.classList.add('open'); mainHeader.classList.add('solid'); clearInterval(heroTimer); setNav(document.getElementById('navWork')); }
+function openGallery()  { if (museum.classList.contains('open')) closeMuseum(); galleryOverlay.classList.add('open'); mainHeader.classList.add('solid'); clearInterval(heroTimer); setNav(document.getElementById('navWork')); }
 function closeGallery() { galleryOverlay.classList.remove('open'); if (!contactOverlay.classList.contains('open')) mainHeader.classList.remove('solid'); startTimer(); setNav(document.getElementById('navWork')); }
 
 document.getElementById('heroEnter').addEventListener('click', openGallery);
@@ -754,6 +762,7 @@ const formSubmitBtn  = document.getElementById('formSubmitBtn');
 const formStatus     = document.getElementById('formStatus');
 
 function openContact() {
+  if (museum.classList.contains('open')) closeMuseum();
   contactOverlay.classList.add('open');
   mainHeader.classList.add('solid');
   clearInterval(heroTimer);
