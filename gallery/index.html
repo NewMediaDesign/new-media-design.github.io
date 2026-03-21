@@ -336,7 +336,7 @@ header.solid .theme-btn{ color:var(--fg2); }
   </div>
   <div class="about-body">
     <div class="about-photo">
-      <img src="images/about/andrea.jpg" alt="Andrea Spinazzola">
+      <img src="images/AS_BW_PORTRAIT_02.png" alt="Andrea Spinazzola">
     </div>
     <div class="about-content">
       <div class="about-label">About the artist</div>
@@ -744,6 +744,7 @@ document.addEventListener('keydown', e => {
     if (museum.classList.contains('open'))         { closeMuseum();  return; }
     if (galleryOverlay.classList.contains('open')) { closeGallery(); return; }
     if (contactOverlay.classList.contains('open')) { closeContact(); return; }
+    if (aboutOverlay.classList.contains('open'))   { closeAbout();   return; }
     return;
   }
   if (!museum.classList.contains('open')) return;
