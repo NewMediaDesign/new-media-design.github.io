@@ -863,7 +863,7 @@ function slideToImage(idx, dir) {
     }
     offCanvas.width = cw; offCanvas.height = ch;
     offCtx.clearRect(0, 0, cw, ch);
-    offCtx.drawImage(mCanvas, 0, 0);
+    try { offCtx.drawImage(mCanvas, 0, 0); } catch(e) { loadMuseumImage(idx); return; }
     // Compute next image's fit geometry using SAME canvas size
     const iw2 = nextImg.naturalWidth, ih2 = nextImg.naturalHeight;
     const s2  = Math.min(cw/iw2, ch/ih2);
@@ -1014,7 +1014,7 @@ mStage.addEventListener('touchend', e => {
     if (r.width>0 && t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom) {
       if (!isZoomed) zoomToPoint(t.clientX-r.left, t.clientY-r.top); else resetToFit();
     }
-  } else if(swipe&&!isZoomed&&!slideAnim){
+  } else if(swipe&&!isZoomed&&!slideAnim&&mIdx>=0){
     if(dx<0) slideToImage((mIdx+1)%IMAGES.length,1); else slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1);
   }
   setTimeout(()=>{ didPan=false; },0);
