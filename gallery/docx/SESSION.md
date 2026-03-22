@@ -175,6 +175,53 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+## Sessione 4 — 2026-03-22
+
+**Obiettivo:** Fix mobile + Roadmap completa M1-M6
+
+**Fix mobile (inizio sessione):**
+- Bug critico: `const galleryOverlay` dichiarata due volte → SyntaxError che uccideva tutto il JS su iOS Safari
+- Fix iOS Safari hashchange: aggiunto `navigateTo()` con `setTimeout(updateNav, 0)` come fallback
+- Fix IntersectionObserver: cambiato root da viewport a `galleryWall` per container `position:fixed`
+
+**M1 — Content Layer:**
+- Sezione `about` e `seo` aggiunte a manifest.json
+- index.html legge tutto l'About da manifest (niente hardcoded)
+- Meta tag SEO iniettati dinamicamente
+
+**M3 — Image Pipeline:**
+- Installato `sharp` (npm), creato `generate-thumbs.js`
+- 19 thumbnail WebP 600px generati: 39MB → 1.1MB (~60KB/img)
+- Gallery usa thumbnail, museum usa full-size 3000px on demand
+
+**M4 — Automation:**
+- `update-manifest.js` riscritto: non-distruttivo, multi-serie, preserva metadata esistenti
+
+**M5 — Series Section:**
+- Overlay `#seriesOverlay` con grid di card serie
+- `navSeries` ora funzionante, `loadSeries(id)` permette cambio serie runtime
+
+**M6 — SEO:**
+- Meta description, og:image, og:title, og:type nel `<head>`
+
+**Commit chiave:**
+- `88c04ef` — fix: resolve duplicate const SyntaxError + iOS Safari nav + IntersectionObserver root
+- `5eb40d4` — feat: M1-M6 — content layer, thumbnails, series section, SEO
+
+**Workflow per aggiungere nuove immagini:**
+1. Copia JPG in `images/series-N/`
+2. `node generate-thumbs.js series-N`
+3. `node update-manifest.js`
+4. Edita `manifest.json` — aggiorna titoli/descrizioni
+5. Copia nel repo + git push
+
+**Pending / prossima sessione:**
+- Aggiornare contenuto reale: bio, email, Instagram, titoli opere in manifest.json
+- Favicon
+- Test multi-serie quando disponibile serie-2
+
+---
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD
