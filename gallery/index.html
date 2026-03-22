@@ -840,6 +840,9 @@ function slideToImage(idx, dir) {
       if (t<1) { slideAnim = requestAnimationFrame(frame); }
       else {
         mIdx = idx; mImg = nextImg; slideAnim = null;
+        unloadDistantImgs(idx);
+        ensureImg((idx-1+IMAGES.length)%IMAGES.length);
+        ensureImg((idx+1)%IMAGES.length);
         mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
         document.getElementById('captionTitle').textContent = IMAGES[idx].title;
         document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
@@ -849,7 +852,8 @@ function slideToImage(idx, dir) {
     }
     slideAnim = requestAnimationFrame(frame);
   };
-  if (nextImg.complete) go(); else nextImg.onload = go;
+  if (nextImg.complete || nextImg._imgError) go();
+  else { nextImg.onload = go; nextImg.onerror = go; }
 }
 
 // ── zoomToPoint ───────────────────────────────────
@@ -881,13 +885,15 @@ function loadMuseumImage(idx) {
   document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
   document.getElementById('captionMeta').textContent  = IMAGES[idx].meta;
   mImg = loadedImgs[idx];
-  if (mImg.complete) { renderMuseum(); } else { mSpinner.classList.add('visible'); mImg.onload = renderMuseum; }
+  if (mImg.complete && mImg.naturalWidth) { renderMuseum(); }
+  else if (mImg._imgError || (mImg.complete && !mImg.naturalWidth)) { mSpinner.classList.remove('visible'); }
+  else { mSpinner.classList.add('visible'); mImg.onload = renderMuseum; mImg.onerror = function(){ mSpinner.classList.remove('visible'); }; }
 }
 
 function openMuseum(idx) {
   isZoomed=false; panX=0; panY=0;
   museum.classList.add('open');
-  // Preload current + adjacent images
+  unloadDistantImgs(idx);
   ensureImg(idx, () => requestAnimationFrame(() => loadMuseumImage(idx)));
   ensureImg((idx-1+IMAGES.length)%IMAGES.length);
   ensureImg((idx+1)%IMAGES.length);
@@ -1001,13 +1007,33 @@ let _pending = 0;
 function loaderStart() { _pending++; loadBar.classList.add('active'); }
 function loaderDone()  { if (--_pending <= 0) { _pending=0; loadBar.classList.remove('active'); } }
 
-// Ensure image at index i is loading; call cb when ready
+// Free decoded image data for images far from current index (prevents OOM on mobile)
+function unloadDistantImgs(centerIdx, keepRadius) {
+  keepRadius = keepRadius || 2;
+  loadedImgs.forEach(function(img, i) {
+    if (!img || !img.src) return;
+    var dist = Math.abs(i - centerIdx);
+    dist = Math.min(dist, IMAGES.length - dist);
+    if (dist > keepRadius) { img.src = ''; img._imgError = false; }
+  });
+}
+
+// Ensure image at index i is loading; call cb when ready (fires cb on error too)
 function ensureImg(i, cb) {
   const img = loadedImgs[i];
   if (!img) return;
   if (img.naturalWidth) { if (cb) cb(); return; }
-  if (!img.src) { loaderStart(); img.src = IMAGES[i].src; img.addEventListener('load',  loaderDone, {once:true}); img.addEventListener('error', loaderDone, {once:true}); }
-  if (cb) img.addEventListener('load', cb, {once:true});
+  if (img._imgError)   { if (cb) cb(); return; }
+  if (!img.src) {
+    loaderStart();
+    img.src = IMAGES[i].src;
+    img.addEventListener('load',  loaderDone, {once:true});
+    img.addEventListener('error', () => { img._imgError = true; loaderDone(); }, {once:true});
+  }
+  if (cb) {
+    img.addEventListener('load',  cb, {once:true});
+    img.addEventListener('error', cb, {once:true});
+  }
 }
 
 // Load thumbnail for gallery (small WebP, fallback to full if no thumb)
@@ -1015,8 +1041,17 @@ function ensureThumb(i, cb) {
   const img = thumbImgs[i];
   if (!img) return;
   if (img.naturalWidth) { if (cb) cb(); return; }
-  if (!img.src) { loaderStart(); img.src = IMAGES[i].thumb; img.addEventListener('load',  loaderDone, {once:true}); img.addEventListener('error', loaderDone, {once:true}); }
-  if (cb) img.addEventListener('load', cb, {once:true});
+  if (img._imgError)   { if (cb) cb(); return; }
+  if (!img.src) {
+    loaderStart();
+    img.src = IMAGES[i].thumb;
+    img.addEventListener('load',  loaderDone, {once:true});
+    img.addEventListener('error', () => { img._imgError = true; loaderDone(); }, {once:true});
+  }
+  if (cb) {
+    img.addEventListener('load',  cb, {once:true});
+    img.addEventListener('error', cb, {once:true});
+  }
 }
 
 // Load a series by id and rebuild hero + gallery arrays
