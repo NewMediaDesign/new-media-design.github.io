@@ -757,7 +757,7 @@ const mPrev      = document.getElementById('mPrev');
 const mNext      = document.getElementById('mNext');
 const mClose     = document.getElementById('mClose');
 
-let mImg = null, mIdx = 0;
+let mImg = null, mIdx = -1; // -1 = museum opening, image not yet rendered
 let isZoomed = false, panX = 0, panY = 0;
 let isDragging = false, lastX = 0, lastY = 0, didPan = false;
 let slideAnim = null;
@@ -847,8 +847,20 @@ function slideToImage(idx, dir) {
   const nextImg = loadedImgs[idx];
   const go = () => {
     if (slideAnim) { cancelAnimationFrame(slideAnim); slideAnim = null; }
-    // Snapshot current canvas at its current dimensions
+    // If canvas has no size yet (museum still opening), skip crossfade and jump directly
     const cw = mCanvas.width, ch = mCanvas.height;
+    if (!cw || !ch || !nextImg.naturalWidth) {
+      mIdx = idx; mImg = nextImg;
+      unloadDistantImgs(idx);
+      ensureImg((idx-1+IMAGES.length)%IMAGES.length);
+      ensureImg((idx+1)%IMAGES.length);
+      mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
+      document.getElementById('captionTitle').textContent = IMAGES[idx].title;
+      document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
+      document.getElementById('captionMeta').textContent  = IMAGES[idx].meta;
+      if (nextImg.naturalWidth) renderMuseum();
+      return;
+    }
     offCanvas.width = cw; offCanvas.height = ch;
     offCtx.clearRect(0, 0, cw, ch);
     offCtx.drawImage(mCanvas, 0, 0);
@@ -924,7 +936,7 @@ function loadMuseumImage(idx) {
 }
 
 function openMuseum(idx) {
-  isZoomed=false; panX=0; panY=0;
+  isZoomed=false; panX=0; panY=0; mIdx=-1;
   museum.classList.add('open');
   unloadDistantImgs(idx);
   ensureImg(idx, () => requestAnimationFrame(() => loadMuseumImage(idx)));
@@ -942,8 +954,8 @@ function closeMuseum() {
 mClose.addEventListener('click', closeMuseum);
 document.getElementById('mBack').addEventListener('click', () => { closeMuseum(); });
 mReset.addEventListener('click', resetToFit);
-mPrev.addEventListener('click', () => { if(slideAnim) return; resetToFit(); slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1); });
-mNext.addEventListener('click', () => { if(slideAnim) return; resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); });
+mPrev.addEventListener('click', () => { if(slideAnim||mIdx<0) return; resetToFit(); slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1); });
+mNext.addEventListener('click', () => { if(slideAnim||mIdx<0) return; resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); });
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -952,8 +964,8 @@ document.addEventListener('keydown', e => {
     return;
   }
   if (!museum.classList.contains('open')) return;
-  if (e.key==='ArrowRight'&&!slideAnim){ resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); }
-  if (e.key==='ArrowLeft' &&!slideAnim){ resetToFit(); slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1); }
+  if (e.key==='ArrowRight'&&!slideAnim&&mIdx>=0){ resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); }
+  if (e.key==='ArrowLeft' &&!slideAnim&&mIdx>=0){ resetToFit(); slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1); }
 });
 
 // Mouse
