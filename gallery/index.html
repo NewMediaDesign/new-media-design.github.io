@@ -516,16 +516,19 @@ document.getElementById('heroSection').addEventListener('touchend', e => {
 
 // GALLERY
 const galleryOverlay = document.getElementById('galleryOverlay');
+const contactOverlay = document.getElementById('contactOverlay');
 const mainHeader     = document.getElementById('mainHeader');
 const galleryWall    = document.getElementById('galleryWall');
 
-// ── Navigation: CSS :target handles show/hide, JS handles side-effects ──
-const galleryOverlay = document.getElementById('galleryOverlay');
-const contactOverlay = document.getElementById('contactOverlay');
-
+// ── Navigation ──────────────────────────────────────
 function goHome() {
   history.pushState(null, '', location.pathname);
   updateNav();
+}
+function navigateTo(hash) {
+  location.hash = hash;
+  // iOS Safari sometimes suppresses hashchange for fixed elements — force it
+  setTimeout(updateNav, 0);
 }
 function updateNav() {
   const h = location.hash;
@@ -540,7 +543,12 @@ function updateNav() {
 }
 window.addEventListener('hashchange', updateNav);
 
-document.getElementById('heroEnter').addEventListener('click', () => { location.hash = '#galleryOverlay'; });
+// Explicit click handlers ensure updateNav fires on iOS Safari too
+document.getElementById('navWork').addEventListener('click',    e => { e.preventDefault(); navigateTo('#galleryOverlay'); });
+document.getElementById('navAbout').addEventListener('click',   e => { e.preventDefault(); navigateTo('#aboutOverlay'); });
+document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); navigateTo('#contactOverlay'); });
+
+document.getElementById('heroEnter').addEventListener('click', () => navigateTo('#galleryOverlay'));
 document.getElementById('galleryBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
 document.getElementById('hName').addEventListener('click', goHome);
 
@@ -603,12 +611,12 @@ function buildGalleryGrid() {
       ctx.drawImage(img, (cv.width-sw)/2, (cv.height-sh)/2, sw, sh);
     };
     new ResizeObserver(paint).observe(item);
-    // Lazy load: trigger only when item is near the viewport
+    // Lazy load: observe relative to the scrollable container (more reliable on mobile)
     new IntersectionObserver((entries, obs) => {
       if (!entries[0].isIntersecting) return;
       obs.unobserve(item);
       ensureImg(ii, paint);
-    }, { rootMargin: '400px 0px' }).observe(item);
+    }, { root: galleryWall, rootMargin: '300px 0px' }).observe(item);
   });
 }
 
