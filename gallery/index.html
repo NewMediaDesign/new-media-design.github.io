@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>Andrea Spinazzola</title>
+<meta name="description" id="metaDesc" content="">
+<meta property="og:title" id="ogTitle" content="Andrea Spinazzola">
+<meta property="og:description" id="ogDesc" content="">
+<meta property="og:image" id="ogImage" content="">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -72,7 +77,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 .hero-dot.active{ background:#fff; transform:scale(1.5); }
 
 /* OVERLAY BASE — gallery, contact, about share this */
-.gallery-overlay,.contact-overlay,.about-overlay{
+.gallery-overlay,.contact-overlay,.about-overlay,.series-overlay{
   position:fixed; inset:0; background:var(--bg); display:flex; flex-direction:column;
   opacity:0; transform:translateY(24px); pointer-events:none; visibility:hidden;
   transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear .38s;
@@ -80,7 +85,8 @@ header.solid .theme-btn{ color:var(--fg2); }
 .gallery-overlay{ z-index:200; }
 .contact-overlay{ z-index:200; }
 .about-overlay{ z-index:200; }
-#galleryOverlay:target,#contactOverlay:target,#aboutOverlay:target{
+.series-overlay{ z-index:200; }
+#galleryOverlay:target,#contactOverlay:target,#aboutOverlay:target,#seriesOverlay:target{
   opacity:1; transform:translateY(0); pointer-events:auto; visibility:visible;
   transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear 0s;
 }
@@ -181,6 +187,18 @@ header.solid .theme-btn{ color:var(--fg2); }
   .about-photo{ width:100%; height:52vw; min-height:200px; flex-shrink:0; }
   .about-content{ padding:32px 20px; }
 }
+
+/* SERIES */
+.series-body{ flex:1; overflow-y:auto; padding:clamp(24px,4vw,56px) clamp(20px,4vw,var(--pp)); }
+.series-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
+.series-card{ cursor:pointer; background:var(--fg3); border-radius:2px; overflow:hidden; transition:opacity .2s; }
+.series-card:hover{ opacity:.85; }
+.series-card-cover{ width:100%; aspect-ratio:4/3; overflow:hidden; background:var(--border); }
+.series-card-cover canvas{ width:100%; height:100%; display:block; }
+.series-card-info{ padding:16px 18px; }
+.series-card-title{ font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--fg); margin-bottom:4px; }
+.series-card-sub{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.18em; text-transform:uppercase; color:var(--fg2); }
+@media(max-width:700px){ .series-grid{ grid-template-columns:1fr 1fr; gap:12px; } .series-body{ padding:16px var(--pp-mob); } }
 
 /* LOAD BAR */
 .load-bar{
@@ -351,23 +369,34 @@ header.solid .theme-btn{ color:var(--fg2); }
   </div>
   <div class="about-body">
     <div class="about-photo">
-      <img src="images/AS_BW_PORTRAIT_02.png" alt="Andrea Spinazzola">
+      <img id="aboutPhoto" src="images/AS_BW_PORTRAIT_02.png" alt="Andrea Spinazzola">
     </div>
     <div class="about-content">
       <div class="about-label">About the artist</div>
-      <div class="about-name">Andrea<br>Spinazzola</div>
-      <p class="about-bio">Visual artist working at the intersection of technology and human expression. Exploring identity, perception and emotion through AI-generative art and digital media.</p>
+      <div class="about-name" id="aboutName">Andrea<br>Spinazzola</div>
+      <p class="about-bio" id="aboutBio">Visual artist working at the intersection of technology and human expression. Exploring identity, perception and emotion through AI-generative art and digital media.</p>
       <div class="about-links">
-        <a class="about-link" href="mailto:andrea@spinazzola.com">
+        <a class="about-link" id="aboutEmail" href="mailto:andrea@spinazzola.com">
           <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-          andrea@spinazzola.com
+          <span id="aboutEmailText">andrea@spinazzola.com</span>
         </a>
-        <a class="about-link" href="https://instagram.com" target="_blank" rel="noopener">
+        <a class="about-link" id="aboutInstagram" href="https://instagram.com" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
-          Instagram
+          <span id="aboutInstagramHandle">Instagram</span>
         </a>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="series-overlay" id="seriesOverlay">
+  <div class="gallery-header">
+    <button class="g-back" id="seriesBack" aria-label="Back to home"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
+    <div class="g-header-name">Andrea Spinazzola</div>
+    <div style="width:60px"></div>
+  </div>
+  <div class="series-body">
+    <div class="series-grid" id="seriesGrid"></div>
   </div>
 </div>
 
@@ -395,8 +424,11 @@ header.solid .theme-btn{ color:var(--fg2); }
 
 <script>
 
-let IMAGES = [];
-let loadedImgs = [];
+let IMAGES       = [];   // current series images metadata
+let loadedImgs   = [];   // full-size Image objects (for hero + museum)
+let thumbImgs    = [];   // thumbnail Image objects (for gallery grid)
+let SERIES_DATA  = [];   // all series from manifest
+let currentSeriesId = null;
 
 
 // PROTECTION
@@ -532,14 +564,16 @@ function navigateTo(hash) {
 }
 function updateNav() {
   const h = location.hash;
-  const inSection = h === '#galleryOverlay' || h === '#aboutOverlay' || h === '#contactOverlay';
+  const inSection = h === '#galleryOverlay' || h === '#aboutOverlay' || h === '#contactOverlay' || h === '#seriesOverlay';
   mainHeader.classList.toggle('solid', inSection);
   if (inSection) { clearInterval(heroTimer); } else { startTimer(); }
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
   if      (h === '#galleryOverlay') document.getElementById('navWork').classList.add('active');
   else if (h === '#aboutOverlay')   document.getElementById('navAbout').classList.add('active');
   else if (h === '#contactOverlay') document.getElementById('navContact').classList.add('active');
+  else if (h === '#seriesOverlay')  document.getElementById('navSeries').classList.add('active');
   if (h === '#galleryOverlay') buildGalleryGrid();
+  if (h === '#seriesOverlay')  buildSeriesGrid();
 }
 window.addEventListener('hashchange', updateNav);
 
@@ -547,9 +581,11 @@ window.addEventListener('hashchange', updateNav);
 document.getElementById('navWork').addEventListener('click',    e => { e.preventDefault(); navigateTo('#galleryOverlay'); });
 document.getElementById('navAbout').addEventListener('click',   e => { e.preventDefault(); navigateTo('#aboutOverlay'); });
 document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); navigateTo('#contactOverlay'); });
+document.getElementById('navSeries').addEventListener('click',  e => { e.preventDefault(); navigateTo('#seriesOverlay'); });
 
 document.getElementById('heroEnter').addEventListener('click', () => navigateTo('#galleryOverlay'));
 document.getElementById('galleryBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
+document.getElementById('seriesBack').addEventListener('click',  e => { e.preventDefault(); goHome(); });
 document.getElementById('hName').addEventListener('click', goHome);
 
 document.getElementById('shuffleBtn').addEventListener('click', () => {
@@ -601,7 +637,7 @@ function buildGalleryGrid() {
 
     const ii = data.origIdx;
     const paint = () => {
-      const img = loadedImgs[ii];
+      const img = thumbImgs[ii];
       if (!item.clientWidth || !item.clientHeight || !img.naturalWidth) return;
       cv.width = item.clientWidth; cv.height = item.clientHeight;
       const ctx = cv.getContext('2d');
@@ -611,11 +647,11 @@ function buildGalleryGrid() {
       ctx.drawImage(img, (cv.width-sw)/2, (cv.height-sh)/2, sw, sh);
     };
     new ResizeObserver(paint).observe(item);
-    // Lazy load: observe relative to the scrollable container (more reliable on mobile)
+    // Lazy load thumbnails: observe relative to the scrollable container (more reliable on mobile)
     new IntersectionObserver((entries, obs) => {
       if (!entries[0].isIntersecting) return;
       obs.unobserve(item);
-      ensureImg(ii, paint);
+      ensureThumb(ii, paint);
     }, { root: galleryWall, rootMargin: '300px 0px' }).observe(item);
   });
 }
@@ -928,28 +964,120 @@ function ensureImg(i, cb) {
   if (cb) img.addEventListener('load', cb, {once:true});
 }
 
-// MANIFEST
-function initFromManifest(manifest) {
-  const sid = manifest.site.hero && manifest.site.hero.seriesId;
-  const series = (sid ? manifest.series.find(s => s.id === sid) : null) || manifest.series[0];
+// Load thumbnail for gallery (small WebP, fallback to full if no thumb)
+function ensureThumb(i, cb) {
+  const img = thumbImgs[i];
+  if (!img) return;
+  if (img.naturalWidth) { if (cb) cb(); return; }
+  if (!img.src) { loaderStart(); img.src = IMAGES[i].thumb; img.addEventListener('load',  loaderDone, {once:true}); img.addEventListener('error', loaderDone, {once:true}); }
+  if (cb) img.addEventListener('load', cb, {once:true});
+}
+
+// Load a series by id and rebuild hero + gallery arrays
+function loadSeries(seriesId) {
+  const series = SERIES_DATA.find(s => s.id === seriesId) || SERIES_DATA[0];
   if (!series) return;
+  currentSeriesId = series.id;
   IMAGES = series.images.map(img => ({
     src:   img.filename,
+    thumb: img.thumb || img.filename,
     title: img.title,
     desc:  img.description || '',
     meta:  img.meta || ''
   }));
-  // Create Image objects without src — load on demand
   loadedImgs = IMAGES.map(() => new Image());
-  document.getElementById('heroSeries').textContent = series.subtitle || '';
-  document.getElementById('heroTitle').textContent  = series.title    || '';
+  thumbImgs  = IMAGES.map(() => new Image());
+  document.getElementById('heroSeries').textContent     = series.subtitle || '';
+  document.getElementById('heroTitle').textContent      = series.title    || '';
   document.getElementById('seriesBarTitle').textContent = series.title    || '';
   document.getElementById('seriesBarMeta').textContent  = series.subtitle || '';
-  buildHeroDots();
-  // Load only first image immediately for hero
-  ensureImg(0, initHero);
-  if (IMAGES[1]) ensureImg(1); // preload second silently
 }
+
+// Build the series selection grid
+function buildSeriesGrid() {
+  const grid = document.getElementById('seriesGrid');
+  grid.innerHTML = '';
+  SERIES_DATA.forEach(series => {
+    const card = document.createElement('div'); card.className = 'series-card';
+    const coverWrap = document.createElement('div'); coverWrap.className = 'series-card-cover';
+    const cv = document.createElement('canvas');
+    const info = document.createElement('div'); info.className = 'series-card-info';
+    const title = document.createElement('div'); title.className = 'series-card-title'; title.textContent = series.title;
+    const sub   = document.createElement('div'); sub.className   = 'series-card-sub';   sub.textContent   = series.subtitle || '';
+    info.appendChild(title); info.appendChild(sub);
+    coverWrap.appendChild(cv); card.appendChild(coverWrap); card.appendChild(info);
+    grid.appendChild(card);
+
+    // Load cover image (first image of series)
+    const coverSrc = (series.images[0] && (series.images[0].thumb || series.images[0].filename)) || '';
+    if (coverSrc) {
+      const img = new Image();
+      const paint = () => {
+        if (!coverWrap.clientWidth || !img.naturalWidth) return;
+        cv.width = coverWrap.clientWidth; cv.height = coverWrap.clientHeight || cv.width * 0.75;
+        const ctx = cv.getContext('2d');
+        const s = Math.max(cv.width/img.naturalWidth, cv.height/img.naturalHeight);
+        ctx.drawImage(img, (cv.width-img.naturalWidth*s)/2, (cv.height-img.naturalHeight*s)/2, img.naturalWidth*s, img.naturalHeight*s);
+      };
+      img.onload = paint;
+      new ResizeObserver(paint).observe(coverWrap);
+      img.src = coverSrc;
+    }
+
+    card.addEventListener('click', () => {
+      loadSeries(series.id);
+      buildHeroDots();
+      ensureImg(0, initHero);
+      if (IMAGES[1]) ensureImg(1);
+      navigateTo('#galleryOverlay');
+    });
+  });
+}
+
+// MANIFEST
+function initFromManifest(manifest) {
+  // Store all series
+  SERIES_DATA = manifest.series || [];
+
+  // Populate About from manifest
+  if (manifest.about) {
+    const a = manifest.about;
+    if (a.photo)  document.getElementById('aboutPhoto').src = a.photo;
+    if (a.name)   document.getElementById('aboutName').innerHTML = a.name.replace('\n', '<br>');
+    if (a.bio)    document.getElementById('aboutBio').textContent = a.bio;
+    if (a.email) {
+      document.getElementById('aboutEmail').href = 'mailto:' + a.email;
+      document.getElementById('aboutEmailText').textContent = a.email;
+    }
+    if (a.instagram) {
+      document.getElementById('aboutInstagram').href = a.instagram;
+      document.getElementById('aboutInstagramHandle').textContent = a.instagramHandle || 'Instagram';
+    }
+  }
+
+  // Populate SEO meta tags
+  if (manifest.seo) {
+    const s = manifest.seo;
+    if (s.title)       document.title = s.title;
+    if (s.description) {
+      document.getElementById('metaDesc').content = s.description;
+      document.getElementById('ogDesc').content   = s.description;
+    }
+    if (s.title) document.getElementById('ogTitle').content = s.title;
+    if (s.ogImage) {
+      const abs = new URL(s.ogImage, location.href).href;
+      document.getElementById('ogImage').content = abs;
+    }
+  }
+
+  // Load the hero series
+  const sid = manifest.site.hero && manifest.site.hero.seriesId;
+  loadSeries(sid || (SERIES_DATA[0] && SERIES_DATA[0].id));
+  buildHeroDots();
+  ensureImg(0, initHero);
+  if (IMAGES[1]) ensureImg(1);
+}
+
 fetch('manifest.json')
   .then(r => { if (!r.ok) throw new Error('manifest.json not found'); return r.json(); })
   .then(initFromManifest)
