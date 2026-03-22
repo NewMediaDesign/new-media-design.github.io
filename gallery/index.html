@@ -591,6 +591,9 @@ const NAV_LINKS = {
 };
 
 function setSection(section) {
+  // Always close museum when changing sections
+  const museumEl = document.getElementById('museum');
+  if (museumEl && museumEl.classList.contains('open')) closeMuseum();
   // Close all overlays
   Object.values(NAV_OVERLAYS).forEach(el => el.classList.remove('active'));
   Object.values(NAV_LINKS).forEach(el => el.classList.remove('active'));
@@ -762,6 +765,7 @@ let mImg = null, mIdx = -1; // -1 = museum opening, image not yet rendered
 let isZoomed = false, panX = 0, panY = 0;
 let isDragging = false, lastX = 0, lastY = 0, didPan = false;
 let slideAnim = null;
+let slideTarget = -1; // tracks the LATEST requested slide target to cancel stale callbacks
 const PP = () => window.innerWidth <= 700 ? 20 : 48;
 
 // Offscreen for crossfade
@@ -802,6 +806,13 @@ function anchorUI(canvasLeft, canvasTop, canvasW, canvasH) {
 // ── renderMuseum ──────────────────────────────────
 function renderMuseum() {
   if (!mImg) return;
+  // Image was unloaded (memory management) — reload it and wait
+  if (!mImg.naturalWidth) {
+    mSpinner.classList.add('visible');
+    if (!mImg.src && mIdx >= 0) { mImg.src = IMAGES[mIdx].src; }
+    mImg.onload = renderMuseum;
+    return;
+  }
   mSpinner.classList.remove('visible');
   const sw = mStage.clientWidth, sh = mStage.clientHeight;
   const pp = PP();
@@ -845,8 +856,10 @@ function renderMuseum() {
 
 // ── slideToImage ──────────────────────────────────
 function slideToImage(idx, dir) {
+  slideTarget = idx; // mark this as the latest intended target
   const nextImg = loadedImgs[idx];
   const go = () => {
+    if (slideTarget !== idx) return; // stale: user already navigated further, discard
     if (slideAnim) { cancelAnimationFrame(slideAnim); slideAnim = null; }
     // If canvas has no size yet (museum still opening), skip crossfade and jump directly
     const cw = mCanvas.width, ch = mCanvas.height;
