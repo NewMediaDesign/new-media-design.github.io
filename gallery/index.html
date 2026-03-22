@@ -886,25 +886,30 @@ function slideToImage(idx, dir) {
     // Quintic ease-out: fast start → graceful deceleration, natural physical feel
     function easeOut(t) { return 1-Math.pow(1-t,5); }
     function frame(ts) {
-      if (!start) start = ts;
-      const t = Math.min((ts-start)/DUR, 1), e = easeOut(t);
-      mCtx.clearRect(0, 0, cw, ch);
-      mCtx.save(); mCtx.globalAlpha = 1-e;
-      mCtx.drawImage(offCanvas, Math.round(-dir*SHIFT*e), 0);
-      mCtx.restore();
-      mCtx.save(); mCtx.globalAlpha = e;
-      mCtx.drawImage(nextImg, Math.round((cw-dw2)/2+dir*SHIFT*(1-e)), Math.round((ch-dh2)/2), dw2, dh2);
-      mCtx.restore();
-      if (t<1) { slideAnim = requestAnimationFrame(frame); }
-      else {
-        mIdx = idx; mImg = nextImg; slideAnim = null;
-        unloadDistantImgs(idx);
-        preloadWindow(idx);
-        mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
-        document.getElementById('captionTitle').textContent = IMAGES[idx].title;
-        document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
-        document.getElementById('captionMeta').textContent  = IMAGES[idx].meta;
-        renderMuseum();
+      try {
+        if (!start) start = ts;
+        const t = Math.min((ts-start)/DUR, 1), e = easeOut(t);
+        mCtx.clearRect(0, 0, cw, ch);
+        mCtx.save(); mCtx.globalAlpha = 1-e;
+        mCtx.drawImage(offCanvas, Math.round(-dir*SHIFT*e), 0);
+        mCtx.restore();
+        mCtx.save(); mCtx.globalAlpha = e;
+        mCtx.drawImage(nextImg, Math.round((cw-dw2)/2+dir*SHIFT*(1-e)), Math.round((ch-dh2)/2), dw2, dh2);
+        mCtx.restore();
+        if (t<1) { slideAnim = requestAnimationFrame(frame); }
+        else {
+          mIdx = idx; mImg = nextImg; slideAnim = null;
+          unloadDistantImgs(idx);
+          preloadWindow(idx);
+          mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
+          document.getElementById('captionTitle').textContent = IMAGES[idx].title;
+          document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
+          document.getElementById('captionMeta').textContent  = IMAGES[idx].meta;
+          renderMuseum();
+        }
+      } catch(e) {
+        slideAnim = null; // unblock navigation if frame throws
+        loadMuseumImage(mIdx >= 0 ? mIdx : idx);
       }
     }
     slideAnim = requestAnimationFrame(frame);
@@ -1079,7 +1084,10 @@ function unloadDistantImgs(centerIdx) {
     if (!img || !img.src) return;
     var dist = Math.abs(i - centerIdx);
     dist = Math.min(dist, IMAGES.length - dist);
-    if (dist > WINDOW_RADIUS) { img.src = ''; img._imgError = false; }
+    if (dist > WINDOW_RADIUS) {
+      img._gen = (img._gen || 0) + 1; // invalidate any queued abort/error events
+      img.src = ''; img._imgError = false;
+    }
   });
 }
 
@@ -1104,9 +1112,10 @@ function ensureImg(i, cb) {
   if (img._imgError)   { if (cb) cb(); return; }
   if (!img.src) {
     loaderStart();
+    const gen = img._gen = (img._gen || 0) + 1;
     img.src = IMAGES[i].src;
-    img.addEventListener('load',  loaderDone, {once:true});
-    img.addEventListener('error', () => { img._imgError = true; loaderDone(); }, {once:true});
+    img.addEventListener('load',  () => { if (img._gen === gen) loaderDone(); }, {once:true});
+    img.addEventListener('error', () => { if (img._gen === gen) { img._imgError = true; loaderDone(); } }, {once:true});
   }
   if (cb) {
     img.addEventListener('load',  cb, {once:true});
