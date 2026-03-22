@@ -61,24 +61,6 @@ header.solid .h-right{ border-left-color:var(--border); }
 header.solid .theme-btn{ color:var(--fg2); }
 .theme-btn svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
 
-/* HEADER — CSS-native solidification when any overlay is active.
-   Uses :has() so the header snaps solid BEFORE the first paint,
-   with zero JS delay. Falls back to .solid class on older browsers. */
-@supports selector(:has(*)) {
-  body:has(.site-overlay:target) header {
-    background: var(--bg);
-    border-bottom-color: var(--border);
-    transition: none; /* snap instantly when overlay opens */
-  }
-  body:has(.site-overlay:target) .h-name       { color: var(--fg);  transition: none; }
-  body:has(.site-overlay:target) nav a          { color: var(--fg2); transition: none; }
-  body:has(.site-overlay:target) nav a:hover,
-  body:has(.site-overlay:target) nav a.active   { color: var(--fg); }
-  body:has(.site-overlay:target) nav a.active   { border-bottom-color: var(--fg); }
-  body:has(.site-overlay:target) .h-right       { border-left-color: var(--border); transition: none; }
-  body:has(.site-overlay:target) .theme-btn     { color: var(--fg2); transition: none; }
-  body:has(.site-overlay:target) .theme-btn:hover { color: var(--fg); }
-}
 
 /* HERO */
 .hero{ position:fixed; inset:0; z-index:0; }
@@ -95,17 +77,13 @@ header.solid .theme-btn{ color:var(--fg2); }
 .hero-dot{ width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,.3); cursor:pointer; transition:background .3s,transform .3s; touch-action:manipulation; }
 .hero-dot.active{ background:#fff; transform:scale(1.5); }
 
-/* OVERLAY BASE — gallery, contact, about share this */
+/* OVERLAY BASE */
 .gallery-overlay,.contact-overlay,.about-overlay,.series-overlay{
-  position:fixed; inset:0; background:var(--bg); display:flex; flex-direction:column;
+  position:fixed; inset:0; background:var(--bg); z-index:200; display:flex; flex-direction:column;
   opacity:0; transform:translateY(24px); pointer-events:none; visibility:hidden;
   transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear .38s;
 }
-.gallery-overlay{ z-index:200; }
-.contact-overlay{ z-index:200; }
-.about-overlay{ z-index:200; }
-.series-overlay{ z-index:200; }
-#galleryOverlay:target,#contactOverlay:target,#aboutOverlay:target,#seriesOverlay:target{
+.site-overlay.active{
   opacity:1; transform:translateY(0); pointer-events:auto; visibility:visible;
   transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear 0s;
 }
@@ -341,10 +319,10 @@ header.solid .theme-btn{ color:var(--fg2); }
 <header id="mainHeader">
   <button class="h-name" id="hName">Andrea Spinazzola</button>
   <nav>
-    <a href="#galleryOverlay" id="navWork">Work</a>
-    <a href="#seriesOverlay" id="navSeries">Series</a>
-    <a href="#aboutOverlay" id="navAbout">About</a>
-    <a href="#contactOverlay" id="navContact">Contact</a>
+    <a href="#work" id="navWork">Work</a>
+    <a href="#series" id="navSeries">Series</a>
+    <a href="#about" id="navAbout">About</a>
+    <a href="#contact" id="navContact">Contact</a>
   </nav>
   <div class="h-right">
     <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
@@ -594,47 +572,80 @@ document.getElementById('heroSection').addEventListener('touchend', e => {
 }, {passive:true});
 
 // GALLERY
-const galleryOverlay = document.getElementById('galleryOverlay');
-const contactOverlay = document.getElementById('contactOverlay');
-const mainHeader     = document.getElementById('mainHeader');
-const galleryWall    = document.getElementById('galleryWall');
+const mainHeader  = document.getElementById('mainHeader');
+const galleryWall = document.getElementById('galleryWall');
 
-// ── Navigation ──────────────────────────────────────
-function goHome() {
-  history.pushState(null, '', location.pathname);
-  updateNav();
-}
-function navigateTo(hash) {
-  location.hash = hash;
-  updateNav(); // immediate call — solid class applied before first paint
-  // iOS Safari sometimes suppresses hashchange for fixed elements — keep as fallback
-  setTimeout(updateNav, 0);
-}
-function updateNav() {
-  const h = location.hash;
-  const inSection = h === '#galleryOverlay' || h === '#aboutOverlay' || h === '#contactOverlay' || h === '#seriesOverlay';
-  mainHeader.classList.toggle('solid', inSection);
-  if (inSection) { clearInterval(heroTimer); } else { startTimer(); }
-  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  if      (h === '#galleryOverlay') document.getElementById('navWork').classList.add('active');
-  else if (h === '#aboutOverlay')   document.getElementById('navAbout').classList.add('active');
-  else if (h === '#contactOverlay') document.getElementById('navContact').classList.add('active');
-  else if (h === '#seriesOverlay')  document.getElementById('navSeries').classList.add('active');
-  if (h === '#galleryOverlay') buildGalleryGrid();
-  if (h === '#seriesOverlay')  buildSeriesGrid();
-}
-window.addEventListener('hashchange', updateNav);
+// ── Navigation — pure JS, no CSS :target ────────────
+const NAV_OVERLAYS = {
+  work:    document.getElementById('galleryOverlay'),
+  series:  document.getElementById('seriesOverlay'),
+  about:   document.getElementById('aboutOverlay'),
+  contact: document.getElementById('contactOverlay'),
+};
+const NAV_LINKS = {
+  work:    document.getElementById('navWork'),
+  series:  document.getElementById('navSeries'),
+  about:   document.getElementById('navAbout'),
+  contact: document.getElementById('navContact'),
+};
 
-// Explicit click handlers ensure updateNav fires on iOS Safari too
-document.getElementById('navWork').addEventListener('click',    e => { e.preventDefault(); navigateTo('#galleryOverlay'); });
-document.getElementById('navAbout').addEventListener('click',   e => { e.preventDefault(); navigateTo('#aboutOverlay'); });
-document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); navigateTo('#contactOverlay'); });
-document.getElementById('navSeries').addEventListener('click',  e => { e.preventDefault(); navigateTo('#seriesOverlay'); });
+function setSection(section) {
+  // Close all overlays
+  Object.values(NAV_OVERLAYS).forEach(el => el.classList.remove('active'));
+  Object.values(NAV_LINKS).forEach(el => el.classList.remove('active'));
 
-document.getElementById('heroEnter').addEventListener('click', () => navigateTo('#galleryOverlay'));
+  if (section && NAV_OVERLAYS[section]) {
+    NAV_OVERLAYS[section].classList.add('active');
+    NAV_LINKS[section].classList.add('active');
+    mainHeader.classList.add('solid');
+    clearInterval(heroTimer);
+    if (section === 'work')   buildGalleryGrid();
+    if (section === 'series') buildSeriesGrid();
+  } else {
+    mainHeader.classList.remove('solid');
+    startTimer();
+  }
+}
+
+function navigateTo(section) {
+  history.pushState({ section: section || null }, '', section ? '#' + section : location.pathname);
+  setSection(section);
+}
+
+function goHome() { navigateTo(null); }
+
+// Browser back / forward
+window.addEventListener('popstate', function(e) {
+  const section = (e.state && e.state.section) ? e.state.section
+                : (location.hash ? location.hash.slice(1) : null);
+  // Map old hash names to new section keys (backwards compat)
+  const legacyMap = { galleryOverlay:'work', seriesOverlay:'series', aboutOverlay:'about', contactOverlay:'contact' };
+  setSection(legacyMap[section] || section || null);
+});
+
+// Nav link clicks
+document.getElementById('navWork').addEventListener('click',    e => { e.preventDefault(); navigateTo('work'); });
+document.getElementById('navSeries').addEventListener('click',  e => { e.preventDefault(); navigateTo('series'); });
+document.getElementById('navAbout').addEventListener('click',   e => { e.preventDefault(); navigateTo('about'); });
+document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); navigateTo('contact'); });
+
+document.getElementById('heroEnter').addEventListener('click', () => navigateTo('work'));
 document.getElementById('galleryBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
 document.getElementById('seriesBack').addEventListener('click',  e => { e.preventDefault(); goHome(); });
 document.getElementById('hName').addEventListener('click', goHome);
+
+// Restore section on initial load (from URL hash)
+(function() {
+  const h = location.hash.slice(1);
+  const legacyMap = { galleryOverlay:'work', seriesOverlay:'series', aboutOverlay:'about', contactOverlay:'contact' };
+  const section = legacyMap[h] || (NAV_OVERLAYS[h] ? h : null);
+  if (section) {
+    history.replaceState({ section }, '', '#' + section);
+    setSection(section);
+  } else {
+    history.replaceState({ section: null }, '', location.pathname);
+  }
+})();
 
 document.getElementById('shuffleBtn').addEventListener('click', () => {
   const btn = document.getElementById('shuffleBtn');
@@ -978,7 +989,6 @@ mStage.addEventListener('touchend', e => {
 window.addEventListener('resize', () => { if(museum.classList.contains('open')) renderMuseum(); });
 
 // ABOUT
-const aboutOverlay = document.getElementById('aboutOverlay');
 document.getElementById('aboutBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
 
 // CONTACT
@@ -1119,7 +1129,7 @@ function buildSeriesGrid() {
       buildHeroDots();
       ensureImg(0, initHero);
       if (IMAGES[1]) ensureImg(1);
-      navigateTo('#galleryOverlay');
+      navigateTo('work');
     });
   });
 }
