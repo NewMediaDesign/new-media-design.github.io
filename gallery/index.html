@@ -866,8 +866,7 @@ function slideToImage(idx, dir) {
     if (!cw || !ch || !nextImg.naturalWidth) {
       mIdx = idx; mImg = nextImg;
       unloadDistantImgs(idx);
-      ensureImg((idx-1+IMAGES.length)%IMAGES.length);
-      ensureImg((idx+1)%IMAGES.length);
+      preloadWindow(idx);
       mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
       document.getElementById('captionTitle').textContent = IMAGES[idx].title;
       document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
@@ -900,8 +899,7 @@ function slideToImage(idx, dir) {
       else {
         mIdx = idx; mImg = nextImg; slideAnim = null;
         unloadDistantImgs(idx);
-        ensureImg((idx-1+IMAGES.length)%IMAGES.length);
-        ensureImg((idx+1)%IMAGES.length);
+        preloadWindow(idx);
         mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
         document.getElementById('captionTitle').textContent = IMAGES[idx].title;
         document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
@@ -954,8 +952,7 @@ function openMuseum(idx) {
   museum.classList.add('open');
   unloadDistantImgs(idx);
   ensureImg(idx, () => requestAnimationFrame(() => loadMuseumImage(idx)));
-  ensureImg((idx-1+IMAGES.length)%IMAGES.length);
-  ensureImg((idx+1)%IMAGES.length);
+  preloadWindow(idx);
 }
 function closeMuseum() {
   museum.classList.remove('open');
@@ -1074,14 +1071,28 @@ let _pending = 0;
 function loaderStart() { _pending++; loadBar.classList.add('active'); }
 function loaderDone()  { if (--_pending <= 0) { _pending=0; loadBar.classList.remove('active'); } }
 
-// Free decoded image data for images far from current index (prevents OOM on mobile)
-function unloadDistantImgs(centerIdx, keepRadius) {
-  keepRadius = keepRadius || 2;
+// Sliding-window memory management: keep WINDOW_RADIUS images on each side
+const WINDOW_RADIUS = 2;
+
+function unloadDistantImgs(centerIdx) {
   loadedImgs.forEach(function(img, i) {
     if (!img || !img.src) return;
     var dist = Math.abs(i - centerIdx);
     dist = Math.min(dist, IMAGES.length - dist);
-    if (dist > keepRadius) { img.src = ''; img._imgError = false; }
+    if (dist > WINDOW_RADIUS) { img.src = ''; img._imgError = false; }
+  });
+}
+
+// Preload the full sliding window around centerIdx
+// Priority: current → +1 → -1 → +2 → -2 (most likely direction first)
+function preloadWindow(centerIdx) {
+  const n = IMAGES.length;
+  const order = [0, 1, -1, 2, -2];
+  order.forEach(function(offset) {
+    const i = (centerIdx + offset + n) % n;
+    if (Math.min(Math.abs(offset), n - Math.abs(offset)) <= WINDOW_RADIUS) {
+      ensureImg(i);
+    }
   });
 }
 
