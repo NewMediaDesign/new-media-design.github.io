@@ -222,6 +222,77 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+## Sessione 5 — 2026-03-22
+
+**Obiettivo:** Fix freeze deterministico alla 17ª immagine + loading indicators + stabilità generale
+
+---
+
+**1 — Shimmer skeleton + museum spinner**
+- Aggiunto CSS `@keyframes shimmer` su `.g-item.loading::after` per placeholder animato durante caricamento thumbnail
+- Aggiunto spinner CSS (`#museumSpinner`) centrato nel museum durante caricamento full-size
+
+---
+
+**2 — OOM / freeze da immagini accumulate**
+- Problema: immagini 3000px accumulate in memoria senza mai essere liberate
+- Soluzione: `unloadDistantImgs(centerIdx, keepRadius)` — libera img.src per immagini a distanza > `WINDOW_RADIUS=2`
+- Sliding window preload (`preloadWindow`): carica current ±1 ±2 in ordine di priorità, come le app di dating
+
+---
+
+**3 — Navigazione: CSS :target → pure JS .active**
+- Problema: iOS Safari sopprimeva hashchange per elementi fixed → overlay non si aprivano
+- Soluzione: sostituito CSS `:target` con sistema JS puro basato su classi `.active`
+- `setSection(section)` / `navigateTo(section)` / `goHome()` gestiscono tutto
+- `popstate` listener per back/forward browser
+- Eliminata dipendenza da hash URL per la visibilità degli overlay
+
+---
+
+**4 — Fix observer leak**
+- `buildGalleryGrid()` ricreava 19 ResizeObserver + 19 IntersectionObserver ad ogni apertura gallery
+- Soluzione: build solo al primo open + `_galleryResizeObs[]` / `_galleryIntersectObs[]` per disconnect prima del rebuild
+
+---
+
+**5 — Fix museum: blocchi navigazione, canvas 0x0, callback stale**
+- `offCtx.drawImage(mCanvas, 0, 0)` crashava quando il canvas non era ancora stato disegnato → guard + try/catch
+- Museum z-index:800 rimaneva aperto quando si navigava ad altre sezioni → `setSection()` chiama `closeMuseum()`
+- `mIdx = -1` sentinel: marca museum come "in apertura" prima del primo render, protegge prev/next/swipe
+- `slideTarget` guard: ogni `go()` callback verifica di essere ancora l'ultimo target richiesto, quelli stale si annullano
+- `closeMuseum()` ora azzera `mImg.onload = null` e `mImg.onerror = null` per evitare callback ghost
+
+---
+
+**6 — Fix freeze deterministico alla 17ª immagine (race condition)**
+- Root cause: `unloadDistantImgs` abortiva un download settando `img.src = ''`; il browser accodava un evento abort; `ensureImg` riavviava immediatamente il download e resettava `img._imgError = false`; l'evento abort accodato si scatenava DOPO il riavvio → settava `_imgError = true` sul download fresco → `slideToImage` chiamava `go()` senza aspettare il load → `drawImage` con `naturalWidth=0` → eccezione in `frame` RAF → `slideAnim` mai azzerato → navigazione permanentemente bloccata
+- Fix 1: **Generation counter** — `unloadDistantImgs` incrementa `img._gen` prima di azzerare `img.src`; `ensureImg` cattura `gen` all'avvio del download; il listener error ignora se `img._gen !== gen`
+- Fix 2: **try/catch in `frame`** — se `drawImage` lancia eccezione, `slideAnim = null` viene comunque eseguito e si richiama `loadMuseumImage` come fallback
+
+---
+
+**Commit chiave:**
+- `3380398` — fix: generation counter prevents stale abort events from corrupting image state
+
+**Ultimo commit:** `3380398` — branch `main`
+
+---
+
+**Stato al termine della sessione:**
+- ✅ Freeze alla 17ª immagine risolto definitivamente
+- ✅ Sliding window memory management (WINDOW_RADIUS=2)
+- ✅ Navigazione pure JS, funzionante su iOS Safari
+- ✅ Observer leak eliminato
+- ✅ Museum robusto: spinner, guard, stale-callback protection
+
+**Pending / prossima sessione:**
+- Aggiornare contenuto reale: bio, email, Instagram, titoli opere in manifest.json
+- Favicon .ico reale (attualmente usa WebP come fallback)
+- Test multi-serie quando disponibile serie-2
+
+---
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD
