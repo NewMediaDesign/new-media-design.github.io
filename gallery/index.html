@@ -287,7 +287,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 .museum-stage{ flex:1; position:relative; overflow:hidden; }
 
 /* The actual photo canvas — positioned by JS, never moves during animation */
-#museum-canvas{ position:absolute; display:block; cursor:none; }
+#museum-canvas{ position:absolute; display:block; cursor:none; will-change:transform; }
 #museum-canvas.zoomed{ cursor:grab; }
 #museum-canvas.grabbing{ cursor:grabbing; }
 
@@ -927,43 +927,23 @@ function renderMuseum() {
   }
 }
 
-// ── renderDrag ── live drag preview ───────────────
+// ── renderDrag ── GPU-accelerated CSS transform, no canvas redraw ──
 function renderDrag(offset) {
-  if (!mImg || !mImg.naturalWidth || isZoomed) return;
-  const sw = mStage.clientWidth, sh = mStage.clientHeight, pp = PP();
-  // Expand canvas to full stage during drag
-  mCanvas.width = sw; mCanvas.height = sh;
-  mCanvas.style.width=sw+'px'; mCanvas.style.height=sh+'px';
-  mCanvas.style.left='0'; mCanvas.style.top='0';
-  mCtx.clearRect(0, 0, sw, sh);
-  // Current image shifted by drag offset
-  const s = Math.min((sw-pp*2)/mImg.naturalWidth, (sh-pp*2)/mImg.naturalHeight);
-  const dw = Math.round(mImg.naturalWidth*s), dh = Math.round(mImg.naturalHeight*s);
-  mCtx.drawImage(mImg, Math.round((sw-dw)/2 + offset), Math.round((sh-dh)/2), dw, dh);
-  // Adjacent image peeking in from the opposite edge
-  const adjIdx = offset >= 0 ? (mIdx-1+IMAGES.length)%IMAGES.length : (mIdx+1)%IMAGES.length;
-  const adjImg = loadedImgs[adjIdx];
-  if (adjImg && adjImg.naturalWidth) {
-    const s2 = Math.min((sw-pp*2)/adjImg.naturalWidth, (sh-pp*2)/adjImg.naturalHeight);
-    const dw2 = Math.round(adjImg.naturalWidth*s2), dh2 = Math.round(adjImg.naturalHeight*s2);
-    const adjX = offset >= 0
-      ? Math.round((sw-dw2)/2 + offset - sw)   // prev: off-screen left, pulled right
-      : Math.round((sw-dw2)/2 + offset + sw);  // next: off-screen right, pulled left
-    mCtx.drawImage(adjImg, adjX, Math.round((sh-dh2)/2), dw2, dh2);
-  }
+  mCanvas.style.transform = 'translateX('+offset+'px)';
 }
 
-// ── springBack ── animate drag back to centre ──────
+// ── springBack ── animate CSS transform back to zero ──
 function springBack() {
   if (springAnim) { cancelAnimationFrame(springAnim); springAnim = null; }
   const s0 = dragOffset;
   let t0 = null;
   springAnim = requestAnimationFrame(function frame(ts) {
     if (!t0) t0 = ts;
-    const frac = Math.min((ts-t0)/250, 1);
-    dragOffset = s0 * Math.pow(1-frac, 3); // cubic ease-out
-    if (frac < 1) { renderDrag(dragOffset); springAnim = requestAnimationFrame(frame); }
-    else { dragOffset = 0; springAnim = null; renderMuseum(); }
+    const frac = Math.min((ts-t0)/280, 1);
+    dragOffset = s0 * Math.pow(1-frac, 3);
+    mCanvas.style.transform = 'translateX('+dragOffset+'px)';
+    if (frac < 1) { springAnim = requestAnimationFrame(frame); }
+    else { dragOffset = 0; springAnim = null; mCanvas.style.transform = ''; }
   });
 }
 
@@ -1081,7 +1061,7 @@ function closeMuseum() {
   mSpinner.classList.remove('visible');
   if (slideAnim) { cancelAnimationFrame(slideAnim); slideAnim = null; }
   if (springAnim) { cancelAnimationFrame(springAnim); springAnim = null; }
-  dragOffset = 0; isSwipeDragging = false;
+  dragOffset = 0; isSwipeDragging = false; mCanvas.style.transform = '';
   if (mImg) { mImg.onload = null; mImg.onerror = null; }
 }
 
@@ -1106,7 +1086,7 @@ document.addEventListener('keydown', e => {
 // Mouse
 mCanvas.addEventListener('mousedown', e => {
   if (slideAnim) return;
-  if (springAnim) { cancelAnimationFrame(springAnim); springAnim=null; dragOffset=0; renderMuseum(); }
+  if (springAnim) { cancelAnimationFrame(springAnim); springAnim=null; dragOffset=0; mCanvas.style.transform=''; }
   didPan=false; lastX=e.clientX; lastY=e.clientY;
   if (isZoomed) { isDragging=true; return; }
   // Start swipe drag when not zoomed
@@ -1132,7 +1112,7 @@ window.addEventListener('mouseup', () => {
     if (!slideAnim && mIdx>=0 && Math.abs(dragOffset)>=DRAG_THRESHOLD) {
       const ni=dragOffset>0?(mIdx-1+IMAGES.length)%IMAGES.length:(mIdx+1)%IMAGES.length;
       const dir=dragOffset>0?-1:1;
-      dragOffset=0; slideToImage(ni,dir);
+      dragOffset=0; mCanvas.style.transform=''; slideToImage(ni,dir);
     } else { springBack(); }
   }
   setTimeout(()=>{ didPan=false; },0);
@@ -1149,7 +1129,7 @@ let lastT=null, tsX=0, tsY=0;
 mStage.addEventListener('touchstart', e => {
   e.preventDefault();
   if (slideAnim) return;
-  if (springAnim) { cancelAnimationFrame(springAnim); springAnim=null; dragOffset=0; renderMuseum(); }
+  if (springAnim) { cancelAnimationFrame(springAnim); springAnim=null; dragOffset=0; mCanvas.style.transform=''; }
   lastT=e.touches; didPan=false; tsX=e.touches[0].clientX; tsY=e.touches[0].clientY;
   // Preload adjacent images so they appear during drag
   if (!isZoomed && mIdx>=0) { ensureImg((mIdx+1)%IMAGES.length); ensureImg((mIdx-1+IMAGES.length)%IMAGES.length); }
@@ -1177,7 +1157,7 @@ mStage.addEventListener('touchend', e => {
       // Commit: slide to adjacent image
       const ni=dragOffset>0?(mIdx-1+IMAGES.length)%IMAGES.length:(mIdx+1)%IMAGES.length;
       const dir=dragOffset>0?-1:1;
-      dragOffset=0; slideToImage(ni,dir);
+      dragOffset=0; mCanvas.style.transform=''; slideToImage(ni,dir);
     } else if (dragOffset!==0) {
       springBack();
     } else if (!didPan) {
