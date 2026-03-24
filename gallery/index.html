@@ -54,7 +54,45 @@ nav a.active{ border-bottom-color:rgba(255,255,255,.55); }
 header.solid nav a{ color:var(--fg2); }
 header.solid nav a:hover,header.solid nav a.active{ color:var(--fg); }
 header.solid nav a.active{ border-bottom-color:var(--fg); }
-@media(max-width:540px){ nav a:not(.active){display:none;} nav a.active{padding:0 10px;} }
+/* HAMBURGER BUTTON (mobile only) */
+.hamburger-btn{
+  display:none; background:none; border:none; cursor:pointer;
+  width:36px; height:36px; align-items:center; justify-content:center;
+  color:rgba(255,255,255,.6); padding:0; transition:color .2s; touch-action:manipulation; flex-shrink:0;
+}
+header.solid .hamburger-btn{ color:var(--fg2); }
+.hamburger-btn:hover,header.solid .hamburger-btn:hover{ color:var(--fg); }
+.hamburger-btn svg{ width:18px; height:13px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; overflow:visible; }
+.hamburger-btn.hidden{ display:none!important; }
+@media(max-width:768px){ nav{ display:none; } .hamburger-btn{ display:flex; } }
+
+/* MOBILE MENU */
+.mob-menu{
+  position:fixed; inset:0; z-index:950;
+  background:var(--bg); display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; visibility:hidden;
+  transition:opacity .35s var(--ease),visibility 0s linear .35s,background .4s;
+}
+.mob-menu.open{
+  opacity:1; pointer-events:auto; visibility:visible;
+  transition:opacity .35s var(--ease),visibility 0s linear 0s,background .4s;
+}
+.mob-nav{ display:flex; flex-direction:column; align-items:center; gap:0; }
+.mob-nav a{
+  font-size:clamp(2.2rem,11vw,4rem); font-weight:700; letter-spacing:-.02em;
+  text-transform:uppercase; color:var(--fg3);
+  text-decoration:none; padding:8px 24px; display:block; transition:color .2s;
+}
+.mob-nav a:hover,.mob-nav a.mob-active{ color:var(--fg); }
+.mob-menu-close{
+  position:absolute; top:12px; right:16px;
+  background:none; border:none; cursor:pointer;
+  width:36px; height:36px; display:flex; align-items:center; justify-content:center;
+  color:var(--fg2); padding:0; transition:color .2s; touch-action:manipulation;
+}
+.mob-menu-close:hover{ color:var(--fg); }
+.mob-menu-close svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
 .h-right{ display:flex; align-items:center; margin-left:8px; padding-left:14px; border-left:1px solid rgba(255,255,255,.18); height:var(--h); transition:border-color .4s; }
 header.solid .h-right{ border-left-color:var(--border); }
 .theme-btn{ background:none; border:none; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.6); padding:0; transition:color .2s; touch-action:manipulation; }
@@ -325,12 +363,27 @@ header.solid .theme-btn{ color:var(--fg2); }
     <a href="#about" id="navAbout">About</a>
     <a href="#contact" id="navContact">Contact</a>
   </nav>
+  <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+    <svg viewBox="0 0 18 13"><line x1="0" y1="1" x2="18" y2="1"/><line x1="0" y1="6.5" x2="18" y2="6.5"/><line x1="0" y1="12" x2="18" y2="12"/></svg>
+  </button>
   <div class="h-right">
     <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
       <svg id="themeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
     </button>
   </div>
 </header>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-menu-close" id="mobMenuClose" aria-label="Close menu">
+    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <nav class="mob-nav">
+    <a href="#work"    id="mobWork">Work</a>
+    <a href="#series"  id="mobSeries">Series</a>
+    <a href="#about"   id="mobAbout">About</a>
+    <a href="#contact" id="mobContact">Contact</a>
+  </nav>
+</div>
 
 <div class="hero" id="heroSection">
   <canvas id="hero-canvas-b"></canvas>
@@ -589,6 +642,12 @@ const NAV_LINKS = {
   about:   document.getElementById('navAbout'),
   contact: document.getElementById('navContact'),
 };
+const MOB_LINKS = {
+  work:    document.getElementById('mobWork'),
+  series:  document.getElementById('mobSeries'),
+  about:   document.getElementById('mobAbout'),
+  contact: document.getElementById('mobContact'),
+};
 
 function setSection(section) {
   // Always close museum when changing sections
@@ -597,10 +656,12 @@ function setSection(section) {
   // Close all overlays
   Object.values(NAV_OVERLAYS).forEach(el => el.classList.remove('active'));
   Object.values(NAV_LINKS).forEach(el => el.classList.remove('active'));
+  Object.values(MOB_LINKS).forEach(el => el.classList.remove('mob-active'));
 
   if (section && NAV_OVERLAYS[section]) {
     NAV_OVERLAYS[section].classList.add('active');
     NAV_LINKS[section].classList.add('active');
+    MOB_LINKS[section].classList.add('mob-active');
     mainHeader.classList.add('solid');
     clearInterval(heroTimer);
     // Only build grid on first open — shuffle button handles rebuilds
@@ -613,6 +674,7 @@ function setSection(section) {
 }
 
 function navigateTo(section) {
+  document.getElementById('mobMenu').classList.remove('open');
   history.pushState({ section: section || null }, '', section ? '#' + section : location.pathname);
   setSection(section);
 }
@@ -638,6 +700,15 @@ document.getElementById('navAbout').addEventListener('click',   e => { e.prevent
 document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); navigateTo('contact'); });
 
 document.getElementById('heroEnter').addEventListener('click', () => navigateTo('work'));
+
+// ── Mobile menu ──────────────────────────────────
+const mobMenu      = document.getElementById('mobMenu');
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+document.getElementById('mobMenuClose').addEventListener('click', () => mobMenu.classList.remove('open'));
+hamburgerBtn.addEventListener('click', () => mobMenu.classList.toggle('open'));
+Object.entries(MOB_LINKS).forEach(([section, el]) => {
+  el.addEventListener('click', e => { e.preventDefault(); navigateTo(section); });
+});
 document.getElementById('galleryBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
 document.getElementById('seriesBack').addEventListener('click',  e => { e.preventDefault(); goHome(); });
 document.getElementById('hName').addEventListener('click', goHome);
@@ -955,12 +1026,15 @@ function loadMuseumImage(idx) {
 function openMuseum(idx) {
   isZoomed=false; panX=0; panY=0; mIdx=-1;
   museum.classList.add('open');
+  document.getElementById('hamburgerBtn').classList.add('hidden');
+  document.getElementById('mobMenu').classList.remove('open');
   unloadDistantImgs(idx);
   ensureImg(idx, () => requestAnimationFrame(() => loadMuseumImage(idx)));
   preloadWindow(idx);
 }
 function closeMuseum() {
   museum.classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('hidden');
   cursorLeave();
   mSpinner.classList.remove('visible');
   if (slideAnim) { cancelAnimationFrame(slideAnim); slideAnim = null; }
@@ -975,6 +1049,7 @@ mNext.addEventListener('click', () => { if(slideAnim||mIdx<0) return; resetToFit
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
+    if (document.getElementById('mobMenu').classList.contains('open')) { document.getElementById('mobMenu').classList.remove('open'); return; }
     if (museum.classList.contains('open')) { closeMuseum(); return; }
     if (location.hash) { goHome(); return; }
     return;

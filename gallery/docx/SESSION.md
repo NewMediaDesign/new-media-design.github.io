@@ -293,6 +293,40 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+---
+
+## Sessione 6 — 2026-03-24
+
+**Obiettivo:** Hamburger menu mobile + responsive navigation
+
+**Problema:** Su mobile (≤540px) la regola CSS `nav a:not(.active){display:none}` nasconde tutti i link non-attivi. L'utente non può navigare verso About, Contact, Series.
+
+**Soluzione pianificata:**
+- Aggiungere hamburger button in header (visibile solo su mobile)
+- Menu fullscreen overlay mobile con tutti i link di navigazione
+- Mantenere: theme toggle sempre visibile, accesso diretto a Work
+- JS: toggle menu, chiudi al click su link, chiudi su `navigateTo()`
+
+**Cosa è stato fatto:**
+- Rimossa regola `nav a:not(.active){display:none}` (540px) che nascondeva i link su mobile
+- Breakpoint cambiato a 768px: su mobile l'intera `<nav>` è nascosta, compare hamburger button
+- Hamburger button: icona 3 righe, posizionato tra `<nav>` e `.h-right` nell'header
+- Mobile menu fullscreen overlay (`#mobMenu`, z-index:950) con 4 link grandi tipografici
+- `MOB_LINKS` map parallela a `NAV_LINKS` per sincronizzare stato `.mob-active`
+- `setSection()` aggiorna `.mob-active` sui link del menu mobile
+- `navigateTo()` chiude il menu mobile prima di navigare
+- `openMuseum()` nasconde hamburger + chiude menu mobile; `closeMuseum()` ripristina hamburger
+- Escape key: primo livello chiude menu mobile (poi museum, poi home)
+
+**Commit chiave:**
+- (da pushare)
+
+**Pending / prossima sessione:**
+- Debug caricamento immagini mobile (dimensione file)
+- Aggiornare contenuto reale: bio, email, Instagram, titoli opere
+- Favicon .ico reale
+- Test multi-serie (serie-2)
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD

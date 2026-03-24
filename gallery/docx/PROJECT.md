@@ -97,20 +97,22 @@ Art_Gallery/
 | **Museum (viewer)** | `#museum` | ✅ Live | Zoom, pan, swipe, arrow nav |
 | **About** | `#aboutOverlay` | ✅ Live | Foto + bio, layout split |
 | **Contact** | `#contactOverlay` | ✅ Live | Form Formspree, validazione |
-| **Series** | `#navSeries` | ⏳ Placeholder | Non ancora implementato |
+| **Series** | `#seriesOverlay` | ✅ Live | Grid card serie da manifest |
 
 ---
 
 ## Navigazione — funzioni JS principali
 
 ```js
-openGallery()  / closeGallery()   // nav Work
-openAbout()    / closeAbout()     // nav About
-openContact()  / closeContact()   // nav Contact
-openMuseum(i)  / closeMuseum()    // click foto in gallery
+navigateTo(section)   // apre una sezione ('work','series','about','contact') o null per home
+setSection(section)   // applica lo stato visivo (aggiunge/rimuove .active)
+goHome()              // chiude tutto, torna alla hero
+closeMuseum()         // chiude il museum viewer
 ```
 
-Ogni `openX()` chiude il museo se aperto. Escape chiude in ordine: museum → gallery → contact → about.
+`navigateTo(null)` / `goHome()` → home (hero).
+Escape chiude in ordine: museum → overlay attivo → home.
+`popstate` gestisce back/forward browser.
 
 ---
 
