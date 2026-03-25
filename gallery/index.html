@@ -108,7 +108,8 @@ header.solid .theme-btn{ color:var(--fg2); }
 #hero-canvas-b{ opacity:0; }
 .hero-overlay{ position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.06) 100%); pointer-events:none; }
 .hero-content{ position:absolute; bottom:0; left:0; right:0; padding:0 6vw clamp(28px,5vw,56px); }
-.hero-series{ font-family:'Space Mono',monospace; font-size:clamp(7px,1.8vw,9px); letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:10px; }
+.hero-series{ font-family:'Space Mono',monospace; font-size:clamp(11px,2.8vw,16px); letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:10px; }
+@media(max-width:768px){ .hero-series{ font-size:13px; } }
 .hero-title{ font-weight:700; font-size:clamp(3.8rem,13vw,12.5rem); line-height:.88; color:#fff; text-transform:uppercase; letter-spacing:-.02em; margin-bottom:clamp(20px,3.5vw,48px); }
 .hero-enter{ display:inline-flex; align-items:center; gap:10px; font-size:clamp(9px,1.8vw,11px); font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.65); cursor:pointer; border:none; background:none; padding:0; transition:color .2s; touch-action:manipulation; }
 .hero-enter:hover{ color:#fff; }
@@ -1038,7 +1039,7 @@ function loadSeries(seriesId) {
   }));
   loadedImgs = IMAGES.map(() => new Image());
   thumbImgs  = IMAGES.map(() => new Image());
-  document.getElementById('heroSeries').textContent     = 'A visual journey through the possible \u00B7 2026';
+  document.getElementById('heroSeries').textContent     = 'A journey through the possible \u00B7 2026';
   document.getElementById('heroTitle').textContent      = SITE_DATA.project || series.title || '';
   document.getElementById('seriesBarTitle').textContent = series.title    || '';
   document.getElementById('seriesBarMeta').textContent  = series.subtitle || '';
@@ -1130,7 +1131,7 @@ function initFromManifest(manifest) {
   if (IMAGES[1]) ensureImg(1);
 }
 
-fetch('manifest.json')
+fetch('manifest.json?v=' + Date.now())
   .then(r => { if (!r.ok) throw new Error('manifest.json not found'); return r.json(); })
   .then(initFromManifest)
   .catch(err => console.error('Gallery init error:', err));
