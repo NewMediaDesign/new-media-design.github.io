@@ -836,6 +836,7 @@ let mImg = null, mIdx = -1; // -1 = museum opening, image not yet rendered
 let isZoomed = false, panX = 0, panY = 0;
 let isDragging = false, lastX = 0, lastY = 0, didPan = false;
 let isSwipeDragging = false, swipeDragStartX = 0, dragOffset = 0, dragStartT = 0;
+let adjDrawn = false, adjInitialized = false;
 let slideAnim = null, springAnim = null;
 let slideTarget = -1; // tracks the LATEST requested slide target to cancel stale callbacks
 const PP = () => window.innerWidth <= 700 ? 20 : 48;
@@ -844,6 +845,12 @@ const DRAG_THRESHOLD = 70; // px to commit a drag-to-slide
 // Offscreen for crossfade
 const offCanvas = document.createElement('canvas');
 const offCtx    = offCanvas.getContext('2d');
+
+// Adjacent-image canvas: shown peeking during swipe drag
+const adjCanvas = document.createElement('canvas');
+adjCanvas.style.cssText = 'position:absolute;display:none;will-change:transform;';
+const adjCtx = adjCanvas.getContext('2d');
+mStage.insertBefore(adjCanvas, mCanvas); // behind current canvas
 
 // Arrow proximity
 let arrowTimer = null;
@@ -927,9 +934,42 @@ function renderMuseum() {
   }
 }
 
+// ── startAdjCanvas ── draw adjacent image off-screen, ready for peek ──
+function startAdjCanvas(dir) {
+  // dir: -1 = prev (appears from left when dragging right)
+  //       1 = next (appears from right when dragging left)
+  const adjIdx = dir < 0 ? (mIdx-1+IMAGES.length)%IMAGES.length : (mIdx+1)%IMAGES.length;
+  const adjImg = loadedImgs[adjIdx];
+  if (!adjImg) return;
+  const draw = () => {
+    if (!adjImg.naturalWidth) return;
+    const sw = mStage.clientWidth, sh = mStage.clientHeight, pp = PP();
+    const s  = Math.min((sw-pp*2)/adjImg.naturalWidth, (sh-pp*2)/adjImg.naturalHeight);
+    const dw = Math.round(adjImg.naturalWidth*s), dh = Math.round(adjImg.naturalHeight*s);
+    const cx = Math.round((sw-dw)/2), cy = Math.round((sh-dh)/2);
+    adjCanvas.width = dw; adjCanvas.height = dh;
+    adjCanvas.style.width = dw+'px'; adjCanvas.style.height = dh+'px';
+    adjCanvas.style.top  = cy+'px';
+    // Position one full stage-width away in the opposite direction of the drag direction
+    adjCanvas.style.left = (cx + (dir < 0 ? -sw : sw))+'px';
+    adjCtx.clearRect(0, 0, dw, dh);
+    adjCtx.drawImage(adjImg, 0, 0, dw, dh);
+    adjCanvas.style.display = 'block';
+    adjDrawn = true;
+  };
+  if (adjImg.naturalWidth) { draw(); }
+  else if (!adjImg._imgError) { adjImg.addEventListener('load', draw, {once:true}); }
+}
+
+function _adjReset() {
+  adjCanvas.style.display = 'none'; adjCanvas.style.transform = '';
+  adjDrawn = false; adjInitialized = false;
+}
+
 // ── renderDrag ── GPU-accelerated CSS transform, no canvas redraw ──
 function renderDrag(offset) {
   mCanvas.style.transform = 'translateX('+offset+'px)';
+  if (adjDrawn) adjCanvas.style.transform = 'translateX('+offset+'px)';
 }
 
 // ── springBack ── animate CSS transform back to zero ──
@@ -942,8 +982,9 @@ function springBack() {
     const frac = Math.min((ts-t0)/280, 1);
     dragOffset = s0 * Math.pow(1-frac, 3);
     mCanvas.style.transform = 'translateX('+dragOffset+'px)';
+    if (adjDrawn) adjCanvas.style.transform = 'translateX('+dragOffset+'px)';
     if (frac < 1) { springAnim = requestAnimationFrame(frame); }
-    else { dragOffset = 0; springAnim = null; mCanvas.style.transform = ''; }
+    else { dragOffset = 0; springAnim = null; mCanvas.style.transform = ''; _adjReset(); }
   });
 }
 
@@ -971,7 +1012,7 @@ function completeSwipe(nextIdx) {
     document.getElementById('captionTitle').textContent = IMAGES[nextIdx].title;
     document.getElementById('captionDesc').textContent  = IMAGES[nextIdx].desc;
     document.getElementById('captionMeta').textContent  = IMAGES[nextIdx].meta;
-    renderMuseum();
+    _adjReset(); renderMuseum();
   }
   slideAnim = requestAnimationFrame(frame);
 }
@@ -1130,6 +1171,7 @@ window.addEventListener('mousemove', e => {
   } else if (isSwipeDragging) {
     const dx=e.clientX-swipeDragStartX;
     if (Math.abs(dx)>5) didPan=true;
+    if (!adjInitialized && Math.abs(dx)>8) { adjInitialized=true; startAdjCanvas(dx>0?-1:1); }
     dragOffset=dx; renderDrag(dragOffset);
   }
 });
@@ -1170,7 +1212,7 @@ mStage.addEventListener('touchmove', e => {
   const dx=e.touches[0].clientX-lastT[0].clientX, dy=e.touches[0].clientY-lastT[0].clientY;
   if (Math.abs(dx)>3||Math.abs(dy)>3) didPan=true;
   if (isZoomed) { panX+=dx; panY+=dy; renderMuseum(); }
-  else if (!slideAnim && mIdx>=0) { dragOffset+=dx; renderDrag(dragOffset); }
+  else if (!slideAnim && mIdx>=0) { dragOffset+=dx; if (!adjInitialized && Math.abs(dragOffset)>8) { adjInitialized=true; startAdjCanvas(dragOffset>0?-1:1); } renderDrag(dragOffset); }
   lastT=e.touches;
 },{passive:false});
 mStage.addEventListener('touchend', e => {
