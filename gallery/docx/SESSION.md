@@ -327,6 +327,27 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 - Favicon .ico reale
 - Test multi-serie (serie-2)
 
+## Sessione 7 — 2026-03-25
+
+**Obiettivo:** Museum swipe peek — immagine adiacente visibile durante il drag
+
+**Problema:** `startAdjCanvas(dir)` era definita ma mai chiamata — `adjCanvas` esisteva e disegnava l'immagine vicina ma rimaneva sempre nascosto (`adjDrawn=false`).
+
+**Fix:**
+- `mousemove`: quando `isSwipeDragging` e `Math.abs(dx)>8` → `startAdjCanvas(dx>0?-1:1)` (guard `adjInitialized`)
+- `touchmove`: quando drag supera 8px → stessa chiamata basata sul segno di `dragOffset`
+- `completeSwipe`: aggiunto `_adjReset()` prima di `renderMuseum()` per pulire lo stato
+
+**Commit chiave:**
+- `0d33e56` — feat: museum swipe peek — show adjacent image during drag
+
+**Pending / prossima sessione:**
+- Aggiornare contenuto reale: bio, email, Instagram, titoli opere in manifest.json
+- Favicon .ico reale
+- Test multi-serie (serie-2)
+
+---
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD
