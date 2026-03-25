@@ -256,10 +256,11 @@ header.solid .theme-btn{ color:var(--fg2); }
 }
 @keyframes loadSlide{ 0%{left:-45%} 100%{left:110%} }
 
-/* CURSOR */
+/* CURSOR — nascosto su touch (pointer:coarse = dito), attivo solo su mouse (pointer:fine) */
 .custom-cursor{ position:fixed; top:0; left:0; width:40px; height:40px; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); opacity:0; transition:opacity .18s; }
 .custom-cursor.visible{ opacity:1; }
 .custom-cursor.pressed{ transform:translate(-50%,-50%) scale(.72); }
+@media(pointer:coarse){ .custom-cursor{ display:none !important; } }
 
 /* ═══════════════════════════════════════════════════════
    PHOTOSWIPE — theme overrides to match site design
@@ -299,7 +300,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 /* Copyright — z-index basso: a fit è sotto il bordo immagine (visibile); a zoom l'immagine cresce e lo copre */
 .pswp-copyright {
   position: absolute; z-index: 2; pointer-events: none; opacity: 0;
-  font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: .18em;
+  font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: .18em;
   color: var(--fg2); text-transform: uppercase; white-space: nowrap;
   transition: opacity .25s;
 }
@@ -381,7 +382,7 @@ header.solid .theme-btn{ color:var(--fg2); }
     <span class="series-bar-title" id="seriesBarTitle">Series I &mdash; Faces</span>
     <span class="series-bar-meta" id="seriesBarMeta">AI Generative &middot; 2024</span>
     <button class="shuffle-btn" id="shuffleBtn" aria-label="Shuffle layout">
-      <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+      <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
     </button>
   </div>
 </div>
@@ -484,7 +485,8 @@ themeBtn.addEventListener('click', () => {
   updateCursorColor();
 });
 
-// CURSOR
+// CURSOR — attivo solo su dispositivi con mouse (pointer:fine), non su touch
+const HAS_MOUSE = window.matchMedia('(pointer: fine)').matches;
 const cursor = document.getElementById('customCursor');
 function buildCursor(color) {
   const dpr = Math.max(window.devicePixelRatio || 1, 2);
@@ -721,11 +723,13 @@ function buildGalleryGrid() {
     item.appendChild(cv); item.appendChild(cap); item.appendChild(hit);
     colEls[col].appendChild(item);
 
-    hit.addEventListener('mousemove',  e => cursorMove(e.clientX, e.clientY));
-    hit.addEventListener('mouseenter', e => cursorEnter(e.clientX, e.clientY));
-    hit.addEventListener('mouseleave', cursorLeave);
-    hit.addEventListener('mousedown',  () => cursor.classList.add('pressed'));
-    hit.addEventListener('mouseup',    () => cursor.classList.remove('pressed'));
+    if (HAS_MOUSE) {
+      hit.addEventListener('mousemove',  e => cursorMove(e.clientX, e.clientY));
+      hit.addEventListener('mouseenter', e => cursorEnter(e.clientX, e.clientY));
+      hit.addEventListener('mouseleave', cursorLeave);
+      hit.addEventListener('mousedown',  () => cursor.classList.add('pressed'));
+      hit.addEventListener('mouseup',    () => cursor.classList.remove('pressed'));
+    }
     hit.addEventListener('click',      () => openMuseum(data.origIdx));
 
     const ii = data.origIdx;
