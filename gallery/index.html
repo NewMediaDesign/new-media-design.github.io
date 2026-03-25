@@ -756,11 +756,12 @@ function buildGalleryGrid() {
 // ═══════════════════════════════════════════════════
 let pswp = null;
 
-// Passepartout: visual gap P is equal on all 4 sides.
-// Top bar (48px) and caption (52px) overlay the gap, so we add their heights
-// to keep the image from sliding behind them.
-function pswpPadding(viewportSize) {
-  const p = viewportSize.x >= 768 ? Math.round(viewportSize.x * 0.09) : 16;
+// Calcola passepartout: gap visivo uguale su tutti e 4 i lati.
+// PhotoSwipe v5 vuole un oggetto plain {top,bottom,left,right}, non una funzione.
+// Top bar = 48px, caption = 52px → sommate così il gap visivo (tra barre e immagine) rimane P su tutti i lati.
+function calcPswpPadding() {
+  const vw = window.innerWidth;
+  const p  = vw >= 768 ? Math.round(vw * 0.09) : Math.round(vw * 0.06);
   return { top: p + 48, bottom: p + 52, left: p, right: p };
 }
 
@@ -785,7 +786,7 @@ function openMuseum(idx) {
     wheelToZoom: true,
     tapAction: 'zoom',
     doubleTapAction: 'zoom',
-    padding: pswpPadding,
+    padding: calcPswpPadding(),
     secondaryZoomLevel: 1,   // 100% = pixel originali
     maxZoomLevel: 2,
     returnFocus: false,
@@ -845,7 +846,7 @@ function openMuseum(idx) {
           }
           // Position at bottom-left of image in fit-zoom state
           const vw = pswp.viewportSize.x, vh = pswp.viewportSize.y;
-          const pad = pswpPadding({ x: vw, y: vh });
+          const pad = calcPswpPadding();
           const availW = vw - pad.left - pad.right;
           const availH = vh - pad.top  - pad.bottom;
           const iw = pswp.currSlide.data.width  || 3000;
