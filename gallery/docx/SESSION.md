@@ -348,6 +348,82 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+## Sessione 8 — 2026-03-25
+
+**Obiettivo:** Sostituzione completo museum viewer canvas → PhotoSwipe v5 + UX polish
+
+---
+
+**1 — Refactor museum: canvas custom → PhotoSwipe v5**
+- Rimossi ~430 righe di codice canvas custom (swipe, zoom/pan, crossfade, adj canvas, sliding window)
+- Integrato PhotoSwipe v5 da CDN (`photoswipe@5.4.4`)
+  - CSS: `dist/photoswipe.css`
+  - JS: `dist/umd/photoswipe.umd.min.js` (path corretto — la versione `@5` senza subfolder dava 404)
+- `openMuseum(idx)` crea istanza PhotoSwipe con `dataSource` da `IMAGES[]`
+- `closeMuseum()` chiama `pswp.close()`
+- Swipe, zoom/pan, pinch, keyboard, lazy loading gestiti nativamente dalla libreria
+
+---
+
+**2 — Customizzazione UI PhotoSwipe**
+- Back button (top-left) via `uiRegister` con classe `.pswp__button--pswp-back`
+- Caption bar (bottom) via `uiRegister` con title/desc/meta dal manifest
+- Copyright "© Andrea Spinazzola" posizionato dinamicamente sotto il bordo inferiore-sinistro dell'immagine
+- Tema light/dark via CSS custom properties (`--pswp-bg: var(--bg)` ecc.)
+
+---
+
+**3 — Frecce desktop (zona)**
+- Frecce visibili solo quando mouse entra nel 22% sinistro / 78% destro del viewport
+- Classe `.zone-active` aggiunta/rimossa via `mousemove` su `.pswp`
+- Nascoste completamente su touch (`@media(hover:none)`)
+- Stile: `<polyline>` singola, `stroke-width: 1.5`, round caps/joins, coordinate per viewBox 32×32
+
+**Fix critico frecce:** `arrowPrevSVGString` accetta solo il contenuto SVG interno (PhotoSwipe crea già `<svg viewBox="0 0 32 32">`), non un tag `<svg>` completo — coordinate aggiornate per il viewBox 32×32.
+
+---
+
+**4 — Passepartout responsivo**
+- Funzione `pswpPadding(viewportSize)` invece di valori fissi
+- Desktop (≥768px): `left/right = 14% del viewport` (≈200px su 1440px)
+- Mobile: `left/right = 20px`
+- `top: 48` (top bar), `bottom: 60` (caption bar)
+
+---
+
+**5 — Zoom pixel originali**
+- `width: 3000, height: Math.round(3000 * thumbAspect)` — dimensioni full-res stimate con aspect ratio corretto dalla thumbnail caricata
+- `secondaryZoomLevel: 1` → click/doppio-tap zooma ai pixel originali (3000px = 1:1)
+- `tapAction: 'zoom'`, `doubleTapAction: 'zoom'`
+
+---
+
+**Commit chiave:**
+- `c5c4730` — refactor: replace custom canvas museum with PhotoSwipe v5 (-527 righe)
+- `b9509b2` — fix: correct PhotoSwipe CDN paths (404 → 200)
+- `27e36a0` — feat: passepartout, copyright, arrow zones, zoom on click
+- `ae9718c` — fix: arrows SVG polyline 32×32, passepartout 14vw, zoom 100%, copyright position
+
+**Ultimo commit:** `ae9718c` — branch `main`
+
+---
+
+**Stato al termine della sessione:**
+- ✅ PhotoSwipe v5 integrato e funzionante
+- ✅ Passepartout responsivo (~14vw desktop)
+- ✅ Frecce a zona con stile coerente al sito
+- ✅ Zoom ai pixel originali (click/doppio-tap)
+- ✅ Copyright posizionato dinamicamente sotto l'immagine
+- ✅ Caption bar con titolo/desc/meta
+
+**Pending / prossima sessione:**
+- Aggiornare contenuto reale: bio, email, Instagram, titoli opere in manifest.json
+- Favicon .ico reale
+- Test multi-serie (serie-2)
+- Verificare comportamento zoom su mobile (pinch)
+
+---
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD
