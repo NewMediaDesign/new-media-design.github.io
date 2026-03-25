@@ -290,9 +290,9 @@ header.solid .theme-btn{ color:var(--fg2); }
 .pswp--has_mouse .pswp__button--arrow.zone-active { opacity: .45 !important; pointer-events: auto !important; }
 .pswp__button--arrow.zone-active:hover,
 .pswp--has_mouse .pswp__button--arrow.zone-active:hover { opacity: 1 !important; }
-/* pswp__icn is the <svg viewBox="0 0 32 32"> PhotoSwipe creates — 50×50px, single chevron line */
+/* pswp__icn: 50×50px chevron. PhotoSwipe auto-flips next arrow via scaleX(-1) — non sovrascrivere transform */
 .pswp__button--arrow .pswp__icn { width: 50px !important; height: 50px !important; margin-top: -25px !important; left: 12px !important; fill: none !important; color: var(--fg); }
-.pswp__button--arrow--next .pswp__icn { left: auto !important; right: 12px !important; transform: none !important; }
+.pswp__button--arrow--next .pswp__icn { left: auto !important; right: 12px !important; }
 .pswp__button--arrow .pswp__icn polyline { fill: none !important; stroke: currentColor !important; stroke-width: 1 !important; stroke-linecap: round !important; stroke-linejoin: round !important; }
 @media(hover:none){ .pswp__button--arrow { display: none !important; } }
 
@@ -761,8 +761,8 @@ let pswp = null;
 // Top bar = 48px, caption = 52px → sommate così il gap visivo (tra barre e immagine) rimane P su tutti i lati.
 function calcPswpPadding() {
   const vw = window.innerWidth;
-  // ~4.2% → circa 60px su 1440px; minimo 24px su mobile
-  const p  = vw >= 768 ? Math.round(vw * 0.042) : 24;
+  // ~3% → circa 43px su 1440px; minimo 20px su mobile
+  const p  = vw >= 768 ? Math.round(vw * 0.03) : 20;
   return { top: p + 48, bottom: p + 52, left: p, right: p };
 }
 
@@ -791,9 +791,8 @@ function openMuseum(idx) {
     secondaryZoomLevel: 1,   // 100% = pixel originali
     maxZoomLevel: 2,
     returnFocus: false,
-    // Frecce: polyline singola, coordinate per viewBox 0 0 32 32
-    arrowPrevSVGString: '<polyline points="20 24 12 16 20 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
-    arrowNextSVGString: '<polyline points="12 8 20 16 12 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+    // Freccia prev (<): PhotoSwipe specchia automaticamente per next con scaleX(-1)
+    arrowPrevSVGString: '<polyline points="21 6 11 16 21 26" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>',
   });
 
   pswp.on('uiRegister', () => {
