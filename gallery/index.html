@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.css">
 <link rel="icon" type="image/jpeg" href="images/series-1/thumbs/01.webp">
 <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;})()</script>
 <style>
@@ -261,94 +262,44 @@ header.solid .theme-btn{ color:var(--fg2); }
 .custom-cursor.pressed{ transform:translate(-50%,-50%) scale(.72); }
 
 /* ═══════════════════════════════════════════════════════
-   MUSEUM — standalone fullscreen layer, own header
+   PHOTOSWIPE — theme overrides to match site design
    ═══════════════════════════════════════════════════════ */
-.museum{
-  position:fixed; inset:0; z-index:800;
-  background:var(--bg); display:flex; flex-direction:column;
-  opacity:0; transform:translateY(24px); pointer-events:none; visibility:hidden;
-  transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear .38s;
-}
-.museum.open{
-  opacity:1; transform:translateY(0); pointer-events:auto; visibility:visible;
-  transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear 0s;
-}
-.museum-top{
-  height:var(--h); flex-shrink:0;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 20px; border-bottom:1px solid var(--border); transition:border-color .4s;
-}
-.museum-counter{ font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--fg2); text-transform:uppercase; }
-.m-btn{ background:none; border:none; color:var(--fg2); cursor:pointer; width:36px; height:36px; display:flex; align-items:center; justify-content:center; transition:color .15s; touch-action:manipulation; }
-.m-btn:hover{ color:var(--fg); }
-.m-btn svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.pswp { --pswp-bg: var(--bg); --pswp-placeholder-color: var(--border); --pswp-root-z-index: 800; }
+.pswp__bg { background: var(--bg); transition: background .4s; }
 
-/* Stage: just a container, no padding */
-.museum-stage{ flex:1; position:relative; overflow:hidden; }
+/* Top bar */
+.pswp__top-bar { background: var(--bg); border-bottom: 1px solid var(--border); height: var(--h); }
+.pswp__button { color: var(--fg2); }
+.pswp__button:hover { color: var(--fg); }
+.pswp__button--close svg, .pswp__button--arrow svg { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.pswp__button--zoom { display: none; }
 
-/* The actual photo canvas — positioned by JS, never moves during animation */
-#museum-canvas{ position:absolute; display:block; cursor:none; will-change:transform; }
-#museum-canvas.zoomed{ cursor:grab; }
-#museum-canvas.grabbing{ cursor:grabbing; }
+/* Counter */
+.pswp__counter { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .22em; color: var(--fg2); text-transform: uppercase; opacity: 1; top: 50%; transform: translateY(-50%); }
 
-/* Museum loading spinner */
-@keyframes spin{ to{transform:translate(-50%,-50%) rotate(360deg)} }
-.museum-spinner{
-  position:absolute; top:50%; left:50%;
-  width:32px; height:32px;
-  border:1.5px solid var(--border);
-  border-top-color:var(--fg2);
-  border-radius:50%;
-  transform:translate(-50%,-50%);
-  animation:spin .8s linear infinite;
-  pointer-events:none;
-  opacity:0; transition:opacity .2s;
-}
-.museum-spinner.visible{ opacity:1; }
+/* Back button (left side of top bar) */
+.pswp__button--pswp-back { position: absolute; left: 0; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px; background: none; border: none; font-family: inherit; font-size: 9px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--fg2); cursor: pointer; padding: 0 20px; height: 100%; }
+.pswp__button--pswp-back:hover { color: var(--fg); }
+.pswp__button--pswp-back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
-/* Copyright and reset: siblings of canvas, positioned by JS once on layout */
-.museum-wm{
-  position:absolute; pointer-events:none;
-  font-family:'Space Mono',monospace; font-size:7px; letter-spacing:.2em;
-  color:var(--fg2); text-transform:uppercase; opacity:.45;
-  white-space:nowrap;
-}
-.museum-reset{
-  position:absolute;
-  background:none; border:none; color:var(--fg2); cursor:pointer;
-  width:24px; height:24px; display:flex; align-items:center; justify-content:center;
-  padding:0; opacity:0; pointer-events:none; transition:opacity .2s,color .2s;
-  touch-action:manipulation;
-}
-.museum-reset.visible{ opacity:.45; pointer-events:auto; }
-.museum-reset:hover{ opacity:1; color:var(--fg); }
-.museum-reset svg{ width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
-
-/* Side arrows — in stage, not related to image */
-.m-arrow{
-  position:absolute; top:50%; transform:translateY(-50%); z-index:20;
-  background:none; border:none; color:var(--fg); cursor:pointer;
-  width:56px; height:56px; display:flex; align-items:center; justify-content:center;
-  opacity:0; transition:opacity .25s; pointer-events:none; touch-action:manipulation;
-}
-.m-arrow svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; }
-.m-arrow-left{ left:4px; } .m-arrow-right{ right:4px; }
-.m-arrow.visible{ opacity:.3; pointer-events:auto; }
-.m-arrow:hover{ opacity:1; }
-@media(hover:none){
-  .m-arrow{ opacity:0!important; pointer-events:auto!important; }
-  .m-arrow-left{ left:0; top:0; transform:none; width:30%; height:100%; justify-content:flex-start; padding-left:10px; }
-  .m-arrow-right{ right:0; top:0; transform:none; width:30%; height:100%; justify-content:flex-end; padding-right:10px; }
-  .m-arrow svg{ opacity:.5; }
-}
+/* Arrows */
+.pswp__button--arrow { background: none; border: none; color: var(--fg); opacity: .35; }
+.pswp__button--arrow:hover { opacity: 1; }
+.pswp__button--arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 
 /* Caption bar */
-.museum-caption{ flex-shrink:0; min-height:52px; display:flex; align-items:center; padding:10px 20px; border-top:1px solid var(--border); gap:24px; transition:border-color .4s; flex-wrap:wrap; }
-.caption-title{ font-size:11px; font-weight:600; letter-spacing:.04em; color:var(--fg); white-space:nowrap; flex-shrink:0; }
-.caption-body{ display:flex; align-items:baseline; gap:24px; flex:1; min-width:0; }
-.caption-desc{ font-size:9px; font-weight:400; line-height:1.55; color:var(--fg2); letter-spacing:.01em; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
-.caption-meta{ font-family:'Space Mono',monospace; font-size:7.5px; letter-spacing:.18em; color:var(--fg3); text-transform:uppercase; line-height:1.9; white-space:nowrap; flex-shrink:0; }
-@media(max-width:480px){ .caption-body{flex-direction:column;gap:4px;} .caption-meta{display:none;} }
+.pswp-caption {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+  min-height: 52px; display: flex; align-items: center;
+  padding: 10px 20px; border-top: 1px solid var(--border);
+  gap: 24px; background: var(--bg); flex-wrap: wrap;
+  transition: background .4s, border-color .4s;
+}
+.pswp-cap-title { font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--fg); white-space: nowrap; flex-shrink: 0; }
+.pswp-cap-body  { display: flex; align-items: baseline; gap: 24px; flex: 1; min-width: 0; }
+.pswp-cap-desc  { font-size: 9px; line-height: 1.55; color: var(--fg2); }
+.pswp-cap-meta  { font-family: 'Space Mono', monospace; font-size: 7.5px; letter-spacing: .18em; color: var(--fg3); text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
+@media(max-width:480px){ .pswp-cap-body{flex-direction:column;gap:4px;} .pswp-cap-meta{display:none;} }
 </style>
 </head>
 <body>
@@ -478,29 +429,7 @@ header.solid .theme-btn{ color:var(--fg2); }
   </div>
 </div>
 
-<div class="museum" id="museum">
-  <div class="museum-top">
-    <button class="g-back m-back" id="mBack" aria-label="Back to gallery"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
-    <div class="museum-counter" id="museumCounter">01 / 02</div>
-    <button class="m-btn" id="mClose" aria-label="Close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-  </div>
-  <div class="museum-stage" id="museumStage">
-    <canvas id="museum-canvas"></canvas>
-    <div class="museum-spinner" id="museumSpinner"></div>
-    <div class="museum-wm">&copy; Andrea Spinazzola</div>
-    <button class="museum-reset" id="museumReset" aria-label="Reset zoom"><svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
-    <button class="m-arrow m-arrow-left"  id="mPrev" aria-label="Previous image"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-    <button class="m-arrow m-arrow-right" id="mNext" aria-label="Next image"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-  </div>
-  <div class="museum-caption">
-    <div class="caption-title" id="captionTitle">&mdash;</div>
-    <div class="caption-body">
-      <div class="caption-desc" id="captionDesc">&mdash;</div>
-      <div class="caption-meta" id="captionMeta">&mdash;</div>
-    </div>
-  </div>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.umd.min.js"></script>
 <script>
 
 let IMAGES       = [];   // current series images metadata
@@ -650,9 +579,7 @@ const MOB_LINKS = {
 };
 
 function setSection(section) {
-  // Always close museum when changing sections
-  const museumEl = document.getElementById('museum');
-  if (museumEl && museumEl.classList.contains('open')) closeMuseum();
+  closeMuseum();
   // Close all overlays
   Object.values(NAV_OVERLAYS).forEach(el => el.classList.remove('active'));
   Object.values(NAV_LINKS).forEach(el => el.classList.remove('active'));
@@ -680,7 +607,7 @@ function navigateTo(section) {
 }
 
 function goHome() {
-  if (museum.classList.contains('open')) closeMuseum();
+  closeMuseum();
   navigateTo(null);
 }
 
@@ -808,442 +735,86 @@ function buildGalleryGrid() {
 }
 
 // ═══════════════════════════════════════════════════
-// MUSEUM
-// Architecture:
-//   .museum-stage  (position:relative, overflow:hidden)
-//     #museum-canvas  (position:absolute) — draws image
-//     .museum-wm      (position:absolute) — copyright, positioned once per layout
-//     .museum-reset   (position:absolute) — reset btn, positioned once per layout
-//     .m-arrow x2     (position:absolute) — navigation
-// Nothing inside the canvas ever moves. Canvas position itself is set by JS.
-// Copyright/reset are anchored to image edges via JS, updated only on
-// renderMuseum() (not during animation frames).
+// MUSEUM — PhotoSwipe v5
 // ═══════════════════════════════════════════════════
-
-const museum     = document.getElementById('museum');
-const mStage     = document.getElementById('museumStage');
-const mCanvas    = document.getElementById('museum-canvas');
-const mCtx       = mCanvas.getContext('2d');
-const mWM        = document.querySelector('.museum-wm');
-const mReset     = document.getElementById('museumReset');
-const mSpinner   = document.getElementById('museumSpinner');
-const mCounter   = document.getElementById('museumCounter');
-const mPrev      = document.getElementById('mPrev');
-const mNext      = document.getElementById('mNext');
-const mClose     = document.getElementById('mClose');
-
-let mImg = null, mIdx = -1; // -1 = museum opening, image not yet rendered
-let isZoomed = false, panX = 0, panY = 0;
-let isDragging = false, lastX = 0, lastY = 0, didPan = false;
-let isSwipeDragging = false, swipeDragStartX = 0, dragOffset = 0, dragStartT = 0;
-let adjDrawn = false, adjInitialized = false;
-let slideAnim = null, springAnim = null;
-let slideTarget = -1; // tracks the LATEST requested slide target to cancel stale callbacks
-const PP = () => window.innerWidth <= 700 ? 20 : 48;
-const DRAG_THRESHOLD = 70; // px to commit a drag-to-slide
-
-// Offscreen for crossfade
-const offCanvas = document.createElement('canvas');
-const offCtx    = offCanvas.getContext('2d');
-
-// Adjacent-image canvas: shown peeking during swipe drag
-const adjCanvas = document.createElement('canvas');
-adjCanvas.style.cssText = 'position:absolute;display:none;will-change:transform;';
-const adjCtx = adjCanvas.getContext('2d');
-mStage.insertBefore(adjCanvas, mCanvas); // behind current canvas
-
-// Arrow proximity
-let arrowTimer = null;
-mStage.addEventListener('mousemove', e => {
-  const r = mStage.getBoundingClientRect(), x = e.clientX-r.left, w = mStage.clientWidth;
-  mPrev.classList.toggle('visible', x < w*0.22);
-  mNext.classList.toggle('visible', x > w*0.78);
-  clearTimeout(arrowTimer);
-  arrowTimer = setTimeout(() => { mPrev.classList.remove('visible'); mNext.classList.remove('visible'); }, 2000);
-});
-mStage.addEventListener('mouseleave', () => { mPrev.classList.remove('visible'); mNext.classList.remove('visible'); });
-
-// Canvas cursor
-mCanvas.addEventListener('mouseenter', e => { if (!isZoomed) cursorEnter(e.clientX, e.clientY); });
-mCanvas.addEventListener('mousemove',  e => { if (!isZoomed) cursorMove(e.clientX, e.clientY); else cursorLeave(); });
-mCanvas.addEventListener('mouseleave', cursorLeave);
-mCanvas.addEventListener('mousedown',  () => { if (!isZoomed) cursor.classList.add('pressed'); });
-mCanvas.addEventListener('mouseup',    () => cursor.classList.remove('pressed'));
-
-// ── anchorUI ──────────────────────────────────────
-// Positions copyright and reset OUTSIDE the canvas, in stage coords.
-// Called once after each layout change (image load / resize / zoom toggle).
-// NOT called during animation frames.
-function anchorUI(canvasLeft, canvasTop, canvasW, canvasH) {
-  const GAP = 9; // px below image bottom edge
-  const top = canvasTop + canvasH + GAP;
-  mWM.style.left = canvasLeft + 'px';
-  mWM.style.top  = top + 'px';
-  mReset.style.right = (mStage.clientWidth - canvasLeft - canvasW) + 'px';
-  mReset.style.top   = (top - 4) + 'px'; // optical centre with text
-}
-
-// ── renderMuseum ──────────────────────────────────
-function renderMuseum() {
-  if (!mImg) return;
-  // Image was unloaded (memory management) — reload it and wait
-  if (!mImg.naturalWidth) {
-    mSpinner.classList.add('visible');
-    if (!mImg.src && mIdx >= 0) { mImg.src = IMAGES[mIdx].src; }
-    mImg.onload = renderMuseum;
-    return;
-  }
-  mSpinner.classList.remove('visible');
-  const sw = mStage.clientWidth, sh = mStage.clientHeight;
-  const pp = PP();
-  const iw = mImg.naturalWidth, ih = mImg.naturalHeight;
-
-  if (!isZoomed) {
-    // FIT: scale image to fit inside passepartout
-    const s  = Math.min((sw-pp*2)/iw, (sh-pp*2)/ih);
-    const dw = Math.round(iw*s), dh = Math.round(ih*s);
-    const cx = Math.round((sw-dw)/2), cy = Math.round((sh-dh)/2);
-    // Size and position canvas to exactly match the drawn image
-    mCanvas.width  = dw; mCanvas.height = dh;
-    mCanvas.style.width  = dw+'px'; mCanvas.style.height = dh+'px';
-    mCanvas.style.left   = cx+'px'; mCanvas.style.top    = cy+'px';
-    mCtx.clearRect(0, 0, dw, dh);
-    mCtx.drawImage(mImg, 0, 0, dw, dh);
-    // Store for zoom math
-    mCanvas._s=s; mCanvas._cx=cx; mCanvas._cy=cy; mCanvas._dw=dw; mCanvas._dh=dh;
-    mCanvas.className = '';
-    mReset.classList.remove('visible');
-    // Anchor copyright/reset to image edges — only here, never during anim
-    anchorUI(cx, cy, dw, dh);
-  } else {
-    // ZOOM 1:1: canvas = full stage, image drawn at native size with pan
-    mCanvas.width  = sw; mCanvas.height = sh;
-    mCanvas.style.width  = sw+'px'; mCanvas.style.height = sh+'px';
-    mCanvas.style.left   = '0px';  mCanvas.style.top    = '0px';
-    const maxPX = Math.max(0, (iw-sw)/2);
-    const maxPY = Math.max(0, (ih-sh)/2);
-    panX = Math.max(-maxPX, Math.min(maxPX, panX));
-    panY = Math.max(-maxPY, Math.min(maxPY, panY));
-    mCtx.clearRect(0, 0, sw, sh);
-    mCtx.drawImage(mImg, Math.round((sw-iw)/2+panX), Math.round((sh-ih)/2+panY), iw, ih);
-    mCanvas.className = isDragging ? 'grabbing' : 'zoomed';
-    mReset.classList.add('visible');
-    // In zoom mode anchor reset to bottom-right of stage
-    mWM.style.left = '20px'; mWM.style.top = (sh-24)+'px';
-    mReset.style.right = '16px'; mReset.style.top = (sh-30)+'px';
-  }
-}
-
-// ── startAdjCanvas ── draw adjacent image off-screen, ready for peek ──
-function startAdjCanvas(dir) {
-  // dir: -1 = prev (appears from left when dragging right)
-  //       1 = next (appears from right when dragging left)
-  const adjIdx = dir < 0 ? (mIdx-1+IMAGES.length)%IMAGES.length : (mIdx+1)%IMAGES.length;
-  const adjImg = loadedImgs[adjIdx];
-  if (!adjImg) return;
-  const draw = () => {
-    if (!adjImg.naturalWidth) return;
-    const sw = mStage.clientWidth, sh = mStage.clientHeight, pp = PP();
-    const s  = Math.min((sw-pp*2)/adjImg.naturalWidth, (sh-pp*2)/adjImg.naturalHeight);
-    const dw = Math.round(adjImg.naturalWidth*s), dh = Math.round(adjImg.naturalHeight*s);
-    const cx = Math.round((sw-dw)/2), cy = Math.round((sh-dh)/2);
-    adjCanvas.width = dw; adjCanvas.height = dh;
-    adjCanvas.style.width = dw+'px'; adjCanvas.style.height = dh+'px';
-    adjCanvas.style.top  = cy+'px';
-    // Position one full stage-width away in the opposite direction of the drag direction
-    adjCanvas.style.left = (cx + (dir < 0 ? -sw : sw))+'px';
-    adjCtx.clearRect(0, 0, dw, dh);
-    adjCtx.drawImage(adjImg, 0, 0, dw, dh);
-    adjCanvas.style.display = 'block';
-    adjDrawn = true;
-  };
-  if (adjImg.naturalWidth) { draw(); }
-  else if (!adjImg._imgError) { adjImg.addEventListener('load', draw, {once:true}); }
-}
-
-function _adjReset() {
-  adjCanvas.style.display = 'none'; adjCanvas.style.transform = '';
-  adjDrawn = false; adjInitialized = false;
-}
-
-// ── renderDrag ── GPU-accelerated CSS transform, no canvas redraw ──
-function renderDrag(offset) {
-  mCanvas.style.transform = 'translateX('+offset+'px)';
-  if (adjDrawn) adjCanvas.style.transform = 'translateX('+offset+'px)';
-}
-
-// ── springBack ── animate CSS transform back to zero ──
-function springBack() {
-  if (springAnim) { cancelAnimationFrame(springAnim); springAnim = null; }
-  const s0 = dragOffset;
-  let t0 = null;
-  springAnim = requestAnimationFrame(function frame(ts) {
-    if (!t0) t0 = ts;
-    const frac = Math.min((ts-t0)/280, 1);
-    dragOffset = s0 * Math.pow(1-frac, 3);
-    mCanvas.style.transform = 'translateX('+dragOffset+'px)';
-    if (adjDrawn) adjCanvas.style.transform = 'translateX('+dragOffset+'px)';
-    if (frac < 1) { springAnim = requestAnimationFrame(frame); }
-    else { dragOffset = 0; springAnim = null; mCanvas.style.transform = ''; _adjReset(); }
-  });
-}
-
-// ── completeSwipe ── continue CSS drag to completion, no crossfade ──
-function completeSwipe(nextIdx) {
-  if (springAnim) { cancelAnimationFrame(springAnim); springAnim = null; }
-  ensureImg(nextIdx); // ensure next image starts loading
-  const sw   = mStage.clientWidth;
-  const s0   = dragOffset;
-  const tgt  = dragOffset >= 0 ? sw : -sw; // slide off in drag direction
-  const dist = Math.abs(tgt - s0);
-  const DUR  = Math.max(80, Math.min(dist * 0.35, 220)); // proportional 80-220ms
-  let t0 = null;
-  function frame(ts) {
-    if (!t0) t0 = ts;
-    const frac = Math.min((ts-t0)/DUR, 1);
-    const ease = 1 - Math.pow(1-frac, 2); // quad ease-out
-    mCanvas.style.transform = 'translateX('+(s0+(tgt-s0)*ease)+'px)';
-    if (frac < 1) { slideAnim = requestAnimationFrame(frame); return; }
-    // Finalize
-    slideAnim = null; dragOffset = 0; mCanvas.style.transform = '';
-    mIdx = nextIdx; mImg = loadedImgs[nextIdx];
-    unloadDistantImgs(nextIdx); preloadWindow(nextIdx);
-    mCounter.textContent = String(nextIdx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
-    document.getElementById('captionTitle').textContent = IMAGES[nextIdx].title;
-    document.getElementById('captionDesc').textContent  = IMAGES[nextIdx].desc;
-    document.getElementById('captionMeta').textContent  = IMAGES[nextIdx].meta;
-    _adjReset(); renderMuseum();
-  }
-  slideAnim = requestAnimationFrame(frame);
-}
-
-// ── slideToImage ──────────────────────────────────
-function slideToImage(idx, dir) {
-  slideTarget = idx; // mark this as the latest intended target
-  const nextImg = loadedImgs[idx];
-  const go = () => {
-    if (slideTarget !== idx) return; // stale: user already navigated further, discard
-    if (slideAnim) { cancelAnimationFrame(slideAnim); slideAnim = null; }
-    // If canvas has no size yet (museum still opening), skip crossfade and jump directly
-    const cw = mCanvas.width, ch = mCanvas.height;
-    if (!cw || !ch || !nextImg.naturalWidth) {
-      mIdx = idx; mImg = nextImg;
-      unloadDistantImgs(idx);
-      preloadWindow(idx);
-      mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
-      document.getElementById('captionTitle').textContent = IMAGES[idx].title;
-      document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
-      document.getElementById('captionMeta').textContent  = IMAGES[idx].meta;
-      if (nextImg.naturalWidth) renderMuseum();
-      return;
-    }
-    offCanvas.width = cw; offCanvas.height = ch;
-    offCtx.clearRect(0, 0, cw, ch);
-    try { offCtx.drawImage(mCanvas, 0, 0); } catch(e) { loadMuseumImage(idx); return; }
-    // Compute next image's fit geometry using SAME canvas size
-    const iw2 = nextImg.naturalWidth, ih2 = nextImg.naturalHeight;
-    const s2  = Math.min(cw/iw2, ch/ih2);
-    const dw2 = Math.round(iw2*s2), dh2 = Math.round(ih2*s2);
-    const SHIFT = Math.round(cw*0.07), DUR = 700;
-    let start = null;
-    // Quintic ease-out: fast start → graceful deceleration, natural physical feel
-    function easeOut(t) { return 1-Math.pow(1-t,5); }
-    function frame(ts) {
-      try {
-        if (!start) start = ts;
-        const t = Math.min((ts-start)/DUR, 1), e = easeOut(t);
-        mCtx.clearRect(0, 0, cw, ch);
-        mCtx.save(); mCtx.globalAlpha = 1-e;
-        mCtx.drawImage(offCanvas, Math.round(-dir*SHIFT*e), 0);
-        mCtx.restore();
-        mCtx.save(); mCtx.globalAlpha = e;
-        mCtx.drawImage(nextImg, Math.round((cw-dw2)/2+dir*SHIFT*(1-e)), Math.round((ch-dh2)/2), dw2, dh2);
-        mCtx.restore();
-        if (t<1) { slideAnim = requestAnimationFrame(frame); }
-        else {
-          mIdx = idx; mImg = nextImg; slideAnim = null;
-          unloadDistantImgs(idx);
-          preloadWindow(idx);
-          mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
-          document.getElementById('captionTitle').textContent = IMAGES[idx].title;
-          document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
-          document.getElementById('captionMeta').textContent  = IMAGES[idx].meta;
-          renderMuseum();
-        }
-      } catch(e) {
-        slideAnim = null; // unblock navigation if frame throws
-        loadMuseumImage(mIdx >= 0 ? mIdx : idx);
-      }
-    }
-    slideAnim = requestAnimationFrame(frame);
-  };
-  if (nextImg.complete || nextImg._imgError) go();
-  else { nextImg.onload = go; nextImg.onerror = go; }
-}
-
-// ── zoomToPoint ───────────────────────────────────
-// In fit mode canvas is sized to image (dw x dh) and positioned at (cx,cy) in stage.
-// Click at (canvasX, canvasY) maps to image pixel (canvasX/s, canvasY/s).
-// In zoom mode we want that image pixel at the same screen position.
-// Screen position = canvas.left + canvasX = cx + canvasX
-// In zoom 1:1: image pixel imgX is at stage position = (sw-iw)/2 + panX + imgX
-// So: cx + canvasX = (sw-iw)/2 + panX + canvasX/s
-// panX = cx + canvasX - (sw-iw)/2 - canvasX/s
-function zoomToPoint(canvasX, canvasY) {
-  if (!mImg) return;
-  const s  = mCanvas._s  || 1;
-  const cx = mCanvas._cx || 0, cy = mCanvas._cy || 0;
-  const iw = mImg.naturalWidth, ih = mImg.naturalHeight;
-  const sw = mStage.clientWidth,  sh = mStage.clientHeight;
-  panX = cx + canvasX - (sw-iw)/2 - canvasX/s;
-  panY = cy + canvasY - (sh-ih)/2 - canvasY/s;
-  isZoomed = true;
-  renderMuseum();
-}
-
-function resetToFit() { isZoomed=false; panX=0; panY=0; renderMuseum(); }
-
-function loadMuseumImage(idx) {
-  mIdx = idx;
-  mCounter.textContent = String(idx+1).padStart(2,'0')+' / '+String(IMAGES.length).padStart(2,'0');
-  document.getElementById('captionTitle').textContent = IMAGES[idx].title;
-  document.getElementById('captionDesc').textContent  = IMAGES[idx].desc;
-  document.getElementById('captionMeta').textContent  = IMAGES[idx].meta;
-  mImg = loadedImgs[idx];
-  if (mImg.complete && mImg.naturalWidth) { renderMuseum(); }
-  else if (mImg._imgError || (mImg.complete && !mImg.naturalWidth)) { mSpinner.classList.remove('visible'); }
-  else { mSpinner.classList.add('visible'); mImg.onload = renderMuseum; mImg.onerror = function(){ mSpinner.classList.remove('visible'); }; }
-}
+let pswp = null;
 
 function openMuseum(idx) {
-  isZoomed=false; panX=0; panY=0; mIdx=-1;
-  museum.classList.add('open');
+  if (pswp) pswp.close();
+
+  const items = IMAGES.map((img, i) => {
+    const t = thumbImgs[i];
+    const aspect = (t && t.naturalWidth) ? t.naturalHeight / t.naturalWidth : 1.5;
+    return { src: img.src, msrc: img.thumb, width: 3000, height: Math.round(3000 * aspect) };
+  });
+
+  pswp = new PhotoSwipe({
+    dataSource: items,
+    index: idx,
+    bgOpacity: 1,
+    loop: true,
+    spacing: 0.1,
+    closeOnVerticalDrag: true,
+    pinchToClose: false,
+    wheelToZoom: true,
+    padding: { top: 48, bottom: 52, left: 0, right: 0 },
+    secondaryZoomLevel: 1.5,
+    maxZoomLevel: 4,
+    returnFocus: false,
+  });
+
+  pswp.on('uiRegister', () => {
+    pswp.ui.registerElement({
+      name: 'pswp-back',
+      order: 1,
+      isButton: true,
+      tagName: 'button',
+      html: '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back',
+      className: 'pswp__button--pswp-back',
+      onClick: () => pswp.close(),
+    });
+
+    pswp.ui.registerElement({
+      name: 'pswp-caption',
+      order: 9,
+      isButton: false,
+      appendTo: 'root',
+      html: '<div class="pswp-caption"><span class="pswp-cap-title"></span><div class="pswp-cap-body"><span class="pswp-cap-desc"></span><span class="pswp-cap-meta"></span></div></div>',
+      onInit: (el) => {
+        const update = () => {
+          const img = IMAGES[pswp.currIndex];
+          if (!img) return;
+          el.querySelector('.pswp-cap-title').textContent = img.title || '';
+          el.querySelector('.pswp-cap-desc').textContent  = img.desc  || '';
+          el.querySelector('.pswp-cap-meta').textContent  = img.meta  || '';
+        };
+        pswp.on('change', update);
+        pswp.on('afterInit', update);
+      },
+    });
+  });
+
+  pswp.on('destroy', () => {
+    pswp = null;
+    document.getElementById('hamburgerBtn').classList.remove('hidden');
+  });
+
   document.getElementById('hamburgerBtn').classList.add('hidden');
   document.getElementById('mobMenu').classList.remove('open');
-  unloadDistantImgs(idx);
-  ensureImg(idx, () => requestAnimationFrame(() => loadMuseumImage(idx)));
-  preloadWindow(idx);
-}
-function closeMuseum() {
-  museum.classList.remove('open');
-  document.getElementById('hamburgerBtn').classList.remove('hidden');
-  cursorLeave();
-  mSpinner.classList.remove('visible');
-  if (slideAnim) { cancelAnimationFrame(slideAnim); slideAnim = null; }
-  if (springAnim) { cancelAnimationFrame(springAnim); springAnim = null; }
-  dragOffset = 0; isSwipeDragging = false; mCanvas.style.transform = '';
-  if (mImg) { mImg.onload = null; mImg.onerror = null; }
+  pswp.init();
 }
 
-mClose.addEventListener('click', closeMuseum);
-document.getElementById('mBack').addEventListener('click', () => { closeMuseum(); });
-mReset.addEventListener('click', resetToFit);
-mPrev.addEventListener('click', () => { if(slideAnim||mIdx<0) return; resetToFit(); slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1); });
-mNext.addEventListener('click', () => { if(slideAnim||mIdx<0) return; resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); });
+function closeMuseum() {
+  if (pswp) pswp.close();
+}
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     if (document.getElementById('mobMenu').classList.contains('open')) { document.getElementById('mobMenu').classList.remove('open'); return; }
-    if (museum.classList.contains('open')) { closeMuseum(); return; }
+    if (pswp) return; // PhotoSwipe handles its own Escape
     if (location.hash) { goHome(); return; }
-    return;
-  }
-  if (!museum.classList.contains('open')) return;
-  if (e.key==='ArrowRight'&&!slideAnim&&mIdx>=0){ resetToFit(); slideToImage((mIdx+1)%IMAGES.length,1); }
-  if (e.key==='ArrowLeft' &&!slideAnim&&mIdx>=0){ resetToFit(); slideToImage((mIdx-1+IMAGES.length)%IMAGES.length,-1); }
-});
-
-// Mouse
-mCanvas.addEventListener('mousedown', e => {
-  if (slideAnim) return;
-  if (springAnim) { cancelAnimationFrame(springAnim); springAnim=null; dragOffset=0; mCanvas.style.transform=''; }
-  didPan=false; lastX=e.clientX; lastY=e.clientY;
-  if (isZoomed) { isDragging=true; return; }
-  // Start swipe drag when not zoomed
-  isSwipeDragging=true; swipeDragStartX=e.clientX; dragStartT=Date.now();
-  if (mIdx>=0) { ensureImg((mIdx+1)%IMAGES.length); ensureImg((mIdx-1+IMAGES.length)%IMAGES.length); }
-});
-window.addEventListener('mousemove', e => {
-  if (isDragging) {
-    const dx=e.clientX-lastX, dy=e.clientY-lastY;
-    if (Math.abs(dx)>2||Math.abs(dy)>2) { didPan=true; mCanvas.className='grabbing'; }
-    panX+=dx; panY+=dy; lastX=e.clientX; lastY=e.clientY; renderMuseum();
-  } else if (isSwipeDragging) {
-    const dx=e.clientX-swipeDragStartX;
-    if (Math.abs(dx)>5) didPan=true;
-    if (!adjInitialized && Math.abs(dx)>8) { adjInitialized=true; startAdjCanvas(dx>0?-1:1); }
-    dragOffset=dx; renderDrag(dragOffset);
   }
 });
-window.addEventListener('mouseup', () => {
-  isDragging=false;
-  if (isZoomed) mCanvas.className='zoomed';
-  if (isSwipeDragging) {
-    isSwipeDragging=false;
-    if (!slideAnim && mIdx>=0) {
-      const vel = Math.abs(dragOffset) / Math.max(1, Date.now()-dragStartT); // px/ms
-      const commit = Math.abs(dragOffset)>=DRAG_THRESHOLD || (Math.abs(dragOffset)>20 && vel>0.4);
-      if (commit) { const ni=dragOffset>0?(mIdx-1+IMAGES.length)%IMAGES.length:(mIdx+1)%IMAGES.length; completeSwipe(ni); }
-      else { springBack(); }
-    }
-  }
-  setTimeout(()=>{ didPan=false; },0);
-});
-mCanvas.addEventListener('click', e => {
-  if (didPan) return;
-  const r = mCanvas.getBoundingClientRect();
-  if (!isZoomed) zoomToPoint(e.clientX-r.left, e.clientY-r.top);
-  else resetToFit();
-});
-
-// Touch — attached to mStage so swipe works even in empty space around image
-let lastT=null, tsX=0, tsY=0;
-mStage.addEventListener('touchstart', e => {
-  e.preventDefault();
-  if (slideAnim) return;
-  if (springAnim) { cancelAnimationFrame(springAnim); springAnim=null; dragOffset=0; mCanvas.style.transform=''; }
-  lastT=e.touches; didPan=false; tsX=e.touches[0].clientX; tsY=e.touches[0].clientY; dragStartT=Date.now();
-  // Preload adjacent images so they appear during drag
-  if (!isZoomed && mIdx>=0) { ensureImg((mIdx+1)%IMAGES.length); ensureImg((mIdx-1+IMAGES.length)%IMAGES.length); }
-},{passive:false});
-mStage.addEventListener('touchmove', e => {
-  e.preventDefault();
-  if (e.touches.length!==1) return;
-  const dx=e.touches[0].clientX-lastT[0].clientX, dy=e.touches[0].clientY-lastT[0].clientY;
-  if (Math.abs(dx)>3||Math.abs(dy)>3) didPan=true;
-  if (isZoomed) { panX+=dx; panY+=dy; renderMuseum(); }
-  else if (!slideAnim && mIdx>=0) { dragOffset+=dx; if (!adjInitialized && Math.abs(dragOffset)>8) { adjInitialized=true; startAdjCanvas(dragOffset>0?-1:1); } renderDrag(dragOffset); }
-  lastT=e.touches;
-},{passive:false});
-mStage.addEventListener('touchend', e => {
-  e.preventDefault();
-  if (isZoomed) {
-    // Tap while zoomed → unzoom
-    if (!didPan) {
-      const r=mCanvas.getBoundingClientRect(), t=e.changedTouches[0];
-      if (r.width>0 && t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom)
-        resetToFit();
-    }
-  } else if (!slideAnim && mIdx>=0) {
-    const vel = Math.abs(dragOffset) / Math.max(1, Date.now()-dragStartT);
-    const commit = Math.abs(dragOffset)>=DRAG_THRESHOLD || (Math.abs(dragOffset)>20 && vel>0.4);
-    if (commit) {
-      // Commit: slide current image off, snap to next
-      const ni=dragOffset>0?(mIdx-1+IMAGES.length)%IMAGES.length:(mIdx+1)%IMAGES.length;
-      completeSwipe(ni);
-    } else if (dragOffset!==0) {
-      springBack();
-    } else if (!didPan) {
-      // Pure tap → zoom in
-      const r=mCanvas.getBoundingClientRect(), t=e.changedTouches[0];
-      if (r.width>0 && t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom)
-        zoomToPoint(t.clientX-r.left, t.clientY-r.top);
-    }
-  }
-  setTimeout(()=>{ didPan=false; },0);
-},{passive:false});
-
-window.addEventListener('resize', () => { if(museum.classList.contains('open')) renderMuseum(); });
 
 // ABOUT
 document.getElementById('aboutBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
