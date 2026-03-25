@@ -424,6 +424,70 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+## Sessione 9 — 2026-03-25
+
+**Obiettivo:** Fix UX PhotoSwipe: passepartout uguale su 4 lati, frecce custom, copyright su zoom, bundle locale
+
+---
+
+**1 — Fix frecce: opzioni errate (bug silenzioso)**
+- Problema: `arrowPrevSVGString` / `arrowNextSVGString` non esistono in PhotoSwipe v5 → libreria le ignorava silenziosamente e mostrava le sue frecce di default
+- Fix: opzioni corrette sono `arrowPrevSVG` / `arrowNextSVG` e richiedono **tag `<svg>` completo** con `class="pswp__icn"`, `aria-hidden="true"`, `viewBox`, `width`, `height`
+- Forma: `<polyline>` singola a chevron `<` / `>`, 50×50px, `stroke-width: 1.2`, round caps
+- Nascosta ombra PhotoSwipe di default: `.pswp__icn-shadow { display: none }`
+
+**2 — Fix frecce: sempre visibili (specificità CSS)**
+- Problema: PhotoSwipe aggiunge `.pswp--has_mouse` che imposta `opacity: .85` con selettore più specifico del nostro `.pswp__button--arrow`
+- Fix: aggiunto `!important` su tutte le regole arrow + duplicato regole con `.pswp--has_mouse` per coprire ogni caso
+- Logica zona hover (`.zone-active`) mantiene `!important` per prevalere
+
+**3 — Fix passepartout: funzione vs oggetto**
+- Problema: `padding: pswpPadding` passava una funzione — PhotoSwipe v5.4.4 si aspetta un **oggetto plain** `{top, bottom, left, right}` → ignorava il valore, nessun gap
+- Fix: `calcPswpPadding()` chiamata all'apertura, ritorna oggetto con gap visivo uguale su 4 lati
+- Formula: `p = 3% del viewport width`; `top: p+48`, `bottom: p+52`, `left: p`, `right: p`
+  (le barre di 48px e 52px si sommano per mantenere il gap visivo P uguale su tutti i lati)
+- Gap finale: ~43px su 1440px (richiesta utente: circa 60px su schermo, poi ridotto a 3%)
+
+**4 — Fix copyright: nascosto su zoom**
+- Evento `zoomPanUpdate`: confronta `pswp.currZoomLevel` con `zoomLevels.initial`
+- Se zoom > fit+0.01 → `opacity: 0`; se ritorna a fit → `opacity: 0.45` + ricalcola posizione
+- Transizione CSS `opacity .25s` per fade fluido
+- Opacity di default in CSS = 0 (JS controlla tutto)
+
+**5 — Bundle PhotoSwipe localmente**
+- Rimossa dipendenza CDN `cdn.jsdelivr.net` (rischio downtime, privacy visitatori)
+- Scaricati in `lib/photoswipe.css` (7KB) e `lib/photoswipe.umd.min.js` (54KB)
+- References aggiornate in `index.html` → `href="lib/photoswipe.css"` / `src="lib/photoswipe.umd.min.js"`
+- File committati nel repo GitHub Pages
+
+---
+
+**Commit chiave:**
+- `90ab987` — fix: arrows !important overrides, equal passepartout all sides, copyright hides on zoom
+- `50c1b8d` — fix: passepartout — pass padding as plain object (PhotoSwipe v5 ignores function)
+- `2376c32` — feat: bundle PhotoSwipe v5.4.4 locally (no CDN dependency)
+- `09cb9cd` — fix: passepartout ~60px (4.2vw), frecce 50px stroke singolo
+- `47607e1` — fix: frecce orientamento (solo prev + scaleX flip), gap 3%
+- `fa4706e` — fix: frecce custom SVG con arrowPrevSVG/arrowNextSVG (opzioni corrette PhotoSwipe v5)
+
+**Ultimo commit:** `fa4706e` — branch `main`
+
+---
+
+**Stato al termine della sessione:**
+- ✅ Passepartout ~3vw uguale su tutti e 4 i lati (formula con offset barre)
+- ✅ Frecce custom chevron via `arrowPrevSVG`/`arrowNextSVG` (nome opzione corretto)
+- ✅ Frecce visibili solo su hover zone sinistra/destra (non su touch)
+- ✅ Copyright nascosto durante zoom, riposizionato al ritorno a fit
+- ✅ PhotoSwipe bundlato localmente — zero dipendenze CDN esterne
+
+**Pending / prossima sessione:**
+- Aggiornare contenuto reale: bio, email, Instagram, titoli opere in manifest.json
+- Favicon .ico reale
+- Test multi-serie (serie-2)
+
+---
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD
