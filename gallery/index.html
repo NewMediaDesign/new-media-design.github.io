@@ -1,1140 +1,2232 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>Andrea Spinazzola</title>
-<meta name="description" id="metaDesc" content="">
-<meta property="og:title" id="ogTitle" content="Andrea Spinazzola">
-<meta property="og:description" id="ogDesc" content="">
-<meta property="og:image" id="ogImage" content="">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="lib/photoswipe.css">
-<link rel="icon" type="image/jpeg" href="images/series-1/thumbs/01.webp">
-<script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;})()</script>
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg:#ffffff; --fg:#111111; --fg2:#888888; --fg3:#cccccc; --border:#e4e4e4;
-  --h:48px; --pp:48px; --pp-mob:20px;
-  --ease:cubic-bezier(0.16,1,0.3,1);
-}
-[data-theme="dark"]{ --bg:#0d0d0d; --fg:#efefef; --fg2:#666666; --fg3:#2a2a2a; --border:#1e1e1e; }
-html{ height:100%; background:var(--bg); }
-body{
-  height:100%; font-family:'Hanken Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif;
-  background:var(--bg); color:var(--fg);
-  -webkit-user-select:none; user-select:none;
-  overflow:hidden; transition:background .4s,color .4s;
-  -webkit-tap-highlight-color:transparent;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+  <title>Andrea Spinazzola</title>
+  <meta name="description" id="metaDesc" content="">
+  <meta property="og:title" id="ogTitle" content="Andrea Spinazzola">
+  <meta property="og:description" id="ogDesc" content="">
+  <meta property="og:image" id="ogImage" content="">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="lib/photoswipe.css">
+  <link rel="icon" type="image/jpeg" href="images/series-1/thumbs/01.webp">
+  <script>(function () { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; })()</script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* HEADER */
-header{
-  position:fixed; top:0; left:0; right:0; z-index:900; height:var(--h);
-  display:flex; align-items:center; padding:0 20px;
-  background:transparent; border-bottom:1px solid transparent;
-  transition:background .45s,border-color .45s;
-}
-header.solid{ background:var(--bg); border-bottom-color:var(--border); }
-.h-name{ font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#fff; margin-right:auto; transition:color .4s; white-space:nowrap; background:none; border:none; cursor:pointer; padding:0; font-family:inherit; }
-header.solid .h-name{ color:var(--fg); }
-nav{ display:flex; align-items:stretch; height:var(--h); }
-nav a{
-  font-size:10px; font-weight:400; letter-spacing:.13em; text-transform:uppercase;
-  color:rgba(255,255,255,.6); text-decoration:none;
-  display:flex; align-items:center; padding:0 14px;
-  border-bottom:1px solid transparent; margin-bottom:-1px;
-  transition:color .2s,border-color .2s; white-space:nowrap;
-}
-nav a:hover,nav a.active{ color:#fff; }
-nav a.active{ border-bottom-color:rgba(255,255,255,.55); }
-header.solid nav a{ color:var(--fg2); }
-header.solid nav a:hover,header.solid nav a.active{ color:var(--fg); }
-header.solid nav a.active{ border-bottom-color:var(--fg); }
-/* HAMBURGER BUTTON (mobile only) */
-.hamburger-btn{
-  display:none; background:none; border:none; cursor:pointer;
-  width:36px; height:36px; align-items:center; justify-content:center;
-  color:rgba(255,255,255,.6); padding:0; transition:color .2s; touch-action:manipulation; flex-shrink:0;
-}
-header.solid .hamburger-btn{ color:var(--fg2); }
-.hamburger-btn:hover,header.solid .hamburger-btn:hover{ color:var(--fg); }
-.hamburger-btn svg{ width:18px; height:13px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; overflow:visible; }
-.hamburger-btn.hidden{ display:none!important; }
-@media(max-width:768px){ nav{ display:none; } .hamburger-btn{ display:flex; } }
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --fg2: #888888;
+      --fg3: #cccccc;
+      --border: #e4e4e4;
+      --h: 48px;
+      --pp: 48px;
+      --pp-mob: 20px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-/* MOBILE MENU */
-.mob-menu{
-  position:fixed; inset:0; z-index:950;
-  background:var(--bg); display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  opacity:0; pointer-events:none; visibility:hidden;
-  transition:opacity .35s var(--ease),visibility 0s linear .35s,background .4s;
-}
-.mob-menu.open{
-  opacity:1; pointer-events:auto; visibility:visible;
-  transition:opacity .35s var(--ease),visibility 0s linear 0s,background .4s;
-}
-.mob-nav{ display:flex; flex-direction:column; align-items:center; gap:0; }
-.mob-nav a{
-  font-size:clamp(2.2rem,11vw,4rem); font-weight:700; letter-spacing:-.02em;
-  text-transform:uppercase; color:var(--fg3);
-  text-decoration:none; padding:8px 24px; display:block; transition:color .2s;
-}
-.mob-nav a:hover,.mob-nav a.mob-active{ color:var(--fg); }
-.mob-menu-close{
-  position:absolute; top:12px; right:16px;
-  background:none; border:none; cursor:pointer;
-  width:36px; height:36px; display:flex; align-items:center; justify-content:center;
-  color:var(--fg2); padding:0; transition:color .2s; touch-action:manipulation;
-}
-.mob-menu-close:hover{ color:var(--fg); }
-.mob-menu-close svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
-.h-right{ display:flex; align-items:center; margin-left:8px; padding-left:14px; border-left:1px solid rgba(255,255,255,.18); height:var(--h); transition:border-color .4s; }
-header.solid .h-right{ border-left-color:var(--border); }
-.theme-btn{ background:none; border:none; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.6); padding:0; transition:color .2s; touch-action:manipulation; }
-.theme-btn:hover,header.solid .theme-btn:hover{ color:var(--fg); }
-header.solid .theme-btn{ color:var(--fg2); }
-.theme-btn svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+    [data-theme="dark"] {
+      --bg: #0d0d0d;
+      --fg: #efefef;
+      --fg2: #666666;
+      --fg3: #2a2a2a;
+      --border: #1e1e1e;
+    }
+
+    html {
+      height: 100%;
+      background: var(--bg);
+    }
+
+    body {
+      height: 100%;
+      font-family: 'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      -webkit-user-select: none;
+      user-select: none;
+      overflow: hidden;
+      transition: background .4s, color .4s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      height: var(--h);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background .45s, border-color .45s;
+    }
+
+    header.solid {
+      background: var(--bg);
+      border-bottom-color: var(--border);
+    }
+
+    .h-name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-right: auto;
+      transition: color .4s;
+      white-space: nowrap;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: inherit;
+    }
+
+    header.solid .h-name {
+      color: var(--fg);
+    }
+
+    nav {
+      display: flex;
+      align-items: stretch;
+      height: var(--h);
+    }
+
+    nav a {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .6);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border-bottom: 1px solid transparent;
+      margin-bottom: -1px;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #fff;
+    }
+
+    nav a.active {
+      border-bottom-color: rgba(255, 255, 255, .55);
+    }
+
+    header.solid nav a {
+      color: var(--fg2);
+    }
+
+    header.solid nav a:hover,
+    header.solid nav a.active {
+      color: var(--fg);
+    }
+
+    header.solid nav a.active {
+      border-bottom-color: var(--fg);
+    }
+
+    /* HAMBURGER BUTTON (mobile only) */
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .6);
+      padding: 0;
+      transition: color .2s;
+      touch-action: manipulation;
+      flex-shrink: 0;
+    }
+
+    header.solid .hamburger-btn {
+      color: var(--fg2);
+    }
+
+    .hamburger-btn:hover,
+    header.solid .hamburger-btn:hover {
+      color: var(--fg);
+    }
+
+    .hamburger-btn svg {
+      width: 18px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      overflow: visible;
+    }
+
+    .hamburger-btn.hidden {
+      display: none !important;
+    }
+
+    @media(max-width:768px) {
+      nav {
+        display: none;
+      }
+
+      .hamburger-btn {
+        display: flex;
+      }
+    }
+
+    /* MOBILE MENU */
+    .mob-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 950;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity .35s var(--ease), visibility 0s linear .35s, background .4s;
+    }
+
+    .mob-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+      transition: opacity .35s var(--ease), visibility 0s linear 0s, background .4s;
+    }
+
+    .mob-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .mob-nav a {
+      font-size: clamp(2.2rem, 11vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      color: var(--fg3);
+      text-decoration: none;
+      padding: 8px 24px;
+      display: block;
+      transition: color .2s;
+    }
+
+    .mob-nav a:hover,
+    .mob-nav a.mob-active {
+      color: var(--fg);
+    }
+
+    .mob-menu-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg2);
+      padding: 0;
+      transition: color .2s;
+      touch-action: manipulation;
+    }
+
+    .mob-menu-close:hover {
+      color: var(--fg);
+    }
+
+    .mob-menu-close svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .h-right {
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+      padding-left: 14px;
+      border-left: 1px solid rgba(255, 255, 255, .18);
+      height: var(--h);
+      transition: border-color .4s;
+    }
+
+    header.solid .h-right {
+      border-left-color: var(--border);
+    }
+
+    .theme-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .6);
+      padding: 0;
+      transition: color .2s;
+      touch-action: manipulation;
+    }
+
+    .theme-btn:hover,
+    header.solid .theme-btn:hover {
+      color: var(--fg);
+    }
+
+    header.solid .theme-btn {
+      color: var(--fg2);
+    }
+
+    .theme-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
 
 
-/* HERO */
-.hero{ position:fixed; inset:0; z-index:0; }
-#hero-canvas,#hero-canvas-b{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
-#hero-canvas-b{ opacity:0; }
-.hero-overlay{ position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.06) 100%); pointer-events:none; }
-.hero-content{ position:absolute; bottom:0; left:0; right:0; padding:0 6vw clamp(28px,5vw,56px); }
-.hero-series{ font-family:'Space Mono',monospace; font-size:clamp(10px,1.1vw,16px); letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:10px; }
-.hero-title{ font-weight:700; font-size:clamp(3.8rem,13vw,12.5rem); line-height:.88; color:#fff; text-transform:uppercase; letter-spacing:-.02em; margin-bottom:clamp(20px,3.5vw,48px); }
-.hero-enter{ display:inline-flex; align-items:center; gap:10px; font-size:clamp(9px,1.8vw,11px); font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.65); cursor:pointer; border:none; background:none; padding:0; transition:color .2s; touch-action:manipulation; }
-.hero-enter:hover{ color:#fff; }
-.hero-enter svg{ width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
-.hero-dots{ position:absolute; bottom:clamp(14px,2.5vw,26px); right:clamp(16px,3vw,28px); display:flex; gap:6px; z-index:5; }
-.hero-dot{ width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,.3); cursor:pointer; transition:background .3s,transform .3s; touch-action:manipulation; }
-.hero-dot.active{ background:#fff; transform:scale(1.5); }
+    /* HERO */
+    .hero {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
 
-/* OVERLAY BASE */
-.gallery-overlay,.contact-overlay,.about-overlay,.series-overlay{
-  position:fixed; inset:0; background:var(--bg); z-index:200; display:flex; flex-direction:column;
-  opacity:0; transform:translateY(24px); pointer-events:none; visibility:hidden;
-  transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear .38s;
-}
-.site-overlay.active{
-  opacity:1; transform:translateY(0); pointer-events:auto; visibility:visible;
-  transition:opacity .38s var(--ease),transform .38s var(--ease),background .4s,visibility 0s linear 0s;
-}
+    #hero-canvas,
+    #hero-canvas-b {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
 
-/* GALLERY */
-.gallery-header,.contact-header,.about-header{
-  height:var(--h); flex-shrink:0; display:flex; align-items:center;
-  padding:0 20px; border-bottom:1px solid var(--border); transition:border-color .4s; gap:16px;
-}
-.g-back{
-  font-size:10px; font-weight:400; letter-spacing:.15em; text-transform:uppercase;
-  color:var(--fg2); background:none; border:none; cursor:pointer;
-  display:flex; align-items:center; gap:7px; transition:color .2s; touch-action:manipulation; padding:8px 0;
-}
-.g-back:hover{ color:var(--fg); }
-.g-back svg{ width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
-.g-header-name{ font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--fg); margin:0 auto; }
-.gallery-wall{
-  flex:1; display:flex; gap:1px; background:var(--border);
-  overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch;
-  align-items:flex-start; transition:background .4s;
-}
-.g-col{ flex:1; display:flex; flex-direction:column; gap:1px; min-width:0; }
-.g-item{ flex-shrink:0; position:relative; overflow:hidden; background:var(--bg); transition:background .4s; }
-@keyframes shimmer{ 0%{background-position:-200% 0} 100%{background-position:200% 0} }
-.g-item.loading::after{
-  content:''; position:absolute; inset:0; z-index:1;
-  background:linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
-  background-size:200% 100%;
-  animation:shimmer 1.4s infinite linear;
-}
-.g-item canvas{ width:100%; height:100%; display:block; pointer-events:none; will-change:transform; transform-origin:center; transition:transform 1.1s var(--ease); }
-.g-item .g-hit{ position:absolute; inset:0; z-index:2; cursor:none; }
-@media(hover:hover){ .g-item:hover canvas{ transform:scale(1.06); } }
-.g-caption{
-  position:absolute; bottom:0; left:0; right:0; z-index:3;
-  padding:52px 18px 18px;
-  background:linear-gradient(to top,rgba(0,0,0,.68) 0%,transparent 100%);
-  display:flex; align-items:flex-end; justify-content:space-between;
-  opacity:0; transform:translateY(12px);
-  transition:opacity .45s var(--ease),transform .45s var(--ease); pointer-events:none;
-}
-@media(hover:hover){ .g-item:hover .g-caption{ opacity:1; transform:translateY(0); } }
-@media(hover:none){ .g-caption{ opacity:1; transform:translateY(0); padding-bottom:14px; } }
-.g-caption-title{ font-size:12px; font-weight:500; letter-spacing:.05em; color:#fff; }
-.g-caption-index{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.2em; color:rgba(255,255,255,.45); text-transform:uppercase; }
-.series-bar{ height:36px; flex-shrink:0; display:flex; align-items:center; gap:16px; padding:0 20px; border-top:1px solid var(--border); transition:border-color .4s; }
-.series-bar-title{ margin-right:auto; }
-.shuffle-btn{ background:none; border:none; cursor:pointer; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:var(--fg2); transition:color .2s,transform .4s; touch-action:manipulation; flex-shrink:0; }
-.shuffle-btn:hover{ color:var(--fg); }
-.shuffle-btn.spinning{ transform:rotate(180deg); }
-.shuffle-btn svg{ width:16px; height:16px; }
-.series-bar-title{ font-size:10px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--fg); }
-.series-bar-meta{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--fg2); text-transform:uppercase; }
-@media(max-width:480px){ .series-bar-meta{ display:none; } }
+    #hero-canvas-b {
+      opacity: 0;
+    }
 
-/* CONTACT */
-.contact-overlay{ -webkit-user-select:text; user-select:text; }
-.contact-body{ flex:1; display:flex; align-items:center; justify-content:center; padding:40px 20px; overflow-y:auto; }
-.contact-inner{ position:relative; width:100%; max-width:520px; border:1px solid var(--border); padding:40px; transition:border-color .4s; }
-.contact-close{
-  position:absolute; top:16px; right:16px;
-  width:32px; height:32px;
-  background:none; border:none; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  color:var(--fg2); transition:color .2s; touch-action:manipulation;
-}
-.contact-close:hover{ color:var(--fg); }
-.contact-close svg{ width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
-.contact-label{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.28em; text-transform:uppercase; color:var(--fg2); margin-bottom:32px; }
-.contact-form{ display:flex; flex-direction:column; gap:0; }
-.form-field{ display:flex; flex-direction:column; gap:6px; border-bottom:1px solid var(--border); padding:18px 0; transition:border-color .2s; }
-.form-field:focus-within{ border-bottom-color:var(--fg); }
-.form-field label{ font-family:'Space Mono',monospace; font-size:7.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--fg2); transition:color .2s; -webkit-user-select:none; user-select:none; }
-.form-field:focus-within label{ color:var(--fg); }
-.form-field input,.form-field textarea{ background:none; border:none; outline:none; font-family:'Hanken Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; font-weight:400; color:var(--fg); width:100%; resize:none; padding:0; -webkit-user-select:text; user-select:text; }
-.form-field input::placeholder,.form-field textarea::placeholder{ color:var(--fg3); }
-.form-field textarea{ min-height:100px; line-height:1.6; }
-.form-submit{ margin-top:32px; display:flex; align-items:center; justify-content:space-between; }
-.form-btn{ background:none; border:none; cursor:pointer; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--fg2); display:flex; align-items:center; gap:10px; padding:0; transition:color .2s; touch-action:manipulation; }
-.form-btn:hover{ color:var(--fg); }
-.form-btn svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; transition:transform .3s var(--ease); }
-.form-btn:hover svg{ transform:translateX(4px); }
-.form-btn.loading svg{ animation:spin .7s linear infinite; }
-@keyframes spin{ to{ transform:rotate(360deg); } }
-.form-status{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.18em; text-transform:uppercase; color:var(--fg2); opacity:0; transition:opacity .3s; }
-.form-status.visible{ opacity:1; }
-.form-status.ok{ color:#4a9; }
-.form-status.err{ color:#c55; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, .65) 0%, rgba(0, 0, 0, .15) 50%, rgba(0, 0, 0, .06) 100%);
+      pointer-events: none;
+    }
 
-/* ABOUT */
-.about-body{ flex:1; display:flex; overflow:hidden; }
-.about-photo{ width:42%; flex-shrink:0; overflow:hidden; background:#e8e4dc; padding:clamp(16px,3vw,36px); box-sizing:border-box; display:flex; align-items:center; justify-content:center; }
-.about-photo img{ width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
-.about-content{ flex:1; display:flex; flex-direction:column; justify-content:center; padding:clamp(32px,5vw,72px) clamp(28px,4vw,64px); overflow-y:auto; }
-.about-label{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.28em; text-transform:uppercase; color:var(--fg2); margin-bottom:28px; }
-.about-name{ font-size:clamp(1.8rem,4vw,3rem); font-weight:700; letter-spacing:-.02em; line-height:.95; color:var(--fg); margin-bottom:28px; text-transform:uppercase; }
-.about-bio{ font-size:13px; line-height:1.8; color:var(--fg2); font-weight:400; max-width:360px; margin-bottom:48px; -webkit-user-select:text; user-select:text; }
-.about-links{ display:flex; flex-direction:column; gap:18px; }
-.about-link{ display:inline-flex; align-items:center; gap:9px; font-size:9px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--fg2); text-decoration:none; transition:color .2s; width:fit-content; }
-.about-link:hover{ color:var(--fg); }
-.about-link svg{ width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
-@media(max-width:700px){
-  .about-body{ flex-direction:column; }
-  .about-photo{ width:100%; height:52vw; min-height:200px; flex-shrink:0; }
-  .about-content{ padding:32px 20px; }
-}
+    .hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0 6vw clamp(28px, 5vw, 56px);
+    }
 
-/* SERIES */
-.series-body{ flex:1; overflow-y:auto; padding:clamp(24px,4vw,56px) clamp(20px,4vw,var(--pp)); }
-.series-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
-.series-card{ cursor:pointer; background:var(--fg3); border-radius:2px; overflow:hidden; transition:opacity .2s; }
-.series-card:hover{ opacity:.85; }
-.series-card-cover{ width:100%; aspect-ratio:4/3; overflow:hidden; background:var(--border); }
-.series-card-cover canvas{ width:100%; height:100%; display:block; }
-.series-card-info{ padding:16px 18px; }
-.series-card-title{ font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--fg); margin-bottom:4px; }
-.series-card-sub{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.18em; text-transform:uppercase; color:var(--fg2); }
-@media(max-width:700px){ .series-grid{ grid-template-columns:1fr 1fr; gap:12px; } .series-body{ padding:16px var(--pp-mob); } }
+    .hero-series {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(9px, 1vw, 15px);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 10px;
+    }
 
-/* LOAD BAR */
-.load-bar{
-  position:fixed; top:0; left:0; right:0; height:2px; z-index:9998;
-  background:transparent; pointer-events:none; overflow:hidden;
-}
-.load-bar.active::after{
-  content:''; position:absolute; top:0; height:100%;
-  width:45%; background:var(--fg); opacity:.55;
-  animation:loadSlide 1.4s ease-in-out infinite;
-}
-@keyframes loadSlide{ 0%{left:-45%} 100%{left:110%} }
+    .hero-title {
+      font-weight: 700;
+      font-size: clamp(3.8rem, 13vw, 12.5rem);
+      line-height: .88;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+      margin-bottom: clamp(20px, 3.5vw, 48px);
+    }
 
-/* CURSOR — nascosto su touch (pointer:coarse = dito), attivo solo su mouse (pointer:fine) */
-.custom-cursor{ position:fixed; top:0; left:0; width:40px; height:40px; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); opacity:0; transition:opacity .18s; }
-.custom-cursor.visible{ opacity:1; }
-.custom-cursor.pressed{ transform:translate(-50%,-50%) scale(.72); }
-@media(pointer:coarse){ .custom-cursor{ display:none !important; } }
+    .hero-enter {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(9px, 1.8vw, 11px);
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .65);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      transition: color .2s;
+      touch-action: manipulation;
+    }
 
-/* ═══════════════════════════════════════════════════════
+    .hero-enter:hover {
+      color: #fff;
+    }
+
+    .hero-enter svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .hero-dots {
+      position: absolute;
+      bottom: clamp(14px, 2.5vw, 26px);
+      right: clamp(16px, 3vw, 28px);
+      display: flex;
+      gap: 6px;
+      z-index: 5;
+    }
+
+    .hero-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .3);
+      cursor: pointer;
+      transition: background .3s, transform .3s;
+      touch-action: manipulation;
+    }
+
+    .hero-dot.active {
+      background: #fff;
+      transform: scale(1.5);
+    }
+
+    /* OVERLAY BASE */
+    .gallery-overlay,
+    .contact-overlay,
+    .about-overlay,
+    .series-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(24px);
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity .38s var(--ease), transform .38s var(--ease), background .4s, visibility 0s linear .38s;
+    }
+
+    .site-overlay.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      visibility: visible;
+      transition: opacity .38s var(--ease), transform .38s var(--ease), background .4s, visibility 0s linear 0s;
+    }
+
+    /* GALLERY */
+    .gallery-header,
+    .contact-header,
+    .about-header {
+      height: var(--h);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border);
+      transition: border-color .4s;
+      gap: 16px;
+    }
+
+    .g-back {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color .2s;
+      touch-action: manipulation;
+      padding: 8px 0;
+    }
+
+    .g-back:hover {
+      color: var(--fg);
+    }
+
+    .g-back svg {
+      width: 12px;
+      height: 12px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .g-header-name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin: 0 auto;
+    }
+
+    .gallery-wall {
+      flex: 1;
+      display: flex;
+      gap: 1px;
+      background: var(--border);
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      align-items: flex-start;
+      transition: background .4s;
+    }
+
+    .g-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .g-item {
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+      transition: background .4s;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0
+      }
+
+      100% {
+        background-position: 200% 0
+      }
+    }
+
+    .g-item.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite linear;
+    }
+
+    .g-item canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+      will-change: transform;
+      transform-origin: center;
+      transition: transform 1.1s var(--ease);
+    }
+
+    .g-item .g-hit {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      cursor: none;
+    }
+
+    @media(hover:hover) {
+      .g-item:hover canvas {
+        transform: scale(1.06);
+      }
+    }
+
+    .g-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      padding: 52px 18px 18px;
+      background: linear-gradient(to top, rgba(0, 0, 0, .68) 0%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .45s var(--ease), transform .45s var(--ease);
+      pointer-events: none;
+    }
+
+    @media(hover:hover) {
+      .g-item:hover .g-caption {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media(hover:none) {
+      .g-caption {
+        opacity: 1;
+        transform: translateY(0);
+        padding-bottom: 14px;
+      }
+    }
+
+    .g-caption-title {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      color: #fff;
+    }
+
+    .g-caption-index {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .2em;
+      color: rgba(255, 255, 255, .45);
+      text-transform: uppercase;
+    }
+
+    .series-bar {
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 20px;
+      border-top: 1px solid var(--border);
+      transition: border-color .4s;
+    }
+
+    .series-bar-title {
+      margin-right: auto;
+    }
+
+    .shuffle-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg2);
+      transition: color .2s, transform .4s;
+      touch-action: manipulation;
+      flex-shrink: 0;
+    }
+
+    .shuffle-btn:hover {
+      color: var(--fg);
+    }
+
+    .shuffle-btn.spinning {
+      transform: rotate(180deg);
+    }
+
+    .shuffle-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .series-bar-title {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--fg);
+    }
+
+    .series-bar-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .18em;
+      color: var(--fg2);
+      text-transform: uppercase;
+    }
+
+    @media(max-width:480px) {
+      .series-bar-meta {
+        display: none;
+      }
+    }
+
+    /* CONTACT */
+    .contact-overlay {
+      -webkit-user-select: text;
+      user-select: text;
+    }
+
+    .contact-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+
+    .contact-inner {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      border: 1px solid var(--border);
+      padding: 40px;
+      transition: border-color .4s;
+    }
+
+    .contact-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg2);
+      transition: color .2s;
+      touch-action: manipulation;
+    }
+
+    .contact-close:hover {
+      color: var(--fg);
+    }
+
+    .contact-close svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      margin-bottom: 32px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      transition: border-color .2s;
+    }
+
+    .form-field:focus-within {
+      border-bottom-color: var(--fg);
+    }
+
+    .form-field label {
+      font-family: 'Space Mono', monospace;
+      font-size: 7.5px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      transition: color .2s;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .form-field:focus-within label {
+      color: var(--fg);
+    }
+
+    .form-field input,
+    .form-field textarea {
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--fg);
+      width: 100%;
+      resize: none;
+      padding: 0;
+      -webkit-user-select: text;
+      user-select: text;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: var(--fg3);
+    }
+
+    .form-field textarea {
+      min-height: 100px;
+      line-height: 1.6;
+    }
+
+    .form-submit {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .form-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0;
+      transition: color .2s;
+      touch-action: manipulation;
+    }
+
+    .form-btn:hover {
+      color: var(--fg);
+    }
+
+    .form-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform .3s var(--ease);
+    }
+
+    .form-btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    .form-btn.loading svg {
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .form-status {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .form-status.visible {
+      opacity: 1;
+    }
+
+    .form-status.ok {
+      color: #4a9;
+    }
+
+    .form-status.err {
+      color: #c55;
+    }
+
+    /* ABOUT */
+    .about-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .about-photo {
+      width: 42%;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: #e8e4dc;
+      padding: clamp(16px, 3vw, 36px);
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .about-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(32px, 5vw, 72px) clamp(28px, 4vw, 64px);
+      overflow-y: auto;
+    }
+
+    .about-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      margin-bottom: 28px;
+    }
+
+    .about-name {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: .95;
+      color: var(--fg);
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+
+    .about-bio {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--fg2);
+      font-weight: 400;
+      max-width: 360px;
+      margin-bottom: 48px;
+      -webkit-user-select: text;
+      user-select: text;
+    }
+
+    .about-links {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .about-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      text-decoration: none;
+      transition: color .2s;
+      width: fit-content;
+    }
+
+    .about-link:hover {
+      color: var(--fg);
+    }
+
+    .about-link svg {
+      width: 12px;
+      height: 12px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    @media(max-width:700px) {
+      .about-body {
+        flex-direction: column;
+      }
+
+      .about-photo {
+        width: 100%;
+        height: 52vw;
+        min-height: 200px;
+        flex-shrink: 0;
+      }
+
+      .about-content {
+        padding: 32px 20px;
+      }
+    }
+
+    /* SERIES */
+    .series-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: clamp(24px, 4vw, 56px) clamp(20px, 4vw, var(--pp));
+    }
+
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .series-card {
+      cursor: pointer;
+      background: var(--fg3);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: opacity .2s;
+    }
+
+    .series-card:hover {
+      opacity: .85;
+    }
+
+    .series-card-cover {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .series-card-cover canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .series-card-info {
+      padding: 16px 18px;
+    }
+
+    .series-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      color: var(--fg);
+      margin-bottom: 4px;
+    }
+
+    .series-card-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--fg2);
+    }
+
+    @media(max-width:700px) {
+      .series-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .series-body {
+        padding: 16px var(--pp-mob);
+      }
+    }
+
+    /* LOAD BAR */
+    .load-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 9998;
+      background: transparent;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .load-bar.active::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 45%;
+      background: var(--fg);
+      opacity: .55;
+      animation: loadSlide 1.4s ease-in-out infinite;
+    }
+
+    @keyframes loadSlide {
+      0% {
+        left: -45%
+      }
+
+      100% {
+        left: 110%
+      }
+    }
+
+    /* CURSOR — nascosto su touch (pointer:coarse = dito), attivo solo su mouse (pointer:fine) */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity .18s;
+    }
+
+    .custom-cursor.visible {
+      opacity: 1;
+    }
+
+    .custom-cursor.pressed {
+      transform: translate(-50%, -50%) scale(.72);
+    }
+
+    @media(pointer:coarse) {
+      .custom-cursor {
+        display: none !important;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════
    PHOTOSWIPE — theme overrides to match site design
    ═══════════════════════════════════════════════════════ */
-.pswp { --pswp-bg: var(--bg); --pswp-placeholder-color: var(--border); --pswp-root-z-index: 800; }
-.pswp__bg { background: var(--bg); transition: background .4s; }
+    .pswp {
+      --pswp-bg: var(--bg);
+      --pswp-placeholder-color: var(--border);
+      --pswp-root-z-index: 800;
+    }
 
-/* Top bar */
-.pswp__top-bar { background: var(--bg); border-bottom: 1px solid var(--border); height: var(--h); }
-.pswp__button { color: var(--fg2); }
-.pswp__button:hover { color: var(--fg); }
-.pswp__button--close svg, .pswp__button--arrow svg { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.pswp__button--zoom { display: none; }
+    .pswp__bg {
+      background: var(--bg);
+      transition: background .4s;
+    }
 
-/* Counter */
-.pswp__counter { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .22em; color: var(--fg2); text-transform: uppercase; opacity: 1; top: 50%; transform: translateY(-50%); }
+    /* Top bar */
+    .pswp__top-bar {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      height: var(--h);
+    }
 
-/* Back button (left side of top bar) */
-.pswp__button--pswp-back { position: absolute; left: 0; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px; background: none; border: none; font-family: inherit; font-size: 9px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--fg2); cursor: pointer; padding: 0 20px; height: 100%; }
-.pswp__button--pswp-back:hover { color: var(--fg); }
-.pswp__button--pswp-back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .pswp__button {
+      color: var(--fg2);
+    }
 
-/* Arrows — always hidden; shown only in left/right hover zones via JS (.zone-active class)
+    .pswp__button:hover {
+      color: var(--fg);
+    }
+
+    .pswp__button--close svg,
+    .pswp__button--arrow svg {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .pswp__button--zoom {
+      display: none;
+    }
+
+    /* Counter */
+    .pswp__counter {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .22em;
+      color: var(--fg2);
+      text-transform: uppercase;
+      opacity: 1;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Back button (left side of top bar) */
+    .pswp__button--pswp-back {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      cursor: pointer;
+      padding: 0 20px;
+      height: 100%;
+    }
+
+    .pswp__button--pswp-back:hover {
+      color: var(--fg);
+    }
+
+    .pswp__button--pswp-back svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* Arrows — always hidden; shown only in left/right hover zones via JS (.zone-active class)
    !important needed to override PhotoSwipe's .pswp--has_mouse .pswp__button--arrow { opacity:.85 } */
-.pswp__button--arrow,
-.pswp--has_mouse .pswp__button--arrow { background: none !important; border: none !important; opacity: 0 !important; pointer-events: none !important; transition: opacity .2s; visibility: visible !important; }
-.pswp__button--arrow.zone-active,
-.pswp--has_mouse .pswp__button--arrow.zone-active { opacity: .45 !important; pointer-events: auto !important; }
-.pswp__button--arrow.zone-active:hover,
-.pswp--has_mouse .pswp__button--arrow.zone-active:hover { opacity: 1 !important; }
-/* pswp__icn: custom 50×50px chevron — shadow outline nascosta */
-.pswp__icn-shadow { display: none !important; }
-.pswp__button--arrow .pswp__icn { width: 50px !important; height: 50px !important; margin-top: -25px !important; left: 12px !important; color: var(--fg); }
-.pswp__button--arrow--next .pswp__icn { left: auto !important; right: 12px !important; transform: none !important; }
-@media(hover:none){ .pswp__button--arrow { display: none !important; } }
+    .pswp__button--arrow,
+    .pswp--has_mouse .pswp__button--arrow {
+      background: none !important;
+      border: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity .2s;
+      visibility: visible !important;
+    }
 
-/* Copyright — z-index: 0, sotto scroll-wrap (PhotoSwipe default z-index:1) → immagine zoommata lo copre */
-.pswp-copyright {
-  position: absolute; z-index: 0; pointer-events: none; opacity: 0;
-  font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: .18em;
-  color: var(--fg2); text-transform: uppercase; white-space: nowrap;
-  transition: opacity .25s;
-}
+    .pswp__button--arrow.zone-active,
+    .pswp--has_mouse .pswp__button--arrow.zone-active {
+      opacity: .45 !important;
+      pointer-events: auto !important;
+    }
 
-/* Caption bar */
-.pswp-caption {
-  position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
-  min-height: 52px; display: flex; align-items: center;
-  padding: 10px 20px; border-top: 1px solid var(--border);
-  gap: 24px; background: var(--bg); flex-wrap: wrap;
-  transition: background .4s, border-color .4s;
-}
-.pswp-cap-title { font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--fg); white-space: nowrap; flex-shrink: 0; }
-.pswp-cap-body  { display: flex; align-items: baseline; gap: 24px; flex: 1; min-width: 0; }
-.pswp-cap-desc  { font-size: 9px; line-height: 1.55; color: var(--fg2); font-style: italic; }
-.pswp-cap-meta  { font-family: 'Space Mono', monospace; font-size: 7.5px; letter-spacing: -0.02em; color: var(--fg3); text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
-@media(max-width:480px){ .pswp-cap-body{flex-direction:column;gap:4px;} }
-</style>
+    .pswp__button--arrow.zone-active:hover,
+    .pswp--has_mouse .pswp__button--arrow.zone-active:hover {
+      opacity: 1 !important;
+    }
+
+    /* pswp__icn: custom 50×50px chevron — shadow outline nascosta */
+    .pswp__icn-shadow {
+      display: none !important;
+    }
+
+    .pswp__button--arrow .pswp__icn {
+      width: 50px !important;
+      height: 50px !important;
+      margin-top: -25px !important;
+      left: 12px !important;
+      color: var(--fg);
+    }
+
+    .pswp__button--arrow--next .pswp__icn {
+      left: auto !important;
+      right: 12px !important;
+      transform: none !important;
+    }
+
+    @media(hover:none) {
+      .pswp__button--arrow {
+        display: none !important;
+      }
+    }
+
+    /* Copyright — z-index: 0, sotto scroll-wrap (PhotoSwipe default z-index:1) → immagine zoommata lo copre */
+    .pswp-copyright {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 7px;
+      letter-spacing: .18em;
+      color: var(--fg2);
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: opacity .25s;
+    }
+
+    /* Caption bar */
+    .pswp-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      border-top: 1px solid var(--border);
+      gap: 24px;
+      background: var(--bg);
+      flex-wrap: nowrap;
+      transition: background .4s, border-color .4s;
+    }
+
+    .pswp-cap-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--fg);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .pswp-cap-body {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pswp-cap-desc {
+      font-size: 9px;
+      line-height: 1.55;
+      color: var(--fg2);
+      font-style: italic;
+    }
+
+    .pswp-cap-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 7.5px;
+      letter-spacing: -0.02em;
+      color: var(--fg3);
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+
+  </style>
 </head>
+
 <body>
-<div class="load-bar" id="loadBar"></div>
-<div class="custom-cursor" id="customCursor"></div>
+  <div class="load-bar" id="loadBar"></div>
+  <div class="custom-cursor" id="customCursor"></div>
 
-<header id="mainHeader">
-  <button class="h-name" id="hName">Andrea Spinazzola</button>
-  <nav>
-    <a href="#work" id="navWork">Work</a>
-    <a href="#series" id="navSeries">Series</a>
-    <a href="#about" id="navAbout">About</a>
-    <a href="#contact" id="navContact">Contact</a>
-  </nav>
-  <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
-    <svg viewBox="0 0 18 13"><line x1="0" y1="1" x2="18" y2="1"/><line x1="0" y1="6.5" x2="18" y2="6.5"/><line x1="0" y1="12" x2="18" y2="12"/></svg>
-  </button>
-  <div class="h-right">
-    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
-      <svg id="themeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+  <header id="mainHeader">
+    <button class="h-name" id="hName">Andrea Spinazzola</button>
+    <nav>
+      <a href="#work" id="navWork">Work</a>
+      <a href="#series" id="navSeries">Series</a>
+      <a href="#about" id="navAbout">About</a>
+      <a href="#contact" id="navContact">Contact</a>
+    </nav>
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+      <svg viewBox="0 0 18 13">
+        <line x1="0" y1="1" x2="18" y2="1" />
+        <line x1="0" y1="6.5" x2="18" y2="6.5" />
+        <line x1="0" y1="12" x2="18" y2="12" />
+      </svg>
     </button>
-  </div>
-</header>
+    <div class="h-right">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+        <svg id="themeIcon" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4" />
+          <line x1="12" y1="2" x2="12" y2="5" />
+          <line x1="12" y1="19" x2="12" y2="22" />
+          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" />
+          <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" />
+          <line x1="2" y1="12" x2="5" y2="12" />
+          <line x1="19" y1="12" x2="22" y2="12" />
+          <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" />
+          <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" />
+        </svg>
+      </button>
+    </div>
+  </header>
 
-<div class="mob-menu" id="mobMenu">
-  <button class="mob-menu-close" id="mobMenuClose" aria-label="Close menu">
-    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
-  <nav class="mob-nav">
-    <a href="#work"    id="mobWork">Work</a>
-    <a href="#series"  id="mobSeries">Series</a>
-    <a href="#about"   id="mobAbout">About</a>
-    <a href="#contact" id="mobContact">Contact</a>
-  </nav>
-</div>
-
-<div class="hero" id="heroSection">
-  <canvas id="hero-canvas-b"></canvas>
-  <canvas id="hero-canvas"></canvas>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-series" id="heroSeries">Series I &mdash; Faces &middot; AI Generative &middot; 2024</div>
-    <div class="hero-title" id="heroTitle">Human Frequency</div>
-    <button class="hero-enter" id="heroEnter">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-      View Series
+  <div class="mob-menu" id="mobMenu">
+    <button class="mob-menu-close" id="mobMenuClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
     </button>
+    <nav class="mob-nav">
+      <a href="#work" id="mobWork">Work</a>
+      <a href="#series" id="mobSeries">Series</a>
+      <a href="#about" id="mobAbout">About</a>
+      <a href="#contact" id="mobContact">Contact</a>
+    </nav>
   </div>
-  <div class="hero-dots" id="heroDots"></div>
-</div>
 
-<div class="gallery-overlay site-overlay" id="galleryOverlay">
-  <div class="gallery-header">
-    <button class="g-back" id="galleryBack" aria-label="Back to home"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
-    <div class="g-header-name">Andrea Spinazzola</div>
-    <div style="width:60px"></div>
+  <div class="hero" id="heroSection">
+    <canvas id="hero-canvas-b"></canvas>
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-series" id="heroSeries">Series I &mdash; Faces &middot; AI Generative &middot; 2024</div>
+      <div class="hero-title" id="heroTitle">Human Frequency</div>
+      <button class="hero-enter" id="heroEnter">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="1" />
+          <line x1="9" y1="3" x2="9" y2="21" />
+        </svg>
+        View Series
+      </button>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
   </div>
-  <div class="gallery-wall" id="galleryWall"></div>
-  <div class="series-bar">
-    <span class="series-bar-title" id="seriesBarTitle">Amerika</span>
-    <span class="series-bar-meta" id="seriesBarMeta">Human Frequency &middot; 2026</span>
-    <button class="shuffle-btn" id="shuffleBtn" aria-label="Shuffle layout">
-      <svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 3)"><path d="m4.501 8.5-3.001 3 3.001 3"/><path d="m12.5 6.5v2c0 1.6568542-1.3431458 3-3 3h-8"/><path d="m8.499 6.5 3.001-3-3.001-3"/><path d="m.5 8.5v-2c0-1.65685425 1.34314575-3 3-3h8"/></g></svg>
-    </button>
-  </div>
-</div>
 
-<div class="contact-overlay site-overlay" id="contactOverlay">
-  <div class="contact-header">
-    <div style="width:60px"></div>
-    <div class="g-header-name">Andrea Spinazzola</div>
-    <div style="width:60px"></div>
-  </div>
-  <div class="contact-body">
-    <div class="contact-inner">
-      <button class="contact-close" id="contactBack" aria-label="Close contact"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      <div class="contact-label">Get in touch</div>
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="form-field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" placeholder="Your name" autocomplete="name" required></div>
-        <div class="form-field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required></div>
-        <div class="form-field"><label for="cf-message">Message</label><textarea id="cf-message" name="message" placeholder="Write your message&hellip;" required></textarea></div>
-        <div class="form-submit">
-          <button class="form-btn" id="formSubmitBtn" type="submit">Send<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-          <span class="form-status" id="formStatus"></span>
-        </div>
-      </form>
+  <div class="gallery-overlay site-overlay" id="galleryOverlay">
+    <div class="gallery-header">
+      <button class="g-back" id="galleryBack" aria-label="Back to home"><svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>Back</button>
+      <div class="g-header-name">Andrea Spinazzola</div>
+      <div style="width:60px"></div>
+    </div>
+    <div class="gallery-wall" id="galleryWall"></div>
+    <div class="series-bar">
+      <span class="series-bar-title" id="seriesBarTitle">Amerika</span>
+      <span class="series-bar-meta" id="seriesBarMeta">Human Frequency &middot; 2026</span>
+      <button class="shuffle-btn" id="shuffleBtn" aria-label="Shuffle layout">
+        <svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            transform="translate(4 3)">
+            <path d="m4.501 8.5-3.001 3 3.001 3" />
+            <path d="m12.5 6.5v2c0 1.6568542-1.3431458 3-3 3h-8" />
+            <path d="m8.499 6.5 3.001-3-3.001-3" />
+            <path d="m.5 8.5v-2c0-1.65685425 1.34314575-3 3-3h8" />
+          </g>
+        </svg>
+      </button>
     </div>
   </div>
-</div>
 
-<div class="about-overlay site-overlay" id="aboutOverlay">
-  <div class="about-header">
-    <button class="g-back" id="aboutBack" aria-label="Back to home"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
-    <div class="g-header-name">Andrea Spinazzola</div>
-    <div style="width:60px"></div>
-  </div>
-  <div class="about-body">
-    <div class="about-photo">
-      <img id="aboutPhoto" src="images/AS_BW_PORTRAIT_02.png" alt="Andrea Spinazzola">
+  <div class="contact-overlay site-overlay" id="contactOverlay">
+    <div class="contact-header">
+      <div style="width:60px"></div>
+      <div class="g-header-name">Andrea Spinazzola</div>
+      <div style="width:60px"></div>
     </div>
-    <div class="about-content">
-      <div class="about-label">About the artist</div>
-      <div class="about-name" id="aboutName">Andrea<br>Spinazzola</div>
-      <p class="about-bio" id="aboutBio">Visual artist. Documenting the human frequency across the Americas — presence, memory and the invisible lines connecting individuals within collective landscapes.</p>
-      <div class="about-links">
-        <a class="about-link" id="aboutInstagram" href="https://instagram.com" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
-          <span id="aboutInstagramHandle">Instagram</span>
-        </a>
-        <a class="about-link" id="aboutLinkedin" href="https://linkedin.com" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="11" x2="8" y2="17"/><line x1="8" y1="8" x2="8" y2="8.5"/><path d="M12 17v-4c0-1.1.9-2 2-2s2 .9 2 2v4"/><line x1="12" y1="11" x2="12" y2="17"/></svg>
-          <span id="aboutLinkedinHandle">LinkedIn</span>
-        </a>
+    <div class="contact-body">
+      <div class="contact-inner">
+        <button class="contact-close" id="contactBack" aria-label="Close contact"><svg viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg></button>
+        <div class="contact-label">Get in touch</div>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text"
+              placeholder="Your name" autocomplete="name" required></div>
+          <div class="form-field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email"
+              placeholder="your@email.com" autocomplete="email" required></div>
+          <div class="form-field"><label for="cf-message">Message</label><textarea id="cf-message" name="message"
+              placeholder="Write your message&hellip;" required></textarea></div>
+          <div class="form-submit">
+            <button class="form-btn" id="formSubmitBtn" type="submit">Send<svg viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></button>
+            <span class="form-status" id="formStatus"></span>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-</div>
 
-<div class="series-overlay site-overlay" id="seriesOverlay">
-  <div class="gallery-header">
-    <button class="g-back" id="seriesBack" aria-label="Back to home"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
-    <div class="g-header-name">Andrea Spinazzola</div>
-    <div style="width:60px"></div>
+  <div class="about-overlay site-overlay" id="aboutOverlay">
+    <div class="about-header">
+      <button class="g-back" id="aboutBack" aria-label="Back to home"><svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>Back</button>
+      <div class="g-header-name">Andrea Spinazzola</div>
+      <div style="width:60px"></div>
+    </div>
+    <div class="about-body">
+      <div class="about-photo">
+        <img id="aboutPhoto" src="images/AS_BW_PORTRAIT_02.png" alt="Andrea Spinazzola">
+      </div>
+      <div class="about-content">
+        <div class="about-label">About the artist</div>
+        <div class="about-name" id="aboutName">Andrea<br>Spinazzola</div>
+        <p class="about-bio" id="aboutBio">Visual artist. Documenting the human frequency across the Americas —
+          presence, memory and the invisible lines connecting individuals within collective landscapes.</p>
+        <div class="about-links">
+          <a class="about-link" id="aboutInstagram" href="https://instagram.com" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="5" />
+              <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none" />
+            </svg>
+            <span id="aboutInstagramHandle">Instagram</span>
+          </a>
+          <a class="about-link" id="aboutLinkedin" href="https://linkedin.com" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="3" />
+              <line x1="8" y1="11" x2="8" y2="17" />
+              <line x1="8" y1="8" x2="8" y2="8.5" />
+              <path d="M12 17v-4c0-1.1.9-2 2-2s2 .9 2 2v4" />
+              <line x1="12" y1="11" x2="12" y2="17" />
+            </svg>
+            <span id="aboutLinkedinHandle">LinkedIn</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="series-body">
-    <div class="series-grid" id="seriesGrid"></div>
+
+  <div class="series-overlay site-overlay" id="seriesOverlay">
+    <div class="gallery-header">
+      <button class="g-back" id="seriesBack" aria-label="Back to home"><svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>Back</button>
+      <div class="g-header-name">Andrea Spinazzola</div>
+      <div style="width:60px"></div>
+    </div>
+    <div class="series-body">
+      <div class="series-grid" id="seriesGrid"></div>
+    </div>
   </div>
-</div>
 
-<script src="lib/photoswipe.umd.min.js"></script>
-<script>
+  <script src="lib/photoswipe.umd.min.js"></script>
+  <script>
 
-let IMAGES       = [];   // current series images metadata
-let loadedImgs   = [];   // full-size Image objects (for hero + museum)
-let thumbImgs    = [];   // thumbnail Image objects (for gallery grid)
-let SERIES_DATA  = [];   // all series from manifest
-let SITE_DATA    = {};   // site-level data from manifest (name, project, hero)
-let currentSeriesId = null;
+    let IMAGES = [];   // current series images metadata
+    let loadedImgs = [];   // full-size Image objects (for hero + museum)
+    let thumbImgs = [];   // thumbnail Image objects (for gallery grid)
+    let SERIES_DATA = [];   // all series from manifest
+    let SITE_DATA = {};   // site-level data from manifest (name, project, hero)
+    let currentSeriesId = null;
 
 
-// PROTECTION
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('dragstart',   e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  const k = e.key.toLowerCase();
-  if ((e.ctrlKey||e.metaKey) && ['s','u','p'].includes(k)) e.preventDefault();
-  if ((e.ctrlKey||e.metaKey) && e.shiftKey && ['i','j','c'].includes(k)) e.preventDefault();
-  if (['F12','PrintScreen'].includes(e.key)) e.preventDefault();
-});
-
-// THEME
-const html = document.documentElement;
-const themeBtn  = document.getElementById('themeBtn');
-const themeIcon = document.getElementById('themeIcon');
-const SUN  = '<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>';
-const MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-// Sync icon with saved theme on init
-themeIcon.innerHTML = html.dataset.theme === 'dark' ? MOON : SUN;
-themeBtn.addEventListener('click', () => {
-  const dark = html.dataset.theme === 'dark';
-  html.dataset.theme = dark ? 'light' : 'dark';
-  localStorage.setItem('theme', dark ? 'light' : 'dark');
-  themeIcon.innerHTML = dark ? SUN : MOON;
-  updateCursorColor();
-});
-
-// CURSOR — attivo solo su dispositivi con mouse (pointer:fine), non su touch
-const HAS_MOUSE = window.matchMedia('(pointer: fine)').matches;
-const cursor = document.getElementById('customCursor');
-function buildCursor(color) {
-  const dpr = Math.max(window.devicePixelRatio || 1, 2);
-  const cv = document.createElement('canvas');
-  const px = 40 * dpr; cv.width = cv.height = px;
-  const ctx = cv.getContext('2d'), cx = px / 2;
-  ctx.clearRect(0, 0, px, px);
-  ctx.beginPath(); ctx.arc(cx, cx, 13 * dpr, 0, Math.PI * 2);
-  ctx.strokeStyle = color; ctx.lineWidth = 1.1 * dpr; ctx.stroke();
-  ctx.beginPath(); ctx.arc(cx, cx, 2.6 * dpr, 0, Math.PI * 2);
-  ctx.fillStyle = color; ctx.fill();
-  return cv.toDataURL('image/png');
-}
-function updateCursorColor() {
-  const c = html.dataset.theme === 'dark' ? 'rgba(239,239,239,0.9)' : 'rgba(17,17,17,0.85)';
-  cursor.style.backgroundImage = 'url(' + buildCursor(c) + ')';
-  cursor.style.backgroundSize = '100% 100%';
-}
-function cursorEnter(x, y) { cursor.style.left = x+'px'; cursor.style.top = y+'px'; cursor.classList.add('visible'); }
-function cursorMove(x, y)  { cursor.style.left = x+'px'; cursor.style.top = y+'px'; }
-function cursorLeave()     { cursor.classList.remove('visible'); }
-updateCursorColor();
-
-// HERO
-const heroCanvasA = document.getElementById('hero-canvas');
-const heroCanvasB = document.getElementById('hero-canvas-b');
-const heroDots    = document.getElementById('heroDots');
-let heroIdx = 0, heroTimer = null;
-
-function drawHero(cv, img) {
-  cv.width = window.innerWidth; cv.height = window.innerHeight;
-  const ctx = cv.getContext('2d');
-  const s = Math.max(cv.width/img.naturalWidth, cv.height/img.naturalHeight);
-  const sw = img.naturalWidth*s, sh = img.naturalHeight*s;
-  ctx.clearRect(0,0,cv.width,cv.height);
-  ctx.drawImage(img, (cv.width-sw)/2, (cv.height-sh)/2, sw, sh);
-}
-function buildHeroDots() {
-  heroDots.innerHTML = '';
-  IMAGES.forEach((_,i) => {
-    const d = document.createElement('div');
-    d.className = 'hero-dot'+(i===0?' active':'');
-    d.addEventListener('click', () => goToSlide(i));
-    heroDots.appendChild(d);
-  });
-}
-function updateDots() {
-  heroDots.querySelectorAll('.hero-dot').forEach((d,i) => d.classList.toggle('active', i===heroIdx));
-}
-function goToSlide(idx) {
-  if (idx===heroIdx) return;
-  heroIdx = idx;
-  const next = loadedImgs[idx];
-  ensureImg(idx);
-  // Silently preload the one after
-  ensureImg((idx+1) % IMAGES.length);
-  const go = () => {
-    drawHero(heroCanvasB, next);
-    heroCanvasB.style.transition = 'none'; heroCanvasB.style.opacity = '0';
-    requestAnimationFrame(() => {
-      heroCanvasB.style.transition = 'opacity 1.2s ease'; heroCanvasB.style.opacity = '1';
-      setTimeout(() => {
-        drawHero(heroCanvasA, next);
-        heroCanvasB.style.transition = 'none'; heroCanvasB.style.opacity = '0';
-        updateDots();
-      }, 1250);
+    // PROTECTION
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      const k = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && ['s', 'u', 'p'].includes(k)) e.preventDefault();
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i', 'j', 'c'].includes(k)) e.preventDefault();
+      if (['F12', 'PrintScreen'].includes(e.key)) e.preventDefault();
     });
-  };
-  if (next.naturalWidth) go(); else next.addEventListener('load', go, {once:true});
-}
-function startTimer() { clearInterval(heroTimer); if (IMAGES.length <= 1) return; heroTimer = setInterval(() => goToSlide((heroIdx+1)%IMAGES.length), 5000); }
-function initHero() {
-  const img = loadedImgs[0];
-  if (img.naturalWidth) drawHero(heroCanvasA, img); else img.addEventListener('load', () => drawHero(heroCanvasA, img), {once:true});
-  updateDots(); startTimer();
-}
-let _heroResizeTimer;
-window.addEventListener('resize', () => { clearTimeout(_heroResizeTimer); _heroResizeTimer = setTimeout(() => { if (loadedImgs.length) drawHero(heroCanvasA, loadedImgs[heroIdx]); }, 150); });
 
-// Hero touch swipe
-let _heroTouchX = 0;
-document.getElementById('heroSection').addEventListener('touchstart', e => { _heroTouchX = e.touches[0].clientX; }, {passive:true});
-document.getElementById('heroSection').addEventListener('touchend', e => {
-  if (IMAGES.length <= 1) return;
-  const dx = e.changedTouches[0].clientX - _heroTouchX;
-  if (Math.abs(dx) > 50) dx < 0 ? goToSlide((heroIdx+1)%IMAGES.length) : goToSlide((heroIdx-1+IMAGES.length)%IMAGES.length);
-}, {passive:true});
+    // THEME
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const SUN = '<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>';
+    const MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    // Sync icon with saved theme on init
+    themeIcon.innerHTML = html.dataset.theme === 'dark' ? MOON : SUN;
+    themeBtn.addEventListener('click', () => {
+      const dark = html.dataset.theme === 'dark';
+      html.dataset.theme = dark ? 'light' : 'dark';
+      localStorage.setItem('theme', dark ? 'light' : 'dark');
+      themeIcon.innerHTML = dark ? SUN : MOON;
+      updateCursorColor();
+    });
 
-// GALLERY
-const mainHeader  = document.getElementById('mainHeader');
-const galleryWall = document.getElementById('galleryWall');
-
-// ── Navigation — pure JS, no CSS :target ────────────
-const NAV_OVERLAYS = {
-  work:    document.getElementById('galleryOverlay'),
-  series:  document.getElementById('seriesOverlay'),
-  about:   document.getElementById('aboutOverlay'),
-  contact: document.getElementById('contactOverlay'),
-};
-const NAV_LINKS = {
-  work:    document.getElementById('navWork'),
-  series:  document.getElementById('navSeries'),
-  about:   document.getElementById('navAbout'),
-  contact: document.getElementById('navContact'),
-};
-const MOB_LINKS = {
-  work:    document.getElementById('mobWork'),
-  series:  document.getElementById('mobSeries'),
-  about:   document.getElementById('mobAbout'),
-  contact: document.getElementById('mobContact'),
-};
-
-function setSection(section) {
-  closeMuseum();
-  // Close all overlays
-  Object.values(NAV_OVERLAYS).forEach(el => el.classList.remove('active'));
-  Object.values(NAV_LINKS).forEach(el => el.classList.remove('active'));
-  Object.values(MOB_LINKS).forEach(el => el.classList.remove('mob-active'));
-
-  if (section && NAV_OVERLAYS[section]) {
-    NAV_OVERLAYS[section].classList.add('active');
-    NAV_LINKS[section].classList.add('active');
-    MOB_LINKS[section].classList.add('mob-active');
-    mainHeader.classList.add('solid');
-    clearInterval(heroTimer);
-    // Only build grid on first open — shuffle button handles rebuilds
-    if (section === 'work'   && galleryWall.children.length === 0) buildGalleryGrid();
-    if (section === 'series' && document.getElementById('seriesGrid').children.length === 0) buildSeriesGrid();
-  } else {
-    mainHeader.classList.remove('solid');
-    startTimer();
-  }
-}
-
-function navigateTo(section) {
-  document.getElementById('mobMenu').classList.remove('open');
-  history.pushState({ section: section || null }, '', section ? '#' + section : location.pathname);
-  setSection(section);
-}
-
-function goHome() {
-  closeMuseum();
-  navigateTo(null);
-}
-
-// Browser back / forward
-window.addEventListener('popstate', function(e) {
-  const section = (e.state && e.state.section) ? e.state.section
-                : (location.hash ? location.hash.slice(1) : null);
-  // Map old hash names to new section keys (backwards compat)
-  const legacyMap = { galleryOverlay:'work', seriesOverlay:'series', aboutOverlay:'about', contactOverlay:'contact' };
-  setSection(legacyMap[section] || section || null);
-});
-
-// Nav link clicks
-document.getElementById('navWork').addEventListener('click',    e => { e.preventDefault(); navigateTo('work'); });
-document.getElementById('navSeries').addEventListener('click',  e => { e.preventDefault(); navigateTo('series'); });
-document.getElementById('navAbout').addEventListener('click',   e => { e.preventDefault(); navigateTo('about'); });
-document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); navigateTo('contact'); });
-
-document.getElementById('heroEnter').addEventListener('click', () => navigateTo('work'));
-
-// ── Mobile menu ──────────────────────────────────
-const mobMenu      = document.getElementById('mobMenu');
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-document.getElementById('mobMenuClose').addEventListener('click', () => mobMenu.classList.remove('open'));
-hamburgerBtn.addEventListener('click', () => mobMenu.classList.toggle('open'));
-Object.entries(MOB_LINKS).forEach(([section, el]) => {
-  el.addEventListener('click', e => { e.preventDefault(); navigateTo(section); });
-});
-document.getElementById('galleryBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
-document.getElementById('seriesBack').addEventListener('click',  e => { e.preventDefault(); goHome(); });
-document.getElementById('hName').addEventListener('click', goHome);
-
-// Restore section on initial load (from URL hash)
-(function() {
-  const h = location.hash.slice(1);
-  const legacyMap = { galleryOverlay:'work', seriesOverlay:'series', aboutOverlay:'about', contactOverlay:'contact' };
-  const section = legacyMap[h] || (NAV_OVERLAYS[h] ? h : null);
-  if (section) {
-    history.replaceState({ section }, '', '#' + section);
-    setSection(section);
-  } else {
-    history.replaceState({ section: null }, '', location.pathname);
-  }
-})();
-
-document.getElementById('shuffleBtn').addEventListener('click', () => {
-  const btn = document.getElementById('shuffleBtn');
-  btn.classList.add('spinning');
-  setTimeout(() => btn.classList.remove('spinning'), 400);
-  buildGalleryGrid();
-});
-
-// Track observers so we can disconnect them before rebuilding
-let _galleryResizeObs = [];
-let _galleryIntersectObs = [];
-
-function buildGalleryGrid() {
-  // Disconnect all old observers before wiping DOM
-  _galleryResizeObs.forEach(o => o.disconnect());
-  _galleryIntersectObs.forEach(o => o.disconnect());
-  _galleryResizeObs = [];
-  _galleryIntersectObs = [];
-  galleryWall.innerHTML = '';
-  const isMobile = window.innerWidth < 700;
-  const NUM_COLS  = isMobile ? 2 : 3;
-  const HEIGHTS   = isMobile ? [180, 260, 360] : [220, 320, 440];
-
-  // Create columns
-  const colEls     = [];
-  const colHeights = new Array(NUM_COLS).fill(0);
-  for (let c = 0; c < NUM_COLS; c++) {
-    const col = document.createElement('div'); col.className = 'g-col';
-    galleryWall.appendChild(col);
-    colEls.push(col);
-  }
-
-  // Shuffle a copy preserving original index for museum navigation
-  const shuffled = IMAGES.map((d,i) => ({...d, origIdx:i})).sort(() => Math.random() - 0.5);
-
-  shuffled.forEach(data => {
-    const h   = HEIGHTS[Math.floor(Math.random() * HEIGHTS.length)];
-    const col = colHeights.indexOf(Math.min(...colHeights));
-    colHeights[col] += h + 1;
-
-    const item = document.createElement('div'); item.className = 'g-item loading'; item.style.height = h + 'px';
-    const cv   = document.createElement('canvas');
-    const cap  = document.createElement('div'); cap.className = 'g-caption';
-    const capTitle = document.createElement('span'); capTitle.className = 'g-caption-title'; capTitle.textContent = data.title;
-    const capIdx   = document.createElement('span'); capIdx.className   = 'g-caption-index'; capIdx.textContent   = 'No.'+String(data.origIdx+1).padStart(2,'0');
-    cap.appendChild(capTitle); cap.appendChild(capIdx);
-    const hit = document.createElement('div'); hit.className = 'g-hit';
-    item.appendChild(cv); item.appendChild(cap); item.appendChild(hit);
-    colEls[col].appendChild(item);
-
-    if (HAS_MOUSE) {
-      hit.addEventListener('mousemove',  e => cursorMove(e.clientX, e.clientY));
-      hit.addEventListener('mouseenter', e => cursorEnter(e.clientX, e.clientY));
-      hit.addEventListener('mouseleave', cursorLeave);
-      hit.addEventListener('mousedown',  () => cursor.classList.add('pressed'));
-      hit.addEventListener('mouseup',    () => cursor.classList.remove('pressed'));
+    // CURSOR — attivo solo su dispositivi con mouse (pointer:fine), non su touch
+    const HAS_MOUSE = window.matchMedia('(pointer: fine)').matches;
+    const cursor = document.getElementById('customCursor');
+    function buildCursor(color) {
+      const dpr = Math.max(window.devicePixelRatio || 1, 2);
+      const cv = document.createElement('canvas');
+      const px = 40 * dpr; cv.width = cv.height = px;
+      const ctx = cv.getContext('2d'), cx = px / 2;
+      ctx.clearRect(0, 0, px, px);
+      ctx.beginPath(); ctx.arc(cx, cx, 13 * dpr, 0, Math.PI * 2);
+      ctx.strokeStyle = color; ctx.lineWidth = 1.1 * dpr; ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cx, 2.6 * dpr, 0, Math.PI * 2);
+      ctx.fillStyle = color; ctx.fill();
+      return cv.toDataURL('image/png');
     }
-    hit.addEventListener('click',      () => openMuseum(data.origIdx));
+    function updateCursorColor() {
+      const c = html.dataset.theme === 'dark' ? 'rgba(239,239,239,0.9)' : 'rgba(17,17,17,0.85)';
+      cursor.style.backgroundImage = 'url(' + buildCursor(c) + ')';
+      cursor.style.backgroundSize = '100% 100%';
+    }
+    function cursorEnter(x, y) { cursor.style.left = x + 'px'; cursor.style.top = y + 'px'; cursor.classList.add('visible'); }
+    function cursorMove(x, y) { cursor.style.left = x + 'px'; cursor.style.top = y + 'px'; }
+    function cursorLeave() { cursor.classList.remove('visible'); }
+    updateCursorColor();
 
-    const ii = data.origIdx;
-    const paint = () => {
-      const img = thumbImgs[ii];
-      if (!item.clientWidth || !item.clientHeight || !img.naturalWidth) return;
-      cv.width = item.clientWidth; cv.height = item.clientHeight;
+    // HERO
+    const heroCanvasA = document.getElementById('hero-canvas');
+    const heroCanvasB = document.getElementById('hero-canvas-b');
+    const heroDots = document.getElementById('heroDots');
+    let heroIdx = 0, heroTimer = null;
+
+    function drawHero(cv, img) {
+      cv.width = window.innerWidth; cv.height = window.innerHeight;
       const ctx = cv.getContext('2d');
-      const s = Math.max(cv.width/img.naturalWidth, cv.height/img.naturalHeight);
-      const sw = img.naturalWidth*s, sh = img.naturalHeight*s;
-      ctx.clearRect(0,0,cv.width,cv.height);
-      ctx.drawImage(img, (cv.width-sw)/2, (cv.height-sh)/2, sw, sh);
-      item.classList.remove('loading');
-    };
-    const ro = new ResizeObserver(paint);
-    ro.observe(item);
-    _galleryResizeObs.push(ro);
-    const io = new IntersectionObserver((entries, obs) => {
-      if (!entries[0].isIntersecting) return;
-      obs.unobserve(item);
-      ensureThumb(ii, paint);
-    }, { root: galleryWall, rootMargin: '300px 0px' });
-    io.observe(item);
-    _galleryIntersectObs.push(io);
-  });
-}
-
-// ═══════════════════════════════════════════════════
-// MUSEUM — PhotoSwipe v5
-// ═══════════════════════════════════════════════════
-let pswp = null;
-
-// Calcola passepartout: gap visivo uguale su tutti e 4 i lati.
-// PhotoSwipe v5 vuole un oggetto plain {top,bottom,left,right}, non una funzione.
-// Top bar = 48px, caption = 52px → sommate così il gap visivo (tra barre e immagine) rimane P su tutti i lati.
-function calcPswpPadding() {
-  const vw = window.innerWidth;
-  // ~3% → circa 43px su 1440px; minimo 20px su mobile
-  const p  = vw >= 768 ? Math.round(vw * 0.03) : 20;
-  return { top: p + 48, bottom: p + 52, left: p, right: p };
-}
-
-function openMuseum(idx) {
-  if (pswp) pswp.close();
-
-  // Usa aspect ratio della thumbnail (già caricata) + larghezza stimata full-res 3000px
-  const items = IMAGES.map((img, i) => {
-    const t = thumbImgs[i];
-    const aspect = (t && t.naturalWidth) ? t.naturalHeight / t.naturalWidth : 2/3;
-    return { src: img.src, msrc: img.thumb, width: 3000, height: Math.round(3000 * aspect) };
-  });
-
-  pswp = new PhotoSwipe({
-    dataSource: items,
-    index: idx,
-    bgOpacity: 1,
-    loop: true,
-    spacing: 0.08,
-    closeOnVerticalDrag: false,
-    pinchToClose: false,
-    wheelToZoom: true,
-    tapAction: 'zoom',
-    doubleTapAction: 'zoom',
-    padding: calcPswpPadding(),
-    secondaryZoomLevel: 1,   // 100% = pixel originali
-    maxZoomLevel: 2,
-    returnFocus: false,
-    // Opzione corretta: arrowPrevSVG / arrowNextSVG con tag <svg> completo (non arrowPrevSVGString)
-    arrowPrevSVG: '<svg aria-hidden="true" class="pswp__icn" viewBox="0 0 32 32" width="32" height="32"><polyline points="21 6 11 16 21 26" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    arrowNextSVG: '<svg aria-hidden="true" class="pswp__icn" viewBox="0 0 32 32" width="32" height="32"><polyline points="11 6 21 16 11 26" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  });
-
-  pswp.on('uiRegister', () => {
-    // Back button
-    pswp.ui.registerElement({
-      name: 'pswp-back',
-      order: 1,
-      isButton: true,
-      tagName: 'button',
-      html: '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back',
-      className: 'pswp__button--pswp-back',
-      onClick: () => pswp.close(),
-    });
-
-    // Caption bar
-    pswp.ui.registerElement({
-      name: 'pswp-caption',
-      order: 9,
-      isButton: false,
-      appendTo: 'root',
-      html: '<div class="pswp-caption"><span class="pswp-cap-title"></span><div class="pswp-cap-body"><span class="pswp-cap-desc"></span><span class="pswp-cap-meta"></span></div></div>',
-      onInit: (el) => {
-        const update = () => {
-          const img = IMAGES[pswp.currIndex];
-          if (!img) return;
-          el.querySelector('.pswp-cap-title').textContent = img.title || '';
-          el.querySelector('.pswp-cap-desc').textContent  = img.desc  || '';
-          el.querySelector('.pswp-cap-meta').textContent  = img.meta  || '';
-        };
-        pswp.on('change', update);
-        pswp.on('afterInit', update);
-      },
-    });
-
-    // Copyright — elemento con classe diretta su el, posizionato sotto il bordo inferiore-sinistro dell'immagine
-    pswp.ui.registerElement({
-      name: 'pswp-copyright',
-      order: 8,
-      isButton: false,
-      appendTo: 'root',
-      className: 'pswp-copyright',   // classe applicata direttamente su el → position:absolute funziona
-      html: '© Andrea Spinazzola',
-      onInit: (el) => {
-        // Sposta il copyright PRIMA dello scroll-wrap nel DOM → l'immagine (dopo) è naturalmente sopra
-        const sw = pswp.element.querySelector('.pswp__scroll-wrap');
-        if (sw) pswp.element.insertBefore(el, sw);
-
-        const updateCopyright = () => {
-          if (!pswp || !pswp.currSlide) return;
-          // Hide when zoomed in — image pans around and copyright has no fixed anchor
-          const fitLevel = pswp.currSlide.zoomLevels ? pswp.currSlide.zoomLevels.initial : 0;
-          if (pswp.currSlide.currZoomLevel > fitLevel + 0.01) {
-            el.style.opacity = '0';
-            return;
-          }
-          // Position at bottom-left of image in fit-zoom state
-          const vw = pswp.viewportSize.x, vh = pswp.viewportSize.y;
-          const pad = calcPswpPadding();
-          const availW = vw - pad.left - pad.right;
-          const availH = vh - pad.top  - pad.bottom;
-          const iw = pswp.currSlide.data.width  || 3000;
-          const ih = pswp.currSlide.data.height || 2000;
-          const scale     = Math.min(availW / iw, availH / ih);
-          const imgLeft   = pad.left + (availW - iw * scale) / 2;
-          const imgBottom = pad.top  + (availH - ih * scale) / 2 + ih * scale;
-          el.style.left    = Math.round(imgLeft) + 'px';
-          el.style.top     = Math.round(imgBottom + 6) + 'px';
-          el.style.opacity = '0.45';
-        };
-        pswp.on('afterInit',    updateCopyright);
-        pswp.on('change',       updateCopyright);
-        pswp.on('resize',       updateCopyright);
-        pswp.on('zoomPanUpdate', updateCopyright);
-      },
-    });
-  });
-
-  // Frecce: compaiono solo nelle zone sinistra/destra al passaggio del mouse
-  pswp.on('afterInit', () => {
-    const el = pswp.element;
-    const prev = el.querySelector('.pswp__button--arrow--prev');
-    const next = el.querySelector('.pswp__button--arrow--next');
-    let zoneTimer;
-    el.addEventListener('mousemove', e => {
-      clearTimeout(zoneTimer);
-      const x = e.clientX, w = window.innerWidth;
-      prev && prev.classList.toggle('zone-active', x < w * 0.22);
-      next && next.classList.toggle('zone-active', x > w * 0.78);
-      zoneTimer = setTimeout(() => {
-        prev && prev.classList.remove('zone-active');
-        next && next.classList.remove('zone-active');
-      }, 2500);
-    });
-    el.addEventListener('mouseleave', () => {
-      clearTimeout(zoneTimer);
-      prev && prev.classList.remove('zone-active');
-      next && next.classList.remove('zone-active');
-    });
-  });
-
-  pswp.on('destroy', () => {
-    pswp = null;
-    document.getElementById('hamburgerBtn').classList.remove('hidden');
-  });
-
-  document.getElementById('hamburgerBtn').classList.add('hidden');
-  document.getElementById('mobMenu').classList.remove('open');
-  pswp.init();
-}
-
-function closeMuseum() {
-  if (pswp) pswp.close();
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    if (document.getElementById('mobMenu').classList.contains('open')) { document.getElementById('mobMenu').classList.remove('open'); return; }
-    if (pswp) return; // PhotoSwipe handles its own Escape
-    if (location.hash) { goHome(); return; }
-  }
-});
-
-// ABOUT
-document.getElementById('aboutBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
-
-// CONTACT
-const contactForm   = document.getElementById('contactForm');
-const formSubmitBtn = document.getElementById('formSubmitBtn');
-const formStatus    = document.getElementById('formStatus');
-document.getElementById('contactBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
-
-contactForm.addEventListener('submit', async e => {
-  e.preventDefault();
-  const name    = document.getElementById('cf-name').value.trim();
-  const email   = document.getElementById('cf-email').value.trim();
-  const message = document.getElementById('cf-message').value.trim();
-  if (!name||!email||!message){ setStatus('Please fill in all fields.','err'); return; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setStatus('Please enter a valid email address.','err'); return; }
-  formSubmitBtn.classList.add('loading'); formSubmitBtn.disabled=true; setStatus('','');
-  try {
-    const res = await fetch('https://formspree.io/f/xgonqrbv',{
-      method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'},
-      body:JSON.stringify({name,email,message})
-    });
-    if(res.ok){ setStatus('Message sent \u2014 thank you.','ok'); contactForm.reset(); }
-    else setStatus('Something went wrong. Try again.','err');
-  } catch { setStatus('Network error. Try again.','err'); }
-  finally { formSubmitBtn.classList.remove('loading'); formSubmitBtn.disabled=false; }
-});
-function setStatus(msg,type){
-  formStatus.textContent=msg;
-  formStatus.className='form-status'+(msg?' visible':'')+(type?' '+type:'');
-}
-
-// LOAD BAR
-const loadBar = document.getElementById('loadBar');
-let _pending = 0;
-function loaderStart() { _pending++; loadBar.classList.add('active'); }
-function loaderDone()  { if (--_pending <= 0) { _pending=0; loadBar.classList.remove('active'); } }
-
-// Sliding-window memory management: keep WINDOW_RADIUS images on each side
-const WINDOW_RADIUS = 2;
-
-function unloadDistantImgs(centerIdx) {
-  loadedImgs.forEach(function(img, i) {
-    if (!img || !img.src) return;
-    var dist = Math.abs(i - centerIdx);
-    dist = Math.min(dist, IMAGES.length - dist);
-    if (dist > WINDOW_RADIUS) {
-      img._gen = (img._gen || 0) + 1; // invalidate any queued abort/error events
-      img.src = ''; img._imgError = false;
+      const s = Math.max(cv.width / img.naturalWidth, cv.height / img.naturalHeight);
+      const sw = img.naturalWidth * s, sh = img.naturalHeight * s;
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.drawImage(img, (cv.width - sw) / 2, (cv.height - sh) / 2, sw, sh);
     }
-  });
-}
-
-// Preload the full sliding window around centerIdx
-// Priority: current → +1 → -1 → +2 → -2 (most likely direction first)
-function preloadWindow(centerIdx) {
-  const n = IMAGES.length;
-  const order = [0, 1, -1, 2, -2];
-  order.forEach(function(offset) {
-    const i = (centerIdx + offset + n) % n;
-    if (Math.min(Math.abs(offset), n - Math.abs(offset)) <= WINDOW_RADIUS) {
-      ensureImg(i);
+    function buildHeroDots() {
+      heroDots.innerHTML = '';
+      IMAGES.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'hero-dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => goToSlide(i));
+        heroDots.appendChild(d);
+      });
     }
-  });
-}
-
-// Ensure image at index i is loading; call cb when ready (fires cb on error too)
-function ensureImg(i, cb) {
-  const img = loadedImgs[i];
-  if (!img) return;
-  if (img.naturalWidth) { if (cb) cb(); return; }
-  if (img._imgError)   { if (cb) cb(); return; }
-  if (!img.src) {
-    loaderStart();
-    const gen = img._gen = (img._gen || 0) + 1;
-    img.src = IMAGES[i].src;
-    img.addEventListener('load',  () => { if (img._gen === gen) loaderDone(); }, {once:true});
-    img.addEventListener('error', () => { if (img._gen === gen) { img._imgError = true; loaderDone(); } }, {once:true});
-  }
-  if (cb) {
-    img.addEventListener('load',  cb, {once:true});
-    img.addEventListener('error', cb, {once:true});
-  }
-}
-
-// Load thumbnail for gallery (small WebP, fallback to full if no thumb)
-function ensureThumb(i, cb) {
-  const img = thumbImgs[i];
-  if (!img) return;
-  if (img.naturalWidth) { if (cb) cb(); return; }
-  if (img._imgError)   { if (cb) cb(); return; }
-  if (!img.src) {
-    loaderStart();
-    img.src = IMAGES[i].thumb;
-    img.addEventListener('load',  loaderDone, {once:true});
-    img.addEventListener('error', () => { img._imgError = true; loaderDone(); }, {once:true});
-  }
-  if (cb) {
-    img.addEventListener('load',  cb, {once:true});
-    img.addEventListener('error', cb, {once:true});
-  }
-}
-
-// Load a series by id and rebuild hero + gallery arrays
-function loadSeries(seriesId) {
-  const series = SERIES_DATA.find(s => s.id === seriesId) || SERIES_DATA[0];
-  if (!series) return;
-  currentSeriesId = series.id;
-  IMAGES = series.images.map(img => ({
-    src:   img.filename,
-    thumb: img.thumb || img.filename,
-    title: img.title,
-    desc:  img.description || '',
-    meta:  img.meta || ''
-  }));
-  loadedImgs = IMAGES.map(() => new Image());
-  thumbImgs  = IMAGES.map(() => new Image());
-  document.getElementById('heroSeries').textContent     = 'A journey through the possible \u00B7 2026';
-  document.getElementById('heroTitle').textContent      = SITE_DATA.project || series.title || '';
-  document.getElementById('seriesBarTitle').textContent = series.title    || '';
-  document.getElementById('seriesBarMeta').textContent  = series.subtitle || '';
-}
-
-// Build the series selection grid
-function buildSeriesGrid() {
-  const grid = document.getElementById('seriesGrid');
-  grid.innerHTML = '';
-  SERIES_DATA.forEach(series => {
-    const card = document.createElement('div'); card.className = 'series-card';
-    const coverWrap = document.createElement('div'); coverWrap.className = 'series-card-cover';
-    const cv = document.createElement('canvas');
-    const info = document.createElement('div'); info.className = 'series-card-info';
-    const title = document.createElement('div'); title.className = 'series-card-title'; title.textContent = series.title;
-    const sub   = document.createElement('div'); sub.className   = 'series-card-sub';   sub.textContent   = series.subtitle || '';
-    info.appendChild(title); info.appendChild(sub);
-    coverWrap.appendChild(cv); card.appendChild(coverWrap); card.appendChild(info);
-    grid.appendChild(card);
-
-    // Load cover image (first image of series)
-    const coverSrc = (series.images[0] && (series.images[0].thumb || series.images[0].filename)) || '';
-    if (coverSrc) {
-      const img = new Image();
-      const paint = () => {
-        if (!coverWrap.clientWidth || !img.naturalWidth) return;
-        cv.width = coverWrap.clientWidth; cv.height = coverWrap.clientHeight || cv.width * 0.75;
-        const ctx = cv.getContext('2d');
-        const s = Math.max(cv.width/img.naturalWidth, cv.height/img.naturalHeight);
-        ctx.drawImage(img, (cv.width-img.naturalWidth*s)/2, (cv.height-img.naturalHeight*s)/2, img.naturalWidth*s, img.naturalHeight*s);
+    function updateDots() {
+      heroDots.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === heroIdx));
+    }
+    function goToSlide(idx) {
+      if (idx === heroIdx) return;
+      heroIdx = idx;
+      const next = loadedImgs[idx];
+      ensureImg(idx);
+      // Silently preload the one after
+      ensureImg((idx + 1) % IMAGES.length);
+      const go = () => {
+        drawHero(heroCanvasB, next);
+        heroCanvasB.style.transition = 'none'; heroCanvasB.style.opacity = '0';
+        requestAnimationFrame(() => {
+          heroCanvasB.style.transition = 'opacity 1.2s ease'; heroCanvasB.style.opacity = '1';
+          setTimeout(() => {
+            drawHero(heroCanvasA, next);
+            heroCanvasB.style.transition = 'none'; heroCanvasB.style.opacity = '0';
+            updateDots();
+          }, 1250);
+        });
       };
-      img.onload = paint;
-      new ResizeObserver(paint).observe(coverWrap);
-      img.src = coverSrc;
+      if (next.naturalWidth) go(); else next.addEventListener('load', go, { once: true });
+    }
+    function startTimer() { clearInterval(heroTimer); if (IMAGES.length <= 1) return; heroTimer = setInterval(() => goToSlide((heroIdx + 1) % IMAGES.length), 5000); }
+    function initHero() {
+      const img = loadedImgs[0];
+      if (img.naturalWidth) drawHero(heroCanvasA, img); else img.addEventListener('load', () => drawHero(heroCanvasA, img), { once: true });
+      updateDots(); startTimer();
+    }
+    let _heroResizeTimer;
+    window.addEventListener('resize', () => { clearTimeout(_heroResizeTimer); _heroResizeTimer = setTimeout(() => { if (loadedImgs.length) drawHero(heroCanvasA, loadedImgs[heroIdx]); }, 150); });
+
+    // Hero touch swipe
+    let _heroTouchX = 0;
+    document.getElementById('heroSection').addEventListener('touchstart', e => { _heroTouchX = e.touches[0].clientX; }, { passive: true });
+    document.getElementById('heroSection').addEventListener('touchend', e => {
+      if (IMAGES.length <= 1) return;
+      const dx = e.changedTouches[0].clientX - _heroTouchX;
+      if (Math.abs(dx) > 50) dx < 0 ? goToSlide((heroIdx + 1) % IMAGES.length) : goToSlide((heroIdx - 1 + IMAGES.length) % IMAGES.length);
+    }, { passive: true });
+
+    // GALLERY
+    const mainHeader = document.getElementById('mainHeader');
+    const galleryWall = document.getElementById('galleryWall');
+
+    // ── Navigation — pure JS, no CSS :target ────────────
+    const NAV_OVERLAYS = {
+      work: document.getElementById('galleryOverlay'),
+      series: document.getElementById('seriesOverlay'),
+      about: document.getElementById('aboutOverlay'),
+      contact: document.getElementById('contactOverlay'),
+    };
+    const NAV_LINKS = {
+      work: document.getElementById('navWork'),
+      series: document.getElementById('navSeries'),
+      about: document.getElementById('navAbout'),
+      contact: document.getElementById('navContact'),
+    };
+    const MOB_LINKS = {
+      work: document.getElementById('mobWork'),
+      series: document.getElementById('mobSeries'),
+      about: document.getElementById('mobAbout'),
+      contact: document.getElementById('mobContact'),
+    };
+
+    function setSection(section) {
+      closeMuseum();
+      // Close all overlays
+      Object.values(NAV_OVERLAYS).forEach(el => el.classList.remove('active'));
+      Object.values(NAV_LINKS).forEach(el => el.classList.remove('active'));
+      Object.values(MOB_LINKS).forEach(el => el.classList.remove('mob-active'));
+
+      if (section && NAV_OVERLAYS[section]) {
+        NAV_OVERLAYS[section].classList.add('active');
+        NAV_LINKS[section].classList.add('active');
+        MOB_LINKS[section].classList.add('mob-active');
+        mainHeader.classList.add('solid');
+        clearInterval(heroTimer);
+        // Only build grid on first open — shuffle button handles rebuilds
+        if (section === 'work' && galleryWall.children.length === 0) buildGalleryGrid();
+        if (section === 'series' && document.getElementById('seriesGrid').children.length === 0) buildSeriesGrid();
+      } else {
+        mainHeader.classList.remove('solid');
+        startTimer();
+      }
     }
 
-    card.addEventListener('click', () => {
-      loadSeries(series.id);
+    function navigateTo(section) {
+      document.getElementById('mobMenu').classList.remove('open');
+      history.pushState({ section: section || null }, '', section ? '#' + section : location.pathname);
+      setSection(section);
+    }
+
+    function goHome() {
+      closeMuseum();
+      navigateTo(null);
+    }
+
+    // Browser back / forward
+    window.addEventListener('popstate', function (e) {
+      const section = (e.state && e.state.section) ? e.state.section
+        : (location.hash ? location.hash.slice(1) : null);
+      // Map old hash names to new section keys (backwards compat)
+      const legacyMap = { galleryOverlay: 'work', seriesOverlay: 'series', aboutOverlay: 'about', contactOverlay: 'contact' };
+      setSection(legacyMap[section] || section || null);
+    });
+
+    // Nav link clicks
+    document.getElementById('navWork').addEventListener('click', e => { e.preventDefault(); navigateTo('work'); });
+    document.getElementById('navSeries').addEventListener('click', e => { e.preventDefault(); navigateTo('series'); });
+    document.getElementById('navAbout').addEventListener('click', e => { e.preventDefault(); navigateTo('about'); });
+    document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); navigateTo('contact'); });
+
+    document.getElementById('heroEnter').addEventListener('click', () => navigateTo('work'));
+
+    // ── Mobile menu ──────────────────────────────────
+    const mobMenu = document.getElementById('mobMenu');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    document.getElementById('mobMenuClose').addEventListener('click', () => mobMenu.classList.remove('open'));
+    hamburgerBtn.addEventListener('click', () => mobMenu.classList.toggle('open'));
+    Object.entries(MOB_LINKS).forEach(([section, el]) => {
+      el.addEventListener('click', e => { e.preventDefault(); navigateTo(section); });
+    });
+    document.getElementById('galleryBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
+    document.getElementById('seriesBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
+    document.getElementById('hName').addEventListener('click', goHome);
+
+    // Restore section on initial load (from URL hash)
+    (function () {
+      const h = location.hash.slice(1);
+      const legacyMap = { galleryOverlay: 'work', seriesOverlay: 'series', aboutOverlay: 'about', contactOverlay: 'contact' };
+      const section = legacyMap[h] || (NAV_OVERLAYS[h] ? h : null);
+      if (section) {
+        history.replaceState({ section }, '', '#' + section);
+        setSection(section);
+      } else {
+        history.replaceState({ section: null }, '', location.pathname);
+      }
+    })();
+
+    document.getElementById('shuffleBtn').addEventListener('click', () => {
+      const btn = document.getElementById('shuffleBtn');
+      btn.classList.add('spinning');
+      setTimeout(() => btn.classList.remove('spinning'), 400);
+      buildGalleryGrid();
+    });
+
+    // Track observers so we can disconnect them before rebuilding
+    let _galleryResizeObs = [];
+    let _galleryIntersectObs = [];
+
+    function buildGalleryGrid() {
+      // Disconnect all old observers before wiping DOM
+      _galleryResizeObs.forEach(o => o.disconnect());
+      _galleryIntersectObs.forEach(o => o.disconnect());
+      _galleryResizeObs = [];
+      _galleryIntersectObs = [];
+      galleryWall.innerHTML = '';
+      const isMobile = window.innerWidth < 700;
+      const NUM_COLS = isMobile ? 2 : 3;
+      const HEIGHTS = isMobile ? [180, 260, 360] : [220, 320, 440];
+
+      // Create columns
+      const colEls = [];
+      const colHeights = new Array(NUM_COLS).fill(0);
+      for (let c = 0; c < NUM_COLS; c++) {
+        const col = document.createElement('div'); col.className = 'g-col';
+        galleryWall.appendChild(col);
+        colEls.push(col);
+      }
+
+      // Shuffle a copy preserving original index for museum navigation
+      const shuffled = IMAGES.map((d, i) => ({ ...d, origIdx: i })).sort(() => Math.random() - 0.5);
+
+      shuffled.forEach(data => {
+        const h = HEIGHTS[Math.floor(Math.random() * HEIGHTS.length)];
+        const col = colHeights.indexOf(Math.min(...colHeights));
+        colHeights[col] += h + 1;
+
+        const item = document.createElement('div'); item.className = 'g-item loading'; item.style.height = h + 'px';
+        const cv = document.createElement('canvas');
+        const cap = document.createElement('div'); cap.className = 'g-caption';
+        const capTitle = document.createElement('span'); capTitle.className = 'g-caption-title'; capTitle.textContent = data.title;
+        const capIdx = document.createElement('span'); capIdx.className = 'g-caption-index'; capIdx.textContent = 'No.' + String(data.origIdx + 1).padStart(2, '0');
+        cap.appendChild(capTitle); cap.appendChild(capIdx);
+        const hit = document.createElement('div'); hit.className = 'g-hit';
+        item.appendChild(cv); item.appendChild(cap); item.appendChild(hit);
+        colEls[col].appendChild(item);
+
+        if (HAS_MOUSE) {
+          hit.addEventListener('mousemove', e => cursorMove(e.clientX, e.clientY));
+          hit.addEventListener('mouseenter', e => cursorEnter(e.clientX, e.clientY));
+          hit.addEventListener('mouseleave', cursorLeave);
+          hit.addEventListener('mousedown', () => cursor.classList.add('pressed'));
+          hit.addEventListener('mouseup', () => cursor.classList.remove('pressed'));
+        }
+        hit.addEventListener('click', () => openMuseum(data.origIdx));
+
+        const ii = data.origIdx;
+        const paint = () => {
+          const img = thumbImgs[ii];
+          if (!item.clientWidth || !item.clientHeight || !img.naturalWidth) return;
+          cv.width = item.clientWidth; cv.height = item.clientHeight;
+          const ctx = cv.getContext('2d');
+          const s = Math.max(cv.width / img.naturalWidth, cv.height / img.naturalHeight);
+          const sw = img.naturalWidth * s, sh = img.naturalHeight * s;
+          ctx.clearRect(0, 0, cv.width, cv.height);
+          ctx.drawImage(img, (cv.width - sw) / 2, (cv.height - sh) / 2, sw, sh);
+          item.classList.remove('loading');
+        };
+        const ro = new ResizeObserver(paint);
+        ro.observe(item);
+        _galleryResizeObs.push(ro);
+        const io = new IntersectionObserver((entries, obs) => {
+          if (!entries[0].isIntersecting) return;
+          obs.unobserve(item);
+          ensureThumb(ii, paint);
+        }, { root: galleryWall, rootMargin: '300px 0px' });
+        io.observe(item);
+        _galleryIntersectObs.push(io);
+      });
+    }
+
+    // ═══════════════════════════════════════════════════
+    // MUSEUM — PhotoSwipe v5
+    // ═══════════════════════════════════════════════════
+    let pswp = null;
+
+    // Calcola passepartout: gap visivo uguale su tutti e 4 i lati.
+    // PhotoSwipe v5 vuole un oggetto plain {top,bottom,left,right}, non una funzione.
+    // Top bar = 48px, caption = 52px → sommate così il gap visivo (tra barre e immagine) rimane P su tutti i lati.
+    function calcPswpPadding() {
+      const vw = window.innerWidth;
+      // ~3% → circa 43px su 1440px; minimo 20px su mobile
+      const p = vw >= 768 ? Math.round(vw * 0.03) : 20;
+      return { top: p + 48, bottom: p + 52, left: p, right: p };
+    }
+
+    function openMuseum(idx) {
+      if (pswp) pswp.close();
+
+      // Usa aspect ratio della thumbnail (già caricata) + larghezza stimata full-res 3000px
+      const items = IMAGES.map((img, i) => {
+        const t = thumbImgs[i];
+        const aspect = (t && t.naturalWidth) ? t.naturalHeight / t.naturalWidth : 2 / 3;
+        return { src: img.src, msrc: img.thumb, width: 3000, height: Math.round(3000 * aspect) };
+      });
+
+      pswp = new PhotoSwipe({
+        dataSource: items,
+        index: idx,
+        bgOpacity: 1,
+        loop: true,
+        spacing: 0.08,
+        closeOnVerticalDrag: false,
+        pinchToClose: false,
+        wheelToZoom: true,
+        tapAction: 'zoom',
+        doubleTapAction: 'zoom',
+        padding: calcPswpPadding(),
+        secondaryZoomLevel: 1,   // 100% = pixel originali
+        maxZoomLevel: 2,
+        returnFocus: false,
+        // Opzione corretta: arrowPrevSVG / arrowNextSVG con tag <svg> completo (non arrowPrevSVGString)
+        arrowPrevSVG: '<svg aria-hidden="true" class="pswp__icn" viewBox="0 0 32 32" width="32" height="32"><polyline points="21 6 11 16 21 26" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        arrowNextSVG: '<svg aria-hidden="true" class="pswp__icn" viewBox="0 0 32 32" width="32" height="32"><polyline points="11 6 21 16 11 26" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      });
+
+      pswp.on('uiRegister', () => {
+        // Back button
+        pswp.ui.registerElement({
+          name: 'pswp-back',
+          order: 1,
+          isButton: true,
+          tagName: 'button',
+          html: '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back',
+          className: 'pswp__button--pswp-back',
+          onClick: () => pswp.close(),
+        });
+
+        // Caption bar
+        pswp.ui.registerElement({
+          name: 'pswp-caption',
+          order: 9,
+          isButton: false,
+          appendTo: 'root',
+          html: '<div class="pswp-caption"><span class="pswp-cap-title"></span><div class="pswp-cap-body"><span class="pswp-cap-desc"></span><span class="pswp-cap-meta"></span></div></div>',
+          onInit: (el) => {
+            const update = () => {
+              const img = IMAGES[pswp.currIndex];
+              if (!img) return;
+              el.querySelector('.pswp-cap-title').textContent = img.title || '';
+              el.querySelector('.pswp-cap-desc').textContent = img.desc || '';
+              el.querySelector('.pswp-cap-meta').textContent = img.meta || '';
+            };
+            pswp.on('change', update);
+            pswp.on('afterInit', update);
+          },
+        });
+
+        // Copyright — elemento con classe diretta su el, posizionato sotto il bordo inferiore-sinistro dell'immagine
+        pswp.ui.registerElement({
+          name: 'pswp-copyright',
+          order: 8,
+          isButton: false,
+          appendTo: 'root',
+          className: 'pswp-copyright',   // classe applicata direttamente su el → position:absolute funziona
+          html: '© Andrea Spinazzola',
+          onInit: (el) => {
+            // Sposta il copyright PRIMA dello scroll-wrap nel DOM → l'immagine (dopo) è naturalmente sopra
+            const sw = pswp.element.querySelector('.pswp__scroll-wrap');
+            if (sw) pswp.element.insertBefore(el, sw);
+
+            const updateCopyright = () => {
+              if (!pswp || !pswp.currSlide) return;
+              // Hide when zoomed in — image pans around and copyright has no fixed anchor
+              const fitLevel = pswp.currSlide.zoomLevels ? pswp.currSlide.zoomLevels.initial : 0;
+              if (pswp.currSlide.currZoomLevel > fitLevel + 0.01) {
+                el.style.opacity = '0';
+                return;
+              }
+              // Position at bottom-left of image in fit-zoom state
+              const vw = pswp.viewportSize.x, vh = pswp.viewportSize.y;
+              const pad = calcPswpPadding();
+              const availW = vw - pad.left - pad.right;
+              const availH = vh - pad.top - pad.bottom;
+              const iw = pswp.currSlide.data.width || 3000;
+              const ih = pswp.currSlide.data.height || 2000;
+              const scale = Math.min(availW / iw, availH / ih);
+              const imgLeft = pad.left + (availW - iw * scale) / 2;
+              const imgBottom = pad.top + (availH - ih * scale) / 2 + ih * scale;
+              el.style.left = Math.round(imgLeft) + 'px';
+              el.style.top = Math.round(imgBottom + 6) + 'px';
+              el.style.opacity = '0.45';
+            };
+            pswp.on('afterInit', updateCopyright);
+            pswp.on('change', updateCopyright);
+            pswp.on('resize', updateCopyright);
+            pswp.on('zoomPanUpdate', updateCopyright);
+          },
+        });
+      });
+
+      // Frecce: compaiono solo nelle zone sinistra/destra al passaggio del mouse
+      pswp.on('afterInit', () => {
+        const el = pswp.element;
+        const prev = el.querySelector('.pswp__button--arrow--prev');
+        const next = el.querySelector('.pswp__button--arrow--next');
+        let zoneTimer;
+        el.addEventListener('mousemove', e => {
+          clearTimeout(zoneTimer);
+          const x = e.clientX, w = window.innerWidth;
+          prev && prev.classList.toggle('zone-active', x < w * 0.22);
+          next && next.classList.toggle('zone-active', x > w * 0.78);
+          zoneTimer = setTimeout(() => {
+            prev && prev.classList.remove('zone-active');
+            next && next.classList.remove('zone-active');
+          }, 2500);
+        });
+        el.addEventListener('mouseleave', () => {
+          clearTimeout(zoneTimer);
+          prev && prev.classList.remove('zone-active');
+          next && next.classList.remove('zone-active');
+        });
+      });
+
+      pswp.on('destroy', () => {
+        pswp = null;
+        document.getElementById('hamburgerBtn').classList.remove('hidden');
+      });
+
+      document.getElementById('hamburgerBtn').classList.add('hidden');
+      document.getElementById('mobMenu').classList.remove('open');
+      pswp.init();
+    }
+
+    function closeMuseum() {
+      if (pswp) pswp.close();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        if (document.getElementById('mobMenu').classList.contains('open')) { document.getElementById('mobMenu').classList.remove('open'); return; }
+        if (pswp) return; // PhotoSwipe handles its own Escape
+        if (location.hash) { goHome(); return; }
+      }
+    });
+
+    // ABOUT
+    document.getElementById('aboutBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
+
+    // CONTACT
+    const contactForm = document.getElementById('contactForm');
+    const formSubmitBtn = document.getElementById('formSubmitBtn');
+    const formStatus = document.getElementById('formStatus');
+    document.getElementById('contactBack').addEventListener('click', e => { e.preventDefault(); goHome(); });
+
+    contactForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = document.getElementById('cf-name').value.trim();
+      const email = document.getElementById('cf-email').value.trim();
+      const message = document.getElementById('cf-message').value.trim();
+      if (!name || !email || !message) { setStatus('Please fill in all fields.', 'err'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setStatus('Please enter a valid email address.', 'err'); return; }
+      formSubmitBtn.classList.add('loading'); formSubmitBtn.disabled = true; setStatus('', '');
+      try {
+        const res = await fetch('https://formspree.io/f/xgonqrbv', {
+          method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message })
+        });
+        if (res.ok) { setStatus('Message sent \u2014 thank you.', 'ok'); contactForm.reset(); }
+        else setStatus('Something went wrong. Try again.', 'err');
+      } catch { setStatus('Network error. Try again.', 'err'); }
+      finally { formSubmitBtn.classList.remove('loading'); formSubmitBtn.disabled = false; }
+    });
+    function setStatus(msg, type) {
+      formStatus.textContent = msg;
+      formStatus.className = 'form-status' + (msg ? ' visible' : '') + (type ? ' ' + type : '');
+    }
+
+    // LOAD BAR
+    const loadBar = document.getElementById('loadBar');
+    let _pending = 0;
+    function loaderStart() { _pending++; loadBar.classList.add('active'); }
+    function loaderDone() { if (--_pending <= 0) { _pending = 0; loadBar.classList.remove('active'); } }
+
+    // Sliding-window memory management: keep WINDOW_RADIUS images on each side
+    const WINDOW_RADIUS = 2;
+
+    function unloadDistantImgs(centerIdx) {
+      loadedImgs.forEach(function (img, i) {
+        if (!img || !img.src) return;
+        var dist = Math.abs(i - centerIdx);
+        dist = Math.min(dist, IMAGES.length - dist);
+        if (dist > WINDOW_RADIUS) {
+          img._gen = (img._gen || 0) + 1; // invalidate any queued abort/error events
+          img.src = ''; img._imgError = false;
+        }
+      });
+    }
+
+    // Preload the full sliding window around centerIdx
+    // Priority: current → +1 → -1 → +2 → -2 (most likely direction first)
+    function preloadWindow(centerIdx) {
+      const n = IMAGES.length;
+      const order = [0, 1, -1, 2, -2];
+      order.forEach(function (offset) {
+        const i = (centerIdx + offset + n) % n;
+        if (Math.min(Math.abs(offset), n - Math.abs(offset)) <= WINDOW_RADIUS) {
+          ensureImg(i);
+        }
+      });
+    }
+
+    // Ensure image at index i is loading; call cb when ready (fires cb on error too)
+    function ensureImg(i, cb) {
+      const img = loadedImgs[i];
+      if (!img) return;
+      if (img.naturalWidth) { if (cb) cb(); return; }
+      if (img._imgError) { if (cb) cb(); return; }
+      if (!img.src) {
+        loaderStart();
+        const gen = img._gen = (img._gen || 0) + 1;
+        img.src = IMAGES[i].src;
+        img.addEventListener('load', () => { if (img._gen === gen) loaderDone(); }, { once: true });
+        img.addEventListener('error', () => { if (img._gen === gen) { img._imgError = true; loaderDone(); } }, { once: true });
+      }
+      if (cb) {
+        img.addEventListener('load', cb, { once: true });
+        img.addEventListener('error', cb, { once: true });
+      }
+    }
+
+    // Load thumbnail for gallery (small WebP, fallback to full if no thumb)
+    function ensureThumb(i, cb) {
+      const img = thumbImgs[i];
+      if (!img) return;
+      if (img.naturalWidth) { if (cb) cb(); return; }
+      if (img._imgError) { if (cb) cb(); return; }
+      if (!img.src) {
+        loaderStart();
+        img.src = IMAGES[i].thumb;
+        img.addEventListener('load', loaderDone, { once: true });
+        img.addEventListener('error', () => { img._imgError = true; loaderDone(); }, { once: true });
+      }
+      if (cb) {
+        img.addEventListener('load', cb, { once: true });
+        img.addEventListener('error', cb, { once: true });
+      }
+    }
+
+    // Load a series by id and rebuild hero + gallery arrays
+    function loadSeries(seriesId) {
+      const series = SERIES_DATA.find(s => s.id === seriesId) || SERIES_DATA[0];
+      if (!series) return;
+      currentSeriesId = series.id;
+      IMAGES = series.images.map(img => ({
+        src: img.filename,
+        thumb: img.thumb || img.filename,
+        title: img.title,
+        desc: img.description || '',
+        meta: img.meta || ''
+      }));
+      loadedImgs = IMAGES.map(() => new Image());
+      thumbImgs = IMAGES.map(() => new Image());
+      document.getElementById('heroSeries').textContent = 'A journey through the possible \u00B7 2026';
+      document.getElementById('heroTitle').textContent = SITE_DATA.project || series.title || '';
+      document.getElementById('seriesBarTitle').textContent = series.title || '';
+      document.getElementById('seriesBarMeta').textContent = series.subtitle || '';
+    }
+
+    // Build the series selection grid
+    function buildSeriesGrid() {
+      const grid = document.getElementById('seriesGrid');
+      grid.innerHTML = '';
+      SERIES_DATA.forEach(series => {
+        const card = document.createElement('div'); card.className = 'series-card';
+        const coverWrap = document.createElement('div'); coverWrap.className = 'series-card-cover';
+        const cv = document.createElement('canvas');
+        const info = document.createElement('div'); info.className = 'series-card-info';
+        const title = document.createElement('div'); title.className = 'series-card-title'; title.textContent = series.title;
+        const sub = document.createElement('div'); sub.className = 'series-card-sub'; sub.textContent = series.subtitle || '';
+        info.appendChild(title); info.appendChild(sub);
+        coverWrap.appendChild(cv); card.appendChild(coverWrap); card.appendChild(info);
+        grid.appendChild(card);
+
+        // Load cover image (first image of series)
+        const coverSrc = (series.images[0] && (series.images[0].thumb || series.images[0].filename)) || '';
+        if (coverSrc) {
+          const img = new Image();
+          const paint = () => {
+            if (!coverWrap.clientWidth || !img.naturalWidth) return;
+            cv.width = coverWrap.clientWidth; cv.height = coverWrap.clientHeight || cv.width * 0.75;
+            const ctx = cv.getContext('2d');
+            const s = Math.max(cv.width / img.naturalWidth, cv.height / img.naturalHeight);
+            ctx.drawImage(img, (cv.width - img.naturalWidth * s) / 2, (cv.height - img.naturalHeight * s) / 2, img.naturalWidth * s, img.naturalHeight * s);
+          };
+          img.onload = paint;
+          new ResizeObserver(paint).observe(coverWrap);
+          img.src = coverSrc;
+        }
+
+        card.addEventListener('click', () => {
+          loadSeries(series.id);
+          buildHeroDots();
+          ensureImg(0, initHero);
+          if (IMAGES[1]) ensureImg(1);
+          navigateTo('work');
+        });
+      });
+    }
+
+    // MANIFEST
+    function initFromManifest(manifest) {
+      // Store site-level and series data
+      SITE_DATA = manifest.site || {};
+      SERIES_DATA = manifest.series || [];
+
+      // Populate About from manifest
+      if (manifest.about) {
+        const a = manifest.about;
+        if (a.photo) document.getElementById('aboutPhoto').src = a.photo;
+        if (a.name) document.getElementById('aboutName').innerHTML = a.name.replace('\n', '<br>');
+        if (a.bio) document.getElementById('aboutBio').textContent = a.bio;
+        if (a.instagram) {
+          document.getElementById('aboutInstagram').href = a.instagram;
+          document.getElementById('aboutInstagramHandle').textContent = a.instagramHandle || 'Instagram';
+        }
+        if (a.linkedin) {
+          document.getElementById('aboutLinkedin').href = a.linkedin;
+          document.getElementById('aboutLinkedinHandle').textContent = a.linkedinHandle || 'LinkedIn';
+        }
+      }
+
+      // Populate SEO meta tags
+      if (manifest.seo) {
+        const s = manifest.seo;
+        if (s.title) document.title = s.title;
+        if (s.description) {
+          document.getElementById('metaDesc').content = s.description;
+          document.getElementById('ogDesc').content = s.description;
+        }
+        if (s.title) document.getElementById('ogTitle').content = s.title;
+        if (s.ogImage) {
+          const abs = new URL(s.ogImage, location.href).href;
+          document.getElementById('ogImage').content = abs;
+        }
+      }
+
+      // Load the hero series
+      const sid = manifest.site.hero && manifest.site.hero.seriesId;
+      loadSeries(sid || (SERIES_DATA[0] && SERIES_DATA[0].id));
       buildHeroDots();
       ensureImg(0, initHero);
       if (IMAGES[1]) ensureImg(1);
-      navigateTo('work');
-    });
-  });
-}
-
-// MANIFEST
-function initFromManifest(manifest) {
-  // Store site-level and series data
-  SITE_DATA   = manifest.site   || {};
-  SERIES_DATA = manifest.series || [];
-
-  // Populate About from manifest
-  if (manifest.about) {
-    const a = manifest.about;
-    if (a.photo)  document.getElementById('aboutPhoto').src = a.photo;
-    if (a.name)   document.getElementById('aboutName').innerHTML = a.name.replace('\n', '<br>');
-    if (a.bio)    document.getElementById('aboutBio').textContent = a.bio;
-    if (a.instagram) {
-      document.getElementById('aboutInstagram').href = a.instagram;
-      document.getElementById('aboutInstagramHandle').textContent = a.instagramHandle || 'Instagram';
     }
-    if (a.linkedin) {
-      document.getElementById('aboutLinkedin').href = a.linkedin;
-      document.getElementById('aboutLinkedinHandle').textContent = a.linkedinHandle || 'LinkedIn';
-    }
-  }
 
-  // Populate SEO meta tags
-  if (manifest.seo) {
-    const s = manifest.seo;
-    if (s.title)       document.title = s.title;
-    if (s.description) {
-      document.getElementById('metaDesc').content = s.description;
-      document.getElementById('ogDesc').content   = s.description;
-    }
-    if (s.title) document.getElementById('ogTitle').content = s.title;
-    if (s.ogImage) {
-      const abs = new URL(s.ogImage, location.href).href;
-      document.getElementById('ogImage').content = abs;
-    }
-  }
+    fetch('manifest.json?v=' + Date.now())
+      .then(r => { if (!r.ok) throw new Error('manifest.json not found'); return r.json(); })
+      .then(initFromManifest)
+      .catch(err => console.error('Gallery init error:', err));
 
-  // Load the hero series
-  const sid = manifest.site.hero && manifest.site.hero.seriesId;
-  loadSeries(sid || (SERIES_DATA[0] && SERIES_DATA[0].id));
-  buildHeroDots();
-  ensureImg(0, initHero);
-  if (IMAGES[1]) ensureImg(1);
-}
-
-fetch('manifest.json?v=' + Date.now())
-  .then(r => { if (!r.ok) throw new Error('manifest.json not found'); return r.json(); })
-  .then(initFromManifest)
-  .catch(err => console.error('Gallery init error:', err));
-
-</script>
+  </script>
 </body>
+
 </html>
