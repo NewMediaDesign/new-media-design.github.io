@@ -216,7 +216,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 
 /* ABOUT */
 .about-body{ flex:1; display:flex; overflow:hidden; }
-.about-photo{ width:42%; flex-shrink:0; overflow:hidden; background:var(--border); transition:background .4s; }
+.about-photo{ width:42%; flex-shrink:0; overflow:hidden; background:#e8e4dc; padding:clamp(16px,3vw,36px); box-sizing:border-box; display:flex; align-items:center; justify-content:center; }
 .about-photo img{ width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
 .about-content{ flex:1; display:flex; flex-direction:column; justify-content:center; padding:clamp(32px,5vw,72px) clamp(28px,4vw,64px); overflow-y:auto; }
 .about-label{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.28em; text-transform:uppercase; color:var(--fg2); margin-bottom:28px; }
@@ -377,8 +377,8 @@ header.solid .theme-btn{ color:var(--fg2); }
   </div>
   <div class="gallery-wall" id="galleryWall"></div>
   <div class="series-bar">
-    <span class="series-bar-title" id="seriesBarTitle">Series I &mdash; Faces</span>
-    <span class="series-bar-meta" id="seriesBarMeta">AI Generative &middot; 2024</span>
+    <span class="series-bar-title" id="seriesBarTitle">Amerika</span>
+    <span class="series-bar-meta" id="seriesBarMeta">Human Frequency &middot; 2026</span>
     <button class="shuffle-btn" id="shuffleBtn" aria-label="Shuffle layout">
       <svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 3)"><path d="m4.501 8.5-3.001 3 3.001 3"/><path d="m12.5 6.5v2c0 1.6568542-1.3431458 3-3 3h-8"/><path d="m8.499 6.5 3.001-3-3.001-3"/><path d="m.5 8.5v-2c0-1.65685425 1.34314575-3 3-3h8"/></g></svg>
     </button>
@@ -421,15 +421,15 @@ header.solid .theme-btn{ color:var(--fg2); }
     <div class="about-content">
       <div class="about-label">About the artist</div>
       <div class="about-name" id="aboutName">Andrea<br>Spinazzola</div>
-      <p class="about-bio" id="aboutBio">Visual artist working at the intersection of technology and human expression. Exploring identity, perception and emotion through AI-generative art and digital media.</p>
+      <p class="about-bio" id="aboutBio">Visual artist. Documenting the human frequency across the Americas — presence, memory and the invisible lines connecting individuals within collective landscapes.</p>
       <div class="about-links">
-        <a class="about-link" id="aboutEmail" href="mailto:andrea@spinazzola.com">
-          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-          <span id="aboutEmailText">andrea@spinazzola.com</span>
-        </a>
         <a class="about-link" id="aboutInstagram" href="https://instagram.com" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
           <span id="aboutInstagramHandle">Instagram</span>
+        </a>
+        <a class="about-link" id="aboutLinkedin" href="https://linkedin.com" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="11" x2="8" y2="17"/><line x1="8" y1="8" x2="8" y2="8.5"/><path d="M12 17v-4c0-1.1.9-2 2-2s2 .9 2 2v4"/><line x1="12" y1="11" x2="12" y2="17"/></svg>
+          <span id="aboutLinkedinHandle">LinkedIn</span>
         </a>
       </div>
     </div>
@@ -841,6 +841,10 @@ function openMuseum(idx) {
       className: 'pswp-copyright',   // classe applicata direttamente su el → position:absolute funziona
       html: '© Andrea Spinazzola',
       onInit: (el) => {
+        // Sposta il copyright PRIMA dello scroll-wrap nel DOM → l'immagine (dopo) è naturalmente sopra
+        const sw = pswp.element.querySelector('.pswp__scroll-wrap');
+        if (sw) pswp.element.insertBefore(el, sw);
+
         const updateCopyright = () => {
           if (!pswp || !pswp.currSlide) return;
           // Hide when zoomed in — image pans around and copyright has no fixed anchor
@@ -1091,13 +1095,13 @@ function initFromManifest(manifest) {
     if (a.photo)  document.getElementById('aboutPhoto').src = a.photo;
     if (a.name)   document.getElementById('aboutName').innerHTML = a.name.replace('\n', '<br>');
     if (a.bio)    document.getElementById('aboutBio').textContent = a.bio;
-    if (a.email) {
-      document.getElementById('aboutEmail').href = 'mailto:' + a.email;
-      document.getElementById('aboutEmailText').textContent = a.email;
-    }
     if (a.instagram) {
       document.getElementById('aboutInstagram').href = a.instagram;
       document.getElementById('aboutInstagramHandle').textContent = a.instagramHandle || 'Instagram';
+    }
+    if (a.linkedin) {
+      document.getElementById('aboutLinkedin').href = a.linkedin;
+      document.getElementById('aboutLinkedinHandle').textContent = a.linkedinHandle || 'LinkedIn';
     }
   }
 

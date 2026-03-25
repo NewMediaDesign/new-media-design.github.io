@@ -9,154 +9,155 @@
   "about": {
     "photo": "images/AS_BW_PORTRAIT_02.png",
     "name": "Andrea\nSpinazzola",
-    "bio": "Visual artist working at the intersection of technology and human expression. Exploring identity, perception and emotion through AI-generative art and digital media.",
-    "email": "andrea@spinazzola.com",
-    "instagram": "https://instagram.com",
-    "instagramHandle": "@andrespinazzola"
+    "bio": "Visual artist. Documenting the human frequency across the Americas — presence, memory and the invisible lines connecting individuals within collective landscapes.",
+    "instagram": "https://instagram.com/andrespinazzola",
+    "instagramHandle": "@andrespinazzola",
+    "linkedin": "https://linkedin.com/in/andrea-spinazzola",
+    "linkedinHandle": "Andrea Spinazzola"
   },
   "seo": {
     "title": "Andrea Spinazzola",
-    "description": "Andrea Spinazzola — Visual artist working at the intersection of technology and human expression. AI-generative art and digital media.",
+    "description": "Andrea Spinazzola — Human Frequency. A photographic archive from the Americas.",
     "ogImage": "images/series-1/01.jpg"
   },
   "series": [
     {
       "id": "series-1",
-      "title": "Human Frequency",
-      "subtitle": "Series I — Faces · AI Generative · 2024",
+      "title": "Amerika",
+      "subtitle": "Human Frequency · 2026",
       "images": [
         {
           "filename": "images/series-1/01.jpg",
           "thumb": "images/series-1/thumbs/01.webp",
-          "title": "Opera 01",
-          "description": "Opera 01 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "The Witness",
+          "description": "Amerika · Human Frequency",
+          "meta": "Salvador · 1997"
         },
         {
           "filename": "images/series-1/02.jpg",
           "thumb": "images/series-1/thumbs/02.webp",
-          "title": "Opera 02",
-          "description": "Opera 02 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Say Something",
+          "description": "Amerika · Human Frequency",
+          "meta": "Rio de Janeiro · 2001"
         },
         {
           "filename": "images/series-1/03.jpg",
           "thumb": "images/series-1/thumbs/03.webp",
-          "title": "Opera 03",
-          "description": "Opera 03 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Silence",
+          "description": "Amerika · Human Frequency",
+          "meta": "São Paulo · 1989"
         },
         {
           "filename": "images/series-1/04.jpg",
           "thumb": "images/series-1/thumbs/04.webp",
-          "title": "Opera 04",
-          "description": "Opera 04 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "The Alarm",
+          "description": "Amerika · Human Frequency",
+          "meta": "Belo Horizonte · 1994"
         },
         {
           "filename": "images/series-1/05.jpg",
           "thumb": "images/series-1/thumbs/05.webp",
-          "title": "Opera 05",
-          "description": "Opera 05 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Still",
+          "description": "Amerika · Human Frequency",
+          "meta": "Buenos Aires · 1986"
         },
         {
           "filename": "images/series-1/06.jpg",
           "thumb": "images/series-1/thumbs/06.webp",
-          "title": "Opera 06",
-          "description": "Opera 06 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Last Bus",
+          "description": "Amerika · Human Frequency",
+          "meta": "Belo Horizonte · 1993"
         },
         {
           "filename": "images/series-1/07.jpg",
           "thumb": "images/series-1/thumbs/07.webp",
-          "title": "Opera 07",
-          "description": "Opera 07 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Sunday",
+          "description": "Amerika · Human Frequency",
+          "meta": "Rio de Janeiro · 1998"
         },
         {
           "filename": "images/series-1/08.jpg",
           "thumb": "images/series-1/thumbs/08.webp",
-          "title": "Opera 08",
-          "description": "Opera 08 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Route 47",
+          "description": "Amerika · Human Frequency",
+          "meta": "São Paulo · 1995"
         },
         {
           "filename": "images/series-1/09.jpg",
           "thumb": "images/series-1/thumbs/09.webp",
-          "title": "Opera 09",
-          "description": "Opera 09 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "The Crowd",
+          "description": "Amerika · Human Frequency",
+          "meta": "Porto Alegre · 1978"
         },
         {
           "filename": "images/series-1/10.jpg",
           "thumb": "images/series-1/thumbs/10.webp",
-          "title": "Opera 10",
-          "description": "Opera 10 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "The Veil",
+          "description": "Amerika · Human Frequency",
+          "meta": "Recife · 1982"
         },
         {
           "filename": "images/series-1/11.jpg",
           "thumb": "images/series-1/thumbs/11.webp",
-          "title": "Opera 11",
-          "description": "Opera 11 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Last Seat",
+          "description": "Amerika · Human Frequency",
+          "meta": "São Paulo · 1991"
         },
         {
           "filename": "images/series-1/12.jpg",
           "thumb": "images/series-1/thumbs/12.webp",
-          "title": "Opera 12",
-          "description": "Opera 12 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "The Third",
+          "description": "Amerika · Human Frequency",
+          "meta": "Salvador · 1988"
         },
         {
           "filename": "images/series-1/13.jpg",
           "thumb": "images/series-1/thumbs/13.webp",
-          "title": "Opera 13",
-          "description": "Opera 13 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "The Secret",
+          "description": "Amerika · Human Frequency",
+          "meta": "Manaus · 2003"
         },
         {
           "filename": "images/series-1/15.jpg",
           "thumb": "images/series-1/thumbs/15.webp",
-          "title": "Opera 15",
-          "description": "Opera 15 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Pampa",
+          "description": "Amerika · Human Frequency",
+          "meta": "Jujuy · 1979"
         },
         {
           "filename": "images/series-1/16.jpg",
           "thumb": "images/series-1/thumbs/16.webp",
-          "title": "Opera 16",
-          "description": "Opera 16 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Departure",
+          "description": "Amerika · Human Frequency",
+          "meta": "Mato Grosso · 1974"
         },
         {
           "filename": "images/series-1/17.jpg",
           "thumb": "images/series-1/thumbs/17.webp",
-          "title": "Opera 17",
-          "description": "Opera 17 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Rush",
+          "description": "Amerika · Human Frequency",
+          "meta": "São Paulo · 2002"
         },
         {
           "filename": "images/series-1/18.jpg",
           "thumb": "images/series-1/thumbs/18.webp",
-          "title": "Opera 18",
-          "description": "Opera 18 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "The Audience",
+          "description": "Amerika · Human Frequency",
+          "meta": "Montevideo · 1997"
         },
         {
           "filename": "images/series-1/19.jpg",
           "thumb": "images/series-1/thumbs/19.webp",
-          "title": "Opera 19",
-          "description": "Opera 19 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "The Board",
+          "description": "Amerika · Human Frequency",
+          "meta": "Rio de Janeiro · 1985"
         },
         {
           "filename": "images/series-1/20.jpg",
           "thumb": "images/series-1/thumbs/20.webp",
-          "title": "Opera 20",
-          "description": "Opera 20 della serie Human Frequency",
-          "meta": "2024 · AI Generative"
+          "title": "Downtown",
+          "description": "Amerika · Human Frequency",
+          "meta": "São Paulo · 2006"
         }
       ]
     }
