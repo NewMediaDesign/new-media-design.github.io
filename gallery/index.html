@@ -175,7 +175,7 @@ header.solid .theme-btn{ color:var(--fg2); }
 .shuffle-btn{ background:none; border:none; cursor:pointer; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:var(--fg2); transition:color .2s,transform .4s; touch-action:manipulation; flex-shrink:0; }
 .shuffle-btn:hover{ color:var(--fg); }
 .shuffle-btn.spinning{ transform:rotate(180deg); }
-.shuffle-btn svg{ width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.shuffle-btn svg{ width:16px; height:16px; }
 .series-bar-title{ font-size:10px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--fg); }
 .series-bar-meta{ font-family:'Space Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--fg2); text-transform:uppercase; }
 @media(max-width:480px){ .series-bar-meta{ display:none; } }
@@ -382,7 +382,7 @@ header.solid .theme-btn{ color:var(--fg2); }
     <span class="series-bar-title" id="seriesBarTitle">Series I &mdash; Faces</span>
     <span class="series-bar-meta" id="seriesBarMeta">AI Generative &middot; 2024</span>
     <button class="shuffle-btn" id="shuffleBtn" aria-label="Shuffle layout">
-      <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+      <svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 3)"><path d="m4.501 8.5-3.001 3 3.001 3"/><path d="m12.5 6.5v2c0 1.6568542-1.3431458 3-3 3h-8"/><path d="m8.499 6.5 3.001-3-3.001-3"/><path d="m.5 8.5v-2c0-1.65685425 1.34314575-3 3-3h8"/></g></svg>
     </button>
   </div>
 </div>
