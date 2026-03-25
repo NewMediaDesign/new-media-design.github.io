@@ -1,6 +1,7 @@
 {
   "site": {
     "name": "Andrea Spinazzola",
+    "project": "Human Frequency",
     "hero": {
       "seriesId": "series-1",
       "interval": 5000

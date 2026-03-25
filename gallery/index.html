@@ -454,6 +454,7 @@ let IMAGES       = [];   // current series images metadata
 let loadedImgs   = [];   // full-size Image objects (for hero + museum)
 let thumbImgs    = [];   // thumbnail Image objects (for gallery grid)
 let SERIES_DATA  = [];   // all series from manifest
+let SITE_DATA    = {};   // site-level data from manifest (name, project, hero)
 let currentSeriesId = null;
 
 
@@ -1037,8 +1038,8 @@ function loadSeries(seriesId) {
   }));
   loadedImgs = IMAGES.map(() => new Image());
   thumbImgs  = IMAGES.map(() => new Image());
-  document.getElementById('heroSeries').textContent     = series.subtitle || '';
-  document.getElementById('heroTitle').textContent      = series.title    || '';
+  document.getElementById('heroSeries').textContent     = '';
+  document.getElementById('heroTitle').textContent      = SITE_DATA.project || series.title || '';
   document.getElementById('seriesBarTitle').textContent = series.title    || '';
   document.getElementById('seriesBarMeta').textContent  = series.subtitle || '';
 }
@@ -1086,7 +1087,8 @@ function buildSeriesGrid() {
 
 // MANIFEST
 function initFromManifest(manifest) {
-  // Store all series
+  // Store site-level and series data
+  SITE_DATA   = manifest.site   || {};
   SERIES_DATA = manifest.series || [];
 
   // Populate About from manifest
