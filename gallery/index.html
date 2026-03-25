@@ -296,13 +296,15 @@ header.solid .theme-btn{ color:var(--fg2); }
 .pswp__button--arrow--next .pswp__icn { left: auto !important; right: 12px !important; transform: none !important; }
 @media(hover:none){ .pswp__button--arrow { display: none !important; } }
 
-/* Copyright overlay — positioned + shown/hidden by JS (opacity:0 = zoomed, opacity:.45 = fit) */
+/* Copyright — z-index basso: a fit è sotto il bordo immagine (visibile); a zoom l'immagine cresce e lo copre */
 .pswp-copyright {
-  position: absolute; z-index: 10; pointer-events: none; opacity: 0;
-  font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: .18em;
+  position: absolute; z-index: 2; pointer-events: none; opacity: 0;
+  font-family: 'Space Mono', monospace; font-size: 6px; letter-spacing: .18em;
   color: var(--fg2); text-transform: uppercase; white-space: nowrap;
   transition: opacity .25s;
 }
+/* Scroll-wrap (contiene l'immagine) sopra il copyright → copre copyright quando zoommato */
+.pswp__scroll-wrap { z-index: 5 !important; }
 
 /* Caption bar */
 .pswp-caption {
