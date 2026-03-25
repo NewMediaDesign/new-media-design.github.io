@@ -290,10 +290,10 @@ header.solid .theme-btn{ color:var(--fg2); }
 .pswp--has_mouse .pswp__button--arrow.zone-active { opacity: .45 !important; pointer-events: auto !important; }
 .pswp__button--arrow.zone-active:hover,
 .pswp--has_mouse .pswp__button--arrow.zone-active:hover { opacity: 1 !important; }
-/* pswp__icn: 50×50px chevron. PhotoSwipe auto-flips next arrow via scaleX(-1) — non sovrascrivere transform */
-.pswp__button--arrow .pswp__icn { width: 50px !important; height: 50px !important; margin-top: -25px !important; left: 12px !important; fill: none !important; color: var(--fg); }
+/* pswp__icn: custom 50×50px chevron — shadow outline nascosta */
+.pswp__icn-shadow { display: none !important; }
+.pswp__button--arrow .pswp__icn { width: 50px !important; height: 50px !important; margin-top: -25px !important; left: 12px !important; color: var(--fg); }
 .pswp__button--arrow--next .pswp__icn { left: auto !important; right: 12px !important; }
-.pswp__button--arrow .pswp__icn polyline { fill: none !important; stroke: currentColor !important; stroke-width: 1 !important; stroke-linecap: round !important; stroke-linejoin: round !important; }
 @media(hover:none){ .pswp__button--arrow { display: none !important; } }
 
 /* Copyright overlay — positioned + shown/hidden by JS (opacity:0 = zoomed, opacity:.45 = fit) */
@@ -791,8 +791,9 @@ function openMuseum(idx) {
     secondaryZoomLevel: 1,   // 100% = pixel originali
     maxZoomLevel: 2,
     returnFocus: false,
-    // Freccia prev (<): PhotoSwipe specchia automaticamente per next con scaleX(-1)
-    arrowPrevSVGString: '<polyline points="21 6 11 16 21 26" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>',
+    // Opzione corretta: arrowPrevSVG / arrowNextSVG con tag <svg> completo (non arrowPrevSVGString)
+    arrowPrevSVG: '<svg aria-hidden="true" class="pswp__icn" viewBox="0 0 32 32" width="32" height="32"><polyline points="21 6 11 16 21 26" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    arrowNextSVG: '<svg aria-hidden="true" class="pswp__icn" viewBox="0 0 32 32" width="32" height="32"><polyline points="11 6 21 16 11 26" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   });
 
   pswp.on('uiRegister', () => {
