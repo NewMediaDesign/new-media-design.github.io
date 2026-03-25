@@ -178,3 +178,59 @@ if (HAS_MOUSE) {
 `pointer: fine` = mouse/trackpad. `pointer: coarse` = dito/touch.
 
 ---
+
+## [FIX-011] manifest.json cached su mobile (CDN GitHub Pages)
+
+**Sintomo:** Le didascalie delle immagini su mobile mostrano dati vecchi (titoli/descrizioni non aggiornati), anche dopo aver pulito la cache del browser, usato incognito e cambiato browser. Su desktop tutto è aggiornato correttamente.
+
+**Causa:** `fetch('manifest.json')` senza parametri di cache-busting. GitHub Pages usa un CDN con edge server distribuiti. Il browser desktop e il browser mobile possono colpire edge server diversi con tempi di invalidazione cache diversi. Anche in incognito, il CDN serve la versione cached dal suo edge, non dal browser.
+
+**Soluzione:** Aggiungere un timestamp come query parameter per rendere ogni richiesta un URL unico mai cached:
+```js
+// prima:
+fetch('manifest.json')
+
+// dopo:
+fetch('manifest.json?v=' + Date.now())
+```
+Il server ignora il parametro `?v=`, ma il CDN e il browser lo trattano come un URL diverso → nessuna cache possibile.
+
+**Nota:** Questo impedisce QUALSIASI caching del manifest. Per siti ad alto traffico si potrebbe usare un hash del contenuto invece del timestamp, ma per un portfolio personale il trade-off è accettabile.
+
+---
+
+## [FIX-012] PhotoSwipe copyright — non si nasconde su zoom (proprietà inesistente)
+
+**Sintomo:** Il testo "© Andrea Spinazzola" rimane visibile sopra l'immagine quando si zooma con click/doppio-tap. Il copyright appare in mezzo all'immagine zoommata invece di essere coperto.
+
+**Causa:** Il codice usava `pswp.currZoomLevel` per confrontare il livello di zoom corrente con il livello fit. **Questa proprietà non esiste** in PhotoSwipe v5 — il livello di zoom è su `pswp.currSlide.currZoomLevel`. Quindi `pswp.currZoomLevel` era sempre `undefined`, il confronto `undefined > number` era sempre `false`, e il copyright non veniva mai nascosto.
+
+**Soluzione:**
+```js
+// prima (non funziona — proprietà inesistente):
+if (pswp.currZoomLevel > fitLevel + 0.01) {
+
+// dopo (proprietà corretta su currSlide):
+if (pswp.currSlide.currZoomLevel > fitLevel + 0.01) {
+```
+
+**Errore da evitare:** Non confondere le proprietà dell'istanza `pswp` con quelle dello slide. In PhotoSwipe v5, molte proprietà di stato (zoom, dimensioni, posizione) sono su `pswp.currSlide`, non su `pswp`.
+
+---
+
+## [FIX-013] PhotoSwipe caption meta — nascosto su mobile (CSS display:none)
+
+**Sintomo:** La caption delle immagini nel museum su mobile mostra solo titolo e serie, ma non la località e l'anno (es. "SÃO PAULO · 1989"). Su desktop la caption è completa.
+
+**Causa:** Una regola CSS nascondeva intenzionalmente il meta su schermi piccoli:
+```css
+@media(max-width:480px){ .pswp-cap-meta{ display:none; } }
+```
+
+**Soluzione:** Rimuovere `display:none` dal meta, mantenendo solo il cambio di layout:
+```css
+@media(max-width:480px){ .pswp-cap-body{flex-direction:column;gap:4px;} }
+```
+
+---
+

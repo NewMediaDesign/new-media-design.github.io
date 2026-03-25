@@ -548,6 +548,72 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+## Sessione 11 — 2026-03-25
+
+**Obiettivo:** Fix mobile (caption, cache, copyright zoom) + polish tipografico hero/caption
+
+---
+
+**1 — Fix cache manifest.json su mobile [FIX-011]**
+- Problema: caption immagini su mobile mostravano dati vecchi, anche in incognito e su browser diversi
+- Causa: `fetch('manifest.json')` senza cache-busting → CDN GitHub Pages serviva versione cached dall'edge server
+- Fix: `fetch('manifest.json?v=' + Date.now())` — timestamp unico rende ogni richiesta un URL mai cached
+- Dominio confermato: `new-media-design.it/gallery/`
+
+---
+
+**2 — Fix copyright non si nasconde su zoom [FIX-012]**
+- Problema: "© Andrea Spinazzola" restava visibile sopra l'immagine zoommata
+- Causa: `pswp.currZoomLevel` non esiste in PhotoSwipe v5 → era `undefined` → confronto sempre `false`
+- Fix: `pswp.currSlide.currZoomLevel` (proprietà corretta)
+
+---
+
+**3 — Fix caption meta nascosto su mobile [FIX-013]**
+- Problema: località e anno (es. "SÃO PAULO · 1989") non visibili su mobile
+- Causa: `@media(max-width:480px){ .pswp-cap-meta{ display:none; } }`
+- Fix: rimosso `display:none`, mantenuto solo cambio layout `flex-direction:column`
+
+---
+
+**4 — Hero subtitle: testo e tipografia**
+- Testo cambiato: "A visual journey through the possible · 2026" → "A journey through the possible · 2026"
+- Font-size hero subtitle aumentato: `clamp(7px,1.8vw,9px)` → `clamp(10px,1.1vw,16px)`
+- Rimossa regola fissa mobile `13px` → ora scala fluidamente come il titolo "Human Frequency"
+
+---
+
+**5 — Caption museum: polish tipografico**
+- Rimosso "Human Frequency" da tutte le 19 description in `manifest.json` → solo "Amerika" (nome serie)
+- Serie (`.pswp-cap-desc`): aggiunto `font-style: italic` — gerarchia: **titolo bold** / *serie italic* / `meta monospace`
+- Meta monospace (`.pswp-cap-meta`): `letter-spacing` ridotto da `+0.18em` a `-0.02em` — più compatto e leggibile
+
+---
+
+**Commit chiave:**
+- `8b86ab6` — fix: cache-bust manifest.json + hero tagline text + mobile font size
+- `b2a0a3d` — fix: show caption meta (location/year) on mobile
+- `b3a1201` — fix: copyright hides on zoom (currSlide.currZoomLevel) + responsive hero subtitle
+- `599304e` — feat: caption — italic series, tight monospace, remove Human Frequency from desc
+
+**Ultimo commit:** `599304e` — branch `main`
+
+---
+
+**Stato al termine della sessione:**
+- ✅ Caption complete su mobile (titolo + serie italic + località/anno)
+- ✅ Copyright si nasconde correttamente su zoom
+- ✅ manifest.json sempre fresco via cache-buster
+- ✅ Hero subtitle responsive, scala proporzionalmente al titolo
+- ✅ Tipografia caption editoriale: bold/italic/monospace
+
+**Pending / prossima sessione:**
+- Favicon .ico reale
+- Test multi-serie (serie-2)
+- Valutare letter-spacing monospace anche su altri elementi (series-bar, gallery caption index)
+
+---
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD
