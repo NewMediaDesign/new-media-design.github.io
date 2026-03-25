@@ -283,11 +283,14 @@ header.solid .theme-btn{ color:var(--fg2); }
 .pswp__button--pswp-back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
 /* Arrows — hidden by default, shown only via JS zone logic */
-.pswp__button--arrow { background: none; border: none; color: var(--fg); opacity: 0; pointer-events: none; transition: opacity .2s; }
-.pswp__button--arrow.zone-active { opacity: .4; pointer-events: auto; }
+.pswp__button--arrow { background: none !important; border: none; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.pswp__button--arrow.zone-active { opacity: .45; pointer-events: auto; }
 .pswp__button--arrow.zone-active:hover { opacity: 1; }
-.pswp__button--arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
-@media(hover:none){ .pswp__button--arrow { display: none; } }
+/* pswp__icn is the <svg viewBox="0 0 32 32"> PhotoSwipe creates — override to match site style */
+.pswp__button--arrow .pswp__icn { width: 28px !important; height: 28px !important; margin-top: -14px !important; left: 16px !important; fill: none !important; color: var(--fg); }
+.pswp__button--arrow--next .pswp__icn { left: auto !important; right: 16px !important; transform: none !important; }
+.pswp__button--arrow .pswp__icn polyline { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+@media(hover:none){ .pswp__button--arrow { display: none !important; } }
 
 /* Copyright overlay — positioned dynamically by JS below image bottom-left */
 .pswp-copyright {
@@ -748,18 +751,20 @@ function buildGalleryGrid() {
 // ═══════════════════════════════════════════════════
 let pswp = null;
 
-// Padding values (passepartout) — keep in sync with pswp options below
-const PSWP_PAD = { top: 48, bottom: 60, left: 56, right: 56 };
+// Calcola il passepartout in base alla larghezza del viewport
+function pswpPadding(viewportSize) {
+  const side = viewportSize.x >= 768 ? Math.round(viewportSize.x * 0.14) : 20;
+  return { top: 48, bottom: 60, left: side, right: side };
+}
 
 function openMuseum(idx) {
   if (pswp) pswp.close();
 
-  // Use thumbnail dimensions for correct aspect ratio (thumbs already loaded for gallery items)
+  // Usa aspect ratio della thumbnail (già caricata) + larghezza stimata full-res 3000px
   const items = IMAGES.map((img, i) => {
     const t = thumbImgs[i];
-    const w = (t && t.naturalWidth)  ? t.naturalWidth  : 600;
-    const h = (t && t.naturalHeight) ? t.naturalHeight : 400;
-    return { src: img.src, msrc: img.thumb, width: w, height: h };
+    const aspect = (t && t.naturalWidth) ? t.naturalHeight / t.naturalWidth : 2/3;
+    return { src: img.src, msrc: img.thumb, width: 3000, height: Math.round(3000 * aspect) };
   });
 
   pswp = new PhotoSwipe({
@@ -773,12 +778,13 @@ function openMuseum(idx) {
     wheelToZoom: true,
     tapAction: 'zoom',
     doubleTapAction: 'zoom',
-    padding: PSWP_PAD,
-    secondaryZoomLevel: 1.5,
-    maxZoomLevel: 4,
+    padding: pswpPadding,
+    secondaryZoomLevel: 1,   // 100% = pixel originali
+    maxZoomLevel: 2,
     returnFocus: false,
-    arrowPrevSVGString: '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    arrowNextSVGString: '<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    // Frecce: polyline singola, coordinate per viewBox 0 0 32 32
+    arrowPrevSVGString: '<polyline points="20 24 12 16 20 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+    arrowNextSVGString: '<polyline points="12 8 20 16 12 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
   });
 
   pswp.on('uiRegister', () => {
@@ -813,27 +819,26 @@ function openMuseum(idx) {
       },
     });
 
-    // Copyright — positioned just below image bottom-left
+    // Copyright — elemento con classe diretta su el, posizionato sotto il bordo inferiore-sinistro dell'immagine
     pswp.ui.registerElement({
       name: 'pswp-copyright',
       order: 8,
       isButton: false,
       appendTo: 'root',
-      html: '<div class="pswp-copyright">© Andrea Spinazzola</div>',
+      className: 'pswp-copyright',   // classe applicata direttamente su el → position:absolute funziona
+      html: '© Andrea Spinazzola',
       onInit: (el) => {
         const positionCopyright = () => {
           if (!pswp || !pswp.currSlide) return;
-          const slide = pswp.currSlide;
           const vw = pswp.viewportSize.x, vh = pswp.viewportSize.y;
-          const availW = vw - PSWP_PAD.left - PSWP_PAD.right;
-          const availH = vh - PSWP_PAD.top  - PSWP_PAD.bottom;
-          const iw = slide.data.width  || 600;
-          const ih = slide.data.height || 400;
-          const scale = Math.min(availW / iw, availH / ih);
-          const renderedW = iw * scale;
-          const renderedH = ih * scale;
-          const imgLeft   = PSWP_PAD.left + (availW - renderedW) / 2;
-          const imgBottom = PSWP_PAD.top  + (availH - renderedH) / 2 + renderedH;
+          const pad = pswpPadding({ x: vw, y: vh });
+          const availW = vw - pad.left - pad.right;
+          const availH = vh - pad.top  - pad.bottom;
+          const iw = pswp.currSlide.data.width  || 3000;
+          const ih = pswp.currSlide.data.height || 2000;
+          const scale     = Math.min(availW / iw, availH / ih);
+          const imgLeft   = pad.left + (availW - iw * scale) / 2;
+          const imgBottom = pad.top  + (availH - ih * scale) / 2 + ih * scale;
           el.style.left = Math.round(imgLeft) + 'px';
           el.style.top  = Math.round(imgBottom + 7) + 'px';
         };
@@ -844,7 +849,7 @@ function openMuseum(idx) {
     });
   });
 
-  // Arrow zone logic — arrows appear only when mouse enters left/right zones
+  // Frecce: compaiono solo nelle zone sinistra/destra al passaggio del mouse
   pswp.on('afterInit', () => {
     const el = pswp.element;
     const prev = el.querySelector('.pswp__button--arrow--prev');
