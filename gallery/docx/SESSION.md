@@ -488,6 +488,66 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+## Sessione 10 — 2026-03-25
+
+**Obiettivo:** Fix freccia destra invertita, copyright z-index, cursore mobile, icona shuffle, sistema documentazione bug
+
+---
+
+**1 — Fix freccia next invertita**
+- Problema: PhotoSwipe applica `transform: scaleX(-1)` alla `.pswp__icn` della freccia next via CSS — anche con SVG custom `>`, l'icona veniva specchiata e diventava `<`
+- Fix: aggiunto `transform: none !important` su `.pswp__button--arrow--next .pswp__icn` in CSS
+- `arrowNextSVG` disegna `>` (punta a destra); con `transform: none` non viene specchiato → orientamento corretto
+- `stroke-width` ridotto a 1pt
+
+**2 — Fix copyright z-index (sopra/sotto immagine)**
+- Problema: copyright appariva sopra l'immagine anche a zoom — `z-index: 2` del copyright era superiore a `z-index: 1` di `.pswp__scroll-wrap` (default PhotoSwipe)
+- Tentativo errato: impostare `z-index: 5` su scroll-wrap non risolveva perché il copyright (aggiunto dopo nel DOM) manteneva precedenza
+- Fix corretto: copyright `z-index: 0` → inferiore al default `z-index: 1` di scroll-wrap → immagine zoommata copre il copyright naturalmente
+
+**3 — Cursore custom su mobile**
+- Problema: il div cursore rimaneva bloccato in posizione su touch (nessun `mousemove` su mobile)
+- Fix: doppio gate
+  - CSS: `@media(pointer:coarse){ .custom-cursor{ display:none !important; } }` — nascosto su touch
+  - JS: `const HAS_MOUSE = window.matchMedia('(pointer: fine)').matches` — i listener mouse sono attaccati solo se c'è un mouse
+
+**4 — Icona shuffle sostituita**
+- Sostituita con SVG custom fornito dall'utente (due frecce circolari, stile 21×21px)
+- CSS semplificato: rimosse proprietà stroke/fill ereditate dall'SVG esterno, dimensione fissa 16×16px
+
+**5 — Sistema documentazione bug (FIX.md + CLAUDE.md)**
+- Creato `docx/FIX.md`: registro persistente di tutti i bug risolti con causa, sintomo, soluzione
+- Creato `CLAUDE.md` nella root: istruzioni di avvio sessione — leggere SESSION.md e FIX.md prima di qualsiasi intervento
+- Entrambi i file pushati nel repo GitHub
+
+---
+
+**Commit chiave:**
+- `f459614` — fix: freccia destra orientamento (transform:none), stroke-width 1
+- `1001a61` — docs: add FIX.md bug registry + CLAUDE.md session startup instructions
+- `b92034e` — fix: copyright z-index 2 (sotto immagine zoom), font 6px
+- `10e95c7` — fix: cursor nascosto su touch, copyright 7px, shuffle icon completa
+- `0bb0a02` — feat: shuffle icon custom SVG
+- `e13c63a` — fix: copyright z-index 0 (sotto scroll-wrap z-index 1)
+
+**Ultimo commit:** `e13c63a` — branch `main`
+
+---
+
+**Stato al termine della sessione:**
+- ✅ Frecce: custom SVG, orientamento corretto, visibili solo su hover zone
+- ✅ Copyright: z-index 0, coperto dall'immagine a zoom, 7px
+- ✅ Cursore custom: nascosto su mobile, funzionante su desktop
+- ✅ Icona shuffle custom SVG
+- ✅ FIX.md + CLAUDE.md: sistema documentazione bug attivo
+
+**Pending / prossima sessione:**
+- Aggiornare contenuto reale: bio, email, Instagram, titoli opere in manifest.json
+- Favicon .ico reale
+- Test multi-serie (serie-2)
+
+---
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD

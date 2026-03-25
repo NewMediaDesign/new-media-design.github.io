@@ -123,3 +123,58 @@ CSS: `.pswp-copyright { position: absolute; ... }` — ora si applica correttame
 ```
 
 ---
+
+## [FIX-008] PhotoSwipe arrow next — icona specchiata anche con SVG custom
+
+**Sintomo:** La freccia destra (next) punta a sinistra anche dopo aver fornito `arrowNextSVG` con un `>` correttamente orientato.
+
+**Causa:** PhotoSwipe applica via CSS `transform: scaleX(-1)` alla `.pswp__icn` della freccia next — indipendentemente dal fatto che si usi l'SVG di default o uno custom. Il `>` fornito viene specchiato → diventa `<`.
+
+**Soluzione:** Aggiungere in CSS con `!important` per bloccare il flip:
+```css
+.pswp__button--arrow--next .pswp__icn { transform: none !important; }
+```
+`arrowNextSVG` deve già disegnare `>` (orientato a destra).
+
+**Nota:** Questo è diverso da [FIX-003] che documentava il problema di orientamento precedente. Entrambi i fix devono essere presenti.
+
+---
+
+## [FIX-009] PhotoSwipe copyright — z-index sopra immagine
+
+**Sintomo:** Il testo copyright rimane visibile sopra l'immagine quando si zooma, invece di essere coperto dall'immagine.
+
+**Causa:** PhotoSwipe imposta `z-index: 1` su `.pswp__scroll-wrap` per default. Il copyright registrato via `registerElement` con `appendTo: 'root'` veniva aggiunto dopo lo scroll-wrap nel DOM. Con `z-index: 2` (o qualsiasi valore > 1), il copyright era sopra l'immagine.
+
+**Soluzione:** Impostare `z-index: 0` sul copyright — inferiore al default `z-index: 1` di `.pswp__scroll-wrap`:
+```css
+.pswp-copyright { z-index: 0; }
+```
+A zoom normale il copyright è posizionato appena sotto il bordo dell'immagine (non si sovrappongono). A zoom, l'immagine cresce e copre il copyright naturalmente per via dello z-index.
+
+**Errore da evitare:** Impostare `z-index: 5` su `.pswp__scroll-wrap` non risolve, perché il copyright (aggiunto dopo nel DOM) mantiene precedenza sullo stacking context.
+
+---
+
+## [FIX-010] Cursore custom bloccato su mobile
+
+**Sintomo:** Su dispositivi touch (mobile/tablet), il div del cursore custom rimane bloccato in una posizione fissa sullo schermo, perché su mobile non esiste `mousemove`.
+
+**Causa:** Il cursore è implementato con un div che segue il mouse via `mousemove`. Su touch non viene mai spostato → rimane dove era l'ultima volta.
+
+**Soluzione:** Doppio gate CSS + JS:
+```css
+@media(pointer: coarse) { .custom-cursor { display: none !important; } }
+```
+```js
+const HAS_MOUSE = window.matchMedia('(pointer: fine)').matches;
+// Attaccare i listener solo se c'è un mouse
+if (HAS_MOUSE) {
+  hit.addEventListener('mousemove', ...);
+  hit.addEventListener('mouseenter', ...);
+  // ...
+}
+```
+`pointer: fine` = mouse/trackpad. `pointer: coarse` = dito/touch.
+
+---
