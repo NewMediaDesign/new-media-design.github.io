@@ -282,10 +282,19 @@ header.solid .theme-btn{ color:var(--fg2); }
 .pswp__button--pswp-back:hover { color: var(--fg); }
 .pswp__button--pswp-back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
-/* Arrows */
-.pswp__button--arrow { background: none; border: none; color: var(--fg); opacity: .35; }
-.pswp__button--arrow:hover { opacity: 1; }
-.pswp__button--arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+/* Arrows — hidden by default, shown only via JS zone logic */
+.pswp__button--arrow { background: none; border: none; color: var(--fg); opacity: 0; pointer-events: none; transition: opacity .2s; }
+.pswp__button--arrow.zone-active { opacity: .4; pointer-events: auto; }
+.pswp__button--arrow.zone-active:hover { opacity: 1; }
+.pswp__button--arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+@media(hover:none){ .pswp__button--arrow { display: none; } }
+
+/* Copyright overlay — positioned dynamically by JS below image bottom-left */
+.pswp-copyright {
+  position: absolute; z-index: 10; pointer-events: none;
+  font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: .2em;
+  color: var(--fg2); text-transform: uppercase; opacity: .55; white-space: nowrap;
+}
 
 /* Caption bar */
 .pswp-caption {
@@ -739,13 +748,18 @@ function buildGalleryGrid() {
 // ═══════════════════════════════════════════════════
 let pswp = null;
 
+// Padding values (passepartout) — keep in sync with pswp options below
+const PSWP_PAD = { top: 48, bottom: 60, left: 56, right: 56 };
+
 function openMuseum(idx) {
   if (pswp) pswp.close();
 
+  // Use thumbnail dimensions for correct aspect ratio (thumbs already loaded for gallery items)
   const items = IMAGES.map((img, i) => {
     const t = thumbImgs[i];
-    const aspect = (t && t.naturalWidth) ? t.naturalHeight / t.naturalWidth : 1.5;
-    return { src: img.src, msrc: img.thumb, width: 3000, height: Math.round(3000 * aspect) };
+    const w = (t && t.naturalWidth)  ? t.naturalWidth  : 600;
+    const h = (t && t.naturalHeight) ? t.naturalHeight : 400;
+    return { src: img.src, msrc: img.thumb, width: w, height: h };
   });
 
   pswp = new PhotoSwipe({
@@ -753,17 +767,22 @@ function openMuseum(idx) {
     index: idx,
     bgOpacity: 1,
     loop: true,
-    spacing: 0.1,
-    closeOnVerticalDrag: true,
+    spacing: 0.08,
+    closeOnVerticalDrag: false,
     pinchToClose: false,
     wheelToZoom: true,
-    padding: { top: 48, bottom: 52, left: 0, right: 0 },
+    tapAction: 'zoom',
+    doubleTapAction: 'zoom',
+    padding: PSWP_PAD,
     secondaryZoomLevel: 1.5,
     maxZoomLevel: 4,
     returnFocus: false,
+    arrowPrevSVGString: '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    arrowNextSVGString: '<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   });
 
   pswp.on('uiRegister', () => {
+    // Back button
     pswp.ui.registerElement({
       name: 'pswp-back',
       order: 1,
@@ -774,6 +793,7 @@ function openMuseum(idx) {
       onClick: () => pswp.close(),
     });
 
+    // Caption bar
     pswp.ui.registerElement({
       name: 'pswp-caption',
       order: 9,
@@ -791,6 +811,59 @@ function openMuseum(idx) {
         pswp.on('change', update);
         pswp.on('afterInit', update);
       },
+    });
+
+    // Copyright — positioned just below image bottom-left
+    pswp.ui.registerElement({
+      name: 'pswp-copyright',
+      order: 8,
+      isButton: false,
+      appendTo: 'root',
+      html: '<div class="pswp-copyright">© Andrea Spinazzola</div>',
+      onInit: (el) => {
+        const positionCopyright = () => {
+          if (!pswp || !pswp.currSlide) return;
+          const slide = pswp.currSlide;
+          const vw = pswp.viewportSize.x, vh = pswp.viewportSize.y;
+          const availW = vw - PSWP_PAD.left - PSWP_PAD.right;
+          const availH = vh - PSWP_PAD.top  - PSWP_PAD.bottom;
+          const iw = slide.data.width  || 600;
+          const ih = slide.data.height || 400;
+          const scale = Math.min(availW / iw, availH / ih);
+          const renderedW = iw * scale;
+          const renderedH = ih * scale;
+          const imgLeft   = PSWP_PAD.left + (availW - renderedW) / 2;
+          const imgBottom = PSWP_PAD.top  + (availH - renderedH) / 2 + renderedH;
+          el.style.left = Math.round(imgLeft) + 'px';
+          el.style.top  = Math.round(imgBottom + 7) + 'px';
+        };
+        pswp.on('afterInit', positionCopyright);
+        pswp.on('change',    positionCopyright);
+        pswp.on('resize',    positionCopyright);
+      },
+    });
+  });
+
+  // Arrow zone logic — arrows appear only when mouse enters left/right zones
+  pswp.on('afterInit', () => {
+    const el = pswp.element;
+    const prev = el.querySelector('.pswp__button--arrow--prev');
+    const next = el.querySelector('.pswp__button--arrow--next');
+    let zoneTimer;
+    el.addEventListener('mousemove', e => {
+      clearTimeout(zoneTimer);
+      const x = e.clientX, w = window.innerWidth;
+      prev && prev.classList.toggle('zone-active', x < w * 0.22);
+      next && next.classList.toggle('zone-active', x > w * 0.78);
+      zoneTimer = setTimeout(() => {
+        prev && prev.classList.remove('zone-active');
+        next && next.classList.remove('zone-active');
+      }, 2500);
+    });
+    el.addEventListener('mouseleave', () => {
+      clearTimeout(zoneTimer);
+      prev && prev.classList.remove('zone-active');
+      next && next.classList.remove('zone-active');
     });
   });
 
