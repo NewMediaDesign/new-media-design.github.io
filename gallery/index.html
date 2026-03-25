@@ -282,21 +282,26 @@ header.solid .theme-btn{ color:var(--fg2); }
 .pswp__button--pswp-back:hover { color: var(--fg); }
 .pswp__button--pswp-back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
-/* Arrows — hidden by default, shown only via JS zone logic */
-.pswp__button--arrow { background: none !important; border: none; opacity: 0; pointer-events: none; transition: opacity .2s; }
-.pswp__button--arrow.zone-active { opacity: .45; pointer-events: auto; }
-.pswp__button--arrow.zone-active:hover { opacity: 1; }
+/* Arrows — always hidden; shown only in left/right hover zones via JS (.zone-active class)
+   !important needed to override PhotoSwipe's .pswp--has_mouse .pswp__button--arrow { opacity:.85 } */
+.pswp__button--arrow,
+.pswp--has_mouse .pswp__button--arrow { background: none !important; border: none !important; opacity: 0 !important; pointer-events: none !important; transition: opacity .2s; visibility: visible !important; }
+.pswp__button--arrow.zone-active,
+.pswp--has_mouse .pswp__button--arrow.zone-active { opacity: .45 !important; pointer-events: auto !important; }
+.pswp__button--arrow.zone-active:hover,
+.pswp--has_mouse .pswp__button--arrow.zone-active:hover { opacity: 1 !important; }
 /* pswp__icn is the <svg viewBox="0 0 32 32"> PhotoSwipe creates — override to match site style */
 .pswp__button--arrow .pswp__icn { width: 28px !important; height: 28px !important; margin-top: -14px !important; left: 16px !important; fill: none !important; color: var(--fg); }
 .pswp__button--arrow--next .pswp__icn { left: auto !important; right: 16px !important; transform: none !important; }
-.pswp__button--arrow .pswp__icn polyline { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.pswp__button--arrow .pswp__icn polyline { fill: none !important; stroke: currentColor !important; stroke-width: 1.5 !important; stroke-linecap: round !important; stroke-linejoin: round !important; }
 @media(hover:none){ .pswp__button--arrow { display: none !important; } }
 
-/* Copyright overlay — positioned dynamically by JS below image bottom-left */
+/* Copyright overlay — positioned + shown/hidden by JS (opacity:0 = zoomed, opacity:.45 = fit) */
 .pswp-copyright {
-  position: absolute; z-index: 10; pointer-events: none;
-  font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: .2em;
-  color: var(--fg2); text-transform: uppercase; opacity: .55; white-space: nowrap;
+  position: absolute; z-index: 10; pointer-events: none; opacity: 0;
+  font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: .18em;
+  color: var(--fg2); text-transform: uppercase; white-space: nowrap;
+  transition: opacity .25s;
 }
 
 /* Caption bar */
@@ -751,10 +756,12 @@ function buildGalleryGrid() {
 // ═══════════════════════════════════════════════════
 let pswp = null;
 
-// Calcola il passepartout in base alla larghezza del viewport
+// Passepartout: visual gap P is equal on all 4 sides.
+// Top bar (48px) and caption (52px) overlay the gap, so we add their heights
+// to keep the image from sliding behind them.
 function pswpPadding(viewportSize) {
-  const side = viewportSize.x >= 768 ? Math.round(viewportSize.x * 0.14) : 20;
-  return { top: 48, bottom: 60, left: side, right: side };
+  const p = viewportSize.x >= 768 ? Math.round(viewportSize.x * 0.09) : 16;
+  return { top: p + 48, bottom: p + 52, left: p, right: p };
 }
 
 function openMuseum(idx) {
@@ -828,8 +835,15 @@ function openMuseum(idx) {
       className: 'pswp-copyright',   // classe applicata direttamente su el → position:absolute funziona
       html: '© Andrea Spinazzola',
       onInit: (el) => {
-        const positionCopyright = () => {
+        const updateCopyright = () => {
           if (!pswp || !pswp.currSlide) return;
+          // Hide when zoomed in — image pans around and copyright has no fixed anchor
+          const fitLevel = pswp.currSlide.zoomLevels ? pswp.currSlide.zoomLevels.initial : 0;
+          if (pswp.currZoomLevel > fitLevel + 0.01) {
+            el.style.opacity = '0';
+            return;
+          }
+          // Position at bottom-left of image in fit-zoom state
           const vw = pswp.viewportSize.x, vh = pswp.viewportSize.y;
           const pad = pswpPadding({ x: vw, y: vh });
           const availW = vw - pad.left - pad.right;
@@ -839,12 +853,14 @@ function openMuseum(idx) {
           const scale     = Math.min(availW / iw, availH / ih);
           const imgLeft   = pad.left + (availW - iw * scale) / 2;
           const imgBottom = pad.top  + (availH - ih * scale) / 2 + ih * scale;
-          el.style.left = Math.round(imgLeft) + 'px';
-          el.style.top  = Math.round(imgBottom + 7) + 'px';
+          el.style.left    = Math.round(imgLeft) + 'px';
+          el.style.top     = Math.round(imgBottom + 6) + 'px';
+          el.style.opacity = '0.45';
         };
-        pswp.on('afterInit', positionCopyright);
-        pswp.on('change',    positionCopyright);
-        pswp.on('resize',    positionCopyright);
+        pswp.on('afterInit',    updateCopyright);
+        pswp.on('change',       updateCopyright);
+        pswp.on('resize',       updateCopyright);
+        pswp.on('zoomPanUpdate', updateCopyright);
       },
     });
   });
