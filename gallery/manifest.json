@@ -161,6 +161,188 @@
           "meta": "São Paulo · 2006"
         }
       ]
+    },
+    {
+      "id": "series-2",
+      "title": "Pulse",
+      "subtitle": "Human Frequency · 2026",
+      "images": [
+        {
+          "filename": "images/series-2/01.jpg",
+          "thumb": "images/series-2/thumbs/01.webp",
+          "title": "Iron",
+          "description": "Pulse",
+          "meta": "Copacabana · 1996"
+        },
+        {
+          "filename": "images/series-2/02.jpg",
+          "thumb": "images/series-2/thumbs/02.webp",
+          "title": "Behind Bars",
+          "description": "Pulse",
+          "meta": "São Paulo · 1993"
+        },
+        {
+          "filename": "images/series-2/03.jpg",
+          "thumb": "images/series-2/thumbs/03.webp",
+          "title": "The Kiss",
+          "description": "Pulse",
+          "meta": "Rio de Janeiro · 1999"
+        },
+        {
+          "filename": "images/series-2/04.jpg",
+          "thumb": "images/series-2/thumbs/04.webp",
+          "title": "The Elder",
+          "description": "Pulse",
+          "meta": "Recife · 1988"
+        },
+        {
+          "filename": "images/series-2/05.jpg",
+          "thumb": "images/series-2/thumbs/05.webp",
+          "title": "Departure",
+          "description": "Pulse",
+          "meta": "Belo Horizonte · 1991"
+        },
+        {
+          "filename": "images/series-2/06.jpg",
+          "thumb": "images/series-2/thumbs/06.webp",
+          "title": "Ascent",
+          "description": "Pulse",
+          "meta": "Buenos Aires · 2001"
+        },
+        {
+          "filename": "images/series-2/07.jpg",
+          "thumb": "images/series-2/thumbs/07.webp",
+          "title": "Grace",
+          "description": "Pulse",
+          "meta": "Salvador · 1994"
+        },
+        {
+          "filename": "images/series-2/08.jpg",
+          "thumb": "images/series-2/thumbs/08.webp",
+          "title": "The Wait",
+          "description": "Pulse",
+          "meta": "Havana · 2003"
+        },
+        {
+          "filename": "images/series-2/09.jpg",
+          "thumb": "images/series-2/thumbs/09.webp",
+          "title": "Three Generations",
+          "description": "Pulse",
+          "meta": "Lima · 1987"
+        },
+        {
+          "filename": "images/series-2/10.jpg",
+          "thumb": "images/series-2/thumbs/10.webp",
+          "title": "Oracle",
+          "description": "Pulse",
+          "meta": "Salvador · 1982"
+        },
+        {
+          "filename": "images/series-2/11.jpg",
+          "thumb": "images/series-2/thumbs/11.webp",
+          "title": "The Wind",
+          "description": "Pulse",
+          "meta": "Fortaleza · 1998"
+        },
+        {
+          "filename": "images/series-2/12.jpg",
+          "thumb": "images/series-2/thumbs/12.webp",
+          "title": "Sonata",
+          "description": "Pulse",
+          "meta": "Havana · 2005"
+        },
+        {
+          "filename": "images/series-2/13.jpg",
+          "thumb": "images/series-2/thumbs/13.webp",
+          "title": "The Gaze",
+          "description": "Pulse",
+          "meta": "Caracas · 1995"
+        },
+        {
+          "filename": "images/series-2/14.jpg",
+          "thumb": "images/series-2/thumbs/14.webp",
+          "title": "Highway",
+          "description": "Pulse",
+          "meta": "Salvador · 1990"
+        },
+        {
+          "filename": "images/series-2/15.jpg",
+          "thumb": "images/series-2/thumbs/15.webp",
+          "title": "Summer",
+          "description": "Pulse",
+          "meta": "Copacabana · 2002"
+        },
+        {
+          "filename": "images/series-2/16.jpg",
+          "thumb": "images/series-2/thumbs/16.webp",
+          "title": "Mother and Daughter",
+          "description": "Pulse",
+          "meta": "Bogotá · 1997"
+        },
+        {
+          "filename": "images/series-2/17.jpg",
+          "thumb": "images/series-2/thumbs/17.webp",
+          "title": "The Fighter",
+          "description": "Pulse",
+          "meta": "Rio de Janeiro · 1992"
+        },
+        {
+          "filename": "images/series-2/18.jpg",
+          "thumb": "images/series-2/thumbs/18.webp",
+          "title": "Skull",
+          "description": "Pulse",
+          "meta": "México DF · 2004"
+        },
+        {
+          "filename": "images/series-2/19.jpg",
+          "thumb": "images/series-2/thumbs/19.webp",
+          "title": "The Crowd",
+          "description": "Pulse",
+          "meta": "São Paulo · 1986"
+        },
+        {
+          "filename": "images/series-2/20.jpg",
+          "thumb": "images/series-2/thumbs/20.webp",
+          "title": "Joy",
+          "description": "Pulse",
+          "meta": "Montevideo · 1999"
+        },
+        {
+          "filename": "images/series-2/21.jpg",
+          "thumb": "images/series-2/thumbs/21.webp",
+          "title": "Written",
+          "description": "Pulse",
+          "meta": "Rio de Janeiro · 2001"
+        },
+        {
+          "filename": "images/series-2/22.jpg",
+          "thumb": "images/series-2/thumbs/22.webp",
+          "title": "The Dancer",
+          "description": "Pulse",
+          "meta": "Havana · 1995"
+        },
+        {
+          "filename": "images/series-2/23.jpg",
+          "thumb": "images/series-2/thumbs/23.webp",
+          "title": "Golden Hour",
+          "description": "Pulse",
+          "meta": "Rio de Janeiro · 2006"
+        },
+        {
+          "filename": "images/series-2/24.jpg",
+          "thumb": "images/series-2/thumbs/24.webp",
+          "title": "The Frame",
+          "description": "Pulse",
+          "meta": "Salvador · 1984"
+        },
+        {
+          "filename": "images/series-2/25.jpg",
+          "thumb": "images/series-2/thumbs/25.webp",
+          "title": "Rubble",
+          "description": "Pulse",
+          "meta": "Port-au-Prince · 2010"
+        }
+      ]
     }
   ]
 }

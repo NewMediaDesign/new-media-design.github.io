@@ -24,7 +24,7 @@
 |-----------|------------|
 | **Linguaggio** | HTML5 + CSS3 + Vanilla JS (ES6+) |
 | **Framework** | Nessuno — single file `index.html` |
-| **Rendering immagini** | HTML5 Canvas API |
+| **Rendering immagini** | PhotoSwipe v5.4.4 (bundlato in `lib/`) |
 | **Tema** | CSS custom properties + localStorage |
 | **Font** | Hanken Grotesk + Space Mono (Google Fonts) |
 | **Form backend** | Formspree (`https://formspree.io/f/xgonqrbv`) |
@@ -40,16 +40,23 @@ Art_Gallery/
 ├── index.html              ← FILE PRINCIPALE (tutto il CSS/JS è qui dentro)
 ├── manifest.json           ← Configura serie e immagini della galleria
 ├── update-manifest.js      ← Script Node.js: rigenera manifest da immagini in disco
+├── generate-thumbs.js      ← Script Node.js: genera thumbnail WebP 600px via sharp
+├── lib/
+│   ├── photoswipe.css      ← PhotoSwipe v5.4.4 CSS (bundlato localmente)
+│   └── photoswipe.umd.min.js ← PhotoSwipe v5.4.4 JS (bundlato localmente)
 ├── images/
 │   ├── AS_BW_PORTRAIT_02.png   ← Foto About
-│   └── series-1/
-│       ├── 01.jpg
-│       ├── 02.jpg
-│       ├── 03.jpg
-│       └── 04.jpg
-└── docx/                   ← Documentazione di progetto (questa cartella)
+│   ├── series-1/               ← Amerika — 19 immagini (01-20, manca 14)
+│   │   ├── 01.jpg … 20.jpg
+│   │   └── thumbs/01.webp … 20.webp
+│   └── series-2/               ← Pulse — 25 immagini (01-25)
+│       ├── 01.jpg … 25.jpg
+│       └── thumbs/01.webp … 25.webp
+├── CLAUDE.md               ← Istruzioni sessione per Claude Code
+└── docx/                   ← Documentazione di progetto
     ├── PROJECT.md          ← Questo file
     ├── SESSION.md          ← Log sessioni
+    ├── FIX.md              ← Registro bug risolti
     └── CONTENT.md          ← Checklist contenuti da fornire
 ```
 
@@ -120,19 +127,33 @@ Escape chiude in ordine: museum → overlay attivo → home.
 
 ```json
 {
-  "site": { "name": "Andrea Spinazzola", "hero": { "seriesId": "series-1", "interval": 5000 } },
-  "series": [{
-    "id": "series-1",
-    "title": "Human Frequency",
-    "subtitle": "Series I — Faces · AI Generative · 2024",
-    "images": [
-      { "filename": "images/series-1/01.jpg", "title": "Opera 01", "description": "...", "meta": "2024 · AI Generative" }
-    ]
-  }]
+  "site": { "name": "Andrea Spinazzola", "project": "Human Frequency", "hero": { "seriesId": "series-1", "interval": 5000 } },
+  "about": { "photo": "...", "name": "...", "bio": "...", "instagram": "...", "linkedin": "..." },
+  "seo": { "title": "...", "description": "...", "ogImage": "..." },
+  "series": [
+    {
+      "id": "series-1", "title": "Amerika", "subtitle": "Human Frequency · 2026",
+      "images": [
+        { "filename": "images/series-1/01.jpg", "thumb": "images/series-1/thumbs/01.webp", "title": "The Witness", "description": "Amerika", "meta": "Salvador · 1997" }
+      ]
+    },
+    {
+      "id": "series-2", "title": "Pulse", "subtitle": "Human Frequency · 2026",
+      "images": [
+        { "filename": "images/series-2/01.jpg", "thumb": "images/series-2/thumbs/01.webp", "title": "Iron", "description": "Pulse", "meta": "Copacabana · 1996" }
+      ]
+    }
+  ]
 }
 ```
 
-Per aggiungere immagini: metti i file in `images/series-1/` e aggiorna `manifest.json` (o esegui `node update-manifest.js`).
+**Serie attive:** Amerika (19 img), Pulse (25 img) — 44 immagini totali.
+
+**Per aggiungere immagini:**
+1. Copia JPG in `images/series-N/`
+2. `node generate-thumbs.js series-N` (genera thumbnail WebP 600px)
+3. `node update-manifest.js` (aggiorna manifest preservando metadata)
+4. Edita `manifest.json` — aggiungi/aggiorna titoli e descrizioni
 
 ---
 

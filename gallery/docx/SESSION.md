@@ -590,27 +590,113 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+**6 — Hero subtitle: riduzione corpo e spaziatura**
+- Font-size ridotto di 1pt: `clamp(10px,1.1vw,16px)` → `clamp(9px,1vw,15px)`
+- Letter-spacing ridotto drasticamente: `.32em` → `-0.02em` (avvicinamento negativo per monospace più editoriale)
+- Risultato: testo su una sola riga su tutti i breakpoint
+
+---
+
+**7 — Caption museum: forzata su riga singola**
+- `.pswp-caption`: `flex-wrap: wrap` → `flex-wrap: nowrap` — impedisce il wrap degli elementi
+- Rimossa media query `@media(max-width:480px)` che forzava `.pswp-cap-body` in `flex-direction:column`
+- Risultato: **Silence** · *Amerika* · `SÃO PAULO · 1989` — tutto su una riga, layout editoriale pulito
+
+---
+
 **Commit chiave:**
 - `8b86ab6` — fix: cache-bust manifest.json + hero tagline text + mobile font size
 - `b2a0a3d` — fix: show caption meta (location/year) on mobile
 - `b3a1201` — fix: copyright hides on zoom (currSlide.currZoomLevel) + responsive hero subtitle
 - `599304e` — feat: caption — italic series, tight monospace, remove Human Frequency from desc
+- `e2605ca` — docs: session 11 + FIX-011/012/013
+- `6bdd2e9` — fix: hero subtitle smaller + tighter spacing, caption forced single line
 
-**Ultimo commit:** `599304e` — branch `main`
+**Ultimo commit:** `6bdd2e9` — branch `main`
 
 ---
 
 **Stato al termine della sessione:**
-- ✅ Caption complete su mobile (titolo + serie italic + località/anno)
-- ✅ Copyright si nasconde correttamente su zoom
-- ✅ manifest.json sempre fresco via cache-buster
-- ✅ Hero subtitle responsive, scala proporzionalmente al titolo
-- ✅ Tipografia caption editoriale: bold/italic/monospace
+- ✅ Caption complete su mobile e desktop, su riga singola
+- ✅ Copyright si nasconde correttamente su zoom (fix `currSlide.currZoomLevel`)
+- ✅ manifest.json sempre fresco via cache-buster `?v=Date.now()`
+- ✅ Hero subtitle responsive con avvicinamento negativo, tipografia editoriale
+- ✅ Tipografia caption: **titolo bold** / *serie italic* / `meta monospace -0.02em`
+- ✅ File riformattato dall'editor (prettified CSS/HTML)
 
 **Pending / prossima sessione:**
 - Favicon .ico reale
 - Test multi-serie (serie-2)
 - Valutare letter-spacing monospace anche su altri elementi (series-bar, gallery caption index)
+
+---
+
+## Sessione 12 — 2026-04-01
+
+**Obiettivo:** Fix responsive mobile + stabilità navigazione
+
+---
+
+**1 — Breakpoint mobile 768px completo**
+- Aggiunta media query `@media(max-width:768px)` con ridimensionamento testo, padding e layout
+- Hero title e subtitle scalano correttamente su schermi piccoli
+
+**2 — Fix pagina bianca su refresh con hash #work**
+- Problema: ricaricare la pagina con `#work` nell'URL causava pagina bianca
+- Fix: gestione corretta dello stato iniziale al load quando un hash è già presente
+- Tipografia hero mobile migliorata
+
+**3 — Hero title mobile + no-cache meta**
+- Hero title ridotto del 10% su mobile per evitare overflow
+- Aggiunti meta tag `Cache-Control: no-cache, no-store, must-revalidate` + `Pragma: no-cache` + `Expires: 0` nel `<head>` per forzare reload freschi
+
+---
+
+**Commit chiave:**
+- `8a7854a` — fix: comprehensive mobile breakpoint 768px — scale text, padding and layout
+- `08d102f` — fix: page refresh on #work hash no longer causes blank page + hero mobile typography
+- `bf8287f` — fix: hero title 10% smaller on mobile + no-cache meta tags for fresh reloads
+
+**Ultimo commit:** `bf8287f` — branch `main`
+
+---
+
+## Sessione 13 — 2026-04-01
+
+**Obiettivo:** Implementazione serie-2 "Pulse"
+
+---
+
+**1 — Nuova serie: Pulse (series-2)**
+- 25 immagini full-size in `images/series-2/` (01-25.jpg)
+- 25 thumbnail WebP in `images/series-2/thumbs/` (generati con generate-thumbs.js)
+- Manifest aggiornato con serie completa: id `series-2`, titolo "Pulse", subtitle "Human Frequency · 2026"
+- Ogni immagine ha titolo, descrizione ("Pulse") e meta (città · anno)
+
+**2 — Contenuti serie-2**
+- 25 titoli assegnati: Iron, Behind Bars, The Kiss, The Elder, Departure, Ascent, Grace, The Wait, Three Generations, Oracle, The Wind, Sonata, The Gaze, Highway, Summer, Mother and Daughter, The Fighter, Skull, The Crowd, Joy, Written, The Dancer, Golden Hour, The Frame, Rubble
+- Località: Copacabana, São Paulo, Rio de Janeiro, Recife, Belo Horizonte, Buenos Aires, Salvador, Havana, Lima, Fortaleza, Caracas, Bogotá, México DF, Montevideo, Port-au-Prince
+- Periodo: 1982–2010
+
+---
+
+**Nota:** Sessione interrotta prima del deploy e dell'aggiornamento documentazione. Completato in sessione 14.
+
+---
+
+## Sessione 14 — 2026-04-02
+
+**Obiettivo:** Aggiornamento documentazione + deploy series-2
+
+---
+
+**1 — Aggiornamento documenti**
+- SESSION.md: aggiunte sessioni 12, 13, 14 (recupero sessioni non documentate)
+- PROJECT.md: aggiornata struttura file (series-2, thumbs, lib/, generate-thumbs.js)
+- FIX.md: invariato (nessun nuovo bug)
+
+**2 — Deploy**
+- Push completo: index.html, manifest.json, images/series-2/, lib/, docs aggiornati
 
 ---
 
