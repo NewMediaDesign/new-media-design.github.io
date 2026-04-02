@@ -1617,6 +1617,7 @@
     let SERIES_DATA = [];   // all series from manifest
     let SITE_DATA = {};   // site-level data from manifest (name, project, hero)
     let currentSeriesId = null;
+    let heroSeriesCount = 0;  // how many images belong to the hero series (for hero slideshow only)
 
 
     // PROTECTION
@@ -1686,12 +1687,12 @@
     }
     function buildHeroDots() {
       heroDots.innerHTML = '';
-      IMAGES.forEach((_, i) => {
+      for (let i = 0; i < heroSeriesCount; i++) {
         const d = document.createElement('div');
         d.className = 'hero-dot' + (i === 0 ? ' active' : '');
         d.addEventListener('click', () => goToSlide(i));
         heroDots.appendChild(d);
-      });
+      }
     }
     function updateDots() {
       heroDots.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === heroIdx));
@@ -1701,8 +1702,8 @@
       heroIdx = idx;
       const next = loadedImgs[idx];
       ensureImg(idx);
-      // Silently preload the one after
-      ensureImg((idx + 1) % IMAGES.length);
+      // Silently preload the one after (within hero series only)
+      ensureImg((idx + 1) % heroSeriesCount);
       const go = () => {
         drawHero(heroCanvasB, next);
         heroCanvasB.style.transition = 'none'; heroCanvasB.style.opacity = '0';
@@ -1717,7 +1718,7 @@
       };
       if (next.naturalWidth) go(); else next.addEventListener('load', go, { once: true });
     }
-    function startTimer() { clearInterval(heroTimer); if (IMAGES.length <= 1) return; heroTimer = setInterval(() => goToSlide((heroIdx + 1) % IMAGES.length), 5000); }
+    function startTimer() { clearInterval(heroTimer); if (heroSeriesCount <= 1) return; heroTimer = setInterval(() => goToSlide((heroIdx + 1) % heroSeriesCount), 5000); }
     function initHero() {
       const img = loadedImgs[0];
       if (img.naturalWidth) drawHero(heroCanvasA, img); else img.addEventListener('load', () => drawHero(heroCanvasA, img), { once: true });
@@ -1730,9 +1731,9 @@
     let _heroTouchX = 0;
     document.getElementById('heroSection').addEventListener('touchstart', e => { _heroTouchX = e.touches[0].clientX; }, { passive: true });
     document.getElementById('heroSection').addEventListener('touchend', e => {
-      if (IMAGES.length <= 1) return;
+      if (heroSeriesCount <= 1) return;
       const dx = e.changedTouches[0].clientX - _heroTouchX;
-      if (Math.abs(dx) > 50) dx < 0 ? goToSlide((heroIdx + 1) % IMAGES.length) : goToSlide((heroIdx - 1 + IMAGES.length) % IMAGES.length);
+      if (Math.abs(dx) > 50) dx < 0 ? goToSlide((heroIdx + 1) % heroSeriesCount) : goToSlide((heroIdx - 1 + heroSeriesCount) % heroSeriesCount);
     }, { passive: true });
 
     // GALLERY
@@ -1962,6 +1963,22 @@
         arrowNextSVG: '<svg aria-hidden="true" class="pswp__icn" viewBox="0 0 32 32" width="32" height="32"><polyline points="11 6 21 16 11 26" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       });
 
+      // Fix deformed images: when full-size image loads, update PhotoSwipe with real dimensions
+      pswp.on('contentLoadImage', ({ content }) => {
+        const el = content.element;
+        if (!el) return;
+        const fix = () => {
+          if (el.naturalWidth && el.naturalHeight &&
+              (content.data.width !== el.naturalWidth || content.data.height !== el.naturalHeight)) {
+            content.data.width = el.naturalWidth;
+            content.data.height = el.naturalHeight;
+            pswp.updateSize(true);
+          }
+        };
+        if (el.complete && el.naturalWidth) fix();
+        else el.addEventListener('load', fix, { once: true });
+      });
+
       pswp.on('uiRegister', () => {
         // Back button
         pswp.ui.registerElement({
@@ -2185,24 +2202,36 @@
       }
     }
 
-    // Load a series by id and rebuild hero + gallery arrays
-    function loadSeries(seriesId) {
-      const series = SERIES_DATA.find(s => s.id === seriesId) || SERIES_DATA[0];
-      if (!series) return;
-      currentSeriesId = series.id;
-      IMAGES = series.images.map(img => ({
-        src: img.filename,
-        thumb: img.thumb || img.filename,
-        title: img.title,
-        desc: img.description || '',
-        meta: img.meta || ''
-      }));
+    // Load ALL series into a single combined IMAGES array.
+    // Hero series images come first (indices 0..heroSeriesCount-1).
+    function loadAllSeries() {
+      const heroSeriesId = (SITE_DATA.hero && SITE_DATA.hero.seriesId) || (SERIES_DATA[0] && SERIES_DATA[0].id);
+      const heroSeries = SERIES_DATA.find(s => s.id === heroSeriesId);
+      const otherSeries = SERIES_DATA.filter(s => s.id !== heroSeriesId);
+      const ordered = heroSeries ? [heroSeries, ...otherSeries] : [...SERIES_DATA];
+
+      IMAGES = [];
+      ordered.forEach(series => {
+        series.images.forEach(img => {
+          IMAGES.push({
+            src: img.filename,
+            thumb: img.thumb || img.filename,
+            title: img.title,
+            desc: img.description || series.title || '',
+            meta: img.meta || ''
+          });
+        });
+      });
+
+      heroSeriesCount = heroSeries ? heroSeries.images.length : IMAGES.length;
       loadedImgs = IMAGES.map(() => new Image());
       thumbImgs = IMAGES.map(() => new Image());
+      currentSeriesId = 'all';
+
       document.getElementById('heroSeries').textContent = 'A journey through the possible \u00B7 2026';
-      document.getElementById('heroTitle').textContent = SITE_DATA.project || series.title || '';
-      document.getElementById('seriesBarTitle').textContent = series.title || '';
-      document.getElementById('seriesBarMeta').textContent = series.subtitle || '';
+      document.getElementById('heroTitle').textContent = SITE_DATA.project || '';
+      document.getElementById('seriesBarTitle').textContent = SITE_DATA.project || '';
+      document.getElementById('seriesBarMeta').textContent = ordered.map(s => s.title).join(' \u00B7 ');
     }
 
     // Build the series selection grid
@@ -2237,10 +2266,6 @@
         }
 
         card.addEventListener('click', () => {
-          loadSeries(series.id);
-          buildHeroDots();
-          ensureImg(0, initHero);
-          if (IMAGES[1]) ensureImg(1);
           navigateTo('work');
         });
       });
@@ -2283,9 +2308,8 @@
         }
       }
 
-      // Load the hero series
-      const sid = manifest.site.hero && manifest.site.hero.seriesId;
-      loadSeries(sid || (SERIES_DATA[0] && SERIES_DATA[0].id));
+      // Load all series combined (hero series first)
+      loadAllSeries();
       buildHeroDots();
       ensureImg(0, initHero);
       if (IMAGES[1]) ensureImg(1);
