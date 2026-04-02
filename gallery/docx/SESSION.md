@@ -686,17 +686,78 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ## Sessione 14 — 2026-04-02
 
-**Obiettivo:** Aggiornamento documentazione + deploy series-2
+**Obiettivo:** Deploy series-2 + gallery multi-serie + fix deformazione immagini + UX museum
 
 ---
 
-**1 — Aggiornamento documenti**
-- SESSION.md: aggiunte sessioni 12, 13, 14 (recupero sessioni non documentate)
-- PROJECT.md: aggiornata struttura file (series-2, thumbs, lib/, generate-thumbs.js)
-- FIX.md: invariato (nessun nuovo bug)
+**1 — Deploy series-2 "Pulse"**
+- Push completo: 25 jpg + 25 webp thumbs in `images/series-2/`
+- `manifest.json` aggiornato con tutte le entry series-2
+- Documenti recuperati: SESSION.md (sessioni 12-14), PROJECT.md (struttura aggiornata)
 
-**2 — Deploy**
-- Push completo: index.html, manifest.json, images/series-2/, lib/, docs aggiornati
+---
+
+**2 — Gallery multi-serie**
+- Nuova funzione `loadAllSeries()`: combina tutte le serie in un unico array `IMAGES`
+- Hero slideshow limitato alla hero series (series-1, 19 immagini) via `heroSeriesCount`
+- Gallery masonry mostra tutte le immagini di tutte le serie mescolate (44 totali)
+- Series bar mostra "Human Frequency" con "Amerika · Pulse"
+- Bottone hero rinominato "View Series" → "Gallery"
+
+---
+
+**3 — Navigazione serie separate**
+- Click su card serie → `loadSeries(seriesId)` carica SOLO quella serie
+- `singleSeriesMode = true` → PhotoSwipe `loop: false` (swipe si ferma alla fine)
+- Back button in gallery (single mode) → torna alla pagina Series
+- Nav "Work" e bottone "Gallery" → resetta sempre a gallery completa (`loadAllSeries()`)
+- Mobile menu "Work" → stessa logica di reset
+
+---
+
+**4 — Fix deformazione immagini nel museum [FIX-014]**
+- Causa: thumbnail non ancora caricate → aspect ratio fallback 2:3 → PhotoSwipe mostrava immagini deformate
+- Fix 1: `openMuseum()` pre-carica TUTTE le thumbnail prima di aprire PhotoSwipe
+- Fix 2: event listener `contentLoadImage` aggiorna dimensioni reali + `slide.updateContentSize(true)`
+
+---
+
+**5 — Menu sempre visibile nel museum [FIX-015]**
+- Problema: hamburger nascosto nel museum → utente bloccato
+- Fix: header con `z-index: 100001` (sopra PhotoSwipe 100000) quando museum è aperto
+- Classe CSS `header.museum-open` aggiunta/rimossa su open/destroy
+
+---
+
+**6 — Hero dots nascosti**
+- `.hero-dots { display: none }` — hero auto-cycle senza interazione utente
+- Codice JS mantenuto per eventuale riattivazione futura
+
+---
+
+**Commit chiave:**
+- `6df20f1` — feat: add series-2 "Pulse" (25 images + thumbs) + update docs
+- `be1c823` — fix: combine all series in gallery + fix PhotoSwipe image deformation
+- `0c92ad5` — feat: separate series navigation + gallery shows all images
+- `d7ef6a7` — fix: menu always visible in museum + hide hero dots + preload thumbs
+
+**Ultimo commit:** `d7ef6a7` — branch `main`
+
+---
+
+**Stato al termine della sessione:**
+- ✅ Series-2 "Pulse" deployata (25 immagini + thumbs)
+- ✅ Gallery mostra tutte le serie mescolate (44 immagini)
+- ✅ Serie separate: click card → solo quella serie, no loop, Back → Series
+- ✅ Menu (hamburger + nav) sempre accessibile, anche nel museum
+- ✅ Hero dots nascosti
+- ✅ Fix deformazione immagini (preload thumbnail + contentLoadImage)
+
+**Pending / prossima sessione:**
+- Favicon .ico reale
+- Verificare comportamento deformazione su mobile (potrebbe servire ulteriore tuning)
+- Aggiornare contenuto reale: bio, email, Instagram, titoli opere in manifest.json
+- Valutare UX alla fine di una serie (single mode): chiusura automatica o messaggio?
 
 ---
 

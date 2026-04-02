@@ -234,3 +234,63 @@ if (pswp.currSlide.currZoomLevel > fitLevel + 0.01) {
 
 ---
 
+## [FIX-014] PhotoSwipe — immagini deformate (aspect ratio fallback)
+
+**Sintomo:** Alcune immagini nel museum appaiono deformate (schiacciate o stirate), in modo apparentemente casuale. Dopo aver sfogliato avanti e indietro tornano normali. Le immagini verticali sono le più colpite.
+
+**Causa:** `openMuseum()` calcola le dimensioni per PhotoSwipe dall'aspect ratio della thumbnail:
+```js
+const aspect = (t && t.naturalWidth) ? t.naturalHeight / t.naturalWidth : 2 / 3;
+```
+Se la thumbnail non è ancora caricata (lazy loading via IntersectionObserver), il fallback `2/3` viene usato. PhotoSwipe pre-dimensiona il container con queste dimensioni sbagliate e forza l'immagine full-size a riempirlo → deformazione. Quali thumbnail sono caricate dipende dallo scroll → la deformazione appare "casuale".
+
+**Soluzione (doppia):**
+1. **Pre-load thumbnails:** `openMuseum()` carica tutte le thumbnail PRIMA di aprire PhotoSwipe:
+```js
+let pending = 0;
+IMAGES.forEach((_, i) => {
+  if (!thumbImgs[i].naturalWidth && !thumbImgs[i]._imgError) {
+    pending++;
+    ensureThumb(i, () => { if (--pending === 0) doOpen(); });
+  }
+});
+if (pending === 0) doOpen();
+```
+2. **Correzione runtime:** event listener `contentLoadImage` aggiorna le dimensioni reali quando l'immagine full-size viene caricata:
+```js
+pswp.on('contentLoadImage', ({ content }) => {
+  const el = content.element;
+  el.addEventListener('load', () => {
+    content.data.width = el.naturalWidth;
+    content.data.height = el.naturalHeight;
+    if (content.slide) content.slide.updateContentSize(true);
+    pswp.updateSize(true);
+  }, { once: true });
+});
+```
+
+**Nota:** La soluzione 1 è la primaria (previene il problema). La soluzione 2 è un fallback per casi edge dove la thumbnail non ha potuto caricarsi.
+
+---
+
+## [FIX-015] Menu non accessibile nel museum (hamburger nascosto)
+
+**Sintomo:** Su mobile, entrando nel museum (PhotoSwipe), l'hamburger menu scompare. L'utente non può navigare ad altre sezioni senza prima chiudere il museum.
+
+**Causa:** Il codice aggiungeva `classList.add('hidden')` all'hamburger button prima di `pswp.init()`, e lo rimuoveva su `pswp.on('destroy')`. L'header (z-index: 900) era comunque sotto PhotoSwipe (z-index: 100000), quindi anche senza l'hide esplicito sarebbe stato invisibile.
+
+**Soluzione:**
+1. Rimosso `hamburgerBtn.classList.add/remove('hidden')`
+2. Aggiunta classe CSS `header.museum-open` con `z-index: 100001` (sopra PhotoSwipe):
+```css
+header.museum-open {
+  z-index: 100001;
+  background: var(--bg);
+  border-bottom-color: var(--border);
+}
+```
+3. JS: `mainHeader.classList.add('museum-open')` all'apertura, `.remove('museum-open')` su `pswp.on('destroy')`
+
+**Nota:** Il PhotoSwipe ha ancora il suo back button registrato via `uiRegister`, ma è coperto dall'header. L'utente naviga tramite l'header del sito.
+
+---

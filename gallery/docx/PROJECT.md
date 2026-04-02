@@ -68,9 +68,10 @@ Art_Gallery/
 |-------|---------|----------|
 | Hero background | 0 | `.hero` |
 | Gallery / Contact / About overlay | 200 | `.gallery-overlay` `.contact-overlay` `.about-overlay` |
-| Museum (viewer foto) | 800 | `.museum` |
 | Header principale | 900 | `header#mainHeader` |
-| Cursore custom | 9999 | `.custom-cursor` |
+| Mobile menu overlay | 950 | `#mobMenu` |
+| Museum (PhotoSwipe) | 100000 | `.pswp` (default PhotoSwipe) |
+| Header durante museum | 100001 | `header.museum-open` |
 
 ---
 
@@ -99,12 +100,12 @@ Art_Gallery/
 
 | Sezione | ID | Stato | Note |
 |---------|----|-------|------|
-| **Hero** | `#heroSection` | ✅ Live | Slideshow canvas, dot nav, swipe touch |
-| **Work (Gallery)** | `#galleryOverlay` | ✅ Live | Grid 12 colonne, canvas hover |
-| **Museum (viewer)** | `#museum` | ✅ Live | Zoom, pan, swipe, arrow nav |
+| **Hero** | `#heroSection` | ✅ Live | Slideshow canvas auto-cycle (dots nascosti), solo hero series |
+| **Work (Gallery)** | `#galleryOverlay` | ✅ Live | Masonry 3 col, tutte le serie mescolate (44 img) |
+| **Museum (viewer)** | PhotoSwipe v5 | ✅ Live | Zoom, pan, swipe, passepartout, frecce a zona |
 | **About** | `#aboutOverlay` | ✅ Live | Foto + bio, layout split |
 | **Contact** | `#contactOverlay` | ✅ Live | Form Formspree, validazione |
-| **Series** | `#seriesOverlay` | ✅ Live | Grid card serie da manifest |
+| **Series** | `#seriesOverlay` | ✅ Live | Grid card serie → click apre solo quella serie |
 
 ---
 
@@ -115,11 +116,15 @@ navigateTo(section)   // apre una sezione ('work','series','about','contact') o 
 setSection(section)   // applica lo stato visivo (aggiunge/rimuove .active)
 goHome()              // chiude tutto, torna alla hero
 closeMuseum()         // chiude il museum viewer
+loadAllSeries()       // carica tutte le serie in IMAGES (gallery completa)
+loadSeries(id)        // carica solo una serie (da card serie)
+openMuseum(idx)       // apre PhotoSwipe all'indice idx in IMAGES
 ```
 
 `navigateTo(null)` / `goHome()` → home (hero).
 Escape chiude in ordine: museum → overlay attivo → home.
 `popstate` gestisce back/forward browser.
+`singleSeriesMode`: true quando si visualizza una singola serie (no loop, Back → Series page).
 
 ---
 
