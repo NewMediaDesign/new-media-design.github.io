@@ -88,6 +88,12 @@
       border-bottom-color: var(--border);
     }
 
+    header.museum-open {
+      z-index: 100001;
+      background: var(--bg);
+      border-bottom-color: var(--border);
+    }
+
     .h-name {
       font-size: 11px;
       font-weight: 600;
@@ -419,7 +425,7 @@
       position: absolute;
       bottom: clamp(14px, 2.5vw, 26px);
       right: clamp(16px, 3vw, 28px);
-      display: flex;
+      display: none;  /* nascosti — hero auto-cycle senza interazione */
       gap: 6px;
       z-index: 5;
     }
@@ -1957,12 +1963,26 @@
     function openMuseum(idx) {
       if (pswp) pswp.close();
 
-      // Usa aspect ratio della thumbnail (già caricata) + larghezza stimata full-res 3000px
-      const items = IMAGES.map((img, i) => {
-        const t = thumbImgs[i];
-        const aspect = (t && t.naturalWidth) ? t.naturalHeight / t.naturalWidth : 2 / 3;
-        return { src: img.src, msrc: img.thumb, width: 3000, height: Math.round(3000 * aspect) };
+      // Pre-load all thumbnails so we have correct aspect ratios (prevents deformation)
+      let pending = 0;
+      const doOpen = () => {
+        const items = IMAGES.map((img, i) => {
+          const t = thumbImgs[i];
+          const aspect = (t && t.naturalWidth) ? t.naturalHeight / t.naturalWidth : 2 / 3;
+          return { src: img.src, msrc: img.thumb, width: 3000, height: Math.round(3000 * aspect) };
+        });
+        _openPswp(items, idx);
+      };
+      IMAGES.forEach((_, i) => {
+        if (!thumbImgs[i].naturalWidth && !thumbImgs[i]._imgError) {
+          pending++;
+          ensureThumb(i, () => { if (--pending === 0) doOpen(); });
+        }
       });
+      if (pending === 0) doOpen();
+    }
+
+    function _openPswp(items, idx) {
 
       pswp = new PhotoSwipe({
         dataSource: items,
@@ -2102,10 +2122,10 @@
 
       pswp.on('destroy', () => {
         pswp = null;
-        document.getElementById('hamburgerBtn').classList.remove('hidden');
+        mainHeader.classList.remove('museum-open');
       });
 
-      document.getElementById('hamburgerBtn').classList.add('hidden');
+      mainHeader.classList.add('museum-open');
       document.getElementById('mobMenu').classList.remove('open');
       pswp.init();
     }
