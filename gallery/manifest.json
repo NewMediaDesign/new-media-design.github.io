@@ -343,6 +343,97 @@
           "meta": "Port-au-Prince · 2010"
         }
       ]
+    },
+    {
+      "id": "series-3",
+      "title": "Apart",
+      "subtitle": "Human Frequency · 2026",
+      "images": [
+        {
+          "filename": "images/series-3/01.jpg",
+          "thumb": "images/series-3/thumbs/01.webp",
+          "title": "The Stare",
+          "description": "Apart",
+          "meta": "Dhaka · 2003"
+        },
+        {
+          "filename": "images/series-3/02.jpg",
+          "thumb": "images/series-3/thumbs/02.webp",
+          "title": "Wind",
+          "description": "Apart",
+          "meta": "Belém · 1998"
+        },
+        {
+          "filename": "images/series-3/03.jpg",
+          "thumb": "images/series-3/thumbs/03.webp",
+          "title": "Refuge",
+          "description": "Apart",
+          "meta": "Mumbai · 2001"
+        },
+        {
+          "filename": "images/series-3/04.jpg",
+          "thumb": "images/series-3/thumbs/04.webp",
+          "title": "The Wrap",
+          "description": "Apart",
+          "meta": "Lagos · 2005"
+        },
+        {
+          "filename": "images/series-3/05.jpg",
+          "thumb": "images/series-3/thumbs/05.webp",
+          "title": "Longing",
+          "description": "Apart",
+          "meta": "Medellín · 1999"
+        },
+        {
+          "filename": "images/series-3/06.jpg",
+          "thumb": "images/series-3/thumbs/06.webp",
+          "title": "Brothers",
+          "description": "Apart",
+          "meta": "Luanda · 2002"
+        },
+        {
+          "filename": "images/series-3/07.jpg",
+          "thumb": "images/series-3/thumbs/07.webp",
+          "title": "The Mask",
+          "description": "Apart",
+          "meta": "Salvador · 2007"
+        },
+        {
+          "filename": "images/series-3/08.jpg",
+          "thumb": "images/series-3/thumbs/08.webp",
+          "title": "The Dreamer",
+          "description": "Apart",
+          "meta": "Kinshasa · 2004"
+        },
+        {
+          "filename": "images/series-3/09.jpg",
+          "thumb": "images/series-3/thumbs/09.webp",
+          "title": "The Matriarch",
+          "description": "Apart",
+          "meta": "Port-au-Prince · 2000"
+        },
+        {
+          "filename": "images/series-3/10.jpg",
+          "thumb": "images/series-3/thumbs/10.webp",
+          "title": "The River",
+          "description": "Apart",
+          "meta": "Manaus · 1997"
+        },
+        {
+          "filename": "images/series-3/11.jpg",
+          "thumb": "images/series-3/thumbs/11.webp",
+          "title": "The Shadow",
+          "description": "Apart",
+          "meta": "Havana · 2006"
+        },
+        {
+          "filename": "images/series-3/12.jpg",
+          "thumb": "images/series-3/thumbs/12.webp",
+          "title": "The Smile",
+          "description": "Apart",
+          "meta": "Kolkata · 2003"
+        }
+      ]
     }
   ]
 }
