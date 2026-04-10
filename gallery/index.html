@@ -2351,6 +2351,8 @@
         if (a.instagram) {
           document.getElementById('aboutInstagram').href = a.instagram;
           document.getElementById('aboutInstagramHandle').textContent = a.instagramHandle || 'Instagram';
+        } else {
+          document.getElementById('aboutInstagram').style.display = 'none';
         }
         if (a.linkedin) {
           document.getElementById('aboutLinkedin').href = a.linkedin;
