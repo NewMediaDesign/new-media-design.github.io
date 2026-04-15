@@ -67,7 +67,7 @@
 }
 .bio strong { color: var(--blue); font-weight: 400; }
 
-.photo-box { width: 260px; height: 320px; overflow: hidden; }
+.photo-box { width: 260px; aspect-ratio: 896 / 1200; overflow: hidden; }
 .photo-box img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: center top;
@@ -264,7 +264,7 @@
     margin-bottom: 16px;
   }
   .bio { font-size: 17px; max-width: none; }
-  .photo-box { width: 180px; height: 220px; }
+  .photo-box { width: 180px; height: auto; }
   .photo-accent { margin-left: 0; }
   .photo-label { text-align: left; }
 
