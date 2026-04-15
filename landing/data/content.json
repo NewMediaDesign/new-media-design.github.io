@@ -30,6 +30,7 @@
   ],
   "contacts": [
     { "label": "Email",    "value": "a.spinazzola@new-media-design.it" },
+    { "label": "Mobile",   "value": "+39 347 8461063" },
     { "label": "LinkedIn", "value": "linkedin.com/in/aspinazzola" },
     { "label": "Web",      "value": "new-media-design.it" }
   ],
