@@ -21,17 +21,12 @@
   color: var(--ink-muted);
   text-transform: uppercase;
 }
-.portfolio-btn {
+.top-meta {
   font-size: 9px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
+  color: var(--ink-muted);
   text-transform: uppercase;
-  color: var(--blue);
-  background: transparent;
-  border: 0.5px solid var(--blue);
-  padding: 6px 14px;
-  transition: background 0.15s, color 0.15s;
 }
-.portfolio-btn:hover { background: var(--blue); color: #fff; }
 
 /* hero */
 .header {
@@ -132,6 +127,110 @@
 .footer { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
 .footer span { font-size: 9px; letter-spacing: 0.12em; color: var(--ink-muted); text-transform: uppercase; }
 
+/* portfolio section */
+.section-portfolio { }
+.pf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+.pf-intro { padding-bottom: 6px; }
+.pf-title {
+  font-family: var(--font-serif);
+  font-size: 46px;
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+.pf-title em { font-style: italic; }
+.pf-sub {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 340px;
+}
+
+.pf-list { display: flex; flex-direction: column; }
+.pf-item {
+  display: grid;
+  grid-template-columns: 32px auto 1fr auto 18px;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 4px 15px 2px;
+  border: none;
+  background: transparent;
+  border-bottom: 0.5px solid var(--rule);
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+  transition: padding 0.3s cubic-bezier(0.4, 0, 0.22, 1), background 0.2s;
+}
+.pf-item:first-child { border-top: 0.5px solid var(--rule); }
+.pf-item:hover { padding-left: 10px; padding-right: 0; }
+.pf-item:hover .pf-name { color: var(--blue); }
+.pf-item:hover .pf-arrow { transform: translateX(3px); color: var(--blue); opacity: 1; }
+.pf-item:hover .pf-rule { background: var(--blue); }
+
+.pf-num {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--blue);
+  font-weight: 500;
+}
+.pf-name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.pf-rule {
+  height: 0.5px;
+  background: var(--rule);
+  align-self: center;
+  transition: background 0.2s;
+}
+.pf-count {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+.pf-arrow {
+  font-size: 13px;
+  color: var(--ink-muted);
+  opacity: 0.5;
+  text-align: right;
+  transition: transform 0.25s, color 0.2s, opacity 0.2s;
+}
+
+.pf-cta-row { display: flex; justify-content: flex-end; }
+.pf-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: transparent;
+  color: var(--blue);
+  border: 0.5px solid var(--blue);
+  padding: 16px 28px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, padding 0.3s cubic-bezier(0.4, 0, 0.22, 1);
+}
+.pf-cta:hover { background: var(--blue); color: #fff; padding-left: 32px; padding-right: 24px; }
+.pf-cta-arrow { font-size: 14px; line-height: 1; }
+
 /* ═══════════════════════════════════════════════════════════
    MOBILE LAYER — desktop layout above 720px stays untouched
    ═══════════════════════════════════════════════════════════ */
@@ -173,6 +272,32 @@
   /* sections */
   .section { margin-bottom: 28px; padding-bottom: 28px; }
   .section-label { margin-bottom: 16px; }
+
+  /* portfolio section: stacked */
+  .pf-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 24px;
+  }
+  .pf-title { font-size: 38px; }
+  .pf-sub { font-size: 15px; max-width: none; }
+  .pf-item {
+    grid-template-columns: 26px 1fr auto 16px;
+    gap: 14px;
+    padding: 13px 2px;
+  }
+  .pf-item .pf-rule { display: none; }
+  .pf-item:hover { padding-left: 4px; }
+  .pf-name { font-size: 19px; white-space: normal; }
+  .pf-count { font-size: 8.5px; }
+  .pf-cta-row { justify-content: stretch; }
+  .pf-cta {
+    width: 100%;
+    justify-content: space-between;
+    padding: 16px 22px;
+  }
+  .pf-cta:hover { padding-left: 22px; padding-right: 22px; }
 
   /* services: stacked with horizontal rule between items */
   .services { grid-template-columns: 1fr; }

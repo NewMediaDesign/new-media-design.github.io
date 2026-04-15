@@ -6,6 +6,7 @@ fetch('data/content.json')
     buildNumbers(data.numbers);
     buildClients(data.clients);
     buildContacts(data.contacts);
+    buildPortfolioList(data.gallery);
     window.__galleryData = data.gallery;
   });
 
@@ -39,4 +40,20 @@ function buildContacts(items) {
       <span>${c.label}</span>
       <p>${c.value}</p>
     </div>`).join('');
+}
+
+function buildPortfolioList(categories) {
+  const listEl = document.getElementById('pf-list');
+  if (!listEl) return;
+  listEl.innerHTML = categories.map((cat, i) => {
+    const n = String(i + 1).padStart(2, '0');
+    return `
+      <button class="pf-item" type="button" data-cat="${i}">
+        <span class="pf-num">${n}</span>
+        <span class="pf-name">${cat.category}</span>
+        <span class="pf-rule"></span>
+        <span class="pf-count">${cat.slides.length} works</span>
+        <span class="pf-arrow">&rarr;</span>
+      </button>`;
+  }).join('');
 }

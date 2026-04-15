@@ -17,6 +17,14 @@ function init() {
   openBtn.addEventListener('click', openIndex);
   closeBtn.addEventListener('click', closeIndex);
 
+  // direct-to-category click on portfolio list items (bypasses editorial index)
+  document.addEventListener('click', e => {
+    const item = e.target.closest('.pf-item');
+    if (!item) return;
+    e.preventDefault();
+    openCategory(parseInt(item.dataset.cat, 10));
+  });
+
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && indexEl.classList.contains('open') && !document.querySelector('.pswp--open')) {
       closeIndex();
