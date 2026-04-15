@@ -31,8 +31,8 @@
 /* hero */
 .header {
   display: grid;
-  grid-template-columns: 1fr 200px;
-  gap: 48px;
+  grid-template-columns: 1fr 260px;
+  gap: 64px;
   align-items: start;
   margin-bottom: 48px;
 }
@@ -42,7 +42,7 @@
   font-weight: 300;
   line-height: 1.0;
   letter-spacing: -0.01em;
-  margin-bottom: 4px;
+  margin-bottom: 32px;
 }
 .name em { font-style: italic; }
 .role-line {
@@ -67,7 +67,7 @@
 }
 .bio strong { color: var(--blue); font-weight: 400; }
 
-.photo-box { width: 200px; height: 240px; overflow: hidden; }
+.photo-box { width: 260px; height: 320px; overflow: hidden; }
 .photo-box img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: center top;
@@ -88,7 +88,6 @@
   margin-bottom: 20px;
   display: flex; align-items: center; gap: 8px;
 }
-.section-label::after { content: ''; flex: 1; height: 0.5px; background: var(--rule); }
 
 /* services */
 .services { display: grid; grid-template-columns: 1fr 1fr 1fr; }
@@ -265,7 +264,7 @@
     margin-bottom: 16px;
   }
   .bio { font-size: 17px; max-width: none; }
-  .photo-box { width: 140px; height: 168px; }
+  .photo-box { width: 180px; height: 220px; }
   .photo-accent { margin-left: 0; }
   .photo-label { text-align: left; }
 
