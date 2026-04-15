@@ -1,0 +1,78 @@
+{
+  "services": [
+    {
+      "title": "Workflow AI",
+      "desc": "Progetto e implemento flussi di lavoro basati su AI generativa per reparti creativi, imaging e produzione di contenuti."
+    },
+    {
+      "title": "Formazione",
+      "desc": "Training e coaching on-the-job per team creative, con focus su strumenti Adobe, AI generativa e digital imaging."
+    },
+    {
+      "title": "Consulenza strategica",
+      "desc": "Supporto alle direzioni nella transizione digitale: analisi dei processi, scelta degli strumenti, roadmap di adozione."
+    }
+  ],
+  "numbers": [
+    { "value": "25", "suffix": "+", "label": "anni di esperienza nel digital imaging" },
+    { "value": "12", "suffix": "",  "label": "anni consulente ufficiale Adobe Italia" },
+    { "value": "40", "suffix": "+", "label": "brand e gruppi editoriali" }
+  ],
+  "clients": [
+    { "name": "Hugo Boss",   "sector": "Fashion · 10 anni",   "accent": true  },
+    { "name": "Prada",       "sector": "Luxury fashion",       "accent": false },
+    { "name": "Bulgari",     "sector": "Luxury",               "accent": false },
+    { "name": "Lindt",       "sector": "Luxury consumer",      "accent": false },
+    { "name": "Adobe",       "sector": "Consulente ufficiale", "accent": true  },
+    { "name": "MSC Cruises", "sector": "Luxury travel",        "accent": false },
+    { "name": "Condé Nast",  "sector": "Editorial",            "accent": false },
+    { "name": "Mondadori",   "sector": "Editorial",            "accent": false }
+  ],
+  "contacts": [
+    { "label": "Email",    "value": "a.spinazzola@new-media-design.it" },
+    { "label": "LinkedIn", "value": "linkedin.com/in/aspinazzola" },
+    { "label": "Web",      "value": "new-media-design.it" }
+  ],
+  "gallery": [
+    {
+      "category": "Virtual Models",
+      "slides": [
+        { "image": "assets/images/virtual-models/vm-01.jpg", "client": "Fashion editorial",  "type": "Modello virtuale · luxury outerwear · ambientazione urbana" },
+        { "image": "assets/images/virtual-models/vm-02.jpg", "client": "Lookbook SS",        "type": "Full body · diverse casting · AI generativa" },
+        { "image": "assets/images/virtual-models/vm-03.jpg", "client": "Studio portrait",    "type": "Ritratto · variazione espressiva · controllo luce" },
+        { "image": "assets/images/virtual-models/vm-04.jpg", "client": "Hugo Boss",          "type": "Campaign model · outdoor context · consistent identity" },
+        { "image": "assets/images/virtual-models/vm-05.jpg", "client": "Casting AI",         "type": "Age variation · same character · 4 versioni" }
+      ]
+    },
+    {
+      "category": "ADV Campaign",
+      "slides": [
+        { "image": "assets/images/adv-campaign/adv-01.jpg", "client": "MSC Cruises",    "type": "Hero shot · product + contesto luxury travel" },
+        { "image": "assets/images/adv-campaign/adv-02.jpg", "client": "Lindt",          "type": "Food ADV · compositing AI · luxury consumer" },
+        { "image": "assets/images/adv-campaign/adv-03.jpg", "client": "Fashion brand",  "type": "Print ADV · campagna stagionale · multi-formato" },
+        { "image": "assets/images/adv-campaign/adv-04.jpg", "client": "Product scene",  "type": "Still life · atmosfera · integrazione brand identity" },
+        { "image": "assets/images/adv-campaign/adv-05.jpg", "client": "Social campaign","type": "Multi-format · ADV digitale · varianti colore" }
+      ]
+    },
+    {
+      "category": "Virtual Try-On",
+      "slides": [
+        { "image": "assets/images/virtual-try-on/vto-01.jpg", "client": "Fashion brand",      "type": "Outfit swap · stessa modella · 4 varianti capo" },
+        { "image": "assets/images/virtual-try-on/vto-02.jpg", "client": "E-commerce",         "type": "Cambio colore · stesso garment · workflow automatizzato" },
+        { "image": "assets/images/virtual-try-on/vto-03.jpg", "client": "Luxury outerwear",   "type": "Body type variation · inclusività · size range" },
+        { "image": "assets/images/virtual-try-on/vto-04.jpg", "client": "Accessori",          "type": "Bag + coat try-on · compositing AI · reference foto" },
+        { "image": "assets/images/virtual-try-on/vto-05.jpg", "client": "Capsule collection", "type": "Look completo · modello AI · ambientazione editoriale" }
+      ]
+    },
+    {
+      "category": "Texture & Fabric",
+      "slides": [
+        { "image": "assets/images/texture-fabric/tf-01.jpg", "client": "Ostinelli Seta",  "type": "Disegno tessuto · AI generativa · varianti colore" },
+        { "image": "assets/images/texture-fabric/tf-02.jpg", "client": "Fashion design",  "type": "Pattern stagionale · workflow Adobe + AI" },
+        { "image": "assets/images/texture-fabric/tf-03.jpg", "client": "Tech outerwear",  "type": "Texture tecnica · materiale sintetico · close-up" },
+        { "image": "assets/images/texture-fabric/tf-04.jpg", "client": "Print design",    "type": "Stampa luxury · ripetizione pattern · prototipo digitale" },
+        { "image": "assets/images/texture-fabric/tf-05.jpg", "client": "Applied texture", "type": "Texture applicata · render su capo · pre-visualizzazione" }
+      ]
+    }
+  ]
+}

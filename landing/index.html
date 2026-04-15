@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrea Spinazzola · New Media Design</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/gallery.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══ PAGE ═══ -->
+  <main class="page">
+    <div class="top-rule"></div>
+
+    <!-- top bar -->
+    <div class="top-bar">
+      <p class="eyebrow">AI Consultant · Digital Imaging · Fashion &amp; Luxury</p>
+      <button class="portfolio-btn" id="open-gallery">&#8599; Portfolio</button>
+    </div>
+
+    <!-- hero -->
+    <div class="header">
+      <div class="header-left">
+        <h1 class="name">Andrea<br><em>Spinazzola</em></h1>
+        <div class="role-line">
+          <span>Art Director</span><span class="dot"></span>
+          <span>Adobe Certified Instructor</span><span class="dot"></span>
+          <span>AI Consultant</span>
+        </div>
+        <p class="bio">
+          25 anni all'intersezione tra immagine, tecnologia e brand del lusso.
+          Oggi traduco questa esperienza in percorsi concreti di adozione dell'
+          <strong>intelligenza artificiale generativa</strong> per i reparti creativi.
+        </p>
+      </div>
+      <div class="header-right">
+        <div class="photo-box">
+          <img src="assets/images/portraits/portrait-bw.png" alt="Andrea Spinazzola" />
+        </div>
+        <div class="photo-accent"></div>
+        <p class="photo-label">Milano · 2026</p>
+      </div>
+    </div>
+
+    <!-- cosa faccio -->
+    <section class="section">
+      <p class="section-label">Cosa faccio</p>
+      <div class="services"></div><!-- populated by js/content.js -->
+    </section>
+
+    <!-- numeri -->
+    <section class="section">
+      <p class="section-label">Numeri</p>
+      <div class="numbers-row"></div><!-- populated by js/content.js -->
+    </section>
+
+    <!-- clienti -->
+    <section class="section">
+      <p class="section-label">Hanno lavorato con me</p>
+      <div class="clients-grid"></div><!-- populated by js/content.js -->
+    </section>
+
+    <!-- contatti -->
+    <section class="section">
+      <p class="section-label">Contatti</p>
+      <div class="contact-row">
+        <div class="contacts"></div><!-- populated by js/content.js -->
+        <div class="nmd">
+          <p><strong>NMD</strong> · New Media Design<br>di Andrea Spinazzola</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="bottom-rule"></div>
+    <div class="footer">
+      <span>Confidenziale · 2026</span>
+      <span>Generative AI · Fashion &amp; Luxury · Digital Imaging</span>
+    </div>
+  </main>
+
+  <!-- ═══ GALLERY OVERLAY ═══ -->
+  <div class="overlay" id="gallery-overlay">
+    <div class="ov-header">
+      <p class="ov-wordmark"><strong>Portfolio</strong> · Andrea Spinazzola · New Media Design · 2026</p>
+      <button class="ov-close" id="close-gallery">&#215; chiudi</button>
+    </div>
+    <nav class="ov-nav" id="ov-nav">
+      <!-- tabs injected by js/gallery.js -->
+    </nav>
+    <div class="ov-stage">
+      <div class="slide-wrap" id="slide-wrap"></div>
+      <div class="ov-bottom">
+        <div class="slide-caption">
+          <p class="cap-client" id="cap-client"></p>
+          <p class="cap-type" id="cap-type"></p>
+        </div>
+        <div class="ov-controls">
+          <button class="ov-arrow" id="prev-slide">&#8592; prev</button>
+          <span class="ov-counter" id="counter"></span>
+          <button class="ov-arrow" id="next-slide">next &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data/content.json" type="application/json" id="content-data"></script>
+  <script src="js/content.js"></script>
+  <script src="js/gallery.js"></script>
+
+</body>
+</html>

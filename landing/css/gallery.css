@@ -1,0 +1,59 @@
+/* ── GALLERY OVERLAY ── */
+.overlay { display: none; position: fixed; inset: 0; z-index: 1000; background: #0a0a0a; flex-direction: column; }
+.overlay.open { display: flex; }
+
+.ov-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 28px 48px 0; flex-shrink: 0;
+}
+.ov-wordmark { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+.ov-wordmark strong { color: rgba(255,255,255,0.6); font-weight: 400; }
+.ov-close {
+  background: transparent; border: none;
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); padding: 0;
+}
+.ov-close:hover { color: #fff; }
+
+.ov-nav {
+  display: flex; padding: 20px 48px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.1);
+  flex-shrink: 0; margin-top: 4px;
+}
+.ov-tab {
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); padding: 0 0 14px; margin-right: 36px;
+  border: none; background: transparent;
+  border-bottom: 1px solid transparent; margin-bottom: -0.5px;
+}
+.ov-tab.active { color: #fff; border-bottom-color: var(--blue); }
+.ov-tab:hover { color: rgba(255,255,255,0.7); }
+
+.ov-stage {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 0 48px 32px; overflow: hidden; min-height: 0;
+}
+.slide-wrap {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  min-height: 0; margin-top: 32px;
+}
+.slide-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.slide-placeholder {
+  width: 100%; height: 440px;
+  border: 0.5px solid rgba(255,255,255,0.08);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+}
+.ph-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.15); }
+.ph-title { font-family: var(--font-serif); font-size: 22px; font-weight: 300; color: rgba(255,255,255,0.2); font-style: italic; }
+
+.ov-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding-top: 20px; border-top: 0.5px solid rgba(255,255,255,0.08); flex-shrink: 0;
+}
+.cap-client { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
+.cap-type { font-family: var(--font-serif); font-size: 15px; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.5); }
+.ov-controls { display: flex; align-items: center; gap: 24px; }
+.ov-arrow { background: transparent; border: none; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 0; }
+.ov-arrow:hover { color: #fff; }
+.ov-counter { font-size: 9px; letter-spacing: 0.14em; color: rgba(255,255,255,0.2); min-width: 48px; text-align: center; }
