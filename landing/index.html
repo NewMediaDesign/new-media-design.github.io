@@ -6,6 +6,7 @@
   <title>Andrea Spinazzola · New Media Design</title>
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="vendor/photoswipe/photoswipe.css" />
   <link rel="stylesheet" href="css/gallery.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -82,34 +83,27 @@
     </div>
   </main>
 
-  <!-- ═══ GALLERY OVERLAY ═══ -->
-  <div class="overlay" id="gallery-overlay">
-    <div class="ov-header">
-      <p class="ov-wordmark"><strong>Portfolio</strong> · Andrea Spinazzola · New Media Design · 2026</p>
-      <button class="ov-close" id="close-gallery">&#215; chiudi</button>
+  <!-- ═══ GALLERY INDEX (editorial category selector) ═══ -->
+  <div class="gallery-index" id="gallery-index" aria-hidden="true" role="dialog" aria-label="Portfolio index">
+    <div class="gx-header">
+      <p class="gx-wordmark"><strong>Portfolio</strong> &middot; Andrea Spinazzola &middot; New Media Design &middot; 2026</p>
+      <button class="gx-close" id="gx-close" type="button">&#215; close</button>
     </div>
-    <nav class="ov-nav" id="ov-nav">
-      <!-- tabs injected by js/gallery.js -->
-    </nav>
-    <div class="ov-stage">
-      <div class="slide-wrap" id="slide-wrap"></div>
-      <div class="ov-bottom">
-        <div class="slide-caption">
-          <p class="cap-client" id="cap-client"></p>
-          <p class="cap-type" id="cap-type"></p>
-        </div>
-        <div class="ov-controls">
-          <button class="ov-arrow" id="prev-slide">&#8592; prev</button>
-          <span class="ov-counter" id="counter"></span>
-          <button class="ov-arrow" id="next-slide">next &#8594;</button>
-        </div>
-      </div>
+    <div class="gx-rule"></div>
+    <div class="gx-intro">
+      <p class="gx-eyebrow">Index</p>
+      <h2 class="gx-title">Selected <em>works</em></h2>
+      <p class="gx-sub">Quattro aree di lavoro &mdash; dalla produzione di modelli virtuali all'applicazione di texture generative.</p>
+    </div>
+    <div class="gx-grid" id="gx-grid"><!-- category cards injected by js/gallery.js --></div>
+    <div class="gx-footer">
+      <span>Confidenziale &middot; 2026</span>
+      <span>Generative AI &middot; Fashion &amp; Luxury</span>
     </div>
   </div>
 
-  <script src="data/content.json" type="application/json" id="content-data"></script>
   <script src="js/content.js"></script>
-  <script src="js/gallery.js"></script>
+  <script type="module" src="js/gallery.js"></script>
 
 </body>
 </html>
