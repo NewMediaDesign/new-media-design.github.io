@@ -47,13 +47,11 @@
 .name em { font-style: italic; }
 .name-accent {
   display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
   color: var(--blue);
-  font-size: 0.46em;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 0;
-  margin-left: 0.12em;
-  transform: translateY(-0.7em);
+  margin-left: 0.18em;
+  transform: translateY(-0.55em);
   vertical-align: baseline;
 }
 .role-line {
@@ -165,20 +163,6 @@
 .footer-info .footer-name strong {
   color: var(--blue);
   font-weight: 500;
-}
-.footer-copy {
-  display: flex;
-  justify-content: flex-end;
-  gap: 24px;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 0.5px solid var(--rule);
-}
-.footer-copy span {
-  font-size: 8.5px;
-  letter-spacing: 0.14em;
-  color: var(--ink-muted);
-  text-transform: uppercase;
 }
 
 /* portfolio section */
@@ -404,9 +388,4 @@
   }
   .footer-logo { width: 150px; }
   .footer-info { text-align: left; }
-  .footer-copy {
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 4px;
-  }
 }
