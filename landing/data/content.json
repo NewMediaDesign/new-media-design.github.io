@@ -33,71 +33,103 @@
   "clients": [
     {
       "name": "Hugo Boss",
-      "logo": "assets/images/loghi/loghi_gallery_0011_hb.png"
+      "logo": "assets/images/loghi/loghi_gallery_0000_hb.png"
+    },
+    {
+      "name": "Tod's",
+      "logo": "assets/images/loghi/loghi_gallery_0001_tods.png"
     },
     {
       "name": "Prada",
-      "logo": "assets/images/loghi/loghi_gallery_0000_prada.png"
-    },
-    {
-      "name": "Bulgari",
-      "logo": "assets/images/loghi/loghi_gallery_0005_bulgari.png"
-    },
-    {
-      "name": "Adobe",
-      "logo": "assets/images/loghi/loghi_gallery_0007_adobe.png"
-    },
-    {
-      "name": "MSC Cruises",
-      "logo": "assets/images/loghi/loghi_gallery_0014_msc.png"
-    },
-    {
-      "name": "Condé Nast",
-      "logo": "assets/images/loghi/loghi_gallery_0016_conde.png"
-    },
-    {
-      "name": "Mondadori",
-      "logo": "assets/images/loghi/loghi_gallery_0013_mondadori.png"
-    },
-    {
-      "name": "Wired",
-      "logo": "assets/images/loghi/loghi_gallery_0004_wired.png"
-    },
-    {
-      "name": "Vanity Fair",
-      "logo": "assets/images/loghi/loghi_gallery_0008_vanity.png"
+      "logo": "assets/images/loghi/loghi_gallery_0002_prada.png"
     },
     {
       "name": "Guess",
-      "logo": "assets/images/loghi/loghi_gallery_0009_guess.png"
-    },
-    {
-      "name": "Cairo Editore",
-      "logo": "assets/images/loghi/loghi_gallery_0010_cairo.png"
-    },
-    {
-      "name": "BTicino",
-      "logo": "assets/images/loghi/loghi_gallery_0001_bticino.png"
-    },
-    {
-      "name": "NABA",
-      "logo": "assets/images/loghi/loghi_gallery_0002_naba.png"
-    },
-    {
-      "name": "IED",
-      "logo": "assets/images/loghi/loghi_gallery_0003_ied.png"
-    },
-    {
-      "name": "Whirlpool",
-      "logo": "assets/images/loghi/loghi_gallery_0012_whirl.png"
-    },
-    {
-      "name": "Parmalat",
-      "logo": "assets/images/loghi/loghi_gallery_0015_parmalat.png"
+      "logo": "assets/images/loghi/loghi_gallery_0003_guess.png"
     },
     {
       "name": "SWA",
-      "logo": "assets/images/loghi/loghi_gallery_0006_swa.png"
+      "logo": "assets/images/loghi/loghi_gallery_0004_swa.png"
+    },
+    {
+      "name": "MSC Cruises",
+      "logo": "assets/images/loghi/loghi_gallery_0005_msc.png"
+    },
+    {
+      "name": "Bulgari",
+      "logo": "assets/images/loghi/loghi_gallery_0006_bulgari.png"
+    },
+    {
+      "name": "WD",
+      "logo": "assets/images/loghi/loghi_gallery_0007_wd.png"
+    },
+    {
+      "name": "Condé Nast",
+      "logo": "assets/images/loghi/loghi_gallery_0008_conde.png"
+    },
+    {
+      "name": "Vanity Fair",
+      "logo": "assets/images/loghi/loghi_gallery_0009_vanity.png"
+    },
+    {
+      "name": "Wired",
+      "logo": "assets/images/loghi/loghi_gallery_0010_wired.png"
+    },
+    {
+      "name": "GQ",
+      "logo": "assets/images/loghi/loghi_gallery_0011_gq.png"
+    },
+    {
+      "name": "RCS",
+      "logo": "assets/images/loghi/loghi_gallery_0012_rcs.png"
+    },
+    {
+      "name": "Cairo Editore",
+      "logo": "assets/images/loghi/loghi_gallery_0013_cairo.png"
+    },
+    {
+      "name": "Mondadori",
+      "logo": "assets/images/loghi/loghi_gallery_0014_mondadori.png"
+    },
+    {
+      "name": "Sky",
+      "logo": "assets/images/loghi/loghi_gallery_0015_sky.png"
+    },
+    {
+      "name": "IED",
+      "logo": "assets/images/loghi/loghi_gallery_0016_ied.png"
+    },
+    {
+      "name": "S. Giulia",
+      "logo": "assets/images/loghi/loghi_gallery_0017_sgiulia.png"
+    },
+    {
+      "name": "NABA",
+      "logo": "assets/images/loghi/loghi_gallery_0018_naba.png"
+    },
+    {
+      "name": "ILAS",
+      "logo": "assets/images/loghi/loghi_gallery_0019_ilas.png"
+    },
+    {
+      "name": "Adobe",
+      "logo": "assets/images/loghi/loghi_gallery_0020_adobe.png"
+    },
+    {
+      "name": "Ferrero",
+      "logo": "assets/images/loghi/loghi_gallery_0021_ferrero.png"
+    },
+    {
+      "name": "BTicino",
+      "logo": "assets/images/loghi/loghi_gallery_0022_bticino.png"
+    },
+    {
+      "name": "Whirlpool",
+      "logo": "assets/images/loghi/loghi_gallery_0023_whirl.png"
+    },
+    {
+      "name": "Parmalat",
+      "logo": "assets/images/loghi/loghi_gallery_0024_parmalat.png"
     }
   ],
   "contacts": [
