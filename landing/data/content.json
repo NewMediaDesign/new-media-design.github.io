@@ -14,74 +14,269 @@
     }
   ],
   "numbers": [
-    { "value": "25", "suffix": "+", "label": "anni di esperienza nel digital imaging" },
-    { "value": "12", "suffix": "",  "label": "anni consulente ufficiale Adobe Italia" },
-    { "value": "40", "suffix": "+", "label": "brand e gruppi editoriali" }
+    {
+      "value": "25",
+      "suffix": "+",
+      "label": "anni di esperienza nel digital imaging"
+    },
+    {
+      "value": "12",
+      "suffix": "",
+      "label": "anni consulente ufficiale Adobe Italia"
+    },
+    {
+      "value": "40",
+      "suffix": "+",
+      "label": "brand e gruppi editoriali"
+    }
   ],
   "clients": [
-    { "name": "Hugo Boss",     "logo": "assets/images/loghi/loghi_gallery_0011_hb.png" },
-    { "name": "Prada",         "logo": "assets/images/loghi/loghi_gallery_0000_prada.png" },
-    { "name": "Bulgari",       "logo": "assets/images/loghi/loghi_gallery_0005_bulgari.png" },
-    { "name": "Adobe",         "logo": "assets/images/loghi/loghi_gallery_0007_adobe.png" },
-    { "name": "MSC Cruises",   "logo": "assets/images/loghi/loghi_gallery_0014_msc.png" },
-    { "name": "Condé Nast",    "logo": "assets/images/loghi/loghi_gallery_0016_conde.png" },
-    { "name": "Mondadori",     "logo": "assets/images/loghi/loghi_gallery_0013_mondadori.png" },
-    { "name": "Wired",         "logo": "assets/images/loghi/loghi_gallery_0004_wired.png" },
-    { "name": "Vanity Fair",   "logo": "assets/images/loghi/loghi_gallery_0008_vanity.png" },
-    { "name": "Guess",         "logo": "assets/images/loghi/loghi_gallery_0009_guess.png" },
-    { "name": "Cairo Editore", "logo": "assets/images/loghi/loghi_gallery_0010_cairo.png" },
-    { "name": "BTicino",       "logo": "assets/images/loghi/loghi_gallery_0001_bticino.png" },
-    { "name": "NABA",          "logo": "assets/images/loghi/loghi_gallery_0002_naba.png" },
-    { "name": "IED",           "logo": "assets/images/loghi/loghi_gallery_0003_ied.png" },
-    { "name": "Whirlpool",     "logo": "assets/images/loghi/loghi_gallery_0012_whirl.png" },
-    { "name": "Parmalat",      "logo": "assets/images/loghi/loghi_gallery_0015_parmalat.png" },
-    { "name": "SWA",           "logo": "assets/images/loghi/loghi_gallery_0006_swa.png" }
+    {
+      "name": "Hugo Boss",
+      "logo": "assets/images/loghi/loghi_gallery_0011_hb.png"
+    },
+    {
+      "name": "Prada",
+      "logo": "assets/images/loghi/loghi_gallery_0000_prada.png"
+    },
+    {
+      "name": "Bulgari",
+      "logo": "assets/images/loghi/loghi_gallery_0005_bulgari.png"
+    },
+    {
+      "name": "Adobe",
+      "logo": "assets/images/loghi/loghi_gallery_0007_adobe.png"
+    },
+    {
+      "name": "MSC Cruises",
+      "logo": "assets/images/loghi/loghi_gallery_0014_msc.png"
+    },
+    {
+      "name": "Condé Nast",
+      "logo": "assets/images/loghi/loghi_gallery_0016_conde.png"
+    },
+    {
+      "name": "Mondadori",
+      "logo": "assets/images/loghi/loghi_gallery_0013_mondadori.png"
+    },
+    {
+      "name": "Wired",
+      "logo": "assets/images/loghi/loghi_gallery_0004_wired.png"
+    },
+    {
+      "name": "Vanity Fair",
+      "logo": "assets/images/loghi/loghi_gallery_0008_vanity.png"
+    },
+    {
+      "name": "Guess",
+      "logo": "assets/images/loghi/loghi_gallery_0009_guess.png"
+    },
+    {
+      "name": "Cairo Editore",
+      "logo": "assets/images/loghi/loghi_gallery_0010_cairo.png"
+    },
+    {
+      "name": "BTicino",
+      "logo": "assets/images/loghi/loghi_gallery_0001_bticino.png"
+    },
+    {
+      "name": "NABA",
+      "logo": "assets/images/loghi/loghi_gallery_0002_naba.png"
+    },
+    {
+      "name": "IED",
+      "logo": "assets/images/loghi/loghi_gallery_0003_ied.png"
+    },
+    {
+      "name": "Whirlpool",
+      "logo": "assets/images/loghi/loghi_gallery_0012_whirl.png"
+    },
+    {
+      "name": "Parmalat",
+      "logo": "assets/images/loghi/loghi_gallery_0015_parmalat.png"
+    },
+    {
+      "name": "SWA",
+      "logo": "assets/images/loghi/loghi_gallery_0006_swa.png"
+    }
   ],
   "contacts": [
-    { "label": "Email",    "value": "a.spinazzola@new-media-design.it" },
-    { "label": "Mobile",   "value": "+39 347 8461063" },
-    { "label": "LinkedIn", "value": "linkedin.com/in/aspinazzola" },
-    { "label": "Web",      "value": "new-media-design.it" }
+    {
+      "label": "Email",
+      "value": "a.spinazzola@new-media-design.it"
+    },
+    {
+      "label": "Mobile",
+      "value": "+39 347 8461063"
+    },
+    {
+      "label": "LinkedIn",
+      "value": "linkedin.com/in/aspinazzola"
+    },
+    {
+      "label": "Web",
+      "value": "new-media-design.it"
+    }
   ],
   "gallery": [
     {
       "category": "Virtual Models",
       "slides": [
-        { "image": "assets/images/virtual-models/vm-01.jpg", "width": 1600, "height": 2000, "client": "Fashion editorial",  "type": "Modello virtuale \u00b7 luxury outerwear \u00b7 ambientazione urbana" },
-        { "image": "assets/images/virtual-models/vm-02.jpg", "width": 1600, "height": 2000, "client": "Lookbook SS",        "type": "Full body \u00b7 diverse casting \u00b7 AI generativa" },
-        { "image": "assets/images/virtual-models/vm-03.jpg", "width": 1600, "height": 2000, "client": "Studio portrait",    "type": "Ritratto \u00b7 variazione espressiva \u00b7 controllo luce" },
-        { "image": "assets/images/virtual-models/vm-04.jpg", "width": 1600, "height": 2000, "client": "Hugo Boss",          "type": "Campaign model \u00b7 outdoor context \u00b7 consistent identity" },
-        { "image": "assets/images/virtual-models/vm-05.jpg", "width": 1600, "height": 2000, "client": "Casting AI",         "type": "Age variation \u00b7 same character \u00b7 4 versioni" }
+        {
+          "image": "assets/images/virtual-models/vm-01.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Fashion editorial",
+          "type": "Modello virtuale · luxury outerwear · ambientazione urbana"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-02.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Lookbook SS",
+          "type": "Full body · diverse casting · AI generativa"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-03.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Studio portrait",
+          "type": "Ritratto · variazione espressiva · controllo luce"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-04.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Hugo Boss",
+          "type": "Campaign model · outdoor context · consistent identity"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-05.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Casting AI",
+          "type": "Age variation · same character · 4 versioni"
+        }
       ]
     },
     {
       "category": "ADV Campaign",
       "slides": [
-        { "image": "assets/images/adv-campaign/adv-01.jpg", "width": 1600, "height": 2000, "client": "MSC Cruises",    "type": "Hero shot \u00b7 product + contesto luxury travel" },
-        { "image": "assets/images/adv-campaign/adv-02.jpg", "width": 1600, "height": 2000, "client": "Lindt",          "type": "Food ADV \u00b7 compositing AI \u00b7 luxury consumer" },
-        { "image": "assets/images/adv-campaign/adv-03.jpg", "width": 1600, "height": 2000, "client": "Fashion brand",  "type": "Print ADV \u00b7 campagna stagionale \u00b7 multi-formato" },
-        { "image": "assets/images/adv-campaign/adv-04.jpg", "width": 1600, "height": 2000, "client": "Product scene",  "type": "Still life \u00b7 atmosfera \u00b7 integrazione brand identity" },
-        { "image": "assets/images/adv-campaign/adv-05.jpg", "width": 1600, "height": 2000, "client": "Social campaign","type": "Multi-format \u00b7 ADV digitale \u00b7 varianti colore" }
+        {
+          "image": "assets/images/adv-campaign/adv-01.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "MSC Cruises",
+          "type": "Hero shot · product + contesto luxury travel"
+        },
+        {
+          "image": "assets/images/adv-campaign/adv-02.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Lindt",
+          "type": "Food ADV · compositing AI · luxury consumer"
+        },
+        {
+          "image": "assets/images/adv-campaign/adv-03.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Fashion brand",
+          "type": "Print ADV · campagna stagionale · multi-formato"
+        },
+        {
+          "image": "assets/images/adv-campaign/adv-04.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Product scene",
+          "type": "Still life · atmosfera · integrazione brand identity"
+        },
+        {
+          "image": "assets/images/adv-campaign/adv-05.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Social campaign",
+          "type": "Multi-format · ADV digitale · varianti colore"
+        }
       ]
     },
     {
       "category": "Virtual Try-On",
       "slides": [
-        { "image": "assets/images/virtual-try-on/vto-01.jpg", "width": 1600, "height": 2000, "client": "Fashion brand",      "type": "Outfit swap \u00b7 stessa modella \u00b7 4 varianti capo" },
-        { "image": "assets/images/virtual-try-on/vto-02.jpg", "width": 1600, "height": 2000, "client": "E-commerce",         "type": "Cambio colore \u00b7 stesso garment \u00b7 workflow automatizzato" },
-        { "image": "assets/images/virtual-try-on/vto-03.jpg", "width": 1600, "height": 2000, "client": "Luxury outerwear",   "type": "Body type variation \u00b7 inclusivit\u00e0 \u00b7 size range" },
-        { "image": "assets/images/virtual-try-on/vto-04.jpg", "width": 1600, "height": 2000, "client": "Accessori",          "type": "Bag + coat try-on \u00b7 compositing AI \u00b7 reference foto" },
-        { "image": "assets/images/virtual-try-on/vto-05.jpg", "width": 1600, "height": 2000, "client": "Capsule collection", "type": "Look completo \u00b7 modello AI \u00b7 ambientazione editoriale" }
+        {
+          "image": "assets/images/virtual-try-on/vto-01.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Fashion brand",
+          "type": "Outfit swap · stessa modella · 4 varianti capo"
+        },
+        {
+          "image": "assets/images/virtual-try-on/vto-02.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "E-commerce",
+          "type": "Cambio colore · stesso garment · workflow automatizzato"
+        },
+        {
+          "image": "assets/images/virtual-try-on/vto-03.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Luxury outerwear",
+          "type": "Body type variation · inclusività · size range"
+        },
+        {
+          "image": "assets/images/virtual-try-on/vto-04.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Accessori",
+          "type": "Bag + coat try-on · compositing AI · reference foto"
+        },
+        {
+          "image": "assets/images/virtual-try-on/vto-05.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Capsule collection",
+          "type": "Look completo · modello AI · ambientazione editoriale"
+        }
       ]
     },
     {
       "category": "Texture & Fabric",
       "slides": [
-        { "image": "assets/images/texture-fabric/tf-01.jpg", "width": 1600, "height": 2000, "client": "Ostinelli Seta",  "type": "Disegno tessuto \u00b7 AI generativa \u00b7 varianti colore" },
-        { "image": "assets/images/texture-fabric/tf-02.jpg", "width": 1600, "height": 2000, "client": "Fashion design",  "type": "Pattern stagionale \u00b7 workflow Adobe + AI" },
-        { "image": "assets/images/texture-fabric/tf-03.jpg", "width": 1600, "height": 2000, "client": "Tech outerwear",  "type": "Texture tecnica \u00b7 materiale sintetico \u00b7 close-up" },
-        { "image": "assets/images/texture-fabric/tf-04.jpg", "width": 1600, "height": 2000, "client": "Print design",    "type": "Stampa luxury \u00b7 ripetizione pattern \u00b7 prototipo digitale" },
-        { "image": "assets/images/texture-fabric/tf-05.jpg", "width": 1600, "height": 2000, "client": "Applied texture", "type": "Texture applicata \u00b7 render su capo \u00b7 pre-visualizzazione" }
+        {
+          "image": "assets/images/texture-fabric/tf-01.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Ostinelli Seta",
+          "type": "Disegno tessuto · AI generativa · varianti colore"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-02.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Fashion design",
+          "type": "Pattern stagionale · workflow Adobe + AI"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-03.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Tech outerwear",
+          "type": "Texture tecnica · materiale sintetico · close-up"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-04.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Print design",
+          "type": "Stampa luxury · ripetizione pattern · prototipo digitale"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-05.jpg",
+          "width": 1600,
+          "height": 2000,
+          "client": "Applied texture",
+          "type": "Texture applicata · render su capo · pre-visualizzazione"
+        }
       ]
     }
   ]
