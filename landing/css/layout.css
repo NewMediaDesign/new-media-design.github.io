@@ -36,23 +36,27 @@
   align-items: start;
   margin-bottom: 48px;
 }
+.name-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 32px;
+}
 .name {
   font-family: var(--font-serif);
   font-size: 72px;
   font-weight: 300;
   line-height: 1.0;
   letter-spacing: -0.015em;
-  margin-bottom: 32px;
+  margin-bottom: 0;
 }
 .name em { font-style: italic; }
 .name-accent {
-  display: inline-block;
-  width: 0.42em;
-  height: 0.42em;
+  flex-shrink: 0;
+  width: 44px;
+  height: auto;
   color: var(--blue);
-  margin-left: 0.18em;
-  transform: translateY(-0.55em);
-  vertical-align: baseline;
+  margin-top: 14px;
 }
 .role-line {
   font-size: 10px;
@@ -83,11 +87,6 @@
   filter: grayscale(100%);
 }
 .photo-accent { width: 20px; height: 2px; background: var(--blue); margin-top: 10px; margin-left: auto; }
-.photo-label {
-  font-size: 9px; letter-spacing: 0.12em;
-  color: var(--ink-muted); text-transform: uppercase;
-  margin-top: 5px; text-align: right;
-}
 
 /* sections */
 .section { margin-bottom: 40px; padding-bottom: 40px; border-bottom: 0.5px solid var(--rule); }
@@ -303,9 +302,10 @@
     margin-bottom: 16px;
   }
   .bio { font-size: 17px; max-width: none; }
-  .photo-box { width: 180px; height: auto; }
+  .name-accent { width: 32px; margin-top: 10px; }
+  .header-right { display: flex; flex-direction: column; align-items: center; }
+  .photo-box { width: 72%; max-width: 300px; height: auto; }
   .photo-accent { margin-left: 0; }
-  .photo-label { text-align: left; }
 
   /* sections */
   .section { margin-bottom: 28px; padding-bottom: 28px; }
