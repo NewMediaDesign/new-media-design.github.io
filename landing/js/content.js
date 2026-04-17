@@ -34,11 +34,20 @@ function buildClients(items) {
 }
 
 function buildContacts(items) {
-  document.querySelector('.contacts').innerHTML = items.map(c => `
+  document.querySelector('.contacts').innerHTML = items.map(c => {
+    let href = '#';
+    const v = c.value;
+    if (c.label === 'Email')    href = 'mailto:' + v;
+    if (c.label === 'Mobile')   href = 'tel:' + v.replace(/\s/g, '');
+    if (c.label === 'LinkedIn') href = 'https://' + v;
+    if (c.label === 'Web')      href = 'https://' + v;
+    const external = c.label === 'LinkedIn' || c.label === 'Web';
+    return `
     <div class="contact-item">
       <span>${c.label}</span>
-      <p>${c.value}</p>
-    </div>`).join('');
+      <a href="${href}"${external ? ' target="_blank" rel="noopener"' : ''}>${v}</a>
+    </div>`;
+  }).join('');
 }
 
 function buildPortfolioList(categories) {

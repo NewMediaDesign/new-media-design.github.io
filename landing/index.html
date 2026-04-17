@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="vendor/photoswipe/photoswipe.css" />
   <link rel="stylesheet" href="css/gallery.css" />
+  <link rel="stylesheet" href="css/contact.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
@@ -85,6 +86,21 @@
       <div class="clients-grid"></div><!-- populated by js/content.js -->
     </section>
 
+    <!-- cta contattami -->
+    <section class="section">
+      <p class="section-label">Lavoriamo insieme</p>
+      <div class="cta-block">
+        <div class="cta-text">
+          <h2 class="cta-headline">Hai un progetto<br><em>in mente?</em></h2>
+          <p class="cta-sub">Raccontami il tuo obiettivo — analizziamo insieme il percorso migliore per adottare l'AI nei tuoi flussi creativi.</p>
+        </div>
+        <button class="cta-btn" id="open-contact" type="button">
+          <span class="cta-btn-label">Contattami</span>
+          <span class="cta-btn-arrow">&#8599;</span>
+        </button>
+      </div>
+    </section>
+
     <!-- contatti -->
     <section class="section">
       <p class="section-label">Contatti</p>
@@ -123,8 +139,58 @@
     </div>
   </div>
 
+  <!-- ═══ CONTACT OVERLAY ═══ -->
+  <div class="contact-overlay" id="contact-overlay" aria-hidden="true" role="dialog" aria-label="Contattami">
+    <div class="co-header">
+      <p class="co-wordmark"><strong>Contattami</strong> &middot; Andrea Spinazzola &middot; New Media Design &middot; 2026</p>
+      <button class="co-close" id="co-close" type="button">&#215; close</button>
+    </div>
+    <div class="co-rule"></div>
+    <div class="co-body">
+      <p class="co-eyebrow">Get in touch</p>
+      <h2 class="co-title">Parliamo del<br><em>tuo progetto</em></h2>
+      <p class="co-sub">Compila il form e ti rispondo entro 24 ore.</p>
+      <form class="co-form" id="co-form" action="https://formspree.io/f/mvzdazjd" method="POST">
+        <div class="co-row">
+          <div class="co-field">
+            <label class="co-label" for="co-nome">Nome</label>
+            <input class="co-input" type="text" id="co-nome" name="nome" autocomplete="given-name" placeholder="Mario" required />
+          </div>
+          <div class="co-field">
+            <label class="co-label" for="co-cognome">Cognome</label>
+            <input class="co-input" type="text" id="co-cognome" name="cognome" autocomplete="family-name" placeholder="Rossi" required />
+          </div>
+        </div>
+        <div class="co-field">
+          <label class="co-label" for="co-email">Email</label>
+          <input class="co-input" type="email" id="co-email" name="email" autocomplete="email" placeholder="mario@azienda.it" required />
+        </div>
+        <div class="co-field">
+          <label class="co-label" for="co-msg">Messaggio</label>
+          <textarea class="co-input co-textarea" id="co-msg" name="messaggio" placeholder="Raccontami il tuo progetto…" required></textarea>
+        </div>
+        <div class="co-privacy">
+          <input type="checkbox" id="co-privacy-check" name="privacy" required />
+          <label for="co-privacy-check">Autorizzo il trattamento dei dati personali ai sensi del GDPR 2016/679, incluso l'invio di comunicazioni commerciali da parte di New Media Design di Andrea Spinazzola.</label>
+        </div>
+        <button class="co-submit" type="submit">
+          <span class="co-submit-label">Invia richiesta</span>
+          <span class="co-submit-arrow">&#8599;</span>
+        </button>
+      </form>
+      <div class="co-success" id="co-success">
+        Grazie — messaggio ricevuto.<br><em>Ti rispondo entro 24 ore.</em>
+      </div>
+    </div>
+    <div class="co-footer">
+      <span>Confidenziale &middot; 2026</span>
+      <span>New Media Design &middot; Varese &middot; Italia</span>
+    </div>
+  </div>
+
   <script src="js/content.js"></script>
   <script type="module" src="js/gallery.js"></script>
+  <script src="js/contact.js"></script>
 
 </body>
 </html>
