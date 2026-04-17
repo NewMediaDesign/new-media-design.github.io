@@ -121,16 +121,17 @@
 }
 .client-item {
   background: var(--bg);
-  height: 110px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
   padding: 0;
 }
 .client-item img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 110px;
+  object-fit: contain;
   width: auto;
   height: auto;
   display: block;
