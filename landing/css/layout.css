@@ -113,13 +113,28 @@
 .num-label { font-size: 9px; letter-spacing: 0.14em; color: var(--ink-muted); text-transform: uppercase; margin-top: 6px; line-height: 1.5; }
 
 /* clients */
-.clients-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.client-item { padding: 13px 16px; border-right: 0.5px solid var(--rule); border-bottom: 0.5px solid var(--rule); }
-.client-item:nth-child(4n) { border-right: none; }
-.client-item:nth-child(n+5) { border-bottom: none; }
-.client-name { font-family: var(--font-serif); font-size: 17px; font-weight: 300; }
-.client-sector { font-size: 9px; letter-spacing: 0.1em; color: var(--ink-muted); text-transform: uppercase; margin-top: 2px; }
-.client-sector.hi { color: var(--blue); }
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 0.5px solid var(--rule);
+  border-left: 0.5px solid var(--rule);
+}
+.client-item {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 0.5px solid var(--rule);
+  border-bottom: 0.5px solid var(--rule);
+}
+.client-item img {
+  width: 100%;
+  max-height: 28px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.5);
+  transition: filter 0.35s ease;
+}
+.client-item:hover img { filter: grayscale(0%) opacity(1); }
 
 /* contacts */
 .contacts { display: flex; gap: 40px; flex-wrap: wrap; }
@@ -363,16 +378,9 @@
   .num-item:last-child { border-bottom: none; }
   .num-big { font-size: 40px; }
 
-  /* clients: 2 columns — reset + recompute borders */
+  /* clients: 2 columns on mobile */
   .clients-grid { grid-template-columns: repeat(2, 1fr); }
-  .client-item {
-    border-right: 0.5px solid var(--rule);
-    border-bottom: 0.5px solid var(--rule);
-  }
-  .client-item:nth-child(4n) { border-right: 0.5px solid var(--rule); }
-  .client-item:nth-child(n+5) { border-bottom: 0.5px solid var(--rule); }
-  .client-item:nth-child(2n) { border-right: none; }
-  .client-item:nth-child(n+7) { border-bottom: none; }
+  .client-item img { max-height: 22px; }
 
   /* contacts: stacked */
   .contacts {

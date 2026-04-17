@@ -19,14 +19,23 @@
     { "value": "40", "suffix": "+", "label": "brand e gruppi editoriali" }
   ],
   "clients": [
-    { "name": "Hugo Boss",   "sector": "Fashion \u00b7 10 anni",   "accent": true  },
-    { "name": "Prada",       "sector": "Luxury fashion",       "accent": false },
-    { "name": "Bulgari",     "sector": "Luxury",               "accent": false },
-    { "name": "Lindt",       "sector": "Luxury consumer",      "accent": false },
-    { "name": "Adobe",       "sector": "Consulente ufficiale", "accent": true  },
-    { "name": "MSC Cruises", "sector": "Luxury travel",        "accent": false },
-    { "name": "Cond\u00e9 Nast",  "sector": "Editorial",            "accent": false },
-    { "name": "Mondadori",   "sector": "Editorial",            "accent": false }
+    { "name": "Hugo Boss",     "logo": "assets/images/loghi/loghi_gallery_0011_hb.png" },
+    { "name": "Prada",         "logo": "assets/images/loghi/loghi_gallery_0000_prada.png" },
+    { "name": "Bulgari",       "logo": "assets/images/loghi/loghi_gallery_0005_bulgari.png" },
+    { "name": "Adobe",         "logo": "assets/images/loghi/loghi_gallery_0007_adobe.png" },
+    { "name": "MSC Cruises",   "logo": "assets/images/loghi/loghi_gallery_0014_msc.png" },
+    { "name": "Condé Nast",    "logo": "assets/images/loghi/loghi_gallery_0016_conde.png" },
+    { "name": "Mondadori",     "logo": "assets/images/loghi/loghi_gallery_0013_mondadori.png" },
+    { "name": "Wired",         "logo": "assets/images/loghi/loghi_gallery_0004_wired.png" },
+    { "name": "Vanity Fair",   "logo": "assets/images/loghi/loghi_gallery_0008_vanity.png" },
+    { "name": "Guess",         "logo": "assets/images/loghi/loghi_gallery_0009_guess.png" },
+    { "name": "Cairo Editore", "logo": "assets/images/loghi/loghi_gallery_0010_cairo.png" },
+    { "name": "BTicino",       "logo": "assets/images/loghi/loghi_gallery_0001_bticino.png" },
+    { "name": "NABA",          "logo": "assets/images/loghi/loghi_gallery_0002_naba.png" },
+    { "name": "IED",           "logo": "assets/images/loghi/loghi_gallery_0003_ied.png" },
+    { "name": "Whirlpool",     "logo": "assets/images/loghi/loghi_gallery_0012_whirl.png" },
+    { "name": "Parmalat",      "logo": "assets/images/loghi/loghi_gallery_0015_parmalat.png" },
+    { "name": "SWA",           "logo": "assets/images/loghi/loghi_gallery_0006_swa.png" }
   ],
   "contacts": [
     { "label": "Email",    "value": "a.spinazzola@new-media-design.it" },

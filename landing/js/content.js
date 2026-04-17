@@ -29,8 +29,7 @@ function buildNumbers(items) {
 function buildClients(items) {
   document.querySelector('.clients-grid').innerHTML = items.map(c => `
     <div class="client-item">
-      <p class="client-name">${c.name}</p>
-      <p class="client-sector${c.accent ? ' hi' : ''}">${c.sector}</p>
+      <img src="${c.logo}" alt="${c.name}" loading="lazy" />
     </div>`).join('');
 }
 
