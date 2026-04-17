@@ -115,7 +115,7 @@
 /* clients */
 .clients-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1px;
   background: var(--rule);
 }
@@ -386,8 +386,8 @@
   .num-item:last-child { border-bottom: none; }
   .num-big { font-size: 40px; }
 
-  /* clients: 2 columns on mobile */
-  .clients-grid { grid-template-columns: repeat(2, 1fr); }
+  /* clients: 3 columns on mobile */
+  .clients-grid { grid-template-columns: repeat(3, 1fr); }
 
   /* contacts: stacked */
   .contacts {
