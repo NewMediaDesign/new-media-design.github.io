@@ -1,0 +1,26 @@
+{
+  "name": "art_gallery",
+  "version": "1.0.0",
+  "main": "update-manifest.js",
+  "scripts": {
+    "thumbs": "node generate-thumbs.js",
+    "manifest": "node update-manifest.js",
+    "watermark": "python watermark.py --all",
+    "metadata": "node write-metadata.js",
+    "favicons": "node generate-favicons.js",
+    "share-pages": "node generate-share-pages.js",
+    "social": "node export-social.js",
+    "queue": "node build-queue.js",
+    "publish-ig": "node publish-instagram.js",
+    "seo": "node build-seo.js",
+    "publish-images": "python watermark.py --all && node generate-thumbs.js && node write-metadata.js && node update-manifest.js && node generate-share-pages.js && node build-seo.js"
+  },
+  "keywords": [],
+  "author": "Andrea Spinazzola",
+  "license": "ISC",
+  "description": "Art gallery portfolio — Human Frequency",
+  "dependencies": {
+    "exiftool-vendored": "^31.0.0",
+    "sharp": "^0.34.5"
+  }
+}

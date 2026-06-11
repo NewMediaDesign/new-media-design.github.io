@@ -13,6 +13,7 @@
 
 const fs   = require('fs');
 const path = require('path');
+const sharp = require('sharp');
 
 const MANIFEST_PATH = path.join(__dirname, 'manifest.json');
 const IMAGES_DIR    = path.join(__dirname, 'images');
@@ -51,6 +52,7 @@ if (seriesDirs.length === 0) {
 const existingSeriesMap = Object.fromEntries((manifest.series || []).map(s => [s.id, s]));
 const updatedSeries = [];
 
+async function run() {
 for (const dirName of seriesDirs) {
   const seriesId  = dirName; // e.g. "series-1"
   const seriesDir = path.join(IMAGES_DIR, dirName);
@@ -70,19 +72,37 @@ for (const dirName of seriesDirs) {
   const romanNumerals = ['I','II','III','IV','V','VI','VII','VIII','IX','X'];
   const roman = romanNumerals[seriesNum - 1] || String(seriesNum);
 
-  const images = files.map((file, idx) => {
+  const images = [];
+  for (let idx = 0; idx < files.length; idx++) {
+    const file     = files[idx];
     const filename = `images/${dirName}/${file}`;
     const thumb    = `images/${dirName}/thumbs/${path.parse(file).name}.webp`;
     const prev     = existingImgMap[filename] || {};
     const num      = String(idx + 1).padStart(2, '0');
-    return {
+
+    // Dimensioni reali (w/h): preservate se già presenti, altrimenti lette dal file.
+    // Usate da index.html/PhotoSwipe per evitare il preload di tutte le thumbnail.
+    let w = prev.w, h = prev.h;
+    if (!w || !h) {
+      try {
+        const meta = await sharp(path.join(seriesDir, file)).metadata();
+        w = meta.width; h = meta.height;
+      } catch (e) {
+        console.warn(`  ⚠️  impossibile leggere dimensioni di ${filename}: ${e.message}`);
+        w = w || 0; h = h || 0;
+      }
+    }
+
+    images.push({
       filename,
       thumb,
+      w,
+      h,
       title:       prev.title       || `Opera ${num}`,
       description: prev.description || `Opera ${num} della serie ${existing.title || dirName}`,
       meta:        prev.meta        || '2024 · AI Generative'
-    };
-  });
+    });
+  }
 
   updatedSeries.push({
     id:       seriesId,
@@ -101,3 +121,6 @@ manifest.series = updatedSeries;
 fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2) + '\n');
 console.log('\n✅ manifest.json aggiornato.');
 console.log('   ⚠️  Ricordati di editare titoli/descrizioni in manifest.json per le nuove immagini.');
+}
+
+run().catch(err => { console.error(err); process.exit(1); });

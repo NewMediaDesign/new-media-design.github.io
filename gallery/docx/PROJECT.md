@@ -38,27 +38,38 @@
 ```
 Art_Gallery/
 ├── index.html              ← FILE PRINCIPALE (tutto il CSS/JS è qui dentro)
-├── manifest.json           ← Configura serie e immagini della galleria
-├── update-manifest.js      ← Script Node.js: rigenera manifest da immagini in disco
-├── generate-thumbs.js      ← Script Node.js: genera thumbnail WebP 600px via sharp
+├── manifest.json           ← Configura serie e immagini (incl. w/h, tagline, canonical)
+├── update-manifest.js      ← Node: rigenera manifest da disco (+ dimensioni w/h via sharp)
+├── generate-thumbs.js      ← Node: thumbnail WebP 600px via sharp
+├── generate-favicons.js    ← Node: set favicon png da immagine sorgente
+├── generate-share-pages.js ← Node: pagine share/ con og: tags per opera + og image 1200px
+├── build-seo.js            ← Node: SEO statica in index.html + sitemap.xml + robots.txt
+├── write-metadata.js       ← Node: EXIF/IPTC/XMP lossless (exiftool-vendored)
+├── watermark.py            ← Python: watermark invisibile (blind_watermark) + verifica
+├── watermark-registry.json ← Registro payload/bit-length watermark (BACKUP!)
+├── requirements.txt        ← Dipendenze Python (blind-watermark)
+├── sitemap.xml / robots.txt← Generati da build-seo.js
 ├── lib/
 │   ├── photoswipe.css      ← PhotoSwipe v5.4.4 CSS (bundlato localmente)
 │   └── photoswipe.umd.min.js ← PhotoSwipe v5.4.4 JS (bundlato localmente)
+├── favicon/                ← Generata da generate-favicons.js
+├── share/                  ← Pagine share per-opera + og/ (immagini 1200px)
 ├── images/
 │   ├── AS_BW_PORTRAIT_02.png   ← Foto About
 │   ├── series-1/               ← Amerika — 19 immagini (01-20, manca 14)
-│   │   ├── 01.jpg … 20.jpg
-│   │   └── thumbs/01.webp … 20.webp
-│   └── series-2/               ← Pulse — 25 immagini (01-25)
-│       ├── 01.jpg … 25.jpg
-│       └── thumbs/01.webp … 25.webp
-├── CLAUDE.md               ← Istruzioni sessione per Claude Code
+│   ├── series-2/               ← Pulse — 25 immagini (01-25)
+│   └── series-3/               ← Apart — 12 immagini (01-12)
+│       └── (ognuna con thumbs/*.webp)
+├── CLAUDE.md               ← Istruzioni sessione per Claude
 └── docx/                   ← Documentazione di progetto
     ├── PROJECT.md          ← Questo file
     ├── SESSION.md          ← Log sessioni
     ├── FIX.md              ← Registro bug risolti
+    ├── ROADMAP.md          ← Audit + milestone M7-M14 + strategia social/vendita
     └── CONTENT.md          ← Checklist contenuti da fornire
 ```
+
+**Nota progetto:** le immagini 3000px online sono una scelta consapevole (zoom 1:1 = concept del progetto); i master 6000px restano offline. Tracciabilità: watermark invisibile + metadata (vedi ROADMAP.md, M8). Niente etichette C2PA/AI per scelta di posizionamento.
 
 ---
 
@@ -152,13 +163,13 @@ Escape chiude in ordine: museum → overlay attivo → home.
 }
 ```
 
-**Serie attive:** Amerika (19 img), Pulse (25 img) — 44 immagini totali.
+**Serie attive:** Amerika (19), Pulse (25), Apart (12) — 56 immagini totali.
 
 **Per aggiungere immagini:**
-1. Copia JPG in `images/series-N/`
-2. `node generate-thumbs.js series-N` (genera thumbnail WebP 600px)
-3. `node update-manifest.js` (aggiorna manifest preservando metadata)
-4. Edita `manifest.json` — aggiungi/aggiorna titoli e descrizioni
+1. Copia JPG in `images/series-N/` (export 3000px dai master 6000px offline)
+2. `npm run publish-images` — esegue in ordine: watermark invisibile → thumbnail → metadata EXIF/IPTC/XMP → manifest (con w/h) → pagine share → SEO/sitemap
+3. Edita `manifest.json` — titoli, descrizioni, meta delle nuove immagini
+4. Rilancia `node generate-share-pages.js && node build-seo.js` (i titoli finiscono nelle pagine share)
 
 ---
 

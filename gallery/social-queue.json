@@ -1,0 +1,635 @@
+[
+  {
+    "id": "launch-1",
+    "type": "image",
+    "pids": [
+      "series-1/01"
+    ],
+    "files": [
+      "social/series-1-01.jpg"
+    ],
+    "caption": "The Witness\nAmerika · Salvador · 1997\n\nSome faces don't ask to be looked at.\nThey look back.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #salvador",
+    "status": "pending"
+  },
+  {
+    "id": "launch-2",
+    "type": "carousel",
+    "pids": [
+      "series-1/03",
+      "series-1/05",
+      "series-1/10",
+      "series-1/06"
+    ],
+    "files": [
+      "social/series-1-03.jpg",
+      "social/series-1-05.jpg",
+      "social/series-1-10.jpg",
+      "social/series-1-06.jpg"
+    ],
+    "caption": "Quiet — four moments from Amerika\n\nSilence · São Paulo · 1989\nStill · Buenos Aires · 1986\nThe Veil · Recife · 1982\nLast Bus · Belo Horizonte · 1993\n\nThe loudest places hide the stillest people.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #saopaulo #buenosaires",
+    "status": "pending"
+  },
+  {
+    "id": "launch-3",
+    "type": "image",
+    "pids": [
+      "series-2/03"
+    ],
+    "files": [
+      "social/series-2-03.jpg"
+    ],
+    "caption": "The Kiss\nPulse · Rio de Janeiro · 1999\n\nA city's noise disappears around two people\nwho stopped hearing it.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #riodejaneiro",
+    "status": "pending"
+  },
+  {
+    "id": "launch-4",
+    "type": "reel",
+    "pids": [
+      "series-2/10"
+    ],
+    "files": [
+      "social/series-2-10.jpg"
+    ],
+    "caption": "Oracle\nPulse · Salvador · 1982\n\nShe was already answering\nquestions nobody had asked yet.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #salvador",
+    "status": "manual",
+    "note": "Reel Ken Burns — vedi docx/LAUNCH-POSTS.md post 4"
+  },
+  {
+    "id": "launch-5",
+    "type": "image",
+    "pids": [
+      "series-3/09"
+    ],
+    "files": [
+      "social/series-3-09.jpg"
+    ],
+    "caption": "The Matriarch\nApart · Port-au-Prince · 2000\n\nEverything this family knows\nis written in one face.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #portauprince",
+    "status": "pending"
+  },
+  {
+    "id": "launch-6",
+    "type": "carousel",
+    "pids": [
+      "series-2/08",
+      "series-2/12",
+      "series-2/22"
+    ],
+    "files": [
+      "social/series-2-08.jpg",
+      "social/series-2-12.jpg",
+      "social/series-2-22.jpg"
+    ],
+    "caption": "One city, three frequencies — Havana\n\nThe Wait · 2003\nSonata · 2005\nThe Dancer · 1995\n\nSome cities don't pose. They perform.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #havana #cuba",
+    "status": "pending"
+  },
+  {
+    "id": "launch-7",
+    "type": "image",
+    "pids": [
+      "series-1/16"
+    ],
+    "files": [
+      "social/series-1-16.jpg"
+    ],
+    "caption": "Departure\nAmerika · Mato Grosso · 1974\n\nNobody photographs the ones who stay.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #matogrosso",
+    "status": "pending"
+  },
+  {
+    "id": "launch-8",
+    "type": "reel",
+    "pids": [
+      "series-2/13"
+    ],
+    "files": [
+      "social/series-2-13.jpg"
+    ],
+    "caption": "The Gaze\nPulse · Caracas · 1995\n\nLook closer.\nWhat do you see?\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #caracas",
+    "status": "manual",
+    "note": "Reel Look Closer — vedi docx/LAUNCH-POSTS.md post 8"
+  },
+  {
+    "id": "launch-9",
+    "type": "manifesto",
+    "pids": [],
+    "files": [],
+    "caption": "",
+    "status": "manual",
+    "note": "Claim tipografico su nero — vedi docx/LAUNCH-POSTS.md post 9"
+  },
+  {
+    "id": "series-1-02",
+    "type": "image",
+    "pids": [
+      "series-1/02"
+    ],
+    "files": [
+      "social/series-1-02.jpg"
+    ],
+    "caption": "Say Something\nAmerika · Rio de Janeiro · 2001\n\nWords were invented for everything\nexcept moments like this.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #riodejaneiro",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-01",
+    "type": "image",
+    "pids": [
+      "series-2/01"
+    ],
+    "files": [
+      "social/series-2-01.jpg"
+    ],
+    "caption": "Iron\nPulse · Copacabana · 1996\n\nStrength is a language\nthe body speaks fluently.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #copacabana",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-01",
+    "type": "image",
+    "pids": [
+      "series-3/01"
+    ],
+    "files": [
+      "social/series-3-01.jpg"
+    ],
+    "caption": "The Stare\nApart · Dhaka · 2003\n\nDistance is not measured in meters.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #dhaka",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-04",
+    "type": "image",
+    "pids": [
+      "series-1/04"
+    ],
+    "files": [
+      "social/series-1-04.jpg"
+    ],
+    "caption": "The Alarm\nAmerika · Belo Horizonte · 1994\n\nSome mornings arrive\nbefore anyone is ready for them.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #belohorizonte",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-02",
+    "type": "image",
+    "pids": [
+      "series-2/02"
+    ],
+    "files": [
+      "social/series-2-02.jpg"
+    ],
+    "caption": "Behind Bars\nPulse · São Paulo · 1993\n\nSome bars keep people in.\nOthers keep the world out.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #saopaulo",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-02",
+    "type": "image",
+    "pids": [
+      "series-3/02"
+    ],
+    "files": [
+      "social/series-3-02.jpg"
+    ],
+    "caption": "Wind\nApart · Belém · 1998\n\nSome days the wind\nis the only thing that visits.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #belem",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-07",
+    "type": "image",
+    "pids": [
+      "series-1/07"
+    ],
+    "files": [
+      "social/series-1-07.jpg"
+    ],
+    "caption": "Sunday\nAmerika · Rio de Janeiro · 1998\n\nOne day a week,\nthe city belongs to its people.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #riodejaneiro",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-04",
+    "type": "image",
+    "pids": [
+      "series-2/04"
+    ],
+    "files": [
+      "social/series-2-04.jpg"
+    ],
+    "caption": "The Elder\nPulse · Recife · 1988\n\nTime doesn't take a face.\nIt finishes it.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #recife",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-03",
+    "type": "image",
+    "pids": [
+      "series-3/03"
+    ],
+    "files": [
+      "social/series-3-03.jpg"
+    ],
+    "caption": "Refuge\nApart · Mumbai · 2001\n\nHome is whatever\nholds still long enough.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #mumbai",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-08",
+    "type": "image",
+    "pids": [
+      "series-1/08"
+    ],
+    "files": [
+      "social/series-1-08.jpg"
+    ],
+    "caption": "Route 47\nAmerika · São Paulo · 1995\n\nEvery route has its regulars.\nNone of them know each other's names.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #saopaulo",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-05",
+    "type": "image",
+    "pids": [
+      "series-2/05"
+    ],
+    "files": [
+      "social/series-2-05.jpg"
+    ],
+    "caption": "Departure\nPulse · Belo Horizonte · 1991\n\nEvery departure has two versions:\nthe one who leaves, the one who waves.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #belohorizonte",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-04",
+    "type": "image",
+    "pids": [
+      "series-3/04"
+    ],
+    "files": [
+      "social/series-3-04.jpg"
+    ],
+    "caption": "The Wrap\nApart · Lagos · 2005\n\nWhat we wear\nis the story we can afford to tell.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #lagos",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-09",
+    "type": "image",
+    "pids": [
+      "series-1/09"
+    ],
+    "files": [
+      "social/series-1-09.jpg"
+    ],
+    "caption": "The Crowd\nAmerika · Porto Alegre · 1978\n\nA crowd is a thousand solitudes\nstanding close together.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #portoalegre",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-06",
+    "type": "image",
+    "pids": [
+      "series-2/06"
+    ],
+    "files": [
+      "social/series-2-06.jpg"
+    ],
+    "caption": "Ascent\nPulse · Buenos Aires · 2001\n\nStairs only ask one question:\nhow much do you want it?\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #buenosaires",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-05",
+    "type": "image",
+    "pids": [
+      "series-3/05"
+    ],
+    "files": [
+      "social/series-3-05.jpg"
+    ],
+    "caption": "Longing\nApart · Medellín · 1999\n\nLonging has no address.\nIt lives everywhere.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #medellin",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-11",
+    "type": "image",
+    "pids": [
+      "series-1/11"
+    ],
+    "files": [
+      "social/series-1-11.jpg"
+    ],
+    "caption": "Last Seat\nAmerika · São Paulo · 1991\n\nSomebody always gets the last seat.\nSomebody always stands.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #saopaulo",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-07",
+    "type": "image",
+    "pids": [
+      "series-2/07"
+    ],
+    "files": [
+      "social/series-2-07.jpg"
+    ],
+    "caption": "Grace\nPulse · Salvador · 1994\n\nGrace is not taught.\nIt survives.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #salvador",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-06",
+    "type": "image",
+    "pids": [
+      "series-3/06"
+    ],
+    "files": [
+      "social/series-3-06.jpg"
+    ],
+    "caption": "Brothers\nApart · Luanda · 2002\n\nHalf of survival\nis having someone to survive with.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #luanda",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-12",
+    "type": "image",
+    "pids": [
+      "series-1/12"
+    ],
+    "files": [
+      "social/series-1-12.jpg"
+    ],
+    "caption": "The Third\nAmerika · Salvador · 1988\n\nTwo people talk.\nThe third one remembers.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #salvador",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-09",
+    "type": "image",
+    "pids": [
+      "series-2/09"
+    ],
+    "files": [
+      "social/series-2-09.jpg"
+    ],
+    "caption": "Three Generations\nPulse · Lima · 1987\n\nSame eyes,\nthree different futures.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #lima",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-07",
+    "type": "image",
+    "pids": [
+      "series-3/07"
+    ],
+    "files": [
+      "social/series-3-07.jpg"
+    ],
+    "caption": "The Mask\nApart · Salvador · 2007\n\nEvery face is a mask.\nSome are just more honest.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #salvador",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-13",
+    "type": "image",
+    "pids": [
+      "series-1/13"
+    ],
+    "files": [
+      "social/series-1-13.jpg"
+    ],
+    "caption": "The Secret\nAmerika · Manaus · 2003\n\nEvery city keeps one.\nFew know where.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #manaus",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-11",
+    "type": "image",
+    "pids": [
+      "series-2/11"
+    ],
+    "files": [
+      "social/series-2-11.jpg"
+    ],
+    "caption": "The Wind\nPulse · Fortaleza · 1998\n\nThe wind owns this coast.\nEveryone else is renting.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #fortaleza",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-08",
+    "type": "image",
+    "pids": [
+      "series-3/08"
+    ],
+    "files": [
+      "social/series-3-08.jpg"
+    ],
+    "caption": "The Dreamer\nApart · Kinshasa · 2004\n\nDreams don't check\nwhere you sleep.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #kinshasa",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-15",
+    "type": "image",
+    "pids": [
+      "series-1/15"
+    ],
+    "files": [
+      "social/series-1-15.jpg"
+    ],
+    "caption": "Pampa\nAmerika · Jujuy · 1979\n\nOut here, the horizon\nis the only neighbor.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #jujuy",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-14",
+    "type": "image",
+    "pids": [
+      "series-2/14"
+    ],
+    "files": [
+      "social/series-2-14.jpg"
+    ],
+    "caption": "Highway\nPulse · Salvador · 1990\n\nRoads promise everything\nto those who stay beside them.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #salvador",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-10",
+    "type": "image",
+    "pids": [
+      "series-3/10"
+    ],
+    "files": [
+      "social/series-3-10.jpg"
+    ],
+    "caption": "The River\nApart · Manaus · 1997\n\nThe river gives, the river takes.\nNobody keeps the accounts.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #manaus",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-17",
+    "type": "image",
+    "pids": [
+      "series-1/17"
+    ],
+    "files": [
+      "social/series-1-17.jpg"
+    ],
+    "caption": "Rush\nAmerika · São Paulo · 2002\n\nEight million people,\nall late for something.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #saopaulo",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-15",
+    "type": "image",
+    "pids": [
+      "series-2/15"
+    ],
+    "files": [
+      "social/series-2-15.jpg"
+    ],
+    "caption": "Summer\nPulse · Copacabana · 2002\n\nSummer is the only season\nthat keeps its promises here.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #copacabana",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-11",
+    "type": "image",
+    "pids": [
+      "series-3/11"
+    ],
+    "files": [
+      "social/series-3-11.jpg"
+    ],
+    "caption": "The Shadow\nApart · Havana · 2006\n\nEven shadows need\nsomewhere to belong.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #havana",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-18",
+    "type": "image",
+    "pids": [
+      "series-1/18"
+    ],
+    "files": [
+      "social/series-1-18.jpg"
+    ],
+    "caption": "The Audience\nAmerika · Montevideo · 1997\n\nThe show was never the point.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #montevideo",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-16",
+    "type": "image",
+    "pids": [
+      "series-2/16"
+    ],
+    "files": [
+      "social/series-2-16.jpg"
+    ],
+    "caption": "Mother and Daughter\nPulse · Bogotá · 1997\n\nEverything she will become\nis already watching.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #bogota",
+    "status": "pending"
+  },
+  {
+    "id": "series-3-12",
+    "type": "image",
+    "pids": [
+      "series-3/12"
+    ],
+    "files": [
+      "social/series-3-12.jpg"
+    ],
+    "caption": "The Smile\nApart · Kolkata · 2003\n\nSome wealth\ncannot be counted.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #kolkata",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-19",
+    "type": "image",
+    "pids": [
+      "series-1/19"
+    ],
+    "files": [
+      "social/series-1-19.jpg"
+    ],
+    "caption": "The Board\nAmerika · Rio de Janeiro · 1985\n\nSome games are played slowly\nbecause time is the prize.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #riodejaneiro",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-17",
+    "type": "image",
+    "pids": [
+      "series-2/17"
+    ],
+    "files": [
+      "social/series-2-17.jpg"
+    ],
+    "caption": "The Fighter\nPulse · Rio de Janeiro · 1992\n\nEvery scar is a round\nthat didn't win.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #riodejaneiro",
+    "status": "pending"
+  },
+  {
+    "id": "series-1-20",
+    "type": "image",
+    "pids": [
+      "series-1/20"
+    ],
+    "files": [
+      "social/series-1-20.jpg"
+    ],
+    "caption": "Downtown\nAmerika · São Paulo · 2006\n\nDowntown doesn't sleep.\nIt just looks away.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #saopaulo",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-18",
+    "type": "image",
+    "pids": [
+      "series-2/18"
+    ],
+    "files": [
+      "social/series-2-18.jpg"
+    ],
+    "caption": "Skull\nPulse · México DF · 2004\n\nHere, death is not the end of the party.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #mexicodf",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-19",
+    "type": "image",
+    "pids": [
+      "series-2/19"
+    ],
+    "files": [
+      "social/series-2-19.jpg"
+    ],
+    "caption": "The Crowd\nPulse · São Paulo · 1986\n\nThe crowd moves as one.\nNobody knows who decides.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #saopaulo",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-20",
+    "type": "image",
+    "pids": [
+      "series-2/20"
+    ],
+    "files": [
+      "social/series-2-20.jpg"
+    ],
+    "caption": "Joy\nPulse · Montevideo · 1999\n\nJoy needs no reason.\nIt needs witnesses.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #montevideo",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-21",
+    "type": "image",
+    "pids": [
+      "series-2/21"
+    ],
+    "files": [
+      "social/series-2-21.jpg"
+    ],
+    "caption": "Written\nPulse · Rio de Janeiro · 2001\n\nThe walls say\nwhat the papers won't.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #riodejaneiro",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-23",
+    "type": "image",
+    "pids": [
+      "series-2/23"
+    ],
+    "files": [
+      "social/series-2-23.jpg"
+    ],
+    "caption": "Golden Hour\nPulse · Rio de Janeiro · 2006\n\nFor one hour a day,\neveryone is golden.\n\nLimited edition prints — link in bio\n.\n.\n.\n#humanstories #portraiture #visualnarrative #documentaryart #peopleoftheworld #monochromatic #bnwmood #artoftheday #emergingartist #riodejaneiro",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-24",
+    "type": "image",
+    "pids": [
+      "series-2/24"
+    ],
+    "files": [
+      "social/series-2-24.jpg"
+    ],
+    "caption": "The Frame\nPulse · Salvador · 1984\n\nEvery window chooses\nwhat the world gets to be.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #salvador",
+    "status": "pending"
+  },
+  {
+    "id": "series-2-25",
+    "type": "image",
+    "pids": [
+      "series-2/25"
+    ],
+    "files": [
+      "social/series-2-25.jpg"
+    ],
+    "caption": "Rubble\nPulse · Port-au-Prince · 2010\n\nWhat breaks in a moment\ntakes a lifetime to fall.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #fineartprints #blackandwhite #monochrome #bnw_greatshots #visualart #contemporaryart #artcollector #limitededition #printsforsale #portauprince",
+    "status": "pending"
+  }
+]

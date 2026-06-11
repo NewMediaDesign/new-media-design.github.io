@@ -761,6 +761,208 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 
 ---
 
+## Sessione 15 — 2026-04-10
+
+**Obiettivo:** Aggiunta serie-3 "Apart"
+
+**Cosa è stato fatto:**
+- 12 immagini già presenti in `images/series-3/` dall'utente
+- Generati 12 thumbnail WebP 600px con `generate-thumbs.js`
+- Aggiornato `manifest.json` con `update-manifest.js` (scaffold) + titoli/descrizioni/meta manuali
+- Serie: id `series-3`, title `"Apart"`, subtitle `"Human Frequency · 2026"`
+- Titoli assegnati dall'analisi visiva delle immagini (ritratti B&W, contesti di marginalità globale):
+  01 The Stare / Dhaka · 2003 — 02 Wind / Belém · 1998 — 03 Refuge / Mumbai · 2001
+  04 The Wrap / Lagos · 2005 — 05 Longing / Medellín · 1999 — 06 Brothers / Luanda · 2002
+  07 The Mask / Salvador · 2007 — 08 The Dreamer / Kinshasa · 2004 — 09 The Matriarch / Port-au-Prince · 2000
+  10 The River / Manaus · 1997 — 11 The Shadow / Havana · 2006 — 12 The Smile / Kolkata · 2003
+- Nessuna modifica a `index.html` — il codice già gestisce N serie dinamicamente dal manifest
+- Deploy: 12 jpg + 12 webp + manifest.json pushati su GitHub Pages
+
+**Commit chiave:**
+- `52c6979` — feat: add series-3 "Apart" (12 images + thumbs)
+
+**Ultimo commit:** `52c6979` — branch `main`
+
+**Stato al termine della sessione:**
+- ✅ Serie-3 "Apart" live — galleria ora a 56 immagini totali (19 + 25 + 12)
+- ✅ Sezione Series mostra 3 card: Amerika · Pulse · Apart
+
+**Pending / prossima sessione:**
+- Favicon .ico reale
+- Aggiornare contenuto reale: bio, email, Instagram in manifest.json
+- Verificare che i titoli/meta di series-3 siano approvati dall'artista
+
+---
+
+## Sessione 16 — 2026-06-11
+
+**Obiettivo:** Audit completo + ROADMAP.md (M7-M14) + implementazione M8 (tracciabilità immagini)
+
+**Cosa è stato fatto:**
+
+**1 — Audit completo + docx/ROADMAP.md**
+- Nuovo documento `docx/ROADMAP.md`: audit (4 criticità, 9 importanti, 6 minori), spiegazione sharing/Open Graph, strategia vendita (print-on-demand via creativehub consigliato), strategia Instagram (Meta Business Suite gratis, 75gg anticipo), milestone M7-M14
+- Decisione di progetto documentata: i 3000px restano online (lo zoom 1:1 è il concept; master 6000px offline). NO C2PA/etichette AI (posizionamento del progetto). Strategia: tracciabilità invece di blocco
+
+**2 — M8: watermark invisibile (watermark.py)**
+- Nuovo script Python batch: `blind_watermark` (DWT-DCT-SVD), payload `AS-<serie>-<nn>` per file
+- Registry `watermark-registry.json` (payload + lunghezza bit, necessari per estrazione/verifica) — idempotente, salva dopo ogni file
+- Embed via PNG temp → ricodifica JPG q95; verifica automatica post-embed; `--verify <file>`, `--dry-run`, `--force`
+- Password nello script (PWD_IMG/PWD_WM): custodire con il registry
+- `requirements.txt` aggiunto
+
+**3 — M8: metadata lossless (write-metadata.js)**
+- Nuovo script Node con `exiftool-vendored` (binario incluso, funziona su Windows): EXIF/IPTC/XMP senza ricompressione
+- Legge autore/©/contatti da manifest (`about`), titolo/serie/meta per opera; jpg = EXIF+IPTC+XMP, webp = solo XMP
+- `--check <file>` per leggere i tag scritti
+- IMPORTANTE: eseguire DOPO watermark.py (il watermark riscrive i pixel e azzera i metadata)
+
+**4 — M8: w/h nel manifest + index.html**
+- `update-manifest.js`: ora legge le dimensioni reali via sharp e scrive `w`/`h` per ogni immagine (preserva quelle esistenti; loop reso async)
+- `index.html` → `loadSeries`/`loadAllSeries` propagano `w`/`h`; `openMuseum` usa le dimensioni dal manifest → eliminato il preload di tutte le thumbnail (56 richieste) all'apertura; il vecchio preload resta come fallback se w/h mancano
+- `package.json`: dipendenza `exiftool-vendored` + script npm: `thumbs`, `manifest`, `watermark`, `metadata`, `publish-images` (catena completa)
+
+**Da eseguire sulla macchina locale (Claude non ha potuto testare: sandbox VM non disponibile):**
+1. `npm install` (installa exiftool-vendored)
+2. `pip install -r requirements.txt`
+3. Test su UNA immagine: `python watermark.py --dry-run --all`, poi p.es. `python watermark.py series-3`
+4. `python watermark.py --verify images/series-3/01.jpg` → deve stampare MATCH
+5. `npm run publish-images` (watermark → thumbs → metadata → manifest con w/h)
+6. `node write-metadata.js --check images/series-3/01.jpg` → verifica tag
+7. Test sito in locale (museum deve aprirsi senza preload e senza deformazioni)
+8. Commit + push (incluso watermark-registry.json — backup anche fuori dal repo!)
+
+**Parte 2 della sessione — M7 + M9 + M10 implementate:**
+
+**M7 — Igiene codice:**
+- Shuffle gallery: Fisher–Yates al posto di `sort(Math.random)` (biased)
+- Honeypot anti-spam nel form contatti (`_gotcha`, finta success per i bot)
+- Tagline hero da manifest (`site.tagline`) invece che hardcoded
+- Messaggio visibile se il fetch del manifest fallisce (prima: pagina muta)
+- Accessibilità gallery: item focusabili da tastiera (role=button, tabindex, Enter/Space, aria-label)
+- `generate-favicons.js` + link favicon nel head (png 16/32/180/192/512 da immagine sorgente — DA ESEGUIRE: `npm run favicons`)
+- `manifest.json`: aggiunti `site.tagline` e `seo.canonical`
+- Payload watermark reso esplicito: `Andrea_Spinazzola_2026_<serie>-<nn>` (PAYLOAD_TEMPLATE in watermark.py); aggiunta opzione `--verify <copia> --as <opera>` per verificare copie esterne
+
+**M9 — SEO statica:**
+- `build-seo.js`: inietta tra i marker `SEO:START/END` di index.html i meta statici (title, description, canonical, og:*, twitter:card, JSON-LD Person+WebSite) letti dal manifest — i crawler social non eseguono JS, senza questo le anteprime erano vuote
+- Genera `sitemap.xml` (homepage + pagine share) e `robots.txt`
+
+**M10 — Sharing per immagine:**
+- Deep link `#photo=<serie>/<nn>`: apre il museum direttamente sull'opera (restoreFromHash); hash sincronizzato su slide change; ripristino `#work` alla chiusura
+- Campo `pid` per ogni immagine in IMAGES (photoId da filename)
+- Bottone **Share** in PhotoSwipe (bottom-right): `navigator.share` su mobile, copia link su desktop con feedback "Link copied"; condivide l'URL della pagina share
+- `generate-share-pages.js`: per ogni opera genera `share/<serie>-<nn>.html` (og: tags dedicati, JSON-LD VisualArtwork, redirect al deep link) + og image 1200px in `share/og/`
+- `package.json`: script `favicons`, `share-pages`, `seo`; `publish-images` ora esegue l'intera catena
+
+**Da eseguire sulla macchina locale (oltre ai test M8 sopra):**
+1. `npm run favicons` (genera favicon/)
+2. `npm run publish-images` (catena completa: watermark → thumbs → metadata → manifest+w/h → share → seo)
+3. Test: aprire il sito, museum → bottone Share → copia link → aprirlo in tab nuova (deve aprire l'opera giusta)
+4. Dopo il deploy: testare un'anteprima con https://developers.facebook.com/tools/debug/ (Meta Sharing Debugger)
+
+**Parte 3 della sessione — M11 (parziale) + M12:**
+
+- **Profilo Instagram registrato: `@humanfrequency.project`** — strategia ribaltata su decisione utente: il progetto è il brand, l'autore è la firma in calce. manifest.json aggiornato (`about.instagram`, `about.instagramHandle`)
+- `docx/SOCIAL-KIT.md`: identità social completa — bio IG, headline/About LinkedIn, 3 set hashtag a rotazione (NO #aiart, NO tag camera-specific: coerenza col gioco percettivo), template caption, checklist M11
+- `docx/LAUNCH-POSTS.md`: i 9 post di lancio con caption complete (opere reali dal manifest), specifiche dei 2 Reel, calendario 3 settimane
+- `export-social.js` (npm run social): genera da manifest i JPG 1080×1350 (4:5, passe-partout, opera intera) + file .txt caption con hashtag a rotazione e geo tag. La cartella social/ NON va pushata nel repo del sito
+
+**Parte 4 della sessione — Automazione completa pubblicazione Instagram:**
+
+- **Setup Meta completato dall'utente** (docx/AUTOMATION-SETUP.md): Pagina FB "Human Frequency" (ID 1193241227201300), app "HumanFrequency Publisher" con caso d'uso Instagram, token long-lived, IG_USER_ID ottenuto. NB: durante il setup, autorizzazioni aggiunte dal caso d'uso (non dall'Explorer); `pages_read_engagement` mancante → IG_USER_ID recuperato via Business Suite (Impostazioni → Account Instagram)
+- **`stories.json`** — 56 micro-storie (caption) pre-scritte, una per opera, voce-progetto
+- **`build-queue.js`** — genera `social-queue.json`: 9 item lancio (2 reel + manifesto marcati `manual`) + 47 opere restanti round-robin tra serie; caption composte (storia + hashtag a rotazione + geo tag); non distruttivo
+- **`publish-instagram.js`** — pubblica il prossimo `pending` via Graph API v25.0 (image + carousel); auto-rinnovo token long-lived ad ogni run, persistito cifrato in `.ig-token.enc` (AES-256-GCM, chiave = App Secret) → token immortale finché il cron gira; verifica URL pubblico prima della chiamata
+- **`publish-social.yml`** — GitHub Actions, cron lun-mer-ven 17:00 UTC + run manuale; va copiato in `.github/workflows/` nel repo (root). Media hostati via raw.githubusercontent (cartella social/ ORA va pushata — nota in export-social.js aggiornata)
+- Reel: pubblicabili via API ma senza musica libreria IG → i 2 reel di lancio restano manuali; automazione reel ffmpeg = fase 2
+
+**Chiusura sessione — handoff a Claude Code:**
+- Il push non è eseguibile da Cowork (sandbox VM in errore EXDEV + credenziali git solo locali)
+- Creato `docx/HANDOFF-PROMPT.md`: prompt pronto per la prossima sessione Claude Code
+  che esegue pipeline completa (favicon, watermark --all, publish-images, build-queue) + deploy/push
+- La sessione 17 sarà quella di Claude Code (deploy); seguire HANDOFF-PROMPT.md
+
+**Documenti creati in questa sessione (tutti in docx/ salvo indicato):**
+- `ROADMAP.md` — audit completo + milestone M7-M14 + strategia sharing/vendita/Instagram
+- `SOCIAL-KIT.md` — identità social: handle, bio IG, LinkedIn, hashtag, template caption
+- `LAUNCH-POSTS.md` — 9 post di lancio con caption complete + specifiche Reel + calendario
+- `AUTOMATION-SETUP.md` — guida setup Meta (completata dall'utente)
+- `HANDOFF-PROMPT.md` — prompt per la prossima sessione
+- Root: watermark.py, requirements.txt, write-metadata.js, build-seo.js, generate-share-pages.js,
+  generate-favicons.js, export-social.js, stories.json, build-queue.js, publish-instagram.js,
+  publish-social.yml + modifiche a index.html, manifest.json, package.json, update-manifest.js
+
+**Stato milestone a fine sessione 16:**
+- ✅ M7 igiene codice (manca solo: eliminare `gallery (2).html`, eseguire npm run favicons)
+- ✅ M8 tracciabilità (watermark testato su series-3/01-02; resto da eseguire con --all)
+- ✅ M9 SEO statica (script pronto, da eseguire)
+- ✅ M10 sharing (codice in index.html + generatore share pages, da deployare)
+- 🔶 M11 social: profilo @humanfrequency.project registrato + setup Meta API completo;
+  manca: bio/foto profilo, completamento checklist SOCIAL-KIT
+- ✅ M12 automazione: motore completo (engine Graph API + cron); Reel automatici = fase 2
+- ⬜ M13 vendita (creativehub) — prossimo grande step
+- ⬜ M14 misura
+
+**Pending / sessione 17 (Claude Code, vedi HANDOFF-PROMPT.md):**
+- Pipeline completa + deploy/push (passi 1-8 del prompt)
+- Utente: bio/foto profilo IG prima del primo Run workflow
+- Primo run workflow = pubblica "The Witness" (post reale!)
+- Reel di lancio 4 e 8 manuali + manifesto post 9
+- `about.email` in manifest ancora vuoto
+- M13: storefront creativehub + bottone "Buy print" (ROADMAP.md)
+
+---
+
+## Sessione 17 — 2026-06-11
+
+**Obiettivo:** Esecuzione pipeline completa sessione 16 + deploy (Claude Code, da HANDOFF-PROMPT.md)
+
+**Cosa è stato fatto:**
+
+**1 — Setup ambiente**
+- `npm install` (exiftool-vendored già presente) + `pip install -r requirements.txt` (blind-watermark 0.4.4, opencv, numpy, PyWavelets — già installati)
+
+**2 — Favicon**
+- `npm run favicons` → generati `favicon/` (16, 32, 180 apple-touch, 192, 512 png)
+
+**3 — Watermark invisibile su tutte le immagini**
+- `python watermark.py --all` → **44 embeddati** (series-1: 19, series-2: 25), **12 già nel registry** (series-3 era completa dalla sessione 16, non solo 01-02)
+- Tutti i 56 embed con **verify: ok** (payload `Andrea_Spinazzola_2026_<serie>-<nn>`, 215 bit)
+- Unico warning innocuo OpenCV (`Unsupported depth image... fallbacked to CV_8U`) durante l'embed via PNG temp
+- `watermark-registry.json` aggiornato: 56 entry — committato nel repo + conservare backup esterno
+
+**4 — Pipeline publish-images**
+- `npm run publish-images` completata senza errori:
+  - watermark: 0 nuovi (56 già nel registry)
+  - thumbs: 0 nuove (56 già esistenti — lo script salta le esistenti per design; il watermark è invisibile, le thumb pre-watermark restano visivamente identiche)
+  - metadata: **112 file scritti** (56 jpg EXIF/IPTC/XMP + 56 webp XMP)
+  - manifest: w/h presenti per tutte le 56 immagini
+  - share pages: **56 html** in `share/` + 56 og image 1200px in `share/og/`
+  - SEO: blocco statico iniettato in index.html, `sitemap.xml` (57 URL), `robots.txt`
+- Verifica metadata: `node write-metadata.js --check images/series-3/01.jpg` → Artist/Copyright/Title/UsageTerms tutti corretti
+
+**5 — Coda social**
+- `node build-queue.js` → `social-queue.json`: **52 item** (49 pending, 3 manuali: 2 reel + manifesto) ≈ 17 settimane a 3 post/settimana
+- `npm run social` → cartella `social/`: 56 JPG 1080×1350 + 56 .txt caption (necessaria nel repo: la Graph API scarica i media da raw.githubusercontent)
+
+**6 — Deploy**
+- Il clone in `/tmp/new-media-design.github.io` era corrotto (residuo Cowork: `.git` con solo `objects/`) → eliminato e riclonato da zero
+- Copiati in `gallery/`: index.html, manifest.json, package.json, package-lock.json, tutti gli script .js/.py, requirements.txt, stories.json, social-queue.json, watermark-registry.json, robots.txt, sitemap.xml, favicon/, share/, social/, docx/, images/ (jpg watermarkati + thumbs)
+- `publish-social.yml` → `.github/workflows/` nella ROOT del repo
+- Commit unico e push su `main`
+- NON copiati: `gallery (2).html`, Web_Layout.psd, node_modules, .claude
+
+**Pending / prossima sessione:**
+- **Utente:** bio/foto profilo IG, poi primo Run workflow manuale dalla tab Actions (pubblica "The Witness" — post reale!)
+- Reel di lancio 4 e 8 manuali + manifesto post 9 (LAUNCH-POSTS.md)
+- Test anteprime share con Meta Sharing Debugger dopo il deploy
+- `about.email` in manifest: ora presente in UsageTerms (spinaster@gmail.com) — verificare se va esposto anche in About
+- M13: storefront creativehub + bottone "Buy print" (ROADMAP.md)
+- Eliminare `gallery (2).html` dalla cartella locale (residuo M7)
+
+---
+
 <!-- TEMPLATE NUOVA SESSIONE — copia e incolla qui sotto
 
 ## Sessione N — YYYY-MM-DD

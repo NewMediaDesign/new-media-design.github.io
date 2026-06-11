@@ -1,0 +1,70 @@
+# publish-social.yml — GitHub Actions: pubblicazione automatica Instagram
+#
+# ⚠️ POSIZIONE: questo file va copiato nel repo deploy in:
+#     .github/workflows/publish-social.yml        (root del repo, NON in gallery/)
+#
+# Cosa fa: lun-mer-ven alle 18:00 (ora italiana invernale; 19:00 in estate)
+#   1. sincronizza coda e immagini social (genera le mancanti)
+#   2. committa i media (devono essere pubblici PRIMA della chiamata API)
+#   3. pubblica il prossimo item della coda su @humanfrequency.project
+#   4. committa lo stato aggiornato (coda + token rinnovato cifrato)
+#
+# Esecuzione manuale di test: tab Actions → Publish to Instagram → Run workflow
+
+name: Publish to Instagram
+
+on:
+  schedule:
+    - cron: '0 17 * * 1,3,5'   # 17:00 UTC = 18:00 CET / 19:00 CEST
+  workflow_dispatch:            # bottone per il run manuale
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-social
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: gallery
+        run: npm install --omit=optional --no-audit --no-fund sharp
+
+      - name: Sync queue + generate social images
+        working-directory: gallery
+        run: |
+          node build-queue.js
+          node export-social.js
+
+      - name: Commit media (must be public before API call)
+        run: |
+          git config user.name "hf-publisher"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "social: sync queue + media"
+          git push
+
+      - name: Publish next item
+        working-directory: gallery
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          META_APP_ID: ${{ secrets.META_APP_ID }}
+          META_APP_SECRET: ${{ secrets.META_APP_SECRET }}
+        run: node publish-instagram.js
+
+      - name: Commit state (queue + refreshed token)
+        if: always()
+        run: |
+          git add -A
+          git diff --cached --quiet || git commit -m "social: publish state update"
+          git push

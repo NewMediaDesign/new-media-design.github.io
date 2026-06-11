@@ -7,19 +7,29 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
+  <!-- SEO:START — blocco generato da build-seo.js (i valori statici servono ai crawler, che non eseguono JS) -->
   <title>Andrea Spinazzola</title>
-  <meta name="description" id="metaDesc" content="">
+  <meta name="description" id="metaDesc" content="Andrea Spinazzola — Human Frequency. A photographic archive from the Americas.">
+  <link rel="canonical" href="https://new-media-design.it/gallery/">
   <meta property="og:title" id="ogTitle" content="Andrea Spinazzola">
-  <meta property="og:description" id="ogDesc" content="">
-  <meta property="og:image" id="ogImage" content="">
+  <meta property="og:description" id="ogDesc" content="Andrea Spinazzola — Human Frequency. A photographic archive from the Americas.">
+  <meta property="og:image" id="ogImage" content="https://new-media-design.it/gallery/images/series-1/01.jpg">
+  <meta property="og:url" content="https://new-media-design.it/gallery/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Andrea Spinazzola">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://new-media-design.it/gallery/#artist","name":"Andrea Spinazzola","url":"https://new-media-design.it/gallery/","description":"Visual artist. Documenting the human frequency — presence, memory and the invisible lines connecting individuals within collective landscapes.","image":"https://new-media-design.it/gallery/images/AS_BW_PORTRAIT_02.png","sameAs":["https://www.instagram.com/humanfrequency.project/","https://www.linkedin.com/in/aspinazzola/"]},{"@type":"WebSite","name":"Andrea Spinazzola","url":"https://new-media-design.it/gallery/","author":{"@id":"https://new-media-design.it/gallery/#artist"},"description":"Andrea Spinazzola — Human Frequency. A photographic archive from the Americas."}]}</script>
+  <!-- SEO:END -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="lib/photoswipe.css">
-  <link rel="icon" type="image/jpeg" href="images/series-1/thumbs/01.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/icon-192.png">
   <script>(function () { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; })()</script>
   <style>
     *,
@@ -1314,6 +1324,46 @@
       flex-shrink: 0;
     }
 
+    /* Share button (bottom-right, sopra la caption bar) */
+    .pswp__button--pswp-share {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      top: auto;
+      left: auto;
+      transform: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      cursor: pointer;
+      padding: 0 20px;
+      height: 52px;
+      width: auto;
+    }
+
+    .pswp__button--pswp-share:hover {
+      color: var(--fg);
+    }
+
+    .pswp__button--pswp-share svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
     /* Arrows — always hidden; shown only in left/right hover zones via JS (.zone-active class)
    !important needed to override PhotoSwipe's .pswp--has_mouse .pswp__button--arrow { opacity:.85 } */
     .pswp__button--arrow,
@@ -1548,6 +1598,9 @@
               placeholder="your@email.com" autocomplete="email" required></div>
           <div class="form-field"><label for="cf-message">Message</label><textarea id="cf-message" name="message"
               placeholder="Write your message&hellip;" required></textarea></div>
+          <!-- honeypot anti-spam: invisibile agli utenti, i bot lo compilano -->
+          <input type="text" id="cf-gotcha" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
           <div class="form-submit">
             <button class="form-btn" id="formSubmitBtn" type="submit">Send<svg viewBox="0 0 24 24">
                 <line x1="5" y1="12" x2="19" y2="12" />
@@ -1852,6 +1905,19 @@
     // Restore section on initial load — deferred to after manifest loads (see initFromManifest)
     function restoreFromHash() {
       const h = location.hash.slice(1);
+
+      // Deep link a singola opera: #photo=series-1/05 → apri il museum direttamente
+      if (h.indexOf('photo=') === 0) {
+        const pid = decodeURIComponent(h.slice(6));
+        const idx = IMAGES.findIndex(im => im.pid === pid);
+        if (idx >= 0) {
+          history.replaceState({ section: 'work' }, '', '#photo=' + pid);
+          setSection('work');
+          openMuseum(idx);
+          return;
+        }
+      }
+
       const legacyMap = { galleryOverlay: 'work', seriesOverlay: 'series', aboutOverlay: 'about', contactOverlay: 'contact' };
       const section = legacyMap[h] || (NAV_OVERLAYS[h] ? h : null);
       if (section) {
@@ -1894,7 +1960,12 @@
       }
 
       // Shuffle a copy preserving original index for museum navigation
-      const shuffled = IMAGES.map((d, i) => ({ ...d, origIdx: i })).sort(() => Math.random() - 0.5);
+      // Fisher–Yates (sort(random) è statisticamente biased)
+      const shuffled = IMAGES.map((d, i) => ({ ...d, origIdx: i }));
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
 
       shuffled.forEach(data => {
         const h = HEIGHTS[Math.floor(Math.random() * HEIGHTS.length)];
@@ -1919,6 +1990,13 @@
           hit.addEventListener('mouseup', () => cursor.classList.remove('pressed'));
         }
         hit.addEventListener('click', () => openMuseum(data.origIdx));
+        // Accessibilità: focusabile e attivabile da tastiera
+        hit.setAttribute('role', 'button');
+        hit.tabIndex = 0;
+        hit.setAttribute('aria-label', (data.title || 'Artwork') + (data.meta ? ' — ' + data.meta : ''));
+        hit.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMuseum(data.origIdx); }
+        });
 
         const ii = data.origIdx;
         const paint = () => {
@@ -1963,16 +2041,23 @@
     function openMuseum(idx) {
       if (pswp) pswp.close();
 
-      // Pre-load all thumbnails so we have correct aspect ratios (prevents deformation)
-      let pending = 0;
       const doOpen = () => {
         const items = IMAGES.map((img, i) => {
+          // Dimensioni reali dal manifest (w/h): niente preload, niente deformazione
+          if (img.w && img.h) return { src: img.src, msrc: img.thumb, width: img.w, height: img.h };
+          // Fallback legacy: aspect ratio dalla thumbnail caricata
           const t = thumbImgs[i];
           const aspect = (t && t.naturalWidth) ? t.naturalHeight / t.naturalWidth : 2 / 3;
           return { src: img.src, msrc: img.thumb, width: 3000, height: Math.round(3000 * aspect) };
         });
         _openPswp(items, idx);
       };
+
+      // Se il manifest ha w/h per tutte le immagini, apri subito (zero preload)
+      if (IMAGES.every(im => im.w && im.h)) { doOpen(); return; }
+
+      // Fallback legacy: pre-load delle thumbnail per gli aspect ratio corretti
+      let pending = 0;
       IMAGES.forEach((_, i) => {
         if (!thumbImgs[i].naturalWidth && !thumbImgs[i]._imgError) {
           pending++;
@@ -2032,6 +2117,38 @@
           html: '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back',
           className: 'pswp__button--pswp-back',
           onClick: () => pswp.close(),
+        });
+
+        // Share button — Web Share API su mobile, copia link su desktop
+        pswp.ui.registerElement({
+          name: 'pswp-share',
+          order: 7,
+          isButton: true,
+          tagName: 'button',
+          appendTo: 'root',
+          html: '<svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><polyline points="8 6 12 2 16 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span class="pswp-share-label">Share</span>',
+          className: 'pswp__button--pswp-share',
+          onInit: (el) => {
+            el.addEventListener('click', () => {
+              const img = IMAGES[pswp.currIndex];
+              if (!img || !img.pid) return;
+              // URL della pagina share (og: tags dedicati per l'anteprima social)
+              const shareUrl = new URL('share/' + img.pid.replace('/', '-') + '.html', location.href).href;
+              const payload = {
+                title: (img.title ? img.title + ' — ' : '') + 'Andrea Spinazzola',
+                text: (img.title || 'Artwork') + (img.meta ? ' · ' + img.meta : '') + ' — Andrea Spinazzola',
+                url: shareUrl
+              };
+              if (navigator.share) {
+                navigator.share(payload).catch(() => { });
+              } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                  const lbl = el.querySelector('.pswp-share-label');
+                  if (lbl) { lbl.textContent = 'Link copied'; setTimeout(() => { lbl.textContent = 'Share'; }, 1600); }
+                }).catch(() => { });
+              }
+            });
+          },
         });
 
         // Caption bar
@@ -2120,9 +2237,19 @@
         });
       });
 
+      // Deep link: sincronizza l'hash con l'opera corrente (#photo=series-1/05)
+      pswp.on('change', () => {
+        const im = IMAGES[pswp.currIndex];
+        if (im && im.pid) history.replaceState(history.state, '', '#photo=' + im.pid);
+      });
+
       pswp.on('destroy', () => {
         pswp = null;
         mainHeader.classList.remove('museum-open');
+        // Ripristina l'hash della sezione (solo se eravamo su un deep link foto)
+        if (location.hash.indexOf('#photo=') === 0) {
+          history.replaceState({ section: 'work' }, '', '#work');
+        }
       });
 
       mainHeader.classList.add('museum-open');
@@ -2156,6 +2283,8 @@
       const name = document.getElementById('cf-name').value.trim();
       const email = document.getElementById('cf-email').value.trim();
       const message = document.getElementById('cf-message').value.trim();
+      // honeypot: se compilato è un bot → finta success, nessun invio
+      if (document.getElementById('cf-gotcha').value) { setStatus('Message sent — thank you.', 'ok'); contactForm.reset(); return; }
       if (!name || !email || !message) { setStatus('Please fill in all fields.', 'err'); return; }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setStatus('Please enter a valid email address.', 'err'); return; }
       formSubmitBtn.classList.add('loading'); formSubmitBtn.disabled = true; setStatus('', '');
@@ -2245,6 +2374,11 @@
       }
     }
 
+    // ID stabile per il deep-link di un'opera: "series-1/05"
+    function photoId(img) {
+      return img.filename.replace(/^images\//, '').replace(/\.[^.]+$/, '');
+    }
+
     // Load a single series by id (for series card click)
     function loadSeries(seriesId) {
       const series = SERIES_DATA.find(s => s.id === seriesId) || SERIES_DATA[0];
@@ -2254,6 +2388,9 @@
       IMAGES = series.images.map(img => ({
         src: img.filename,
         thumb: img.thumb || img.filename,
+        w: img.w || 0,
+        h: img.h || 0,
+        pid: photoId(img),
         title: img.title,
         desc: img.description || series.title || '',
         meta: img.meta || ''
@@ -2278,6 +2415,9 @@
           IMAGES.push({
             src: img.filename,
             thumb: img.thumb || img.filename,
+            w: img.w || 0,
+            h: img.h || 0,
+            pid: photoId(img),
             title: img.title,
             desc: img.description || series.title || '',
             meta: img.meta || ''
@@ -2291,7 +2431,7 @@
       currentSeriesId = 'all';
       singleSeriesMode = false;
 
-      document.getElementById('heroSeries').textContent = 'A journey through the possible \u00B7 2026';
+      document.getElementById('heroSeries').textContent = (SITE_DATA.tagline || 'A journey through the possible \u00B7 2026');
       document.getElementById('heroTitle').textContent = SITE_DATA.project || '';
       document.getElementById('seriesBarTitle').textContent = SITE_DATA.project || '';
       document.getElementById('seriesBarMeta').textContent = ordered.map(s => s.title).join(' \u00B7 ');
@@ -2388,7 +2528,14 @@
     fetch('manifest.json?v=' + Date.now())
       .then(r => { if (!r.ok) throw new Error('manifest.json not found'); return r.json(); })
       .then(initFromManifest)
-      .catch(err => console.error('Gallery init error:', err));
+      .catch(err => {
+        console.error('Gallery init error:', err);
+        // Messaggio visibile invece di pagina vuota
+        const hs = document.getElementById('heroSeries');
+        const ht = document.getElementById('heroTitle');
+        if (ht) ht.textContent = 'Andrea Spinazzola';
+        if (hs) hs.textContent = 'Unable to load the gallery — please reload the page.';
+      });
 
   </script>
 </body>

@@ -2,6 +2,7 @@
   "site": {
     "name": "Andrea Spinazzola",
     "project": "Human Frequency",
+    "tagline": "A journey through the possible · 2026",
     "hero": {
       "seriesId": "series-1",
       "interval": 5000
@@ -11,15 +12,16 @@
     "photo": "images/AS_BW_PORTRAIT_02.png",
     "name": "Andrea\nSpinazzola",
     "bio": "Visual artist. Documenting the human frequency — presence, memory and the invisible lines connecting individuals within collective landscapes.",
-    "instagram": "",
-    "instagramHandle": "@andrespinazzola",
+    "instagram": "https://www.instagram.com/humanfrequency.project/",
+    "instagramHandle": "@humanfrequency.project",
     "linkedin": "https://www.linkedin.com/in/aspinazzola/",
     "linkedinHandle": "Andrea Spinazzola"
   },
   "seo": {
     "title": "Andrea Spinazzola",
     "description": "Andrea Spinazzola — Human Frequency. A photographic archive from the Americas.",
-    "ogImage": "images/series-1/01.jpg"
+    "ogImage": "images/series-1/01.jpg",
+    "canonical": "https://new-media-design.it/gallery/"
   },
   "series": [
     {
@@ -30,6 +32,8 @@
         {
           "filename": "images/series-1/01.jpg",
           "thumb": "images/series-1/thumbs/01.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "The Witness",
           "description": "Amerika",
           "meta": "Salvador · 1997"
@@ -37,6 +41,8 @@
         {
           "filename": "images/series-1/02.jpg",
           "thumb": "images/series-1/thumbs/02.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "Say Something",
           "description": "Amerika",
           "meta": "Rio de Janeiro · 2001"
@@ -44,6 +50,8 @@
         {
           "filename": "images/series-1/03.jpg",
           "thumb": "images/series-1/thumbs/03.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Silence",
           "description": "Amerika",
           "meta": "São Paulo · 1989"
@@ -51,6 +59,8 @@
         {
           "filename": "images/series-1/04.jpg",
           "thumb": "images/series-1/thumbs/04.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "The Alarm",
           "description": "Amerika",
           "meta": "Belo Horizonte · 1994"
@@ -58,6 +68,8 @@
         {
           "filename": "images/series-1/05.jpg",
           "thumb": "images/series-1/thumbs/05.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "Still",
           "description": "Amerika",
           "meta": "Buenos Aires · 1986"
@@ -65,6 +77,8 @@
         {
           "filename": "images/series-1/06.jpg",
           "thumb": "images/series-1/thumbs/06.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Last Bus",
           "description": "Amerika",
           "meta": "Belo Horizonte · 1993"
@@ -72,6 +86,8 @@
         {
           "filename": "images/series-1/07.jpg",
           "thumb": "images/series-1/thumbs/07.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Sunday",
           "description": "Amerika",
           "meta": "Rio de Janeiro · 1998"
@@ -79,6 +95,8 @@
         {
           "filename": "images/series-1/08.jpg",
           "thumb": "images/series-1/thumbs/08.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Route 47",
           "description": "Amerika",
           "meta": "São Paulo · 1995"
@@ -86,6 +104,8 @@
         {
           "filename": "images/series-1/09.jpg",
           "thumb": "images/series-1/thumbs/09.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Crowd",
           "description": "Amerika",
           "meta": "Porto Alegre · 1978"
@@ -93,6 +113,8 @@
         {
           "filename": "images/series-1/10.jpg",
           "thumb": "images/series-1/thumbs/10.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "The Veil",
           "description": "Amerika",
           "meta": "Recife · 1982"
@@ -100,6 +122,8 @@
         {
           "filename": "images/series-1/11.jpg",
           "thumb": "images/series-1/thumbs/11.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "Last Seat",
           "description": "Amerika",
           "meta": "São Paulo · 1991"
@@ -107,6 +131,8 @@
         {
           "filename": "images/series-1/12.jpg",
           "thumb": "images/series-1/thumbs/12.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Third",
           "description": "Amerika",
           "meta": "Salvador · 1988"
@@ -114,6 +140,8 @@
         {
           "filename": "images/series-1/13.jpg",
           "thumb": "images/series-1/thumbs/13.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Secret",
           "description": "Amerika",
           "meta": "Manaus · 2003"
@@ -121,6 +149,8 @@
         {
           "filename": "images/series-1/15.jpg",
           "thumb": "images/series-1/thumbs/15.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "Pampa",
           "description": "Amerika",
           "meta": "Jujuy · 1979"
@@ -128,6 +158,8 @@
         {
           "filename": "images/series-1/16.jpg",
           "thumb": "images/series-1/thumbs/16.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "Departure",
           "description": "Amerika",
           "meta": "Mato Grosso · 1974"
@@ -135,6 +167,8 @@
         {
           "filename": "images/series-1/17.jpg",
           "thumb": "images/series-1/thumbs/17.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Rush",
           "description": "Amerika",
           "meta": "São Paulo · 2002"
@@ -142,6 +176,8 @@
         {
           "filename": "images/series-1/18.jpg",
           "thumb": "images/series-1/thumbs/18.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "The Audience",
           "description": "Amerika",
           "meta": "Montevideo · 1997"
@@ -149,6 +185,8 @@
         {
           "filename": "images/series-1/19.jpg",
           "thumb": "images/series-1/thumbs/19.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Board",
           "description": "Amerika",
           "meta": "Rio de Janeiro · 1985"
@@ -156,6 +194,8 @@
         {
           "filename": "images/series-1/20.jpg",
           "thumb": "images/series-1/thumbs/20.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Downtown",
           "description": "Amerika",
           "meta": "São Paulo · 2006"
@@ -170,6 +210,8 @@
         {
           "filename": "images/series-2/01.jpg",
           "thumb": "images/series-2/thumbs/01.webp",
+          "w": 2001,
+          "h": 3000,
           "title": "Iron",
           "description": "Pulse",
           "meta": "Copacabana · 1996"
@@ -177,6 +219,8 @@
         {
           "filename": "images/series-2/02.jpg",
           "thumb": "images/series-2/thumbs/02.webp",
+          "w": 2001,
+          "h": 3000,
           "title": "Behind Bars",
           "description": "Pulse",
           "meta": "São Paulo · 1993"
@@ -184,6 +228,8 @@
         {
           "filename": "images/series-2/03.jpg",
           "thumb": "images/series-2/thumbs/03.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Kiss",
           "description": "Pulse",
           "meta": "Rio de Janeiro · 1999"
@@ -191,6 +237,8 @@
         {
           "filename": "images/series-2/04.jpg",
           "thumb": "images/series-2/thumbs/04.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Elder",
           "description": "Pulse",
           "meta": "Recife · 1988"
@@ -198,6 +246,8 @@
         {
           "filename": "images/series-2/05.jpg",
           "thumb": "images/series-2/thumbs/05.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Departure",
           "description": "Pulse",
           "meta": "Belo Horizonte · 1991"
@@ -205,6 +255,8 @@
         {
           "filename": "images/series-2/06.jpg",
           "thumb": "images/series-2/thumbs/06.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Ascent",
           "description": "Pulse",
           "meta": "Buenos Aires · 2001"
@@ -212,6 +264,8 @@
         {
           "filename": "images/series-2/07.jpg",
           "thumb": "images/series-2/thumbs/07.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Grace",
           "description": "Pulse",
           "meta": "Salvador · 1994"
@@ -219,6 +273,8 @@
         {
           "filename": "images/series-2/08.jpg",
           "thumb": "images/series-2/thumbs/08.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Wait",
           "description": "Pulse",
           "meta": "Havana · 2003"
@@ -226,6 +282,8 @@
         {
           "filename": "images/series-2/09.jpg",
           "thumb": "images/series-2/thumbs/09.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Three Generations",
           "description": "Pulse",
           "meta": "Lima · 1987"
@@ -233,6 +291,8 @@
         {
           "filename": "images/series-2/10.jpg",
           "thumb": "images/series-2/thumbs/10.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Oracle",
           "description": "Pulse",
           "meta": "Salvador · 1982"
@@ -240,6 +300,8 @@
         {
           "filename": "images/series-2/11.jpg",
           "thumb": "images/series-2/thumbs/11.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "The Wind",
           "description": "Pulse",
           "meta": "Fortaleza · 1998"
@@ -247,6 +309,8 @@
         {
           "filename": "images/series-2/12.jpg",
           "thumb": "images/series-2/thumbs/12.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Sonata",
           "description": "Pulse",
           "meta": "Havana · 2005"
@@ -254,6 +318,8 @@
         {
           "filename": "images/series-2/13.jpg",
           "thumb": "images/series-2/thumbs/13.webp",
+          "w": 2001,
+          "h": 3000,
           "title": "The Gaze",
           "description": "Pulse",
           "meta": "Caracas · 1995"
@@ -261,6 +327,8 @@
         {
           "filename": "images/series-2/14.jpg",
           "thumb": "images/series-2/thumbs/14.webp",
+          "w": 3000,
+          "h": 1694,
           "title": "Highway",
           "description": "Pulse",
           "meta": "Salvador · 1990"
@@ -268,6 +336,8 @@
         {
           "filename": "images/series-2/15.jpg",
           "thumb": "images/series-2/thumbs/15.webp",
+          "w": 3000,
+          "h": 1998,
           "title": "Summer",
           "description": "Pulse",
           "meta": "Copacabana · 2002"
@@ -275,6 +345,8 @@
         {
           "filename": "images/series-2/16.jpg",
           "thumb": "images/series-2/thumbs/16.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Mother and Daughter",
           "description": "Pulse",
           "meta": "Bogotá · 1997"
@@ -282,6 +354,8 @@
         {
           "filename": "images/series-2/17.jpg",
           "thumb": "images/series-2/thumbs/17.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Fighter",
           "description": "Pulse",
           "meta": "Rio de Janeiro · 1992"
@@ -289,6 +363,8 @@
         {
           "filename": "images/series-2/18.jpg",
           "thumb": "images/series-2/thumbs/18.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Skull",
           "description": "Pulse",
           "meta": "México DF · 2004"
@@ -296,6 +372,8 @@
         {
           "filename": "images/series-2/19.jpg",
           "thumb": "images/series-2/thumbs/19.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Crowd",
           "description": "Pulse",
           "meta": "São Paulo · 1986"
@@ -303,6 +381,8 @@
         {
           "filename": "images/series-2/20.jpg",
           "thumb": "images/series-2/thumbs/20.webp",
+          "w": 2001,
+          "h": 3000,
           "title": "Joy",
           "description": "Pulse",
           "meta": "Montevideo · 1999"
@@ -310,6 +390,8 @@
         {
           "filename": "images/series-2/21.jpg",
           "thumb": "images/series-2/thumbs/21.webp",
+          "w": 3000,
+          "h": 1688,
           "title": "Written",
           "description": "Pulse",
           "meta": "Rio de Janeiro · 2001"
@@ -317,6 +399,8 @@
         {
           "filename": "images/series-2/22.jpg",
           "thumb": "images/series-2/thumbs/22.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Dancer",
           "description": "Pulse",
           "meta": "Havana · 1995"
@@ -324,6 +408,8 @@
         {
           "filename": "images/series-2/23.jpg",
           "thumb": "images/series-2/thumbs/23.webp",
+          "w": 2001,
+          "h": 3000,
           "title": "Golden Hour",
           "description": "Pulse",
           "meta": "Rio de Janeiro · 2006"
@@ -331,6 +417,8 @@
         {
           "filename": "images/series-2/24.jpg",
           "thumb": "images/series-2/thumbs/24.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "The Frame",
           "description": "Pulse",
           "meta": "Salvador · 1984"
@@ -338,6 +426,8 @@
         {
           "filename": "images/series-2/25.jpg",
           "thumb": "images/series-2/thumbs/25.webp",
+          "w": 3000,
+          "h": 2001,
           "title": "Rubble",
           "description": "Pulse",
           "meta": "Port-au-Prince · 2010"
@@ -352,6 +442,8 @@
         {
           "filename": "images/series-3/01.jpg",
           "thumb": "images/series-3/thumbs/01.webp",
+          "w": 2013,
+          "h": 3000,
           "title": "The Stare",
           "description": "Apart",
           "meta": "Dhaka · 2003"
@@ -359,6 +451,8 @@
         {
           "filename": "images/series-3/02.jpg",
           "thumb": "images/series-3/thumbs/02.webp",
+          "w": 3000,
+          "h": 1729,
           "title": "Wind",
           "description": "Apart",
           "meta": "Belém · 1998"
@@ -366,6 +460,8 @@
         {
           "filename": "images/series-3/03.jpg",
           "thumb": "images/series-3/thumbs/03.webp",
+          "w": 2013,
+          "h": 3000,
           "title": "Refuge",
           "description": "Apart",
           "meta": "Mumbai · 2001"
@@ -373,6 +469,8 @@
         {
           "filename": "images/series-3/04.jpg",
           "thumb": "images/series-3/thumbs/04.webp",
+          "w": 2013,
+          "h": 3000,
           "title": "The Wrap",
           "description": "Apart",
           "meta": "Lagos · 2005"
@@ -380,6 +478,8 @@
         {
           "filename": "images/series-3/05.jpg",
           "thumb": "images/series-3/thumbs/05.webp",
+          "w": 2013,
+          "h": 3000,
           "title": "Longing",
           "description": "Apart",
           "meta": "Medellín · 1999"
@@ -387,6 +487,8 @@
         {
           "filename": "images/series-3/06.jpg",
           "thumb": "images/series-3/thumbs/06.webp",
+          "w": 3000,
+          "h": 1729,
           "title": "Brothers",
           "description": "Apart",
           "meta": "Luanda · 2002"
@@ -394,6 +496,8 @@
         {
           "filename": "images/series-3/07.jpg",
           "thumb": "images/series-3/thumbs/07.webp",
+          "w": 3000,
+          "h": 1674,
           "title": "The Mask",
           "description": "Apart",
           "meta": "Salvador · 2007"
@@ -401,6 +505,8 @@
         {
           "filename": "images/series-3/08.jpg",
           "thumb": "images/series-3/thumbs/08.webp",
+          "w": 2270,
+          "h": 3000,
           "title": "The Dreamer",
           "description": "Apart",
           "meta": "Kinshasa · 2004"
@@ -408,6 +514,8 @@
         {
           "filename": "images/series-3/09.jpg",
           "thumb": "images/series-3/thumbs/09.webp",
+          "w": 2013,
+          "h": 3000,
           "title": "The Matriarch",
           "description": "Apart",
           "meta": "Port-au-Prince · 2000"
@@ -415,6 +523,8 @@
         {
           "filename": "images/series-3/10.jpg",
           "thumb": "images/series-3/thumbs/10.webp",
+          "w": 2013,
+          "h": 3000,
           "title": "The River",
           "description": "Apart",
           "meta": "Manaus · 1997"
@@ -422,6 +532,8 @@
         {
           "filename": "images/series-3/11.jpg",
           "thumb": "images/series-3/thumbs/11.webp",
+          "w": 3000,
+          "h": 2270,
           "title": "The Shadow",
           "description": "Apart",
           "meta": "Havana · 2006"
@@ -429,6 +541,8 @@
         {
           "filename": "images/series-3/12.jpg",
           "thumb": "images/series-3/thumbs/12.webp",
+          "w": 2013,
+          "h": 3000,
           "title": "The Smile",
           "description": "Apart",
           "meta": "Kolkata · 2003"
