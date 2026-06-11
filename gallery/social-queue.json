@@ -50,11 +50,11 @@
       "series-2/10"
     ],
     "files": [
-      "social/series-2-10.jpg"
+      "social/reels/launch-4-oracle.mp4"
     ],
     "caption": "Oracle\nPulse · Salvador · 1982\n\nShe was already answering\nquestions nobody had asked yet.\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #salvador",
     "status": "manual",
-    "note": "Reel Ken Burns — vedi docx/LAUNCH-POSTS.md post 4"
+    "note": "Video del Reel GIA PRONTO (link qui sotto): scaricalo, aggiungi una traccia strumentale in tendenza dall app IG, incolla la caption e pubblica"
   },
   {
     "id": "launch-5",
@@ -103,20 +103,21 @@
       "series-2/13"
     ],
     "files": [
-      "social/series-2-13.jpg"
+      "social/reels/launch-8-look-closer.mp4"
     ],
     "caption": "The Gaze\nPulse · Caracas · 1995\n\nLook closer.\nWhat do you see?\n\nLimited edition prints — link in bio\n.\n.\n.\n#artprint #wallart #fineartcollector #blackandwhiteart #figurativeart #artforsale #interiorart #gicleeprint #editionprint #caracas",
     "status": "manual",
-    "note": "Reel Look Closer — vedi docx/LAUNCH-POSTS.md post 8"
+    "note": "Video del Reel GIA PRONTO (link qui sotto): scaricalo, aggiungi un audio minimale (un battito) dall app IG, incolla la caption e pubblica"
   },
   {
     "id": "launch-9",
-    "type": "manifesto",
+    "type": "image",
     "pids": [],
-    "files": [],
-    "caption": "",
-    "status": "manual",
-    "note": "Claim tipografico su nero — vedi docx/LAUNCH-POSTS.md post 9"
+    "files": [
+      "social/launch-9-manifesto.jpg"
+    ],
+    "caption": "Human Frequency\nA journey through the possible · 2026\n\nAn archive of presence, memory and the invisible\nlines connecting individuals within collective landscapes.\n\nThree series. Fifty-six works. Ongoing.\n\nLimited edition prints — link in bio\n.\n.\n.\n#fineart #visualart #contemporaryart #blackandwhite #monochrome #artcollector #limitededition #newproject #artoftheday",
+    "status": "pending"
   },
   {
     "id": "series-1-02",

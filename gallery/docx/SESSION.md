@@ -968,8 +968,15 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 - Timeline lancio: ven 12/06 carousel (auto) → lun 15/06 post 3 (auto) + **email per Reel Oracle** → mer 17/06 Reel Oracle (manuale) → … → mer 24/06 Reel Look Closer → ven 26/06 manifesto
 - Decisione utente documentata: NO automazione via login/password IG (rischio ban account nuovo, ToS Meta) — l'API ufficiale resta l'unico canale di pubblicazione automatica; valutare in futuro "fase 2" reel ffmpeg (video auto in social/reels/ + caricamento manuale con musica dall'app)
 
+**9 — Generazione automatica manifesto + video Reel (generate-manifesto.js, generate-reels.js)**
+- `generate-manifesto.js` (npm run manifesto): immagine tipografica 1080×1350 del post 9 — claim su #0d0d0d, Hanken Grotesk. NOTA TECNICA: sharp/libvips su Windows ignora i font non installati (fontconfig custom non rispettato) → si usa ffmpeg drawtext con `fontfile=` diretto. Font OFL in `fonts/HankenGrotesk.ttf` (committato)
+- `generate-reels.js` (npm run reels): video Reel 1080×1920 30fps H.264 senza audio, Ken Burns + testi temporizzati + chiusura su nero con handle. Due modalità: `letterbox` (opere orizzontali: si parte dall'opera intera) e `cover` (verticali: full-bleed). Generati: `social/reels/launch-4-oracle.mp4` (11.6s) e `launch-8-look-closer.mp4` (14.6s, zoom estremo sull'occhio col testo Look closer/Closer/What do you see?)
+- Coda aggiornata: **launch-9 manifesto ora AUTOMATICO** (type image, pending — uscirà ~mer 24/06 dopo launch-7); launch-4/8 restano manuali ma `files` punta ai video pronti → la Issue di promemoria contiene il link di download diretto; l'utente aggiunge solo musica dall'app IG
+- Interventi manuali rimasti: SOLO i 2 Reel (musica IG non disponibile via API). Decisione: niente automazione login/password IG (ban risk)
+- Verifica: orientamenti misti nelle serie (es. Oracle 3000×2001 orizzontale, The Gaze 2001×3000 verticale) — check di massa 56/56 thumb↔master coerenti, nessun problema
+
 **Pending / prossima sessione:**
-- Reel di lancio 4 e 8 manuali + manifesto post 9 (LAUNCH-POSTS.md)
+- Reel di lancio 4 e 8: caricamento manuale con musica (video già pronti in social/reels/, promemoria automatico via Issue)
 - Test anteprime share con Meta Sharing Debugger dopo il deploy
 - `about.email` in manifest: ora presente in UsageTerms (spinaster@gmail.com) — verificare se va esposto anche in About
 - M13: storefront creativehub + bottone "Buy print" (ROADMAP.md)

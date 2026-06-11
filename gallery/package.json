@@ -10,6 +10,8 @@
     "favicons": "node generate-favicons.js",
     "share-pages": "node generate-share-pages.js",
     "social": "node export-social.js",
+    "manifesto": "node generate-manifesto.js",
+    "reels": "node generate-reels.js",
     "queue": "node build-queue.js",
     "publish-ig": "node publish-instagram.js",
     "seo": "node build-seo.js",
