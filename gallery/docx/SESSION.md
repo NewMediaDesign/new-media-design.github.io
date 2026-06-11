@@ -975,8 +975,24 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 - Interventi manuali rimasti: SOLO i 2 Reel (musica IG non disponibile via API). Decisione: niente automazione login/password IG (ban risk)
 - Verifica: orientamenti misti nelle serie (es. Oracle 3000×2001 orizzontale, The Gaze 2001×3000 verticale) — check di massa 56/56 thumb↔master coerenti, nessun problema
 
+**Commit chiave:**
+- `533c514` — feat: M8-M12 — watermark, metadata, SEO statica, share pages, motore Instagram (369 file)
+- `fabf273` — fix: workflow Instagram — sharp optional deps + git identity [FIX-016/017]
+- `4619ee1` — chore: .gitignore + rimozione node_modules e token cache [FIX-018/019]
+- `5df8a7e` — feat: promemoria azioni manuali via Issue GitHub (notify-manual.js)
+- `02c3387` — feat: manifesto automatico + video Reel pronti (generate-manifesto/reels.js)
+
+**Stato al termine della sessione:**
+- ✅ Sito deployato completo: watermark 56/56, metadata, SEO statica, share pages, favicon, deep link
+- ✅ **Motore Instagram FUNZIONANTE**: primo post "The Witness" pubblicato (media id 18051748256599124)
+- ✅ Cron attivo lun-mer-ven 17:00 UTC — 49 item in coda ≈ 4 mesi di pubblicazione autonoma
+- ✅ Promemoria automatici via Issue GitHub → email per le azioni manuali
+- ✅ Manifesto generato e in coda automatica (esce ~mer 24/06)
+- ✅ Video dei 2 Reel pronti in social/reels/ — all'utente restano SOLO musica+upload (2 azioni da 5 min)
+- 🔑 Secrets configurati e token rigenerato con i 5 permessi completi [FIX-020]
+
 **Pending / prossima sessione:**
-- Reel di lancio 4 e 8: caricamento manuale con musica (video già pronti in social/reels/, promemoria automatico via Issue)
+- Reel di lancio 4 e 8: caricamento manuale con musica (video già pronti in social/reels/, promemoria automatico via Issue — email lun 15/06 e lun 22/06)
 - Test anteprime share con Meta Sharing Debugger dopo il deploy
 - `about.email` in manifest: ora presente in UsageTerms (spinaster@gmail.com) — verificare se va esposto anche in About
 - M13: storefront creativehub + bottone "Buy print" (ROADMAP.md)
