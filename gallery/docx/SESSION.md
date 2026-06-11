@@ -956,10 +956,12 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 **7 — Post-deploy: secrets + fix workflow (stessa sessione, parte 2)**
 - Scoperto che i 4 secrets NON erano configurati nel repo (verificato via `gh api`: 0 secrets ovunque — la nota della sessione 16 era errata). L'utente li ha inseriti (verificati: IG_USER_ID, IG_ACCESS_TOKEN, META_APP_ID, META_APP_SECRET presenti)
 - Primo run manuale del workflow → **fallito**: [FIX-016] sharp non si carica (`--omit=optional` esclude i binari nativi) + [FIX-017] "Author identity unknown" nello step `if: always()`. Corretti entrambi in publish-social.yml + bump checkout/setup-node @v4→@v5 (deprecazione Node 20 forzata dal 16/06/2026)
-- Fix pushato; secondo run a cura dell'utente
+- Secondo run → fallito con Graph API "(#10) Application does not have permission": token senza `instagram_content_publish` [FIX-020]. Scoperti e ripuliti anche: node_modules committato dalla Action (mancava .gitignore) [FIX-018] e `.ig-token.enc` che ha precedenza sul secret [FIX-019]
+- Utente ha rigenerato il token con i 5 permessi completi → **terzo run: SUCCESS** 🎉
+- **PRIMO POST PUBBLICATO su @humanfrequency.project: "The Witness" (launch-1, series-1/01), media id 18051748256599124** — 2026-06-11 14:55 UTC
+- Coda dopo il primo post: 46 image + 2 carousel pending, 2 reel + 1 manifesto manuali. Cron attivo lun-mer-ven 17:00 UTC
 
 **Pending / prossima sessione:**
-- **Utente:** secondo Run workflow dalla tab Actions (pubblica "The Witness" — post reale!)
 - Reel di lancio 4 e 8 manuali + manifesto post 9 (LAUNCH-POSTS.md)
 - Test anteprime share con Meta Sharing Debugger dopo il deploy
 - `about.email` in manifest: ora presente in UsageTerms (spinaster@gmail.com) — verificare se va esposto anche in About

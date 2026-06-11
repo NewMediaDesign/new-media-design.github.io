@@ -355,3 +355,17 @@ git rm gallery/.ig-token.enc && git commit -m "chore: reset cached IG token" && 
 Al run successivo lo script riparte dal secret e ricrea il file con il token nuovo.
 
 ---
+
+## [FIX-020] Graph API — "(#10) Application does not have permission for this action"
+
+**Sintomo:** Il workflow arriva fino alla pubblicazione ma la chiamata `POST /{ig-user-id}/media` fallisce con errore code 10. Il rinnovo token funziona (non valida i permessi), la pubblicazione no.
+
+**Causa:** Il token era stato generato senza il set completo di permessi — in particolare mancava `instagram_content_publish` (e `pages_read_engagement`, già noto dalla sessione 16).
+
+**Soluzione:** Rigenerare il token nel Graph API Explorer spuntando TUTTI questi permessi prima di Generate Access Token:
+`instagram_basic`, `instagram_content_publish`, `pages_show_list`, `pages_read_engagement`, `business_management`.
+Nel popup di autorizzazione selezionare sia l'account IG sia la Pagina FB, senza saltare schermate. Poi: scambio long-lived → aggiornare il secret `IG_ACCESS_TOKEN` → **eliminare `.ig-token.enc` dal repo** (vedi [FIX-019], altrimenti il nuovo secret viene ignorato).
+
+**Verifica preventiva:** incollare il token nell'Access Token Debugger (developers.facebook.com/tools/debug/accesstoken) e controllare che tra gli Scopes ci sia `instagram_content_publish`.
+
+---
