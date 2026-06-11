@@ -950,11 +950,16 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 - Il clone in `/tmp/new-media-design.github.io` era corrotto (residuo Cowork: `.git` con solo `objects/`) → eliminato e riclonato da zero
 - Copiati in `gallery/`: index.html, manifest.json, package.json, package-lock.json, tutti gli script .js/.py, requirements.txt, stories.json, social-queue.json, watermark-registry.json, robots.txt, sitemap.xml, favicon/, share/, social/, docx/, images/ (jpg watermarkati + thumbs)
 - `publish-social.yml` → `.github/workflows/` nella ROOT del repo
-- Commit unico e push su `main`
+- Commit unico e push su `main`: `533c514` — 369 file (252 nuovi, 117 modificati)
 - NON copiati: `gallery (2).html`, Web_Layout.psd, node_modules, .claude
 
+**7 — Post-deploy: secrets + fix workflow (stessa sessione, parte 2)**
+- Scoperto che i 4 secrets NON erano configurati nel repo (verificato via `gh api`: 0 secrets ovunque — la nota della sessione 16 era errata). L'utente li ha inseriti (verificati: IG_USER_ID, IG_ACCESS_TOKEN, META_APP_ID, META_APP_SECRET presenti)
+- Primo run manuale del workflow → **fallito**: [FIX-016] sharp non si carica (`--omit=optional` esclude i binari nativi) + [FIX-017] "Author identity unknown" nello step `if: always()`. Corretti entrambi in publish-social.yml + bump checkout/setup-node @v4→@v5 (deprecazione Node 20 forzata dal 16/06/2026)
+- Fix pushato; secondo run a cura dell'utente
+
 **Pending / prossima sessione:**
-- **Utente:** bio/foto profilo IG, poi primo Run workflow manuale dalla tab Actions (pubblica "The Witness" — post reale!)
+- **Utente:** secondo Run workflow dalla tab Actions (pubblica "The Witness" — post reale!)
 - Reel di lancio 4 e 8 manuali + manifesto post 9 (LAUNCH-POSTS.md)
 - Test anteprime share con Meta Sharing Debugger dopo il deploy
 - `about.email` in manifest: ora presente in UsageTerms (spinaster@gmail.com) — verificare se va esposto anche in About

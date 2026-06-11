@@ -294,3 +294,37 @@ header.museum-open {
 **Nota:** Il PhotoSwipe ha ancora il suo back button registrato via `uiRegister`, ma è coperto dall'header. L'utente naviga tramite l'header del sito.
 
 ---
+
+## [FIX-016] GitHub Actions — sharp non si carica (`--omit=optional`)
+
+**Sintomo:** Il workflow "Publish to Instagram" fallisce allo step "Sync queue + generate social images" con:
+```
+Error: Could not load the "sharp" module using the linux-x64 runtime
+```
+
+**Causa:** Lo step di install usava `npm install --omit=optional sharp`. Da sharp v0.33+ i binari nativi per piattaforma (`@img/sharp-linux-x64` ecc.) sono distribuiti come **optional dependencies**: `--omit=optional` esclude esattamente i binari necessari. Il modulo JS si installa ma non ha il runtime nativo.
+
+**Soluzione:** In `.github/workflows/publish-social.yml`:
+```yaml
+# prima (rotto):
+run: npm install --omit=optional --no-audit --no-fund sharp
+# dopo:
+run: npm install --include=optional --no-audit --no-fund sharp
+```
+
+---
+
+## [FIX-017] GitHub Actions — "Author identity unknown" nello step `if: always()`
+
+**Sintomo:** Lo step "Commit state (queue + refreshed token)" fallisce con exit 128:
+```
+fatal: empty ident name (...) not allowed
+```
+
+**Causa:** L'identità git (`git config user.name/email`) era configurata solo nello step "Commit media". Se un passo precedente fallisce, quello step viene saltato — ma "Commit state" gira comunque (`if: always()`) senza identità configurata.
+
+**Soluzione:** Ripetere `git config user.name` / `user.email` all'inizio dello step `if: always()`, che deve essere autosufficiente perché può girare anche quando gli altri step sono stati saltati.
+
+**Nota correlata:** nello stesso intervento aggiornate `actions/checkout` e `actions/setup-node` da @v4 a @v5 — dal 16/06/2026 GitHub forza Node 24 e le @v4 sono deprecate (avrebbe potuto rompere il cron non presidiato).
+
+---
