@@ -328,3 +328,30 @@ fatal: empty ident name (...) not allowed
 **Nota correlata:** nello stesso intervento aggiornate `actions/checkout` e `actions/setup-node` da @v4 a @v5 — dal 16/06/2026 GitHub forza Node 24 e le @v4 sono deprecate (avrebbe potuto rompere il cron non presidiato).
 
 ---
+
+## [FIX-018] GitHub Actions — node_modules committato nel repo Pages
+
+**Sintomo:** Dopo un run del workflow "Publish to Instagram", il repo contiene `gallery/node_modules/` (centinaia di file, binari sharp inclusi).
+
+**Causa:** Gli step di commit del workflow usano `git add -A` (necessario: devono raccogliere coda, media e token rinnovato), ma il repo deploy **non aveva un `.gitignore`** → l'npm install eseguito dalla Action finiva committato.
+
+**Soluzione:** `.gitignore` nella root del repo deploy con `node_modules/` + rimozione dall'index:
+```bash
+git rm -r --cached gallery/node_modules
+```
+
+---
+
+## [FIX-019] publish-instagram.js — il token cifrato ha precedenza sul secret
+
+**Sintomo:** Si aggiorna il secret `IG_ACCESS_TOKEN` su GitHub (es. token rigenerato con permessi nuovi) ma lo script continua a usare il token vecchio: l'errore di permessi non cambia.
+
+**Causa:** Per design, `loadToken()` legge prima `.ig-token.enc` (token cifrato committato dal run precedente) e usa il secret SOLO se il file non esiste o non è decifrabile. Il file viene ricommittato ad ogni run (anche fallito, via step `if: always()`), quindi un token "cattivo" si auto-perpetua.
+
+**Soluzione:** Dopo ogni rigenerazione manuale del token (e aggiornamento del secret), **eliminare `.ig-token.enc` dal repo**:
+```bash
+git rm gallery/.ig-token.enc && git commit -m "chore: reset cached IG token" && git push
+```
+Al run successivo lo script riparte dal secret e ricrea il file con il token nuovo.
+
+---
