@@ -20,6 +20,7 @@ on:
 
 permissions:
   contents: write
+  issues: write   # promemoria azioni manuali via Issue (notify-manual.js)
 
 concurrency:
   group: publish-social
@@ -62,6 +63,15 @@ jobs:
           META_APP_ID: ${{ secrets.META_APP_ID }}
           META_APP_SECRET: ${{ secrets.META_APP_SECRET }}
         run: node publish-instagram.js
+
+      # Se il prossimo item in scaletta è manuale (reel/manifesto), apre una
+      # Issue di promemoria → GitHub manda l'email automaticamente
+      - name: Promemoria azioni manuali (Issue)
+        if: always()
+        working-directory: gallery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node notify-manual.js
 
       - name: Commit state (queue + refreshed token)
         if: always()

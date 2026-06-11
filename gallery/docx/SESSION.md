@@ -961,6 +961,13 @@ Documento di tracciamento sessioni. Aggiornare ad ogni sessione di lavoro.
 - **PRIMO POST PUBBLICATO su @humanfrequency.project: "The Witness" (launch-1, series-1/01), media id 18051748256599124** — 2026-06-11 14:55 UTC
 - Coda dopo il primo post: 46 image + 2 carousel pending, 2 reel + 1 manifesto manuali. Cron attivo lun-mer-ven 17:00 UTC
 
+**8 — Promemoria automatici per le azioni manuali (notify-manual.js)**
+- Problema (utente): i 3 contenuti manuali del lancio (2 reel + manifesto) rischiano di essere dimenticati
+- Nuovo script `notify-manual.js`: dopo ogni publish, individua gli item `manual` che nella coda precedono il prossimo `pending` e apre una **Issue GitHub** per ciascuno (dedup: una sola issue per item, anche se chiusa) → GitHub invia l'email di notifica automaticamente. Issue con: link file sorgente raw, caption pronta, link LAUNCH-POSTS.md
+- `publish-social.yml`: aggiunto step "Promemoria azioni manuali" (`if: always()`) + permesso `issues: write`
+- Timeline lancio: ven 12/06 carousel (auto) → lun 15/06 post 3 (auto) + **email per Reel Oracle** → mer 17/06 Reel Oracle (manuale) → … → mer 24/06 Reel Look Closer → ven 26/06 manifesto
+- Decisione utente documentata: NO automazione via login/password IG (rischio ban account nuovo, ToS Meta) — l'API ufficiale resta l'unico canale di pubblicazione automatica; valutare in futuro "fase 2" reel ffmpeg (video auto in social/reels/ + caricamento manuale con musica dall'app)
+
 **Pending / prossima sessione:**
 - Reel di lancio 4 e 8 manuali + manifesto post 9 (LAUNCH-POSTS.md)
 - Test anteprime share con Meta Sharing Debugger dopo il deploy
