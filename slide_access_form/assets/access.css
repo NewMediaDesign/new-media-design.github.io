@@ -31,7 +31,7 @@ input {
 
 .access-shell {
   width: min(1120px, calc(100% - 32px));
-  min-height: 100vh;
+  min-height: calc(100vh - 72px);
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(340px, 440px);
@@ -278,3 +278,14 @@ tr:last-child td {
 .honeypot { display: none !important; }
 
 .link-button { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; margin-top: 24px; }
+
+.site-footer {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 18px 0 24px;
+  color: var(--muted);
+  font-size: .85rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
