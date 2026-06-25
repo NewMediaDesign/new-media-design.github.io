@@ -2,38 +2,32 @@
 
 Questa versione usa solo file statici pubblicati su GitHub Pages e Formspree per raccogliere le richieste di accesso.
 
-## Cosa succede
+## Cosa succede con il piano gratuito Formspree
 
 1. Lo studente apre la pagina `index.html`.
 2. Compila nome, cognome, email e consenso.
 3. Il form invia i dati a Formspree: `https://formspree.io/f/xwvdllkq`.
 4. Formspree salva la submission nel tuo account.
-5. Formspree puo inviare una email automatica allo studente con il link alle slide.
-6. Dopo l'invio, lo studente vede `thanks.html`.
+5. Lo studente viene mandato a `thanks.html`.
+6. La pagina `thanks.html` mostra il pulsante per aprire le slide.
 
-## Link slide da inserire nell'email Formspree
+Con il piano gratuito Formspree non viene inviata automaticamente una email allo studente con il link. L'autoresponse richiede un piano Formspree a pagamento.
 
-Quando configuri l'auto-response in Formspree, inserisci il link pubblico alle slide:
+## Link pubblico di registrazione
 
 ```text
-https://TUO-DOMINIO/courses/nmd-gen-ai-generativa/nmd-gen-ai-generativa-standalone.html
+https://new-media-design.it/slide_access_form/
 ```
 
-Sostituisci `https://TUO-DOMINIO` con il dominio GitHub Pages o il tuo dominio personale.
+## Link diretto alle slide
+
+```text
+https://new-media-design.it/slide_access_form/courses/nmd-gen-ai-generativa/nmd-gen-ai-generativa-standalone.html
+```
 
 ## Limite importante
 
-Questa soluzione raccoglie i dati e invia il link, ma non protegge davvero il file HTML. Chi riceve il link puo inoltrarlo. Per un primo corso va bene; per accessi revocabili, log reali e sessioni servira un backend.
-
-## Configurazione Formspree consigliata
-
-Nel pannello Formspree del form `xwvdllkq`:
-
-- abilita le email notifications verso di te;
-- abilita l'auto-response verso il campo `email`;
-- nel testo dell'auto-response inserisci il link alle slide;
-- esporta periodicamente le submission in CSV se vuoi tenere un archivio locale;
-- se disponibile nel tuo piano, abilita spam protection o captcha.
+Questa soluzione raccoglie i dati e mostra il link dopo la registrazione, ma non protegge davvero il file HTML. Chi riceve o copia il link puo inoltrarlo. Per un primo corso va bene; per accessi revocabili, log reali e sessioni servira un backend.
 
 ## Campi inviati
 

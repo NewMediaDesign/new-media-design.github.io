@@ -276,3 +276,5 @@ tr:last-child td {
 }
 
 .honeypot { display: none !important; }
+
+.link-button { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; margin-top: 24px; }
