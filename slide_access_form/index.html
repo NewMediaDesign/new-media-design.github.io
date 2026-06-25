@@ -1,0 +1,62 @@
+﻿<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accesso slide NMD</title>
+  <link rel="stylesheet" href="assets/access.css">
+</head>
+<body>
+  <main class="access-shell">
+    <section class="intro">
+      <p class="eyebrow">Materiali corso</p>
+      <h1>Intelligenza Artificiale Generativa</h1>
+      <p class="lede">Registrati con nome, cognome ed email. Riceverai via email il link per consultare le slide del corso.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="registration-title">
+      <div class="panel-head">
+        <h2 id="registration-title">Richiedi accesso</h2>
+        <p>I dati vengono raccolti tramite Formspree e usati per inviarti il link alle slide.</p>
+      </div>
+
+      <form id="registration-form" class="form-stack" action="https://formspree.io/f/xwvdllkq" method="POST">
+        <input type="hidden" name="_subject" value="Nuova richiesta accesso slide - IA Generativa">
+        <input type="hidden" name="corso" value="nmd-gen-ai-generativa">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
+
+        <label>
+          <span>Nome</span>
+          <input name="nome" autocomplete="given-name" required>
+        </label>
+
+        <label>
+          <span>Cognome</span>
+          <input name="cognome" autocomplete="family-name" required>
+        </label>
+
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" autocomplete="email" required>
+        </label>
+
+        <label class="checkline">
+          <input name="consenso_accesso_slide" type="checkbox" value="accettato" required>
+          <span>Accetto che i miei dati siano usati per ricevere l'accesso alle slide e per la gestione tecnica della richiesta.</span>
+        </label>
+
+        <label class="checkline muted-check">
+          <input name="consenso_aggiornamenti" type="checkbox" value="si">
+          <span>Desidero ricevere eventuali aggiornamenti futuri su materiali e corsi NMD.</span>
+        </label>
+
+        <button class="primary-button" type="submit">Richiedi accesso</button>
+        <p id="form-status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="assets/access.js" type="module"></script>
+</body>
+</html>
+
