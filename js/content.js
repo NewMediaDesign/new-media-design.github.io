@@ -3,6 +3,7 @@ fetch('data/content.json')
   .then(r => r.json())
   .then(data => {
     buildServices(data.services);
+    buildNumbers(data.numbers);
     buildCourses(data.courses);
     buildClients(data.clients);
     buildContacts(data.contacts);
@@ -10,11 +11,41 @@ fetch('data/content.json')
     window.__galleryData = data.gallery;
   });
 
+// testo breve sempre visibile; il "+" apre l'approfondimento (stesso pattern dei corsi)
 function buildServices(items) {
-  document.querySelector('.services').innerHTML = items.map(s => `
+  const wrap = document.querySelector('.services');
+  wrap.innerHTML = items.map((s, i) => {
+    const more = s.more ? `
+        <button class="svc-more-btn" type="button" aria-expanded="false" aria-controls="svc-more-${i}">
+          <span class="svc-more-label">Approfondisci</span>
+          <span class="course-toggle" aria-hidden="true"></span>
+        </button>
+        <p class="svc-more" id="svc-more-${i}" hidden>${s.more}</p>` : '';
+    return `
     <div class="svc">
       <p class="svc-title">${s.title}</p>
-      <p class="svc-desc">${s.desc}</p>
+      <div class="svc-body">
+        <p class="svc-desc">${s.desc}</p>${more}
+      </div>
+    </div>`;
+  }).join('');
+  wrap.addEventListener('click', e => {
+    const btn = e.target.closest('.svc-more-btn');
+    if (!btn) return;
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    btn.setAttribute('aria-expanded', String(open));
+    btn.closest('.svc').classList.toggle('open', open);
+    document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
+  });
+}
+
+function buildNumbers(items) {
+  const row = document.querySelector('.numbers-row');
+  if (!row || !items) return;
+  row.innerHTML = items.map(n => `
+    <div class="num-item">
+      <p class="num-big">${n.value}<span>${n.suffix}</span></p>
+      <p class="num-label">${n.label}</p>
     </div>`).join('');
 }
 

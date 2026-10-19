@@ -194,6 +194,36 @@ body {
   letter-spacing: var(--tracking-mono-label);
 }
 
+/* ── Numeri: tre riquadri, cifra display + etichetta mono ── */
+.numbers-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.num-item { padding: 28px 28px 26px; border-right: 1px solid var(--border); }
+.num-item:first-child { padding-left: 0; }
+.num-item:last-child { border-right: none; }
+.num-big {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: var(--tracking-title);
+  color: var(--ink);
+}
+.num-big span { color: var(--accent); }
+.num-label {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: var(--tracking-mono-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 /* ── Cosa faccio: righe editoriali titolo + descrizione ── */
 .services { display: block; }
 .svc {
@@ -214,6 +244,37 @@ body {
   line-height: 1.3;
 }
 .svc-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--fg);
+}
+
+.svc-desc { font-size: var(--text-col); color: var(--nmd-grey-800); }
+.svc-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--accent);
+}
+.svc-more-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-mono-label);
+  text-transform: uppercase;
+}
+.svc-more-btn .course-toggle { width: 12px; height: 12px; }
+.svc-more-btn .course-toggle::before { top: 5px; width: 12px; }
+.svc-more-btn .course-toggle::after { left: 5px; height: 12px; }
+.svc.open .svc-more-btn .course-toggle::after { transform: scaleY(0); }
+.svc-more {
+  margin-top: 12px;
   font-family: var(--font-body);
   font-size: var(--text-sm);
   line-height: 1.7;
@@ -564,6 +625,10 @@ body {
   .about { grid-template-columns: 1fr; gap: 28px; }
   .about-photo { order: -1; max-width: 300px; }
   .svc { grid-template-columns: 1fr; gap: 8px; }
+  .numbers-row { grid-template-columns: 1fr; }
+  .num-item { padding: 20px 0; border-right: none; border-bottom: 1px solid var(--border); }
+  .num-item:last-child { border-bottom: none; }
+  .num-big { font-size: 48px; }
   .course-head { grid-template-columns: 28px 1fr 20px; gap: 12px; }
   .course-body { padding-left: 0; }
   .pf-title { font-size: 26px; }
