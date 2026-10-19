@@ -1,0 +1,20 @@
+/* NMD — canvas slide, margini IDML, griglia 12 colonne. */
+:root{
+  --slide-w:1920px;
+  --slide-h:1080px;
+
+  --margin-top:90px;
+  --margin-bottom:70px;
+  --margin-left:65px;
+  --margin-right:65px;
+
+  --col-count:12;
+  --col-gap:48px;
+  --audit-h:32px;
+
+  --lead-gap:80px;      /* distanza fissa intro → contenuto successivo */
+  --callout-gap:28px;   /* distanza fissa sopra il callout */
+  --image-doc-small-w:55%;
+
+  --site-maxw:1120px;
+}

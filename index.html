@@ -1,228 +1,247 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrea Spinazzola | New Media Design</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        :root {
-            --brand-blue: #0066cc; 
-            --white: #ffffff;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--brand-blue);
-            color: var(--white);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1.6fr auto 1fr;
-            gap: 70px;
-            max-width: 1400px;
-            width: 100%;
-            align-items: center;
-        }
-
-        /* Area Sinistra */
-        .hero-text {
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .hero-text h1 {
-            font-size: clamp(3.5rem, 8vw, 6.5rem);
-            font-weight: 800;
-            line-height: 0.85;
-            letter-spacing: -4px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
-        .role-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 45px;
-            color: var(--white);
-        }
-
-        .mission {
-            font-size: 1.25rem;
-            font-weight: 400;
-            line-height: 1.4;
-            opacity: 0.9;
-            margin-bottom: 25px;
-            max-width: 700px;
-            margin-left: auto;
-        }
-
-        .credentials {
-            font-size: 1.1rem;
-            font-weight: 300;
-            font-style: italic;
-            opacity: 0.8;
-            display: inline-block;
-            align-self: flex-end;
-        }
-
-        /* Divisore Centrale */
-        .divider-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 650px;
-        }
-
-        /* NUOVO STILE PER L'ICONA SVG */
-        .sparkle-icon {
-            width: 55px; /* Dimensione leggermente aumentata per compensare la morbidezza */
-            height: 55px;
-            color: var(--white); /* Usa il colore bianco per il riempimento SVG */
-            margin-bottom: 25px;
-            flex-shrink: 0;
-        }
-
-        .vertical-line {
-            width: 1px;
-            background-color: rgba(255, 255, 255, 0.4);
-            flex-grow: 1;
-        }
-
-        /* Area Destra */
-        .info-panel {
-            text-align: left;
-        }
-
-        .contact-list {
-            list-style: none;
-            margin-bottom: 40px;
-        }
-
-        .contact-list li {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .contact-list a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 1.1rem;
-        }
-
-        .contact-list i {
-            width: 24px;
-            text-align: center;
-            font-size: 1.2rem;
-        }
-
-        /* Stile Dati Societari e Logo */
-        .company-data {
-            font-size: 0.9rem;
-            opacity: 0.75;
-            line-height: 1.7;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding-top: 50px;
-        }
-
-        .company-logo {
-            max-width: 150px; 
-            height: auto;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        /* Responsive Mobile */
-        @media (max-width: 1024px) {
-            body { 
-                padding: 30px 20px; 
-                justify-content: flex-start;
-            }
-
-            .main-layout { grid-template-columns: 1fr; gap: 40px; }
-            .hero-text { text-align: center; }
-            .hero-text h1 { letter-spacing: -2px; }
-            .mission, .credentials { margin: 0 auto 20px auto; align-self: center; }
-            
-            /* Stella centrale */
-            .divider-container { 
-                height: auto; 
-                min-height: auto; 
-                width: 100%; 
-                justify-content: center; 
-                margin: 10px 0 30px 0;
-            }
-            .sparkle-icon { margin-bottom: 0; } /* Aggiornato il selettore per mobile */
-            .vertical-line { display: none; }
-
-            /* Centratura contatti mobile */
-            .info-panel { text-align: center; }
-            .contact-list li { justify-content: center; }
-            
-            .company-data { 
-                border-top: none; 
-                padding-top: 10px;
-                display: flex;
-                flex-direction: column;
-                align-items: center; 
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrea Spinazzola · New Media Design</title>
+  <meta name="description" content="Consulenza e formazione sull'intelligenza artificiale generativa per la creazione di contenuti. Affianco aziende e reparti creativi nell'integrazione dell'intelligenza artificiale generativa nei processi di progettazione e produzione visiva." />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="vendor/photoswipe/photoswipe.css" />
+  <link rel="stylesheet" href="css/gallery.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+  <link rel="stylesheet" href="css/theme-ds.css" />
 </head>
 <body>
 
-    <main class="main-layout">
-        <section class="hero-text">
-            <h1>Andrea<br>Spinazzola</h1>
-            <div class="role-title">Generative AI Strategist & Workflow Architect</div>
-            <p class="mission">
-                Integrazione delle tecnologie e dei modelli AI emergenti<br>
-                per la Comunicazione Visiva e l’Editoria.
-            </p>
-            <div class="credentials">
-                Adobe Certified Instructor & ex Adobe Guru
-            </div>
-        </section>
+  <!-- ═══ PAGE ═══ -->
+  <main class="page">
 
-        <div class="divider-container">
-            <svg class="sparkle-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C13.4373 6.8335 17.1665 10.5627 22 12C17.1665 13.4373 13.4373 17.1665 12 22C10.5627 17.1665 6.8335 13.4373 2 12C6.8335 10.5627 10.5627 6.8335 12 2Z"/>
-            </svg>
-            <div class="vertical-line"></div>
+    <!-- top bar -->
+    <div class="top-bar">
+      <img src="ds/assets/logo/nmd-black.svg" alt="New Media Design" class="topbar-logo" />
+      <p class="top-meta">2026</p>
+    </div>
+    <div class="top-rule"></div>
+
+    <!-- hero: solo testo — un kicker (A0) e una dichiarazione (A1) -->
+    <div class="header">
+      <div class="name-row">
+        <h1 class="name">Andrea<br><em>Spinazzola</em></h1>
+      </div>
+      <p class="bio">
+        Affianco aziende e reparti creativi nell'integrazione
+        dell'<strong>intelligenza artificiale generativa</strong> nei processi di
+        progettazione e produzione visiva. Un'esperienza consolidata al fianco
+        di realtà di primo piano, maturata come consulente per grandi gruppi
+        ed editori.
+      </p>
+      <button class="cta-btn hero-cta js-open-contact" type="button">
+        <span class="cta-btn-label">Richiedi informazioni</span>
+        <span class="cta-btn-arrow">&#8599;</span>
+      </button>
+    </div>
+
+    <!-- profilo / about: foto reale + testo uniforme + contatti rapidi -->
+    <section class="section">
+      <p class="section-label">Profilo</p>
+      <div class="about">
+        <div class="about-text">
+          <p>
+            Mi occupo di intelligenza artificiale generativa applicata ai flussi
+            di lavoro creativi. Offro consulenza, audit e formazione per aziende,
+            studi di design e reparti di comunicazione, con una specializzazione
+            verticale nel design tessile e moda.
+          </p>
+          <p>
+            Il mio percorso professionale si è costruito al fianco di Adobe,
+            di cui sono stato per anni voce ufficiale in Italia come Adobe Guru,
+            relatore, formatore certificato e consulente presso i principali
+            gruppi editoriali e industriali italiani. A questo si affianca la
+            docenza in Accademia di Belle Arti e la collaborazione con brand
+            internazionali nei settori moda, editoria e largo consumo.
+          </p>
+          <p>
+            Oggi porto questa esperienza nelle aziende che vogliono adottare
+            l'AI con metodo, non come scorciatoia ma come evoluzione consapevole
+            delle proprie competenze.
+          </p>
         </div>
+        <figure class="about-photo">
+          <img src="assets/images/portraits/as_portrait_bw.jpg" alt="Andrea Spinazzola" />
+        </figure>
+      </div>
+    </section>
 
-        <aside class="info-panel">
-            <ul class="contact-list">
-                <li><i class="fa-solid fa-envelope"></i> <a href="mailto:a.spinazzola@new-media-design.it">a.spinazzola@new-media-design.it</a></li>
-                <li><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/aspinazzola" target="_blank">linkedin.com/in/aspinazzola</a></li>
-                <li><i class="fa-solid fa-globe"></i> <a href="https://www.new-media-design.it" target="_blank">www.new-media-design.it</a></li>
-                <li><i class="fa-solid fa-mobile-screen-button"></i> <a href="tel:+393478461063">+39 347 8461063</a></li>
-            </ul>
+    <!-- clienti -->
+    <section class="section">
+      <p class="section-label">Clienti</p>
+      <div class="clients-intro">
+        <p>
+          Quelli che seguono sono una parte dei clienti e delle realtà
+          con cui ho collaborato nel corso degli anni.
+        </p>
+        <p>
+          Brand internazionali, gruppi editoriali, aziende industriali e
+          istituzioni formative, in progetti che vanno dalla produzione
+          visiva alla formazione dei team creativi.
+        </p>
+      </div>
+      <div class="clients-grid"></div><!-- populated by js/content.js -->
+    </section>
 
-            <div class="company-data">
-                <img src="logo-nmd-white.png" alt="New Media Design Logo" class="company-logo">
-                
-                <strong>New Media Design di Andrea Spinazzola</strong><br>
-                Viale Valganna, 34/D - 21100 VARESE<br>
-                P.I.: 03820670127
-            </div>
-        </aside>
-    </main>
+    <!-- cosa faccio -->
+    <section class="section">
+      <p class="section-label">Cosa faccio</p>
+      <div class="services"></div><!-- populated by js/content.js -->
+    </section>
+
+    <!-- formazione: corsi a catalogo -->
+    <section class="section">
+      <p class="section-label">Formazione</p>
+      <div class="courses">
+        <h2 class="courses-title">Corsi a <em>catalogo</em></h2>
+        <div class="courses-list" id="courses-list"><!-- populated by js/content.js --></div>
+      </div>
+      <aside class="callout">
+        <p>La formazione in azienda è finanziabile tramite i fondi interprofessionali a cui la tua azienda aderisce.</p>
+      </aside>
+    </section>
+
+    <!-- portfolio -->
+    <section class="section section-portfolio">
+      <p class="section-label">Portfolio</p>
+      <div class="pf-grid">
+        <div class="pf-intro">
+          <h2 class="pf-title">Lavori<br><em>selezionati</em></h2>
+        </div>
+        <div class="pf-list" id="pf-list"><!-- populated by js/content.js --></div>
+      </div>
+      <div class="pf-cta-row">
+        <button class="pf-cta" id="open-gallery" type="button">
+          <span class="pf-cta-label">Apri la gallery</span>
+          <span class="pf-cta-arrow">&#8599;</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- chiusura blu: cta + contatti + footer -->
+    <div class="brand-close">
+
+      <!-- cta richiedi informazioni -->
+      <section class="section">
+        <p class="section-label">Richiedi informazioni</p>
+        <div class="cta-block">
+          <div class="cta-text">
+            <h2 class="cta-headline">Consulenza e<br><em>formazione</em></h2>
+          </div>
+          <button class="cta-btn" id="open-contact" type="button">
+            <span class="cta-btn-label">Richiedi informazioni</span>
+            <span class="cta-btn-arrow">&#8599;</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- contatti -->
+      <section class="section">
+        <p class="section-label">Contatti</p>
+        <div class="contacts"></div><!-- populated by js/content.js -->
+      </section>
+
+      <footer class="footer">
+        <a class="footer-brand" href="https://new-media-design.it" aria-label="NMD · New Media Design">
+          <img src="ds/assets/logo/nmd-white.svg" alt="NMD · New Media Design" class="footer-logo" />
+        </a>
+        <div class="footer-info">
+          <p class="footer-name"><strong>New Media Design</strong> di Andrea Spinazzola</p>
+          <p class="footer-addr">Viale Valganna, 34/D &middot; 21100 Varese &middot; P.I. 03820670127</p>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- ═══ GALLERY INDEX (editorial category selector) ═══ -->
+  <div class="gallery-index" id="gallery-index" aria-hidden="true" role="dialog" aria-label="Portfolio index">
+    <div class="gx-header">
+      <p class="gx-wordmark"><strong>Portfolio</strong> &middot; New Media Design</p>
+      <button class="gx-close" id="gx-close" type="button">&#215; chiudi</button>
+    </div>
+    <div class="gx-rule"></div>
+    <div class="gx-intro">
+      <p class="gx-eyebrow">Indice</p>
+      <h2 class="gx-title">Lavori <em>selezionati</em></h2>
+    </div>
+    <div class="gx-grid" id="gx-grid"><!-- category cards injected by js/gallery.js --></div>
+    <div class="gx-footer">
+      <span>Andrea Spinazzola</span>
+      <span>2026</span>
+    </div>
+  </div>
+
+  <!-- ═══ CONTACT OVERLAY ═══ -->
+  <div class="contact-overlay" id="contact-overlay" aria-hidden="true" role="dialog" aria-label="Richiedi informazioni">
+    <div class="co-header">
+      <p class="co-wordmark"><strong>Richiedi informazioni</strong> &middot; New Media Design</p>
+      <button class="co-close" id="co-close" type="button">&#215; chiudi</button>
+    </div>
+    <div class="co-rule"></div>
+    <div class="co-body">
+      <p class="co-eyebrow co-context" id="co-context" hidden></p>
+      <h2 class="co-title">Richiedi<br><em>informazioni</em></h2>
+      <form class="co-form" id="co-form" action="https://formspree.io/f/mvzdazjd" method="POST">
+        <input type="hidden" name="corso" id="co-corso" value="" />
+        <div class="co-row">
+          <div class="co-field">
+            <label class="co-label" for="co-nome">Nome</label>
+            <input class="co-input" type="text" id="co-nome" name="nome" autocomplete="given-name" placeholder="Il tuo nome" required />
+          </div>
+          <div class="co-field">
+            <label class="co-label" for="co-cognome">Cognome</label>
+            <input class="co-input" type="text" id="co-cognome" name="cognome" autocomplete="family-name" placeholder="Il tuo cognome" required />
+          </div>
+        </div>
+        <div class="co-row">
+          <div class="co-field">
+            <label class="co-label" for="co-email">Email</label>
+            <input class="co-input" type="email" id="co-email" name="email" autocomplete="email" placeholder="nome@azienda.it" required />
+          </div>
+          <div class="co-field">
+            <label class="co-label" for="co-tel">Telefono (facoltativo)</label>
+            <input class="co-input" type="tel" id="co-tel" name="telefono" autocomplete="tel" placeholder="Il tuo numero" />
+          </div>
+        </div>
+        <div class="co-field">
+          <label class="co-label" for="co-msg">Messaggio</label>
+          <textarea class="co-input co-textarea" id="co-msg" name="messaggio" placeholder="Scrivi qui la tua richiesta…" required></textarea>
+        </div>
+        <div class="co-privacy">
+          <input type="checkbox" id="co-call-check" name="richiesta_call" value="si" />
+          <label for="co-call-check">Chiedo di essere ricontattato per una call conoscitiva.</label>
+        </div>
+        <div class="co-privacy">
+          <input type="checkbox" id="co-privacy-check" name="privacy" required />
+          <label for="co-privacy-check">Autorizzo il trattamento dei dati personali ai sensi del GDPR 2016/679, incluso l'invio di comunicazioni commerciali da parte di New Media Design di Andrea Spinazzola.</label>
+        </div>
+        <button class="co-submit" type="submit">
+          <span class="co-submit-label">Richiedi informazioni</span>
+          <span class="co-submit-arrow">&#8599;</span>
+        </button>
+      </form>
+      <div class="co-success" id="co-success">
+        Grazie, richiesta ricevuta.<br><em>Ti ricontatto al più presto.</em>
+      </div>
+    </div>
+    <div class="co-footer">
+      <span>Andrea Spinazzola</span>
+      <span>2026</span>
+    </div>
+  </div>
+
+  <script src="js/content.js"></script>
+  <script type="module" src="js/gallery.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/reveal.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,41 @@
+/* NMD — colori. Un solo accento (blu corporate #0A6ABF, derivato dall'IDML originale). */
+:root{
+  /* Base */
+  --nmd-blue:#0A6ABF;
+  --nmd-blue-dark:#074F8F;
+  --nmd-white:#FFFFFF;
+  --nmd-grey-100:#F4F5F7;
+  --nmd-grey-200:#E4E4E4;
+  --nmd-grey-300:#CCCCCC;
+  --nmd-grey-500:#6B6B6B;
+  --nmd-grey-700:#4D4D4D;
+  --nmd-grey-800:#333333;
+  --nmd-black-900:#1A1A1A;
+  --nmd-red:#C00000;
+
+  /* Semantici — nomi usati dal motore slide e dal sito */
+  --accent:var(--nmd-blue);
+  --accent-hover:var(--nmd-blue-dark);
+  --accent-on:var(--nmd-white);
+  --primary:var(--nmd-blue);
+  --bg:var(--nmd-grey-200);
+  --surface:var(--nmd-white);
+  --fg:var(--nmd-grey-700);
+  --muted:var(--nmd-grey-500);
+  --border:var(--nmd-grey-300);
+  --chrome-bg:var(--nmd-black-900);
+  --code-bg:var(--nmd-grey-100);
+  --footer-bg:var(--nmd-grey-800);
+
+  /* Codice */
+  --code-num:#0550AE;
+  --code-fn:#8250DF;
+
+  /* Stato */
+  --success:#17A34A;
+  --warn:#EAB308;
+  --danger:#DC2626;
+
+  /* Segnalazione redazionale (placeholder immagine mancante) */
+  --placeholder-note:var(--nmd-red);
+}

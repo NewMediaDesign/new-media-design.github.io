@@ -1,0 +1,34 @@
+/* NMD — tipografia. Switzer (display + body), JetBrains Mono (codice, metadati, note). */
+:root{
+  --font-display:'Switzer',-apple-system,system-ui,sans-serif;
+  --font-body:'Switzer',-apple-system,system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+
+  /* Scala px — da IDML + editoriale */
+  --text-xs:12px;
+  --text-sm:14px;
+  --text-base:16px;
+  --text-lg:20px;
+  --text-xl:24px;
+  --text-2xl:32px;
+  --text-3xl:48px;
+  --text-4xl:64px;
+
+  /* Ruoli tipografici del deck */
+  --text-slide-title:72px;      /* h2 slide content — SEMPRE uppercase */
+  --text-section-title:110px;   /* separatore di sezione, centrato */
+  --text-opening-title:126px;   /* apertura, bandiera destra */
+  --text-body-slide:20px;       /* corpo paragrafi e liste nelle slide */
+  --text-col:15px;              /* corpo nei layout multi-colonna (2x2, 3col, 4col) */
+  --text-callout:11px;          /* corpo nota callout-blue, mono */
+  --text-caption:11px;          /* didascalie immagine, mono */
+  --list-approf-size:16px;      /* elenco approfondimento */
+
+  --leading-body:1.55;
+  --leading-slide-body:1.65;
+  --leading-tight:1.2;
+  --leading-display:1.05;
+  --tracking-display:-0.015em;
+  --tracking-title:-0.02em;
+  --tracking-mono-label:0.05em;
+}

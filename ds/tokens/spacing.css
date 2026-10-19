@@ -1,0 +1,26 @@
+/* NMD — spaziature, raggi, ombre, motion. */
+:root{
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-8:32px;
+  --space-10:40px;
+  --space-12:48px;
+  --space-16:64px;
+
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-pill:9999px;
+
+  --shadow-canvas:0 8px 40px rgba(0,0,0,0.2);
+  --shadow-panel:0 18px 45px rgba(27,31,35,.08);
+  --shadow-framed:0 6px 24px rgba(0,0,0,0.14);
+
+  --ease:ease;
+  --dur-fast:150ms;
+  --dur-base:200ms;
+  --dur-slide:300ms;
+}

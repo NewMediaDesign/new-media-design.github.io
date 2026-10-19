@@ -1,0 +1,32 @@
+/* ── RESET & VARIABLES ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+}
+
+:root {
+  --ink:        #0f0f0f;
+  --ink-soft:   #4a4a4a;
+  --ink-muted:  #9a9a9a;
+  --rule:       #e0e0e0;
+  --bg:         #fafaf8;
+  --blue:       #1B6FD8;
+
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-mono:  'DM Mono', monospace;
+}
+
+html { font-size: 16px; }
+
+body {
+  font-family: var(--font-mono);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: var(--font-mono); cursor: pointer; }
+img { display: block; max-width: 100%; }
+strong { font-weight: 500; }

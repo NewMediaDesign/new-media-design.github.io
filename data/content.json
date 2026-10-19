@@ -1,0 +1,455 @@
+{
+  "services": [
+    {
+      "title": "Consulenza e integrazione AI",
+      "desc": "Analisi dei processi di produzione visiva esistenti e definizione di un percorso di integrazione dell'AI generativa calibrato sugli obiettivi dell'azienda. Il lavoro comprende la valutazione degli strumenti, l'analisi dei processi aziendali, la progettazione dei flussi di lavoro AI, la verifica di qualità e conformità e l'affiancamento del team fino alla piena operatività."
+    },
+    {
+      "title": "Formazione in azienda",
+      "desc": "I percorsi di formazione sono strutturati in modo personalizzato per rispondere alle esigenze specifiche del settore di riferimento e vengono costruiti su esempi e case study propri di quel settore. Tutti i corsi affrontano le basi dell'utilizzo dell'intelligenza artificiale generativa, necessarie per comprendere che cosa c'è dietro le quinte quando si scrive un semplice prompt, e si specializzano nel prompt engineering, non quello generico per l'uso comune ma quello specifico del settore in cui opera l'azienda. Tecniche come il metaprompting, il reverse prompting e il visual prompting risultano particolarmente utili negli ambiti in cui si lavora con la creatività e con la creazione di contenuti originali."
+    },
+    {
+      "title": "Design tessile e moda",
+      "desc": "Specializzazione maturata nella collaborazione con brand e aziende tessili. Comprende la generazione di modelli virtuali per lookbook e campagne, il virtual try-on dei capi, lo sviluppo di pattern e texture e la previsualizzazione delle collezioni prima della messa in produzione, con flussi di lavoro che integrano l'AI generativa negli strumenti di progettazione esistenti."
+    }
+  ],
+  "courses": [
+    {
+      "title": "Intelligenza artificiale generativa per la creazione di contenuti",
+      "subtitle": "Introduzione all'uso dei Large Language Model",
+      "program": [
+        "Fondamenti di intelligenza artificiale, machine learning e deep learning",
+        "Architettura Transformer e famiglia GPT",
+        "Token, bias e temperatura, il funzionamento dietro le quinte",
+        "ChatGPT operativo, dalla gestione di documenti e immagini alla memoria",
+        "Supporto multilingue, traduzioni e adattamento del tono",
+        "Prompt engineering e tecniche di prompting con esempi professionali"
+      ]
+    },
+    {
+      "title": "LLM e Microsoft 365 Copilot",
+      "subtitle": "Guida introduttiva alla creazione di contenuti",
+      "program": [
+        "Fondamenti di intelligenza artificiale e Large Language Model",
+        "Come funziona un modello predittivo, token e contesto",
+        "Copilot e ChatGPT nella creazione di contenuti e nelle attività quotidiane",
+        "Struttura di un prompt efficace, con ruolo, compito, formato e vincoli",
+        "Tecniche di prompting, dal role prompting alla Chain of Thought",
+        "Meta prompting, autocritica del modello e pipeline di prompt"
+      ]
+    },
+    {
+      "title": "Corso completo su Midjourney",
+      "subtitle": "Prompt, parametri e flussi di lavoro per la generazione di immagini",
+      "program": [
+        "Fondamenti di intelligenza artificiale e modelli generativi, dalle GAN ai modelli di diffusione",
+        "Comandi, parametri e strumenti di Midjourney",
+        "Struttura del prompt, scelta delle parole e prompt avanzati",
+        "Pesi delle istruzioni e prompt negativi",
+        "Riferimenti di stile e di soggetto con Style Reference e Omni Reference",
+        "Profili personalizzati per uno stile coerente col brand",
+        "Immagini di riferimento e permutation prompt per le varianti in serie"
+      ]
+    },
+    {
+      "title": "Open Source e intelligenza artificiale generativa",
+      "subtitle": "Guida pratica per la creazione di contenuti",
+      "program": [
+        "Cosa significa open source nell'AI generativa e come orientarsi tra le licenze",
+        "Modelli quantizzati ed esecuzione in locale",
+        "Hugging Face, Ollama, LM Studio e GPT4All",
+        "ComfyUI e Stable Diffusion per la generazione di immagini",
+        "La famiglia di modelli FLUX e i relativi ambiti di utilizzo",
+        "Prompting per i modelli open source"
+      ]
+    },
+    {
+      "title": "Vibe Coding",
+      "subtitle": "Creare con l'intelligenza artificiale senza saper programmare",
+      "program": [
+        "Il contesto, dal vibe coding all'agentic engineering",
+        "Come funziona lo sviluppo guidato dall'AI e il ruolo di chi descrive",
+        "Gli strumenti, da Claude Code ad Antigravity e OpenCode",
+        "Modelli cloud e locali, con Ollama e gli aggregatori",
+        "Configurare gli agenti e comunicare con l'AI",
+        "Sicurezza, permessi e buone pratiche",
+        "MCP e skills per estendere le capacità degli agenti"
+      ]
+    },
+    {
+      "title": "Guida completa all'ecosistema Google AI",
+      "subtitle": "Da Gemini e NotebookLM a Veo e Antigravity, per scegliere e usare gli strumenti giusti",
+      "program": [
+        "Fondamenti dell'intelligenza artificiale e dei Large Language Model",
+        "La famiglia Gemini e la scelta del modello giusto",
+        "Portali di accesso, AI Studio e API key",
+        "Prompt engineering e coding per non programmatori",
+        "Google Labs, generazione di immagini e video",
+        "Analisi dei documenti con NotebookLM",
+        "I modelli open source Gemma e le strategie di utilizzo"
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "name": "Walt Disney Company",
+      "logo": "assets/images/loghi/loghi_gallery_0007_wd.png"
+    },
+    {
+      "name": "Prada",
+      "logo": "assets/images/loghi/loghi_gallery_0002_prada.png"
+    },
+    {
+      "name": "Hugo Boss",
+      "logo": "assets/images/loghi/loghi_gallery_0000_hb.png"
+    },
+    {
+      "name": "Bulgari",
+      "logo": "assets/images/loghi/loghi_gallery_0006_bulgari.png"
+    },
+    {
+      "name": "Adobe",
+      "logo": "assets/images/loghi/loghi_gallery_0020_adobe.png"
+    },
+    {
+      "name": "Condé Nast",
+      "logo": "assets/images/loghi/loghi_gallery_0008_conde.png"
+    },
+    {
+      "name": "TOD'S",
+      "logo": "assets/images/loghi/loghi_gallery_0001_tods.png"
+    },
+    {
+      "name": "Guess",
+      "logo": "assets/images/loghi/loghi_gallery_0003_guess.png"
+    },
+    {
+      "name": "Swarovski",
+      "logo": "assets/images/loghi/loghi_gallery_0004_swa.png"
+    },
+    {
+      "name": "MSC",
+      "logo": "assets/images/loghi/loghi_gallery_0005_msc.png"
+    },
+    {
+      "name": "Vanity Fair",
+      "logo": "assets/images/loghi/loghi_gallery_0009_vanity.png"
+    },
+    {
+      "name": "Wired",
+      "logo": "assets/images/loghi/loghi_gallery_0010_wired.png"
+    },
+    {
+      "name": "GQ",
+      "logo": "assets/images/loghi/loghi_gallery_0011_gq.png"
+    },
+    {
+      "name": "RCS MediaGroup",
+      "logo": "assets/images/loghi/loghi_gallery_0012_rcs.png"
+    },
+    {
+      "name": "Cairo Editore",
+      "logo": "assets/images/loghi/loghi_gallery_0013_cairo.png"
+    },
+    {
+      "name": "Gruppo Mondadori",
+      "logo": "assets/images/loghi/loghi_gallery_0014_mondadori.png"
+    },
+    {
+      "name": "Sky",
+      "logo": "assets/images/loghi/loghi_gallery_0015_sky.png"
+    },
+    {
+      "name": "Ferrero",
+      "logo": "assets/images/loghi/loghi_gallery_0021_ferrero.png"
+    },
+    {
+      "name": "Bticino",
+      "logo": "assets/images/loghi/loghi_gallery_0022_bticino.png"
+    },
+    {
+      "name": "Whirlpool",
+      "logo": "assets/images/loghi/loghi_gallery_0023_whirl.png"
+    },
+    {
+      "name": "IED",
+      "logo": "assets/images/loghi/loghi_gallery_0016_ied.png"
+    },
+    {
+      "name": "Accademia SantaGiulia",
+      "logo": "assets/images/loghi/loghi_gallery_0017_sgiulia.png"
+    },
+    {
+      "name": "NABA",
+      "logo": "assets/images/loghi/loghi_gallery_0018_naba.png"
+    },
+    {
+      "name": "ILAS",
+      "logo": "assets/images/loghi/loghi_gallery_0019_ilas.png"
+    }
+  ],
+  "contacts": [
+    {
+      "label": "Email",
+      "value": "a.spinazzola@new-media-design.it"
+    },
+    {
+      "label": "Mobile",
+      "value": "+39 347 8461063"
+    },
+    {
+      "label": "LinkedIn",
+      "value": "linkedin.com/in/aspinazzola"
+    }
+  ],
+  "gallery": [
+    {
+      "category": "Virtual Models",
+      "cover": "assets/images/covers/virtual-models.jpg",
+      "slides": [
+        {
+          "image": "assets/images/virtual-models/vm-01.jpg",
+          "width": 1073,
+          "height": 1600,
+          "client": "Editoriale costiero",
+          "type": "Modella virtuale · trench cammello · Z-Image in ComfyUI"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-02.jpg",
+          "width": 1068,
+          "height": 1600,
+          "client": "Editoriale costiero",
+          "type": "Modello virtuale · outerwear · luce naturale"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-03.jpg",
+          "width": 832,
+          "height": 1216,
+          "client": "Editoriale costiero",
+          "type": "Modella virtuale · lino · vento di mare"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-04.jpg",
+          "width": 832,
+          "height": 1216,
+          "client": "Editoriale costiero",
+          "type": "Modello virtuale · knitwear · costa rocciosa"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-05.jpg",
+          "width": 832,
+          "height": 1216,
+          "client": "Ritratto",
+          "type": "Close-up · knitwear · pelle e texture naturali"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-06.jpg",
+          "width": 832,
+          "height": 1216,
+          "client": "Editoriale costiero",
+          "type": "Doppio soggetto · cappotti · stessa scena"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-07.jpg",
+          "width": 1068,
+          "height": 1600,
+          "client": "Editoriale costiero",
+          "type": "Modella virtuale · trench e camicia bianca · ritratto nel vento"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-08.jpg",
+          "width": 1024,
+          "height": 1024,
+          "client": "Editoriale costiero",
+          "type": "Modella virtuale · cappotto cammello · falesie bianche"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-09.jpg",
+          "width": 1068,
+          "height": 1600,
+          "client": "Editoriale costiero",
+          "type": "Modello virtuale · trench doppiopetto · luce diretta"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-10.jpg",
+          "width": 1068,
+          "height": 1600,
+          "client": "Editoriale costiero",
+          "type": "Modello virtuale · trench aperto · movimento nel vento"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-11.jpg",
+          "width": 1068,
+          "height": 1600,
+          "client": "Editoriale costiero",
+          "type": "Modello virtuale · soprabito · toni neutri"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-12.jpg",
+          "width": 1068,
+          "height": 1600,
+          "client": "Editoriale costiero",
+          "type": "Modello virtuale · polo bianca · ritratto in esterni"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-13.jpg",
+          "width": 832,
+          "height": 1216,
+          "client": "Editoriale costiero",
+          "type": "Modello virtuale · foulard di seta · knitwear sulla costa"
+        },
+        {
+          "image": "assets/images/virtual-models/vm-14.jpg",
+          "width": 832,
+          "height": 1216,
+          "client": "Ritratto",
+          "type": "Modello maturo · dolcevita e lana · luce del tramonto"
+        }
+      ]
+    },
+    {
+      "category": "ADV Campaign",
+      "cover": "assets/images/covers/adv-campaign.jpg",
+      "slides": [
+        {
+          "image": "assets/images/adv-campaign/adv-01.jpg",
+          "width": 1280,
+          "height": 720,
+          "client": "MSC",
+          "type": "Key visual · used car solutions · compositing AI"
+        },
+        {
+          "image": "assets/images/adv-campaign/adv-02.jpg",
+          "width": 1600,
+          "height": 840,
+          "client": "MSC",
+          "type": "Campagna social · we move cars · auto da film nel container"
+        },
+        {
+          "image": "assets/images/adv-campaign/adv-03.jpg",
+          "width": 1600,
+          "height": 840,
+          "client": "MSC",
+          "type": "Campagna social · we move cars · variante police car"
+        },
+        {
+          "image": "assets/images/adv-campaign/adv-04.jpg",
+          "width": 1600,
+          "height": 840,
+          "client": "MSC",
+          "type": "Campagna social · we move cars · variante maggiolino"
+        },
+        {
+          "image": "assets/images/adv-campaign/adv-05.jpg",
+          "width": 1600,
+          "height": 840,
+          "client": "MSC",
+          "type": "Campagna social · we move cars · variante muscle car"
+        },
+        {
+          "image": "assets/images/adv-campaign/adv-06.jpg",
+          "width": 1600,
+          "height": 840,
+          "client": "MSC",
+          "type": "Campagna social · we move cars · variante notturna"
+        }
+      ]
+    },
+    {
+      "category": "Virtual Try-On",
+      "cover": "assets/images/covers/virtual-try-on.jpg",
+      "slides": [
+        {
+          "image": "assets/images/virtual-try-on/vto-01.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Centrostyle",
+          "type": "Occhiale sportivo protettivo · soggetto e prodotto di partenza"
+        },
+        {
+          "image": "assets/images/virtual-try-on/vto-02.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Centrostyle",
+          "type": "Try-on virtuale · stesso soggetto · pose e angolazioni multiple"
+        },
+        {
+          "image": "assets/images/virtual-try-on/vto-03.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Centrostyle",
+          "type": "Close-up · resa di lenti e montatura sul volto"
+        },
+        {
+          "image": "assets/images/virtual-try-on/vto-04.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Centrostyle",
+          "type": "Try-on virtuale · secondo soggetto · pose e angolazioni multiple"
+        },
+        {
+          "image": "assets/images/virtual-try-on/vto-05.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Centrostyle",
+          "type": "Still life ambientato · key visual di prodotto"
+        }
+      ]
+    },
+    {
+      "category": "Texture & Fabric",
+      "cover": "assets/images/covers/texture-fabric.jpg",
+      "slides": [
+        {
+          "image": "assets/images/texture-fabric/tf-01.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Ostinelli Seta",
+          "type": "Dal brief al pattern · soggetti, riferimenti di stile e disegno finale"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-02.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Ostinelli Seta",
+          "type": "Collezione foulard · tre disegni dal pattern al capo"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-03.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Ostinelli Seta",
+          "type": "Foulard botanico · disegno e ambientazioni di presentazione"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-04.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Ostinelli Seta",
+          "type": "Foulard marino · disegno e ambientazioni di presentazione"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-05.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Ostinelli Seta",
+          "type": "Foulard equestre · disegno e ambientazioni di presentazione"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-06.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Ostinelli Seta",
+          "type": "Pattern su capo · due varianti applicate in previsualizzazione"
+        },
+        {
+          "image": "assets/images/texture-fabric/tf-07.jpg",
+          "width": 1600,
+          "height": 900,
+          "client": "Ostinelli Seta",
+          "type": "Pattern per arredo · applicazione su tessuti d'interni"
+        }
+      ]
+    }
+  ]
+}
